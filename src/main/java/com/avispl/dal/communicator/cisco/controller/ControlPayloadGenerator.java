@@ -17,12 +17,15 @@ import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityCo
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfigurationServices;
 import com.avispl.dal.communicator.cisco.dto.configuration.roomanalytics.RoomAnalyticsConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.standby.StandbyConfiguration;
+import com.avispl.dal.communicator.cisco.dto.configuration.time.TimeConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.userinterface.*;
 import com.avispl.dal.communicator.cisco.dto.configuration.video.*;
 import com.avispl.dal.communicator.cisco.dto.control.commands.Command;
 import com.avispl.dal.communicator.cisco.dto.control.commands.audio.VolumeChangeCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.camera.CameraCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.camera.CameraPositionSetCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.standby.StandbyCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.systemunit.SystemUnitCommand;
 import com.avispl.symphony.dal.util.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -32,16 +35,16 @@ import org.apache.commons.logging.LogFactory;
  * {@link Command} classes.
  */
 public class ControlPayloadGenerator {
-    private static final Log logger = LogFactory.getLog(ControlPayloadGenerator.class);
+    private static final Log LOG = LogFactory.getLog(ControlPayloadGenerator.class);
 
     /**
      * Generate camera control command.
      * This method is specific per-camera, so it requires cameraId. CameraId value is parsed from the property name,
      * e.g "Cameras#Camera1Pan" where 1 is a local cameraId to use.
      *
-     * @param value       control operation value
-     * @param cameraId    id of camera
-     * @param type type of the camera control command, to use as a reference for command payload creation
+     * @param value    control operation value
+     * @param cameraId id of camera
+     * @param type     type of the camera control command, to use as a reference for command payload creation
      * @return {@link Command} instance with correct values set
      */
     public static Command generateCameraControlCommandPayload(String value, String cameraId, CameraControlCommandType type) {
@@ -67,8 +70,8 @@ public class ControlPayloadGenerator {
                 cameraPositionSetCommand.setFocus(new ValueSpaceRefHolder[]{new ValueSpaceRefHolder(cameraPropertyValue)});
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -148,8 +151,8 @@ public class ControlPayloadGenerator {
                 camera.setWhitebalance(cameraWhitebalance);
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -176,8 +179,8 @@ public class ControlPayloadGenerator {
                 camerasConfiguration.setPreset(camerasConfigurationPreset);
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -241,8 +244,8 @@ public class ControlPayloadGenerator {
                 conferenceConfiguration.setDoNotDisturb(doNotDisturb);
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -302,8 +305,8 @@ public class ControlPayloadGenerator {
                 networkServicesConfiguration.setWelcomeText(new ValueSpaceRefHolder(value));
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -328,8 +331,8 @@ public class ControlPayloadGenerator {
                 roomAnalyticsConfiguration.setPeoplePresenceDetector(new ValueSpaceRefHolder(normalizeSwitchValue(value, "On", "Off")));
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -371,8 +374,8 @@ public class ControlPayloadGenerator {
                 proximityConfiguration.setServices(proximityConfigurationServices);
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -409,8 +412,8 @@ public class ControlPayloadGenerator {
                 standbyConfiguration.setStandbyAction(new ValueSpaceRefHolder(value));
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -505,8 +508,8 @@ public class ControlPayloadGenerator {
                 userInterfaceConfiguration.setWelcomeText(new ValueSpaceRefHolder(value));
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -561,8 +564,8 @@ public class ControlPayloadGenerator {
                 configurationSelfview.setSelfviewDefault(selfviewDefault);
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -594,8 +597,8 @@ public class ControlPayloadGenerator {
                 videoConfiguration.setPresentation(presentation);
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -687,8 +690,8 @@ public class ControlPayloadGenerator {
                 videoConfiguration.setOutput(videoConfigurationOutput);
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -698,8 +701,8 @@ public class ControlPayloadGenerator {
     /**
      * Generate audio configuration command.
      *
-     * @param value           control operation value
-     * @param type            type of the audio configuration command, to use as a reference for command payload creation
+     * @param value control operation value
+     * @param type  type of the audio configuration command, to use as a reference for command payload creation
      * @return {@link CiscoConfiguration} instance with correct values set
      */
     public static CiscoConfiguration generateAudioConfigurationPayload(String value, AudioConfigurationCommandType type) {
@@ -719,8 +722,8 @@ public class ControlPayloadGenerator {
                 audioConfiguration.setUltrasound(ultrasound);
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
@@ -731,8 +734,8 @@ public class ControlPayloadGenerator {
     /**
      * Generate audio control command.
      *
-     * @param value           control operation value
-     * @param type            type of the audio configuration command, to use as a reference for command payload creation
+     * @param value control operation value
+     * @param type  type of the audio configuration command, to use as a reference for command payload creation
      * @return {@link Command} instance with correct values set
      */
     public static Command generateAudioCommandPayload(String value, AudioControlCommandType type) {
@@ -743,13 +746,37 @@ public class ControlPayloadGenerator {
                 commmand.setAudioCommand(new VolumeChangeCommand(Integer.valueOf(removeDecimalPoint(value))));
                 break;
             default:
-                if(logger.isWarnEnabled()) {
-                    logger.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
                 }
                 break;
         }
 
         return commmand;
+    }
+
+    public static CiscoConfiguration generateSystemTimeZoneConfigurationPayload(String value) {
+        CiscoConfiguration ciscoConfiguration = new CiscoConfiguration();
+        TimeConfiguration timeConfiguration = new TimeConfiguration();
+        timeConfiguration.setZone(new ValueSpaceRefHolder(value));
+        ciscoConfiguration.setTime(timeConfiguration);
+        return ciscoConfiguration;
+    }
+
+    public static Command generateRestartPayload() {
+        Command command = new Command();
+        command.setSystemUnitCommand(new SystemUnitCommand(SystemUnitCommand.BootAction.Restart));
+        return command;
+    }
+
+    public static Command generateStandbyCommandPayload(String value) {
+        Command command = new Command();
+        if ("0".equals(value)) {
+            command.setStandbyCommand(new StandbyCommand(new StandbyCommand.Deactivate()));
+        } else {
+            command.setStandbyCommand(new StandbyCommand(new StandbyCommand.Activate()));
+        }
+        return command;
     }
 
     /**

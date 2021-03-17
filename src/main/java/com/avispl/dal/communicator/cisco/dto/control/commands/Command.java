@@ -10,6 +10,7 @@ import com.avispl.dal.communicator.cisco.dto.control.commands.call.response.Call
 import com.avispl.dal.communicator.cisco.dto.control.commands.call.response.DialResult;
 import com.avispl.dal.communicator.cisco.dto.control.commands.camera.CameraCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.standby.StandbyCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.systemunit.SystemUnitCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.userinterface.UserInterfaceCommand;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -36,6 +37,8 @@ public class Command {
     private UserInterfaceCommand userInterface;
     @XmlElement(name = "Standby")
     private StandbyCommand standbyCommand;
+    @XmlElement(name = "SystemUnit")
+    private SystemUnitCommand systemUnitCommand;
 
     public DialCommand getDialCommand() {
         return dialCommand;
@@ -100,4 +103,8 @@ public class Command {
     public void setStandbyCommand(StandbyCommand standbyCommand) {
         this.standbyCommand = standbyCommand;
     }
+
+    public SystemUnitCommand getSystemUnitCommand() { return systemUnitCommand; }
+
+    public void setSystemUnitCommand(SystemUnitCommand systemUnitCommand) { this.systemUnitCommand = systemUnitCommand; }
 }

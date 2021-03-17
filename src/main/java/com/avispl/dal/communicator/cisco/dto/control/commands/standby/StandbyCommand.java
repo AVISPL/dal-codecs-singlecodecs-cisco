@@ -5,18 +5,26 @@ package com.avispl.dal.communicator.cisco.dto.control.commands.standby;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+
 @XmlAccessorType(XmlAccessType.NONE)
 public class StandbyCommand {
     public static class Activate {
         @XmlAttribute
         private final String command = "True";
+
+        public String getCommand() {
+            return command;
+        }
     }
     public static class Deactivate {
         @XmlAttribute
         private final String command = "True";
+
+        public String getCommand() {
+            return command;
+        }
     }
     @XmlElement(name = "Activate")
     private Activate activate;

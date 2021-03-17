@@ -19,8 +19,6 @@ import java.util.List;
  * controllable property type etc.
  */
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ValueSpaceRefHolder {
     @XmlAttribute(name = "item")

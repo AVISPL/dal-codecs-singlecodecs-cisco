@@ -42,6 +42,8 @@ public class UserInterfaceCommand {
                 public void setText(ValueSpaceRefHolder text) { this.text = text; }
 
                 public void setDuration(ValueSpaceRefHolder duration) { this.duration = duration; }
+
+                public String getCommand() { return command; }
             }
             @XmlElement(name = "Display")
             private Display display;

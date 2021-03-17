@@ -3,12 +3,10 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.systemunit;
 
-
-
 import javax.xml.bind.annotation.XmlElement;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+
 @XmlAccessorType(XmlAccessType.NONE)
 public class SystemUnit {
     @XmlElement(name = "Hardware")
@@ -74,4 +72,8 @@ public class SystemUnit {
     public void setProductType(String productType) {
         this.productType = productType;
     }
+
+    public String getUptime() { return uptime; }
+
+    public void setUptime(String uptime) { this.uptime = uptime; }
 }

@@ -22,11 +22,8 @@ import com.avispl.dal.communicator.cisco.dto.configuration.systemunit.SystemUnit
 import com.avispl.dal.communicator.cisco.dto.configuration.time.TimeConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.userinterface.UserInterfaceConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.video.VideoConfiguration;
-
 import javax.xml.bind.annotation.*;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 @XmlRootElement(name = "Configuration")
 @XmlAccessorType(XmlAccessType.NONE)
 public class CiscoConfiguration {

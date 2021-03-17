@@ -64,6 +64,13 @@ public class CiscoCommunicatorTest {
     }
 
     @Test
+    public void testRestart() throws Exception {
+        ControllableProperty controllableProperty = new ControllableProperty();
+        controllableProperty.setProperty("SystemUnit#Restart");
+        ciscoCommunicator.controlProperty(controllableProperty);
+    }
+
+    @Test
     public void testSerializeProperties() throws Exception {
         ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
         List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();

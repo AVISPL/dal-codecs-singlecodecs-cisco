@@ -36,7 +36,8 @@ public class ValueSpace {
     @XmlAttribute(name = "type")
     private String type;
 
-    private String name;
+    @XmlElement(name = "Value")
+    private TTPARValue[] values;
 
     public String getType() {
         return type;
@@ -46,8 +47,6 @@ public class ValueSpace {
         this.type = type;
     }
 
-    @XmlElement(name = "Value")
-    private TTPARValue[] values;
 
     public TTPARValue[] getValues() {
         return values;

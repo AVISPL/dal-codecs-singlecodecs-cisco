@@ -26,7 +26,6 @@ import com.avispl.dal.communicator.cisco.dto.control.commands.audio.MicrophonesM
 import com.avispl.dal.communicator.cisco.dto.control.commands.call.CallDisconnectCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.call.DialCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.camera.CameraPositionSetCommand;
-import com.avispl.dal.communicator.cisco.dto.control.commands.standby.StandbyCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.userinterface.UserInterfaceCommand;
 import com.avispl.dal.communicator.cisco.dto.status.CiscoStatus;
 import com.avispl.dal.communicator.cisco.dto.status.audio.*;
@@ -282,7 +281,16 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private final String statusPath = "status.xml";
     private final String valuespacePath = "valuespace.xml";
 
+    /**
+     * Exposing 2 property groups by default - SystemUnit and Audio
+     */
     private String displayPropertyGroups = "SystemUnit,Audio";
+
+    /**
+     * Grace period for restart operation, 120s by default
+     */
+    private long restartGracePeriod = 120000;
+
     /**
      * Timestamp of the last control operation, used to determine whether we need to wait
      * for {@link #CONTROL_OPERATION_COOLDOWN_MS} before collecting new statistics
@@ -339,6 +347,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     public void setDisplayPropertyGroups(String displayPropertyGroups) {
         this.displayPropertyGroups = displayPropertyGroups;
+    }
+
+    public long getRestartGracePeriod() {
+        return restartGracePeriod;
+    }
+
+    public void setRestartGracePeriod(long restartGracePeriod) {
+        this.restartGracePeriod = restartGracePeriod;
     }
 
     @Override
@@ -691,7 +707,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
             }
             if(propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
-                populateSystemUnitData(statisticsMap, ciscoStatus);
+                populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus);
             }
             if(propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
                 populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
@@ -758,39 +774,49 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param ciscoStatus device response data
      * @param statistics map to set data to
      */
-    private void populateSystemUnitData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
+    private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus ciscoStatus) {
         SystemUnit systemUnit = ciscoStatus.getSystemUnit();
         if (systemUnit == null) {
             return;
         }
-        statistics.put("SystemUnit#ProductId", systemUnit.getProductId());
-        statistics.put("SystemUnit#ProductPlatform", systemUnit.getProductPlatform());
-        statistics.put("SystemUnit#ProductType", systemUnit.getProductType());
+
+        statistics.put(SYSTEM_UNIT_RESTART, "");
+        controls.add(createButton(SYSTEM_UNIT_RESTART, "Restart", "Restarting...", restartGracePeriod));
+
+        String uptime = systemUnit.getUptime();
+        if(!StringUtils.isNullOrEmpty(uptime)) {
+            addStatisticsParameter(statistics, "SystemUnit#Uptime", normalizeUptime(uptime));
+        }
+
+        addStatisticsParameter(statistics, "SystemUnit#ProductId", systemUnit.getProductId());
+        addStatisticsParameter(statistics, "SystemUnit#ProductPlatform", systemUnit.getProductPlatform());
+        addStatisticsParameter(statistics, "SystemUnit#ProductType", systemUnit.getProductType());
 
         State state = systemUnit.getState();
         if (state != null) {
-            statistics.put("SystemUnit#ActiveCallsNumber", state.getNumberOfActiveCalls());
-            statistics.put("SystemUnit#InProgressCallsNumber", state.getNumberOfInProgressCalls());
-            statistics.put("SystemUnit#SuspendedCallsNumber", state.getNumberOfSuspendedCalls());
+            addStatisticsParameter(statistics, "SystemUnit#ActiveCallsNumber", state.getNumberOfActiveCalls());
+            addStatisticsParameter(statistics, "SystemUnit#InProgressCallsNumber", state.getNumberOfInProgressCalls());
+            addStatisticsParameter(statistics, "SystemUnit#SuspendedCallsNumber", state.getNumberOfSuspendedCalls());
         }
+
 
         Hardware hardware = systemUnit.getHardware();
         if (hardware != null) {
-            statistics.put("SystemUnit#HardwareTemperature(C)", hardware.getTemperature());
+            addStatisticsParameter(statistics, "SystemUnit#HardwareTemperature(C)", hardware.getTemperature());
 
             HardwareModule module = hardware.getModule();
             if (module != null) {
-                statistics.put("SystemUnit#SerialNumber", module.getSerialNumber());
-                statistics.put("SystemUnit#CompatibilityLevel", module.getCompatibilityLevel());
+                addStatisticsParameter(statistics, "SystemUnit#SerialNumber", module.getSerialNumber());
+                addStatisticsParameter(statistics, "SystemUnit#CompatibilityLevel", module.getCompatibilityLevel());
             }
         }
 
         Software software = systemUnit.getSoftware();
         if (software != null) {
-            statistics.put("SystemUnit#DisplayName", software.getDisplayName());
-            statistics.put("SystemUnit#Name", software.getName());
-            statistics.put("SystemUnit#ReleaseDate", software.getReleaseDate());
-            statistics.put("SystemUnit#Version", software.getVersion());
+            addStatisticsParameter(statistics, "SystemUnit#DisplayName", software.getDisplayName());
+            addStatisticsParameter(statistics, "SystemUnit#Name", software.getName());
+            addStatisticsParameter(statistics, "SystemUnit#ReleaseDate", software.getReleaseDate());
+            addStatisticsParameter(statistics, "SystemUnit#Version", software.getVersion());
         }
     }
 
@@ -815,13 +841,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             AudioConfigurationInput input = audioConfiguration.getInput();
             if (input != null) {
-                ValueSpaceRefHolder microphoneMode = input.getMicrophoneMode();
-                if (microphoneMode != null) {
-                    ValueSpace valueSpace = extractTTPARValuespace(valuespace, microphoneMode.getValueSpaceRef());
-                    addStatisticsParameter(statistics, AUDIO_MICROPHONE_MODE, "");
-                    controllableProperties.add(createDropdown(AUDIO_MICROPHONE_MODE,
-                            Arrays.stream(valueSpace.getValues()).map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), microphoneMode.getValue()));
-                }
+                addStatisticsParameterWithDropdown(statistics, controllableProperties, AUDIO_MICROPHONE_MODE, input.getMicrophoneMode(), valuespace);
             }
         }
 
@@ -880,7 +900,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     AudioOutputLine[] audioOutputLines = outputConnectors.getLines();
                     if (audioOutputLines != null) {
                         Arrays.stream(audioOutputLines).forEach(audioOutputLine -> {
-                            statistics.put(String.format(N_INPUT_LINE_DELAY, audioOutputLine.getItem()), audioOutputLine.getDelayMs());
+                            addStatisticsParameter(statistics, String.format(N_INPUT_LINE_DELAY, audioOutputLine.getItem()), audioOutputLine.getDelayMs());
                         });
                     }
                 }
@@ -901,16 +921,16 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                                    CiscoStatus ciscoStatus, CiscoConfiguration configuration, String valuespace) {
         VideoStatus videoStatus = ciscoStatus.getVideo();
         if (videoStatus != null) {
-            statistics.put(VIDEO_MONITORS, videoStatus.getMonitors());
+            addStatisticsParameter(statistics, VIDEO_MONITORS, videoStatus.getMonitors());
 
             ActiveSpeaker activeSpeaker = videoStatus.getActiveSpeaker();
             if (activeSpeaker != null) {
-                statistics.put("Video#ActiveSpeakerPIPPosition", activeSpeaker.getPipPosition());
+                addStatisticsParameter(statistics, "Video#ActiveSpeakerPIPPosition", activeSpeaker.getPipPosition());
             }
 
             VideoInput videoInput = videoStatus.getInput();
             if (videoInput != null) {
-                statistics.put("Video#MainVideoSource", videoInput.getMainVideoSource());
+                addStatisticsParameter(statistics, "Video#MainVideoSource", videoInput.getMainVideoSource());
             }
 
             VideoOutput videoOutput = videoStatus.getOutput();
@@ -918,25 +938,25 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 VideoOutputConnector[] videoOutputConnectors = videoOutput.getConnectors();
                 if (videoOutputConnectors != null) {
                     Arrays.stream(videoOutputConnectors).forEach(videoOutputConnector -> {
-                        statistics.put(String.format(N_VIDEO_CONNECTOR_TYPE, videoOutputConnector.getItem()), videoOutputConnector.getType());
-                        statistics.put(String.format(N_VIDEO_CONNECTOR_CONNECTED, videoOutputConnector.getItem()), videoOutputConnector.getConnected());
+                        addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_TYPE, videoOutputConnector.getItem()), videoOutputConnector.getType());
+                        addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED, videoOutputConnector.getItem()), videoOutputConnector.getConnected());
                         VideoOutputDevice videoOutputDevice = videoOutputConnector.getConnectedDevice();
                         if (videoOutputDevice != null) {
-                            statistics.put(String.format(N_VIDEO_CONNECTOR_CONNECTED_DEVICE_NAME, videoOutputConnector.getItem()), videoOutputDevice.getName());
-                            statistics.put(String.format(N_VIDEO_CONNECTOR_CONNECTED_DEVICE_PREFERRED_FORMAT, videoOutputConnector.getItem()), videoOutputDevice.getPreferredFormat());
+                            addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED_DEVICE_NAME, videoOutputConnector.getItem()), videoOutputDevice.getName());
+                            addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED_DEVICE_PREFERRED_FORMAT, videoOutputConnector.getItem()), videoOutputDevice.getPreferredFormat());
                         }
                     });
                 }
             }
 
-            statistics.put("Video#LayoutFamity", ciscoStatus.getVideo().getLayout().getLayoutFamily().getLocal());
+            addStatisticsParameter(statistics, "Video#LayoutFamity", ciscoStatus.getVideo().getLayout().getLayoutFamily().getLocal());
 
             VideoSelfview videoSelfview = videoStatus.getSelfView();
             if (videoSelfview != null) {
-                statistics.put("VideoSelfView#FullscreenMode", videoSelfview.getFullscreenMode());
-                statistics.put("VideoSelfView#Mode", videoSelfview.getMode());
-                statistics.put("VideoSelfView#OnMonitorRole", videoSelfview.getOnMonitorRole());
-                statistics.put("VideoSelfView#PIPPosition", videoSelfview.getPipPosition());
+                addStatisticsParameter(statistics, "VideoSelfView#FullscreenMode", videoSelfview.getFullscreenMode());
+                addStatisticsParameter(statistics, "VideoSelfView#Mode", videoSelfview.getMode());
+                addStatisticsParameter(statistics, "VideoSelfView#OnMonitorRole", videoSelfview.getOnMonitorRole());
+                addStatisticsParameter(statistics, "VideoSelfView#PIPPosition", videoSelfview.getPipPosition());
             }
         }
 
@@ -1032,35 +1052,35 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                                         CiscoStatus ciscoStatus, CiscoConfiguration configuration, String valuespace) {
         ConferenceStatus conferenceStatus = ciscoStatus.getConference();
         if (conferenceStatus != null) {
-            statistics.put("Conference#DoNotDisturb", conferenceStatus.getDoNotDisturb());
+            addStatisticsParameter(statistics, "Conference#DoNotDisturb", conferenceStatus.getDoNotDisturb());
 
             ActiveConferenceSpeaker activeConferenceSpeaker = conferenceStatus.getActiveSpeaker();
             if (activeConferenceSpeaker != null) {
-                statistics.put("Conference#ActiveSpeakerCallId", activeConferenceSpeaker.getCallId());
+                addStatisticsParameter(statistics, "Conference#ActiveSpeakerCallId", activeConferenceSpeaker.getCallId());
             }
 
             Multipoint multipoint = conferenceStatus.getMultipoint();
             if (multipoint != null) {
-                statistics.put("Conference#MultipointMode", multipoint.getMode());
+                addStatisticsParameter(statistics, "Conference#MultipointMode", multipoint.getMode());
             }
 
             Presentation presentation = conferenceStatus.getPresentation();
             if (presentation != null) {
-                statistics.put("Conference#PresentationMode", presentation.getMode());
-                statistics.put("Conference#PresentationCallId", presentation.getCallId());
+                addStatisticsParameter(statistics, "Conference#PresentationMode", presentation.getMode());
+                addStatisticsParameter(statistics, "Conference#PresentationCallId", presentation.getCallId());
 
                 Whiteboard whiteboard = presentation.getWhiteboard();
                 if (whiteboard != null) {
-                    statistics.put("Conference#WhiteboardMode", whiteboard.getMode());
-                    statistics.put("Conference#WhiteboardReleaseFloorAvailability", whiteboard.getReleaseFloorAvailability());
-                    statistics.put("Conference#WhiteboardRequestFloorAvailability", whiteboard.getRequestFloorAvailability());
+                    addStatisticsParameter(statistics, "Conference#WhiteboardMode", whiteboard.getMode());
+                    addStatisticsParameter(statistics, "Conference#WhiteboardReleaseFloorAvailability", whiteboard.getReleaseFloorAvailability());
+                    addStatisticsParameter(statistics, "Conference#WhiteboardRequestFloorAvailability", whiteboard.getRequestFloorAvailability());
                 }
             }
 
             SpeakerLock speakerLock = conferenceStatus.getSpeakerLock();
             if (speakerLock != null) {
-                statistics.put("Conference#SpeakerLockMode", speakerLock.getMode());
-                statistics.put("Conference#SpeakerLockCallId", speakerLock.getCallId());
+                addStatisticsParameter(statistics, "Conference#SpeakerLockMode", speakerLock.getMode());
+                addStatisticsParameter(statistics, "Conference#SpeakerLockCallId", speakerLock.getCallId());
             }
         }
 
@@ -1111,10 +1131,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (conferenceCapabilities == null) {
             return;
         }
-        statistics.put("ConferenceCapabilities#MaxActiveCalls", conferenceCapabilities.getMaxActiveCalls());
-        statistics.put("ConferenceCapabilities#MaxAudioCalls", conferenceCapabilities.getMaxAudioCalls());
-        statistics.put("ConferenceCapabilities#MaxCalls", conferenceCapabilities.getMaxCalls());
-        statistics.put("ConferenceCapabilities#MaxVideoCalls", conferenceCapabilities.getMaxVideoCalls());
+        addStatisticsParameter(statistics, "ConferenceCapabilities#MaxActiveCalls", conferenceCapabilities.getMaxActiveCalls());
+        addStatisticsParameter(statistics, "ConferenceCapabilities#MaxAudioCalls", conferenceCapabilities.getMaxAudioCalls());
+        addStatisticsParameter(statistics, "ConferenceCapabilities#MaxCalls", conferenceCapabilities.getMaxCalls());
+        addStatisticsParameter(statistics, "ConferenceCapabilities#MaxVideoCalls", conferenceCapabilities.getMaxVideoCalls());
     }
 
     /**
@@ -1128,15 +1148,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (h323 != null) {
             H323Gatekeeper gatekeeper = h323.getGatekeeper();
             if (gatekeeper != null) {
-                statistics.put("H323#GatekeeperAddress", gatekeeper.getAddress());
-                statistics.put("H323#GatekeeperPort", gatekeeper.getPort());
-                statistics.put("H323#GatekeeperRejectedReason", gatekeeper.getReason());
-                statistics.put("H323#GatekeeperStatus", gatekeeper.getStatus());
+                addStatisticsParameter(statistics, "H323#GatekeeperAddress", gatekeeper.getAddress());
+                addStatisticsParameter(statistics, "H323#GatekeeperPort", gatekeeper.getPort());
+                addStatisticsParameter(statistics, "H323#GatekeeperRejectedReason", gatekeeper.getReason());
+                addStatisticsParameter(statistics, "H323#GatekeeperStatus", gatekeeper.getStatus());
             }
             H323Mode mode = h323.getMode();
             if (mode != null) {
-                statistics.put("H323#Status", mode.getStatus());
-                statistics.put("H323#RejectedReason", mode.getReason());
+                addStatisticsParameter(statistics, "H323#Status", mode.getStatus());
+                addStatisticsParameter(statistics, "H323#RejectedReason", mode.getReason());
             }
         }
     }
@@ -1150,21 +1170,21 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateSIPData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         SIP sip = ciscoStatus.getSip();
         if (sip != null) {
-            statistics.put("SIP#Authentication", sip.getAuthentication());
-            statistics.put("SIP#Secure", sip.getSecure());
-            statistics.put("SIP#Verified", sip.getVerified());
+            addStatisticsParameter(statistics, "SIP#Authentication", sip.getAuthentication());
+            addStatisticsParameter(statistics, "SIP#Secure", sip.getSecure());
+            addStatisticsParameter(statistics, "SIP#Verified", sip.getVerified());
 
             CallForward callForward = sip.getCallForward();
             if (callForward != null) {
-                statistics.put("SIP#DisplayName", callForward.getDisplayName());
-                statistics.put("SIP#CallForwardMode", callForward.getMode());
-                statistics.put("SIP#CallForwardUri", callForward.getUri());
+                addStatisticsParameter(statistics, "SIP#DisplayName", callForward.getDisplayName());
+                addStatisticsParameter(statistics, "SIP#CallForwardMode", callForward.getMode());
+                addStatisticsParameter(statistics, "SIP#CallForwardUri", callForward.getUri());
             }
 
             Mailbox mailbox = sip.getMailbox();
             if (mailbox != null) {
-                statistics.put("SIP#MailboxMessagesWaiting", mailbox.getMessagesWaiting());
-                statistics.put("SIP#MailboxURI", mailbox.getUri());
+                addStatisticsParameter(statistics, "SIP#MailboxMessagesWaiting", mailbox.getMessagesWaiting());
+                addStatisticsParameter(statistics, "SIP#MailboxURI", mailbox.getUri());
             }
 
             Registration[] sipRegistrations = sip.getRegistrations();
@@ -1172,15 +1192,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             if (sipProxies != null) {
                 Arrays.stream(sipProxies).forEach(proxy -> {
-                    statistics.put(String.format(N_SIP_PROXY_ADDRESS, proxy.getItem()), proxy.getAddress());
-                    statistics.put(String.format(N_SIP_PROXY_STATUS, proxy.getItem()), proxy.getStatus());
+                    addStatisticsParameter(statistics, String.format(N_SIP_PROXY_ADDRESS, proxy.getItem()), proxy.getAddress());
+                    addStatisticsParameter(statistics, String.format(N_SIP_PROXY_STATUS, proxy.getItem()), proxy.getStatus());
                 });
             }
             if (sipRegistrations != null) {
                 Arrays.stream(sipRegistrations).forEach(registration -> {
-                    statistics.put(String.format(N_SIP_REGISTRATION_STATUS, registration.getItem()), registration.getStatus());
-                    statistics.put(String.format(N_SIP_REGISTRATION_URI, registration.getItem()), registration.getUri());
-                    statistics.put(String.format(N_SIP_REGISTRATION_REJECTED_REASON, registration.getItem()), registration.getReason());
+                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_STATUS, registration.getItem()), registration.getStatus());
+                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_URI, registration.getItem()), registration.getUri());
+                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_REJECTED_REASON, registration.getItem()), registration.getReason());
                 });
             }
         }
@@ -1197,15 +1217,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (security != null) {
             FIPS fips = security.getFips();
             if (fips != null) {
-                statistics.put("Security#FIPSMode", fips.getMode());
+                addStatisticsParameter(statistics, "Security#FIPSMode", fips.getMode());
             }
 
             Persistency persistency = security.getPersistency();
             if (persistency != null) {
-                statistics.put("Security#CallHistoryPersistency", persistency.getCallHistory());
-                statistics.put("Security#ConfigurationsPersistency", persistency.getConfigurations());
-                statistics.put("Security#DHCPPersistency", persistency.getDhcp());
-                statistics.put("Security#LocalPhonebookPersistency", persistency.getLocalPhonebook());
+                addStatisticsParameter(statistics, "Security#CallHistoryPersistency", persistency.getCallHistory());
+                addStatisticsParameter(statistics, "Security#ConfigurationsPersistency", persistency.getConfigurations());
+                addStatisticsParameter(statistics, "Security#DHCPPersistency", persistency.getDhcp());
+                addStatisticsParameter(statistics, "Security#LocalPhonebookPersistency", persistency.getLocalPhonebook());
             }
         }
     }
@@ -1226,49 +1246,49 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             String id = network.getItem();
             CDP cdp = network.getCdp();
             if (cdp != null) {
-                statistics.put(String.format(N_NETWORK_CDP_ADDRESS, id), cdp.getAddress());
-                statistics.put(String.format(N_NETWORK_CDP_CAPABILITIES, id), cdp.getCapabilities());
-                statistics.put(String.format(N_NETWORK_CDP_DEVICE_ID, id), cdp.getDeviceId());
-                statistics.put(String.format(N_NETWORK_CDP_DUPLEX, id), cdp.getDuplex());
-                statistics.put(String.format(N_NETWORK_CDP_PLATFORM, id), cdp.getPlatform());
-                statistics.put(String.format(N_NETWORK_CDP_PORT_ID, id), cdp.getPortId());
-                statistics.put(String.format(N_NETWORK_CDP_PRIMARY_MGMT_ADDRESS, id), cdp.getPrimaryMgmtAddress());
-                statistics.put(String.format(N_NETWORK_CDP_SYSNAME, id), cdp.getSysName());
-                statistics.put(String.format(N_NETWORK_CDP_SYS_OBJECT_ID, id), cdp.getSysObjectId());
-                statistics.put(String.format(N_NETWORK_CDP_VERSION, id), cdp.getVersion());
-                statistics.put(String.format(N_NETWORK_CDP_VOIP_APPLIANCE_VLAN_ID, id), cdp.getVoipApplianceVlanId());
-                statistics.put(String.format(N_NETWORK_CDP_VTP_MGMT_DOMAIN, id), cdp.getVtpMgmtDomain());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_ADDRESS, id), cdp.getAddress());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_CAPABILITIES, id), cdp.getCapabilities());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_DEVICE_ID, id), cdp.getDeviceId());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_DUPLEX, id), cdp.getDuplex());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_PLATFORM, id), cdp.getPlatform());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_PORT_ID, id), cdp.getPortId());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_PRIMARY_MGMT_ADDRESS, id), cdp.getPrimaryMgmtAddress());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_SYSNAME, id), cdp.getSysName());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_SYS_OBJECT_ID, id), cdp.getSysObjectId());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_VERSION, id), cdp.getVersion());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_VOIP_APPLIANCE_VLAN_ID, id), cdp.getVoipApplianceVlanId());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_CDP_VTP_MGMT_DOMAIN, id), cdp.getVtpMgmtDomain());
             }
 
             DNS dns = network.getDns();
             if (dns != null) {
                 DNSDomain dnsDomain = dns.getDnsDomain();
                 if (dnsDomain != null) {
-                    statistics.put(String.format(N_NETWORK_DNS_DOMAIN_NAME, id), dnsDomain.getName());
+                    addStatisticsParameter(statistics, String.format(N_NETWORK_DNS_DOMAIN_NAME, id), dnsDomain.getName());
                 }
                 DNSServer dnsServer = dns.getDnsServer();
                 if (dnsServer != null) {
-                    statistics.put(String.format(N_NETWORK_DNS_ADDRESS, id), dnsServer.getAddress());
+                    addStatisticsParameter(statistics, String.format(N_NETWORK_DNS_ADDRESS, id), dnsServer.getAddress());
                 }
             }
 
             Ethernet ethernet = network.getEthernet();
             if (ethernet != null) {
-                statistics.put(String.format(N_NETWORK_ETHERNET_MAC_ADDRESS, id), ethernet.getMacAddress());
-                statistics.put(String.format(N_NETWORK_ETHERNET_SPEED, id), ethernet.getSpeed());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_ETHERNET_MAC_ADDRESS, id), ethernet.getMacAddress());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_ETHERNET_SPEED, id), ethernet.getSpeed());
             }
 
             IPv4 iPv4 = network.getiPv4();
             if (iPv4 != null) {
-                statistics.put(String.format(N_NETWORK_IPV4_ADDRESS, id), iPv4.getAddress());
-                statistics.put(String.format(N_NETWORK_IPV4_GATEWAY, id), iPv4.getGateway());
-                statistics.put(String.format(N_NETWORK_IPV4_SUBNET_MASK, id), iPv4.getSubnetMask());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_IPV4_ADDRESS, id), iPv4.getAddress());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_IPV4_GATEWAY, id), iPv4.getGateway());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_IPV4_SUBNET_MASK, id), iPv4.getSubnetMask());
             }
 
             IPv6 iPv6 = network.getiPv6();
             if (network.getiPv6() != null) {
-                statistics.put(String.format(N_NETWORK_IPV6_ADDRESS, id), iPv6.getAddress());
-                statistics.put(String.format(N_NETWORK_IPV6_GATEWAY, id), iPv6.getGateway());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_IPV6_ADDRESS, id), iPv6.getAddress());
+                addStatisticsParameter(statistics, String.format(N_NETWORK_IPV6_GATEWAY, id), iPv6.getGateway());
             }
         });
     }
@@ -1288,12 +1308,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (networkServices != null) {
             NTP ntp = networkServices.getNtp();
             if (ntp != null) {
-                statistics.put("NetworkServices#NTPAddress", ntp.getCurrentAddress());
-                statistics.put("NetworkServices#NTPDiscarded", ntp.getDiscarded());
+                addStatisticsParameter(statistics, "NetworkServices#NTPAddress", ntp.getCurrentAddress());
+                addStatisticsParameter(statistics, "NetworkServices#NTPDiscarded", ntp.getDiscarded());
                 NTPServer[] ntpServers = ntp.getServers();
                 if (ntpServers != null) {
                     Arrays.stream(ntpServers).forEach(ntpServer -> {
-                        statistics.put(String.format(N_NETWORK_SERVICES_NTP_SERVER_ADDRESS, ntpServer.getItem()), ntpServer.getAddress());
+                        addStatisticsParameter(statistics, String.format(N_NETWORK_SERVICES_NTP_SERVER_ADDRESS, ntpServer.getItem()), ntpServer.getAddress());
                     });
                 }
             }
@@ -1303,32 +1323,32 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (networkServicesConfiguration != null) {
             NetworkServicesConfigurationH323 h323Configuration = networkServicesConfiguration.getH323();
             if (h323Configuration != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_H323_MODE, h323Configuration.getMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_H323_MODE, h323Configuration.getMode());
             }
 
             NetworkServicesConfigurationSIP sipConfiguration = networkServicesConfiguration.getSip();
             if (sipConfiguration != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_SIP_MODE, sipConfiguration.getMode().getValue()); // TODO check if the method is right
+                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_SIP_MODE, sipConfiguration.getMode());
             }
 
             NetworkServicesConfigurationTelnet telnetConfiguration = networkServicesConfiguration.getTelnet();
             if (telnetConfiguration != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_TELNET_MODE, telnetConfiguration.getMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_TELNET_MODE, telnetConfiguration.getMode());
             }
 
             NetworkServicesConfigurationSSH sshConfiguration = networkServicesConfiguration.getSsh();
             if (sshConfiguration != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_SSH_MODE, sshConfiguration.getMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_SSH_MODE, sshConfiguration.getMode());
             }
 
             NetworkServicesConfigurationCDP cdpConfiguration = networkServicesConfiguration.getCdp();
             if (cdpConfiguration != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_CDP_MODE, cdpConfiguration.getMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_CDP_MODE, cdpConfiguration.getMode());
             }
 
             NetworkServicesConfigurationUPnP upNpConfiguration = networkServicesConfiguration.getuPnP();
             if (upNpConfiguration != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_UPNP_MODE, upNpConfiguration.getMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, NETWORK_SERVICES_UPNP_MODE, upNpConfiguration.getMode());
             }
 
             NetworkServicesConfigurationNTP ntpConfiguration = networkServicesConfiguration.getNtp();
@@ -1380,8 +1400,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             Device[] devices = usb.getDevices();
             if (devices != null) {
                 Arrays.stream(devices).forEach(device -> {
-                    statistics.put(String.format(N_USB_DEVICE_STATE, device.getItem()), device.getState());
-                    statistics.put(String.format(N_USB_DEVICE_TYPE, device.getItem()), device.getType());
+                    addStatisticsParameter(statistics, String.format(N_USB_DEVICE_STATE, device.getItem()), device.getState());
+                    addStatisticsParameter(statistics, String.format(N_USB_DEVICE_TYPE, device.getItem()), device.getType());
                 });
             }
         }
@@ -1451,19 +1471,19 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (services != null) {
                 ValueSpaceRefHolder callControl = services.getCallControl();
                 if (callControl != null) {
-                    statistics.put(PROXIMITY_SERVICES_CALL_CONTROL, callControl.getValue());
+                    addStatisticsParameter(statistics, PROXIMITY_SERVICES_CALL_CONTROL, callControl.getValue());
                     controls.add(createSwitch(PROXIMITY_SERVICES_CALL_CONTROL, callControl.getValue().equals("Enabled") ? 1 : 0));
                 }
                 ProximityConfigurationContentShare contentShare = services.getContentShare();
                 if (contentShare != null) {
                     ValueSpaceRefHolder toClients = contentShare.getToClients();
                     if (toClients != null) {
-                        statistics.put(PROXIMITY_SERVICES_CONTENT_SHARE_TO_CLIENTS, toClients.getValue());
+                        addStatisticsParameter(statistics, PROXIMITY_SERVICES_CONTENT_SHARE_TO_CLIENTS, toClients.getValue());
                         controls.add(createSwitch(PROXIMITY_SERVICES_CONTENT_SHARE_TO_CLIENTS, toClients.getValue().equals("Enabled") ? 1 : 0));
                     }
                     ValueSpaceRefHolder fromClients = contentShare.getFromClients();
                     if (fromClients != null) {
-                        statistics.put(PROXIMITY_SERVICES_CONTENT_SHARE_FROM_CLIENTS, fromClients.getValue());
+                        addStatisticsParameter(statistics, PROXIMITY_SERVICES_CONTENT_SHARE_FROM_CLIENTS, fromClients.getValue());
                         controls.add(createSwitch(PROXIMITY_SERVICES_CONTENT_SHARE_FROM_CLIENTS, fromClients.getValue().equals("Enabled") ? 1 : 0));
                     }
                 }
@@ -1689,6 +1709,24 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), whitebalance.getMode().getValue());
             }
         });
+    }
+
+    /**
+     * Instantiate Text controllable property
+     *
+     * @param name         name of the property
+     * @param label        default button label
+     * @param labelPressed button label when is pressed
+     * @param gracePeriod  period to pause monitoring statistics for
+     * @return instance of AdvancedControllableProperty with AdvancedControllableProperty.Button as type
+     */
+    private AdvancedControllableProperty createButton(String name, String label, String labelPressed, long gracePeriod) {
+        AdvancedControllableProperty.Button button = new AdvancedControllableProperty.Button();
+        button.setLabel(label);
+        button.setLabelPressed(labelPressed);
+        button.setGracePeriod(gracePeriod);
+
+        return new AdvancedControllableProperty(name, new Date(), button, "");
     }
 
     /**
@@ -2137,13 +2175,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     postConfigurationRequest(generateStandbyConfigurationPayload(value, StandbyConfigurationCommandType.WakeupAction), property, value);
                     break;
                 case STANDBY_STATE:
-                    Command command = new Command();
-                    if ("0".equals(value)) {
-                        command.setStandbyCommand(new StandbyCommand(new StandbyCommand.Deactivate()));
-                    } else {
-                        command.setStandbyCommand(new StandbyCommand(new StandbyCommand.Activate()));
-                    }
-                    postCommandRequest(command, property, value);
+                    postCommandRequest(generateStandbyCommandPayload(value), property, value);
                     break;
                 case NETWORK_SERVICES_H323_MODE:
                     postConfigurationRequest(generateNetworkServicesConfigurationPayload(value, NetworkServicesConfigurationCommandType.H323Mode), property, value);
@@ -2233,11 +2265,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     postConfigurationRequest(generateVideoSelfViewConfigurationPayload(value, VideoSelfViewConfigurationCommandType.OnCallMode), property, value);
                     break;
                 case SYSTEM_TIME_ZONE:
-                    CiscoConfiguration ciscoConfiguration = new CiscoConfiguration();
-                    TimeConfiguration timeConfiguration = new TimeConfiguration();
-                    timeConfiguration.setZone(new ValueSpaceRefHolder(value));
-                    ciscoConfiguration.setTime(timeConfiguration);
-                    postConfigurationRequest(ciscoConfiguration, property, value);
+                    postConfigurationRequest(generateSystemTimeZoneConfigurationPayload(value), property, value);
+                    break;
+                case SYSTEM_UNIT_RESTART:
+                    doPost("putxml", generateRestartPayload());
                     break;
                 case AUDIO_VOLUME:
                     postCommandRequest(generateAudioCommandPayload(value, AudioControlCommandType.Volume), property, value);
@@ -2340,7 +2371,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             cp.setTimestamp(new Date());
         });
     }
-
 
     /**
      * Add statistics parameter to the target map, if the value is not null
@@ -2470,6 +2500,40 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             controllableProperties.add(createDropdown(parameterName, Arrays.stream(extractTTPARValuespace(valueSpace,
                     value.getValueSpaceRef()).getValues()).map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), value.getValue()));
         }
+    }
+
+
+    /**
+     * Uptime is received in seconds, need to normalize it and make it human readable, like
+     * 1 day(s) 5 hour(s) 12 minute(s) 55 minute(s)
+     * Incoming parameter is may have a decimal point, so in order to safely process this - it's rounded first.
+     * We don't need to add a segment of time if it's 0.
+     *
+     * @param uptime value, with a decimal point
+     * @return string value of format 'x day(s) x hour(s) x minute(s) x minute(s)'
+     */
+    private String normalizeUptime(String uptime) {
+        long uptimeSeconds = Math.round(Float.parseFloat(uptime));
+        StringBuilder normalizedUptime = new StringBuilder();
+
+        long seconds = uptimeSeconds % 60;
+        long minutes = uptimeSeconds % 3600 / 60;
+        long hours = uptimeSeconds % 86400 / 3600;
+        long days = uptimeSeconds / 86400;
+
+        if (days > 0) {
+            normalizedUptime.append(days).append(" day(s) ");
+        }
+        if (hours > 0) {
+            normalizedUptime.append(hours).append(" hour(s) ");
+        }
+        if (minutes > 0) {
+            normalizedUptime.append(minutes).append(" minute(s) ");
+        }
+        if (seconds > 0) {
+            normalizedUptime.append(seconds).append(" second(s)");
+        }
+        return normalizedUptime.toString().trim();
     }
 
     /**

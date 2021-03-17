@@ -1,0 +1,22 @@
+/*
+ * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ */
+package com.avispl.dal.communicator.cisco.dto.status.security;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.NONE)
+public class FIPS {
+    @XmlElement(name = "Mode")
+    private String mode;
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
+}

@@ -284,7 +284,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Exposing 2 property groups by default - SystemUnit and Audio
      */
-    private String displayPropertyGroups = "SystemUnit,Audio";
+    private String displayPropertyGroups = "SystemUnit,RoomAnalytics";
 
     /**
      * Grace period for restart operation, 120s by default
@@ -737,7 +737,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
             }
             if(propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
-                statisticsMap.put("SystemTime", ciscoStatus.getTime().getSystemTime());
+                statisticsMap.put("SystemTime#Time", ciscoStatus.getTime().getSystemTime());
                 TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
                 if (timeConfiguration != null) {
                     addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), valuespace);
@@ -1601,7 +1601,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     addStatisticsParameter(statistics, String.format(N_CAMERA_SERIAL_NUMBER, camera.getItem()), camera.getSerialNumber());
                     addStatisticsParameter(statistics, String.format(N_CAMERA_SERIAL_SOFTWARE_ID, camera.getItem()), camera.getSoftwareId());
 
-
+                    // TODO only for cameras that present in the
                     CameraPosition cameraPosition = camera.getPosition();
                     if (cameraPosition != null && cameraCommand.getCameraCommand() != null) {
                         CameraPositionSetCommand positionSetCommand = cameraCommand.getCameraCommand().getPositionSetCommand();

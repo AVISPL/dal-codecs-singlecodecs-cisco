@@ -132,7 +132,7 @@ final class CiscoCommunicatorProperties {
      static final String VIDEO_SELFVIEW_DEFAULT_PIP_POSITION = "VideoSelfView#DefaultPIPPosition";
      static final String VIDEO_SELFVIEW_ON_CALL_DURATION = "VideoSelfView#OnCallDuration";
      static final String VIDEO_SELFVIEW_ON_CALL_MODE = "VideoSelfView#OnCallMode";
-     static final String SYSTEM_TIME_ZONE = "SystemTimeZome";
+     static final String SYSTEM_TIME_ZONE = "SystemTime#TimeZome";
      static final String SYSTEM_UNIT_RESTART = "SystemUnit#Restart";
      static final String AUDIO_VOLUME = "Audio#Volume";
      static final String AUDIO_ULTRASOUND_MAX_VOLUME = "Audio#UltrasoundMaxVolume";

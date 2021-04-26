@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ */
 package com.avispl.dal.communicator.cisco.dto.control.commands.systemunit;
 
 import javax.xml.bind.annotation.XmlAccessType;

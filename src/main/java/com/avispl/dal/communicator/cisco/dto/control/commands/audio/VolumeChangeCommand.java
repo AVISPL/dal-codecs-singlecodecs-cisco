@@ -5,9 +5,23 @@ package com.avispl.dal.communicator.cisco.dto.control.commands.audio;
 
 import javax.xml.bind.annotation.*;
 
+/***
+ * Volume change command template
+ *
+ * @author Maksym.Rossiitsev / Symphony Dev Team<br>
+ * Created on Apr 26, 2021
+ * @since 1.0
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class VolumeChangeCommand extends AudioCommand {
 
+    /***
+     * Volume set action template
+     *
+     * @author Maksym.Rossiitsev / Symphony Dev Team<br>
+     * Created on Apr 26, 2021
+     * @since 1.0
+     */
     @XmlAccessorType(XmlAccessType.NONE)
     private static class Volume {
         @XmlElement(name = "Set")
@@ -18,6 +32,13 @@ public class VolumeChangeCommand extends AudioCommand {
         }
     }
 
+    /***
+     * Set command template, contains command-specific values
+     *
+     * @author Maksym.Rossiitsev / Symphony Dev Team<br>
+     * Created on Apr 26, 2021
+     * @since 1.0
+     */
     @XmlAccessorType(XmlAccessType.NONE)
     private static class SetCommand {
         @XmlAttribute
@@ -29,10 +50,20 @@ public class VolumeChangeCommand extends AudioCommand {
             this.level = level;
         }
 
+        /**
+         * Retrieves {@code {@link #command}}
+         *
+         * @return value of {@link #command}
+         */
         public String getCommand() {
             return command;
         }
 
+        /**
+         * Retrieves {@code {@link #level}}
+         *
+         * @return value of {@link #level}
+         */
         public Integer getLevel() {
             return level;
         }
@@ -45,6 +76,11 @@ public class VolumeChangeCommand extends AudioCommand {
         this.volume = new Volume(volumeLevel);
     }
 
+    /**
+     * Retrieves {@code {@link #volume}}
+     *
+     * @return value of {@link #volume}
+     */
     public Volume getVolume() {
         return volume;
     }

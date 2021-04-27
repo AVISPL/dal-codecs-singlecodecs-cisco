@@ -8,9 +8,33 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 
+/***
+ * Class for SystemUnit command representation
+ *
+ * @author Maksym.Rossiitsev / Symphony Dev Team<br>
+ * Created on Apr 26, 2021
+ * @since 1.0
+ */
 @XmlAccessorType(XmlAccessType.NONE)
 public class SystemUnitCommand {
-    public static enum BootAction {Restart}
+
+    /***
+     * Boot action represents specific action, that can be performed for the system unit.
+     * There's one option at the moment, but may be more
+     *
+     * @author Maksym.Rossiitsev / Symphony Dev Team<br>
+     * Created on Apr 26, 2021
+     * @since 1.0
+     */
+    public enum BootAction { Restart }
+
+    /***
+     * Boot class that represents system unit action that may be performed
+     *
+     * @author Maksym.Rossiitsev / Symphony Dev Team<br>
+     * Created on Apr 26, 2021
+     * @since 1.0
+     */
     @XmlAccessorType(XmlAccessType.NONE)
     public static class Boot {
         @XmlAttribute
@@ -23,9 +47,23 @@ public class SystemUnitCommand {
             this.action = action.name();
         }
 
-        public String getCommand() { return command; }
+        /**
+         * Retrieves {@code {@link #command}}
+         *
+         * @return value of {@link #command}
+         */
+        public String getCommand() {
+            return command;
+        }
 
-        public String getAction() { return action; }
+        /**
+         * Retrieves {@code {@link #action}}
+         *
+         * @return value of {@link #action}
+         */
+        public String getAction() {
+            return action;
+        }
     }
     @XmlElement(name = "Boot")
     private Boot boot;
@@ -34,5 +72,12 @@ public class SystemUnitCommand {
         boot = new Boot(action);
     }
 
-    public Boot getBoot() { return boot; }
+    /**
+     * Retrieves {@code {@link #boot}}
+     *
+     * @return value of {@link #boot}
+     */
+    public Boot getBoot() {
+        return boot;
+    }
 }

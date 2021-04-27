@@ -13,5 +13,20 @@ package com.avispl.dal.communicator.cisco.controller.type;
  * @since 1.0
  */
 public enum NetworkServicesConfigurationCommandType {
-    H323Mode, SIPMode, TelnetMode, SSHMode, CDPMode, UPnPMode, NTPMode, WelcomeText
+    /**H323Mode for h323 mode change commands*/
+    H323Mode,
+    /**SIPMode for sip mode change commands*/
+    SIPMode,
+    /**TelnetMode for telnet mode change commands*/
+    TelnetMode,
+    /**SSHMode for ssh mode change commands*/
+    SSHMode,
+    /**CDPMode for cdp mode change commands*/
+    CDPMode,
+    /**UPnPMode for upnp mode change commands*/
+    UPnPMode,
+    /**NTPMode for ntp mode change commands*/
+    NTPMode,
+    /**WelcomeText for welcome text change commands*/
+    WelcomeText
 }

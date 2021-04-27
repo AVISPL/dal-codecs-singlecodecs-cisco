@@ -19,10 +19,20 @@ public class CallDisconnectResult {
     @XmlAttribute(name = "status")
     private String status;
 
+    /**
+     * Retrieves {@code {@link #status}}
+     *
+     * @return value of {@link #status}
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * Sets {@code status}
+     *
+     * @param status the {@code java.lang.String} field
+     */
     public void setStatus(String status) {
         this.status = status;
     }

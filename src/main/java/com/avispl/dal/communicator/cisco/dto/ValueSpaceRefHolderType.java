@@ -11,5 +11,14 @@ package com.avispl.dal.communicator.cisco.dto;
  * @since 1.0
  */
 public enum ValueSpaceRefHolderType {
-    VS_INT, INT, STR, TTPAR, DEFAULT
+    /**VS INT for int range valuespace type with known min/max values*/
+    VS_INT,
+    /**INT for int range valuespace type with known min/max values*/
+    INT,
+    /**STR for str valuespace values*/
+    STR,
+    /**TTPAR for valuespace ranges that should be fetched from the valuespace.xml payload*/
+    TTPAR,
+    /**DEFAULT for irrelevant types that could be ignored, value can be used as is*/
+    DEFAULT
 }

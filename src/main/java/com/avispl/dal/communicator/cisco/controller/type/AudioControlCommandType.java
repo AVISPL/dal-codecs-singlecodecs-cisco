@@ -13,5 +13,6 @@ package com.avispl.dal.communicator.cisco.controller.type;
  * @since 1.0
  */
 public enum AudioControlCommandType {
+    /**Volume is for volume change control actions */
     Volume
 }

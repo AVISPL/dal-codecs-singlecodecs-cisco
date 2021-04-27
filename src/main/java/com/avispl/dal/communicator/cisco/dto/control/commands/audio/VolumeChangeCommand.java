@@ -27,6 +27,11 @@ public class VolumeChangeCommand extends AudioCommand {
         @XmlElement(name = "Set")
         private SetCommand setCommand;
 
+        /**
+         * Instantiate Volume command based on a given volume level value
+         *
+         * @param level indicating volume level 0-100
+         * */
         public Volume(Integer level) {
             setCommand = new SetCommand(level);
         }
@@ -46,6 +51,11 @@ public class VolumeChangeCommand extends AudioCommand {
         @XmlElement(name = "Level")
         private final Integer level;
 
+        /**
+         * Instantiate SetCommand with a level value
+         *
+         * @param level to set as a value for a command (may be something else, but currently it's only volume level)
+         * */
         public SetCommand(Integer level) {
             this.level = level;
         }
@@ -72,6 +82,11 @@ public class VolumeChangeCommand extends AudioCommand {
     @XmlElement(name = "Volume")
     private final Volume volume;
 
+    /**
+     * Instantiate VolumeChangeCommand based on given volume value
+     *
+     * @param volumeLevel volume to set 0-100
+     * */
     public VolumeChangeCommand(Integer volumeLevel) {
         this.volume = new Volume(volumeLevel);
     }

@@ -10,17 +10,17 @@ import javax.xml.bind.annotation.*;
  * This is used for processing configuration parameters with multiple values potentially available. Such
  * data is dynamic so we can't rely on static values set in the code, nor we can rely on anything manually
  * configured. So, every time a specific node it processed, like:
- *      <Protocol valueSpaceRef="/Valuespace/TTPAR_CallProtocol">Auto</Protocol>
+ *      {@code <Protocol valueSpaceRef="/Valuespace/TTPAR_CallProtocol">Auto</Protocol>}
  *
  * In order to receive proper range of values for the controllable property, /valuespace.xml is fetched, and
  * possible values are retrieved from there, so this class represents the format:
- *      <TTPAR_CallProtocol type="Literal">
- *          <Value item="1">Auto</Value>
- *          <Value item="2">H320</Value>
- *          <Value item="3">H323</Value>
- *          <Value item="4">Sip</Value>
- *          <Value item="5">Spark</Value>
- *      </TTPAR_CallProtocol>
+ *      {@code <TTPAR_CallProtocol type="Literal">
+ *              <Value item="1">Auto</Value>
+ *              <Value item="2">H320</Value>
+ *              <Value item="3">H323</Value>
+ *              <Value item="4">Sip</Value>
+ *              <Value item="5">Spark</Value>
+ *          </TTPAR_CallProtocol>}
  *
  * @author Maksym.Rossiitsev / Symphony Dev Team<br>
  * Created on Apr 26, 2021

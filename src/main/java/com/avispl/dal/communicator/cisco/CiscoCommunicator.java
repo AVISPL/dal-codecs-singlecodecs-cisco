@@ -410,10 +410,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     public String dial(DialDevice dialDevice) throws Exception {
         List<Call> connectedCalls = getConnectedCalls();
         if (connectedCalls.size() > 0) {
+            Call call = connectedCalls.get(0);
             if(logger.isInfoEnabled()) {
-                logger.info("There is an active call in progress: " + getConnectedCalls().get(0).getDisplayName());
+                logger.info("There is an active call in progress: " + call.getDisplayName());
             }
-            return connectedCalls.get(0).getItem();
+            return call.getItem();
         }
 
         Command dialCommand = new Command();
@@ -436,14 +437,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             for (Call call : calls) {
                 if (call.getItem().equals(callId) && !StringUtils.isNullOrEmpty(call.getCallbackNumber())
-                        && call.getCallbackNumber().contains(dialDevice.getDialString())) {
+                        && call.getCallbackNumber().contains(dialString)) {
                     return callId;
                 }
             }
             Thread.sleep(1000);
         }
         throw new RuntimeException(String.format("An error occurred during dialing out to %s with protocol %s.",
-                dialDevice.getDialString(), dialDevice.getProtocol()));
+                dialString, dialDevice.getProtocol()));
     }
 
     /**
@@ -945,8 +946,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     Microphone[] microphones = audioInputConnectors.getMicrophones();
                     if (microphones != null) {
                         Arrays.stream(microphones).forEach(microphone -> {
-                            addStatisticsParameter(statistics, String.format(N_MICROPHONE_STATUS, microphone.getItem()), microphone.getConnectionStatus());
-                            addStatisticsParameter(statistics, String.format(N_MICROPHONE_EC_REFERENCE_DELAY, microphone.getItem()), microphone.getEcReferenceDelay());
+                            String itemCounter = microphone.getItem();
+                            addStatisticsParameter(statistics, String.format(N_MICROPHONE_STATUS, itemCounter), microphone.getConnectionStatus());
+                            addStatisticsParameter(statistics, String.format(N_MICROPHONE_EC_REFERENCE_DELAY, itemCounter), microphone.getEcReferenceDelay());
                         });
                     }
                 }
@@ -997,12 +999,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 VideoOutputConnector[] videoOutputConnectors = videoOutput.getConnectors();
                 if (videoOutputConnectors != null) {
                     Arrays.stream(videoOutputConnectors).forEach(videoOutputConnector -> {
-                        addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_TYPE, videoOutputConnector.getItem()), videoOutputConnector.getType());
-                        addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED, videoOutputConnector.getItem()), videoOutputConnector.getConnected());
+                        String propertyCounter = videoOutputConnector.getItem();
+                        addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_TYPE, propertyCounter), videoOutputConnector.getType());
+                        addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED, propertyCounter), videoOutputConnector.getConnected());
                         VideoOutputDevice videoOutputDevice = videoOutputConnector.getConnectedDevice();
                         if (videoOutputDevice != null) {
-                            addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED_DEVICE_NAME, videoOutputConnector.getItem()), videoOutputDevice.getName());
-                            addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED_DEVICE_PREFERRED_FORMAT, videoOutputConnector.getItem()), videoOutputDevice.getPreferredFormat());
+                            addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED_DEVICE_NAME, propertyCounter), videoOutputDevice.getName());
+                            addStatisticsParameter(statistics, String.format(N_VIDEO_CONNECTOR_CONNECTED_DEVICE_PREFERRED_FORMAT, propertyCounter), videoOutputDevice.getPreferredFormat());
                         }
                     });
                 }
@@ -1036,15 +1039,16 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 VideoConfigurationConnector[] connectors = inputConfiguration.getConnectors();
                 if (connectors != null) {
                     Arrays.stream(connectors).forEach(videoConfigurationConnector -> {
+                        String itemCounter = videoConfigurationConnector.getItem();
                         addStatisticsParameterWithDropdown(statistics, controllableProperties,
-                                String.format(N_INPUT_SOURCE_TYPE, videoConfigurationConnector.getItem()), videoConfigurationConnector.getInputSourceType(), valuespace);
+                                String.format(N_INPUT_SOURCE_TYPE, itemCounter), videoConfigurationConnector.getInputSourceType(), valuespace);
                         addStatisticsParameterWithDropdown(statistics, controllableProperties,
-                                String.format(N_INPUT_SOURCE_VISIBILITY, videoConfigurationConnector.getItem()), videoConfigurationConnector.getVisibility(), valuespace);
+                                String.format(N_INPUT_SOURCE_VISIBILITY, itemCounter), videoConfigurationConnector.getVisibility(), valuespace);
                         addStatisticsParameterWithDropdown(statistics, controllableProperties,
-                                String.format(N_INPUT_SOURCE_PRESENTATION_SELECTION, videoConfigurationConnector.getItem()), videoConfigurationConnector.getPresentationSelection(), valuespace);
+                                String.format(N_INPUT_SOURCE_PRESENTATION_SELECTION, itemCounter), videoConfigurationConnector.getPresentationSelection(), valuespace);
                         addStatisticsParameterWithDropdown(statistics, controllableProperties,
-                                String.format(N_INPUT_SOURCE_QUALITY, videoConfigurationConnector.getItem()), videoConfigurationConnector.getQuality(), valuespace);
-                        addStatisticsParameter(statistics, String.format(N_INPUT_SOURCE_NAME, videoConfigurationConnector.getItem()), videoConfigurationConnector.getName());
+                                String.format(N_INPUT_SOURCE_QUALITY, itemCounter), videoConfigurationConnector.getQuality(), valuespace);
+                        addStatisticsParameter(statistics, String.format(N_INPUT_SOURCE_NAME, itemCounter), videoConfigurationConnector.getName());
                     });
                 }
             }
@@ -1054,14 +1058,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 VideoConfigurationConnector[] connectors = outputConfiguration.getConnectors();
                 if (connectors != null) {
                     Arrays.stream(connectors).forEach(videoConfigurationConnector -> {
-                        String multiValueParameterKey = videoConfigurationConnector.getItem();
+                        String itemCounter = videoConfigurationConnector.getItem();
                         VideoConfigurationCEC cecConfiguration = videoConfigurationConnector.getCec();
                         if (cecConfiguration != null) {
-                            addStatisticsParameterWithSwitch(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_CEC_MODE, multiValueParameterKey), cecConfiguration.getMode().getValue());
+                            addStatisticsParameterWithSwitch(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_CEC_MODE, itemCounter), cecConfiguration.getMode().getValue());
                         }
-                        addStatisticsParameterWithDropdown(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_MONITOR_ROLE, multiValueParameterKey), videoConfigurationConnector.getMonitorRole(), valuespace);
-                        addStatisticsParameterWithDropdown(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_OVERSCAN_LEVEL, multiValueParameterKey), videoConfigurationConnector.getOverscanLevel(), valuespace);
-                        addStatisticsParameterWithDropdown(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_RESOLUTION, multiValueParameterKey), videoConfigurationConnector.getResolution(), valuespace);
+                        addStatisticsParameterWithDropdown(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_MONITOR_ROLE, itemCounter), videoConfigurationConnector.getMonitorRole(), valuespace);
+                        addStatisticsParameterWithDropdown(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_OVERSCAN_LEVEL, itemCounter), videoConfigurationConnector.getOverscanLevel(), valuespace);
+                        addStatisticsParameterWithDropdown(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_RESOLUTION, itemCounter), videoConfigurationConnector.getResolution(), valuespace);
                     });
                 }
             }
@@ -1100,18 +1104,18 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             return;
         }
         Arrays.stream(calls).forEach(call -> {
-            String multivalueParameterKey = call.getItem();
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_ANSWER_STATE, multivalueParameterKey), call.getAnswerState());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_TYPE, multivalueParameterKey), call.getCallType());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_CALLBACK_NUMBER, multivalueParameterKey), call.getCallbackNumber());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_DEVICE_TYPE, multivalueParameterKey), call.getDeviceType());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_DIRECTION, multivalueParameterKey), call.getDirection());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_DISPLAY_NAME, multivalueParameterKey), call.getDisplayName());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_DURATION, multivalueParameterKey), call.getDuration());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_FACILITY_SERVICE_ID, multivalueParameterKey), call.getFacilityServiceId());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_HOLD_REASON, multivalueParameterKey), call.getHoldReason());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_ON_HOLD, multivalueParameterKey), call.getPlacedOnHold());
-            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_PROTOCOL, multivalueParameterKey), call.getProtocol());
+            String itemCounter = call.getItem();
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_ANSWER_STATE, itemCounter), call.getAnswerState());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_TYPE, itemCounter), call.getCallType());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_CALLBACK_NUMBER, itemCounter), call.getCallbackNumber());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_DEVICE_TYPE, itemCounter), call.getDeviceType());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_DIRECTION, itemCounter), call.getDirection());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_DISPLAY_NAME, itemCounter), call.getDisplayName());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_DURATION, itemCounter), call.getDuration());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_FACILITY_SERVICE_ID, itemCounter), call.getFacilityServiceId());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_HOLD_REASON, itemCounter), call.getHoldReason());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_ON_HOLD, itemCounter), call.getPlacedOnHold());
+            addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_PROTOCOL, itemCounter), call.getProtocol());
         });
     }
 
@@ -1274,17 +1278,17 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             if (sipProxies != null) {
                 Arrays.stream(sipProxies).forEach(proxy -> {
-                    String multivalueParameterKey = proxy.getItem();
-                    addStatisticsParameter(statistics, String.format(N_SIP_PROXY_ADDRESS, multivalueParameterKey), proxy.getAddress());
-                    addStatisticsParameter(statistics, String.format(N_SIP_PROXY_STATUS, multivalueParameterKey), proxy.getStatus());
+                    String itemCounter = proxy.getItem();
+                    addStatisticsParameter(statistics, String.format(N_SIP_PROXY_ADDRESS, itemCounter), proxy.getAddress());
+                    addStatisticsParameter(statistics, String.format(N_SIP_PROXY_STATUS, itemCounter), proxy.getStatus());
                 });
             }
             if (sipRegistrations != null) {
                 Arrays.stream(sipRegistrations).forEach(registration -> {
-                    String multivalueParameterKey = registration.getItem();
-                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_STATUS, multivalueParameterKey), registration.getStatus());
-                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_URI, multivalueParameterKey), registration.getUri());
-                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_REJECTED_REASON, multivalueParameterKey), registration.getReason());
+                    String itemCounter = registration.getItem();
+                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_STATUS, itemCounter), registration.getStatus());
+                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_URI, itemCounter), registration.getUri());
+                    addStatisticsParameter(statistics, String.format(N_SIP_REGISTRATION_REJECTED_REASON, itemCounter), registration.getReason());
                 });
             }
         }
@@ -1490,9 +1494,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             Device[] devices = usb.getDevices();
             if (devices != null) {
                 Arrays.stream(devices).forEach(device -> {
-                    String multivalueParameterKey = device.getItem();
-                    addStatisticsParameter(statistics, String.format(N_USB_DEVICE_STATE, multivalueParameterKey), device.getState());
-                    addStatisticsParameter(statistics, String.format(N_USB_DEVICE_TYPE, multivalueParameterKey), device.getType());
+                    String itemCounter = device.getItem();
+                    addStatisticsParameter(statistics, String.format(N_USB_DEVICE_STATE, itemCounter), device.getState());
+                    addStatisticsParameter(statistics, String.format(N_USB_DEVICE_TYPE, itemCounter), device.getType());
                 });
             }
         }
@@ -1697,14 +1701,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (cameras != null) {
                 Command cameraCommand = retrieveCameraCommands();
                 Arrays.stream(cameras).forEach(camera -> {
-                    String multivalueParameterKey = camera.getItem();
-                    addStatisticsParameter(statistics, String.format(N_CAMERA_CONNECTED, multivalueParameterKey), camera.getConnected());
-                    addStatisticsParameter(statistics, String.format(N_CAMERA_HARDWARE_ID, multivalueParameterKey), camera.getHardwareId());
-                    addStatisticsParameter(statistics, String.format(N_CAMERA_MAC_ADDRESS, multivalueParameterKey), camera.getMacAddress());
-                    addStatisticsParameter(statistics, String.format(N_CAMERA_MANUFACTURER, multivalueParameterKey), camera.getManufacturer());
-                    addStatisticsParameter(statistics, String.format(N_CAMERA_MODEL, multivalueParameterKey), camera.getModel());
-                    addStatisticsParameter(statistics, String.format(N_CAMERA_SERIAL_NUMBER, multivalueParameterKey), camera.getSerialNumber());
-                    addStatisticsParameter(statistics, String.format(N_CAMERA_SERIAL_SOFTWARE_ID, multivalueParameterKey), camera.getSoftwareId());
+                    String itemCounter = camera.getItem();
+                    addStatisticsParameter(statistics, String.format(N_CAMERA_CONNECTED, itemCounter), camera.getConnected());
+                    addStatisticsParameter(statistics, String.format(N_CAMERA_HARDWARE_ID, itemCounter), camera.getHardwareId());
+                    addStatisticsParameter(statistics, String.format(N_CAMERA_MAC_ADDRESS, itemCounter), camera.getMacAddress());
+                    addStatisticsParameter(statistics, String.format(N_CAMERA_MANUFACTURER, itemCounter), camera.getManufacturer());
+                    addStatisticsParameter(statistics, String.format(N_CAMERA_MODEL, itemCounter), camera.getModel());
+                    addStatisticsParameter(statistics, String.format(N_CAMERA_SERIAL_NUMBER, itemCounter), camera.getSerialNumber());
+                    addStatisticsParameter(statistics, String.format(N_CAMERA_SERIAL_SOFTWARE_ID, itemCounter), camera.getSoftwareId());
 
                     CameraPosition cameraPosition = camera.getPosition();
                     if (cameraPosition != null && cameraCommand.getCameraCommand() != null) {
@@ -1712,33 +1716,33 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
                         ValueSpaceRefHolder[] focus = positionSetCommand.getFocus();
                         if (focus != null) {
-                            Arrays.stream(focus).filter(valueSpaceRefHolder -> valueSpaceRefHolder.getItem().equals(camera.getItem())).findFirst().ifPresent(focusValues -> {
+                            Arrays.stream(focus).filter(valueSpaceRefHolder -> valueSpaceRefHolder.getItem().equals(itemCounter)).findFirst().ifPresent(focusValues -> {
                                 focusValues.setValue(cameraPosition.getFocus());
-                                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_FOCUS, camera.getItem()), focusValues);
+                                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_FOCUS, itemCounter), focusValues);
                             });
                         }
 
                         ValueSpaceRefHolder[] pan = positionSetCommand.getPan();
                         if (pan != null) {
-                            Arrays.stream(pan).filter(valueSpaceRefHolder -> valueSpaceRefHolder.getItem().equals(camera.getItem())).findFirst().ifPresent(panValues -> {
+                            Arrays.stream(pan).filter(valueSpaceRefHolder -> valueSpaceRefHolder.getItem().equals(itemCounter)).findFirst().ifPresent(panValues -> {
                                 panValues.setValue(cameraPosition.getPan());
-                                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_PAN, camera.getItem()), panValues);
+                                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_PAN, itemCounter), panValues);
                             });
                         }
 
                         ValueSpaceRefHolder[] tilt = positionSetCommand.getTilt();
                         if (tilt != null) {
-                            Arrays.stream(tilt).filter(valueSpaceRefHolder -> valueSpaceRefHolder.getItem().equals(camera.getItem())).findFirst().ifPresent(tiltValues -> {
+                            Arrays.stream(tilt).filter(valueSpaceRefHolder -> valueSpaceRefHolder.getItem().equals(itemCounter)).findFirst().ifPresent(tiltValues -> {
                                 tiltValues.setValue(cameraPosition.getTilt());
-                                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_TILT, camera.getItem()), tiltValues);
+                                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_TILT, itemCounter), tiltValues);
                             });
                         }
 
                         ValueSpaceRefHolder[] zoom = positionSetCommand.getZoom();
                         if (zoom != null) {
-                            Arrays.stream(zoom).filter(valueSpaceRefHolder -> valueSpaceRefHolder.getItem().equals(camera.getItem())).findFirst().ifPresent(zoomValues -> {
+                            Arrays.stream(zoom).filter(valueSpaceRefHolder -> valueSpaceRefHolder.getItem().equals(itemCounter)).findFirst().ifPresent(zoomValues -> {
                                 zoomValues.setValue(cameraPosition.getZoom());
-                                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_ZOOM, camera.getItem()), zoomValues);
+                                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_ZOOM, itemCounter), zoomValues);
                             });
                         }
                     }
@@ -1772,49 +1776,49 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
         Arrays.stream(cameras).forEach(cameraConfiguration -> {
             CamerasConfigurationBacklight backlight = cameraConfiguration.getBacklight();
-            String multivaluePropertyKey =  cameraConfiguration.getItem();
+            String itemCounter =  cameraConfiguration.getItem();
             if (backlight != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_BACKLIGHT, multivaluePropertyKey), backlight.getDefaultMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_BACKLIGHT, itemCounter), backlight.getDefaultMode().getValue());
             }
 
             CamerasConfigurationBrightness brightness = cameraConfiguration.getBrightness();
             if (brightness != null) {
-                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_LEVEL, multivaluePropertyKey), brightness.getDefaultLevel());
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_MODE, multivaluePropertyKey),
+                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_LEVEL, itemCounter), brightness.getDefaultLevel());
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_MODE, itemCounter),
                         Arrays.stream(extractTTPARValuespace(valuespace, brightness.getMode().getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), brightness.getMode().getValue());
             }
 
             ValueSpaceRefHolder flip = cameraConfiguration.getFlip();
             if (flip != null) {
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FLIP, multivaluePropertyKey),
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FLIP, itemCounter),
                         Arrays.stream(extractTTPARValuespace(valuespace, flip.getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), flip.getValue());
             }
 
             CamerasConfigurationFocus focus = cameraConfiguration.getFocus();
             if (focus != null) {
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FOCUS_MODE, multivaluePropertyKey),
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FOCUS_MODE, itemCounter),
                         Arrays.stream(extractTTPARValuespace(valuespace, focus.getMode().getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), focus.getMode().getValue());
             }
 
             CamerasConfigurationGamma gamma = cameraConfiguration.getGamma();
             if (gamma != null) {
-                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_GAMMA_LEVEL, multivaluePropertyKey), gamma.getLevel());
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_GAMMA_MODE, multivaluePropertyKey),
+                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_GAMMA_LEVEL, itemCounter), gamma.getLevel());
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_GAMMA_MODE, itemCounter),
                         Arrays.stream(extractTTPARValuespace(valuespace, gamma.getMode().getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), gamma.getMode().getValue());
             }
 
             ValueSpaceRefHolder irSensor = cameraConfiguration.getIrSensor();
             if (irSensor != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_IR_SENSOR, multivaluePropertyKey), irSensor.getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_IR_SENSOR, itemCounter), irSensor.getValue());
             }
 
             ValueSpaceRefHolder mirror = cameraConfiguration.getMirror();
             if (mirror != null) {
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_MIRROR, multivaluePropertyKey),
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_MIRROR, itemCounter),
                         Arrays.stream(extractTTPARValuespace(valuespace, mirror.getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), mirror.getValue());
             }
@@ -1823,8 +1827,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (whitebalance != null) {
                 ValueSpaceRefHolder whitebalanceMode = whitebalance.getMode();
                 if(whitebalanceMode != null) {
-                    addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_LEVEL, multivaluePropertyKey), whitebalance.getLevel());
-                    addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_MODE, multivaluePropertyKey),
+                    addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_LEVEL, itemCounter), whitebalance.getLevel());
+                    addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_MODE, itemCounter),
                             Arrays.stream(extractTTPARValuespace(valuespace, whitebalanceMode.getValueSpaceRef()).getValues())
                                     .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), whitebalanceMode.getValue());
                 }
@@ -2071,7 +2075,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     private Integer extractValueInt(String value) {
-        if(isNumeric(value)) {
+        if(!isNumeric(value)) {
             if(logger.isDebugEnabled()) {
                 logger.debug("Value is missing or has incorrect format. Skipping.");
             }
@@ -2596,8 +2600,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if(value != null) {
             String parameterValue = value.getValue();
             List<Object> minMaxValues = value.getValues();
+            ValueSpaceRefHolderType type = value.getType();
             if (isNumeric(parameterValue) && !minMaxValues.isEmpty()
-                    && (value.getType().equals(ValueSpaceRefHolderType.INT) || value.getType().equals(ValueSpaceRefHolderType.VS_INT))) {
+                    && (type.equals(ValueSpaceRefHolderType.INT) || type.equals(ValueSpaceRefHolderType.VS_INT))) {
                 statistics.put(parameterName, "");
                 controllableProperties.add(createSlider(parameterName, Float.valueOf(String.valueOf(minMaxValues.get(0))),
                         Float.valueOf(String.valueOf(minMaxValues.get(1))), Float.valueOf(parameterValue)));

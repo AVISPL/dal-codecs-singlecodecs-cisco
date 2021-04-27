@@ -13,5 +13,12 @@ package com.avispl.dal.communicator.cisco.controller.type;
  * @since 1.0
  */
 public enum CameraControlCommandType {
-    CameraPan, CameraTilt, CameraZoom, CameraFocus
+    /**CameraPan for camera pan change commands*/
+    CameraPan,
+    /**CameraTilt for camera tilt change commands*/
+    CameraTilt,
+    /**CameraZoom for camera zoom change commands*/
+    CameraZoom,
+    /**CameraFocus for camera focus change commands*/
+    CameraFocus
 }

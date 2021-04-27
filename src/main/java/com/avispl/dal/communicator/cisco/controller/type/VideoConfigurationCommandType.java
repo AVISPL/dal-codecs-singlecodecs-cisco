@@ -13,6 +13,26 @@ package com.avispl.dal.communicator.cisco.controller.type;
  * @since 1.0
  */
 public enum VideoConfigurationCommandType {
-    DefaultMainSource, DefaultPresentationSource, Monitors, Type, Visibility, PresentationSelection, Quality, CECMode, MonitorRole,
-    OverscanLevel, Resolution
+    /**DefaultMainSource for video default main source change commands*/
+    DefaultMainSource,
+    /**DefaultPresentationSource for video default presentation source change commands*/
+    DefaultPresentationSource,
+    /**Monitors for monitors selection commands*/
+    Monitors,
+    /**Type for video configuration type change commands*/
+    Type,
+    /**Visibility for video configuration visibility commands*/
+    Visibility,
+    /**PresentationSelection for video configuration presentation selection commands*/
+    PresentationSelection,
+    /**Quality for video quality change commands*/
+    Quality,
+    /**CECMode for cec mode change commands*/
+    CECMode,
+    /**MonitorRole for monitor role change commands*/
+    MonitorRole,
+    /**OverscanLevel for overscan level change commands*/
+    OverscanLevel,
+    /**Resolution for resolution change commands*/
+    Resolution
 }

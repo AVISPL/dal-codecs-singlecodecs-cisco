@@ -23,11 +23,21 @@ public class DialCommand {
     @XmlElement(name = "Protocol")
     private String protocol;
 
+    /**
+     * Instantiate DialCommand based on number and protocol
+     *
+     * @param number to dial
+     * @param protocol to use for dial operation
+     * */
     public DialCommand(String number, String protocol) {
         this.command = "True";
         this.number = number;
         this.protocol = protocol;
     }
+
+    /**
+     * Default constructor
+     * */
     public DialCommand(){}
 
     /**

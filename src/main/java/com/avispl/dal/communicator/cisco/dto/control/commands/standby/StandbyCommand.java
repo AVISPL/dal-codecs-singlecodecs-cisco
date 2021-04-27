@@ -63,10 +63,20 @@ public class StandbyCommand {
     @XmlElement(name = "Deactivate")
     private Deactivate deactivate;
 
+    /**
+     * Instantiate standby command with Activate action
+     *
+     * @param activate instance of {@link Activate} class
+     * */
     public StandbyCommand(Activate activate) {
         this.activate = activate;
     }
 
+    /**
+     * Instantiate standby command with Deactivate action
+     *
+     * @param deactivate instance of {@link Deactivate} class
+     * */
     public StandbyCommand(Deactivate deactivate) {
         this.deactivate = deactivate;
     }

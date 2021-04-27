@@ -13,5 +13,14 @@ package com.avispl.dal.communicator.cisco.controller.type;
  * @since 1.0
  */
 public enum StandbyConfigurationCommandType {
-    BootAction, Control, Delay, StandbyAction, WakeupAction
+    /**BootAction for boot action change commands*/
+    BootAction,
+    /**Control for standby control mode change commands*/
+    Control,
+    /**Delay for standby delay change commands*/
+    Delay,
+    /**StandbyAction for standby action change commands*/
+    StandbyAction,
+    /**WakeupAction for wakeup action change commands*/
+    WakeupAction
 }

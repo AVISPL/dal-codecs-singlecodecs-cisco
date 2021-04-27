@@ -13,5 +13,8 @@ package com.avispl.dal.communicator.cisco.controller.type;
  * @since 1.0
  */
 public enum AudioConfigurationCommandType {
-    MicrophoneMode, MaxUltrasoundVolume
+    /**MicrophoneMode for microphome mode commands*/
+    MicrophoneMode,
+    /**MaxUltrasoundVolume for maximum ultrasound volume for people presence detector*/
+    MaxUltrasoundVolume
 }

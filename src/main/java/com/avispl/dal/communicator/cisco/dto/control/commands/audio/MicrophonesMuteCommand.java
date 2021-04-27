@@ -81,7 +81,15 @@ public class MicrophonesMuteCommand extends AudioCommand {
     @XmlElement(name = "Microphones")
     private Microphones microphones;
 
+    /**
+     * Default constructor
+     * */
     public MicrophonesMuteCommand() { }
+    /**
+     * Instantiate mute command based on a given mute boolean parameter
+     *
+     * @param mute indicating whether it's a mute or an unmute command
+     * */
     public MicrophonesMuteCommand(boolean mute) {
         this.microphones = new Microphones(mute);
     }

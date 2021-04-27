@@ -13,5 +13,6 @@ package com.avispl.dal.communicator.cisco.controller.type;
  * @since 1.0
  */
 public enum RoomAnalyticsConfigurationCommandType {
+    /**PeoplePresenseMode for people presense sensor on/off commands*/
     PeoplePresenseMode
 }

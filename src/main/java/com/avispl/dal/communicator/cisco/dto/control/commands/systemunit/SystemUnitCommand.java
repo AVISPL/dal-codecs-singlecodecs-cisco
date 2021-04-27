@@ -26,7 +26,10 @@ public class SystemUnitCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    public enum BootAction { Restart }
+    public enum BootAction {
+        /**Restart for restart boot action*/
+        Restart
+    }
 
     /***
      * Boot class that represents system unit action that may be performed
@@ -42,7 +45,16 @@ public class SystemUnitCommand {
         @XmlElement(name = "Action")
         private String action;
 
+        /**
+         * Default constructor
+         * */
         public Boot(){}
+
+        /**
+         * Instantiate {@link Boot} with given {@link BootAction}
+         *
+         * @param action to get action name from and set it to {@link #action}
+         * */
         public Boot(BootAction action) {
             this.action = action.name();
         }
@@ -67,7 +79,15 @@ public class SystemUnitCommand {
     }
     @XmlElement(name = "Boot")
     private Boot boot;
+    /**
+     * Default constructor
+     * */
     public SystemUnitCommand() {}
+    /***
+     * Instantiate SystemUnitCommand with a BootAction passed
+     *
+     * @param action instance of {@link BootAction} to use for {@link Boot} instantiation
+     */
     public SystemUnitCommand(BootAction action) {
         boot = new Boot(action);
     }

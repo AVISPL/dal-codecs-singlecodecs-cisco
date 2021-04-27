@@ -54,7 +54,16 @@ public class UserInterfaceCommand {
                 @XmlElement(name = "Duration")
                 private ValueSpaceRefHolder duration;
 
+                /**
+                 * Default constructor
+                 * */
                 public Display() {}
+                /**
+                 * Instantiate Display command with given text and on screen duration
+                 *
+                 * @param duration message duration in seconds
+                 * @param text to show on the screen
+                 * */
                 public Display(String text, Integer duration) {
                     this.text = new ValueSpaceRefHolder(text);
                     this.duration = new ValueSpaceRefHolder(duration);
@@ -129,7 +138,16 @@ public class UserInterfaceCommand {
         @XmlElement(name = "TextLine")
         private TextLine textLine;
 
+        /**
+         * Default constructor
+         * */
         public Message () {}
+        /**
+         * Instantiate message with given text and duration
+         *
+         * @param text to display
+         * @param duration in seconds
+         * */
         public Message (String text, Integer duration) {
             textLine = new TextLine();
             textLine.setDisplay(new TextLine.Display(text, duration));

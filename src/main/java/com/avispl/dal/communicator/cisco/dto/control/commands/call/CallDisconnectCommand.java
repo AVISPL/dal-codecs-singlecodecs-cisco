@@ -46,6 +46,9 @@ public class CallDisconnectCommand {
         return disconnectCommand;
     }
 
+    /**
+     * Instantiate CallDisconnectCommand with a default Disconnect class instance
+     * */
     public CallDisconnectCommand() {
         this.disconnectCommand = new Disconnect();
     }

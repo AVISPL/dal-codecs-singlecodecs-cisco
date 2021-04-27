@@ -11,9 +11,9 @@ import java.util.List;
 
 /***
  * Representation of nodes, that contain values, item and valueSpaceRef attrubutes, example
- * <DviType valueSpaceRef="/Valuespace/TTPAR_DviType">AutoDetect</DviType>
+ * {@code <DviType valueSpaceRef="/Valuespace/TTPAR_DviType">AutoDetect</DviType>}
  * or
- * <Connector item="2" maxOccurrence="2"></Connector>
+ * {@code <Connector item="2" maxOccurrence="2"></Connector>}
  *
  * valueSpaceRef is later used for fetching additional value details from /valuespace.xml, to define control limits,
  * controllable property type etc.
@@ -37,6 +37,9 @@ public class ValueSpaceRefHolder {
 
     private List<Object> values = new ArrayList<>();
 
+    /**
+     * Default constructor
+     * */
     public ValueSpaceRefHolder() {
     }
 

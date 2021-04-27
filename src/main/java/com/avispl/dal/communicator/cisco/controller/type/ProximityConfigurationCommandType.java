@@ -13,5 +13,12 @@ package com.avispl.dal.communicator.cisco.controller.type;
  * @since 1.0
  */
 public enum ProximityConfigurationCommandType {
-    ProximityMode, CallControl, ContentShareToClients, ContentShareFromClients
+    /**ProximityMode for proximity mode change commands*/
+    ProximityMode,
+    /**CallControl for call control commands*/
+    CallControl,
+    /**ContentShareToClients for content share to clients on/off commands*/
+    ContentShareToClients,
+    /**ContentShareFromClients for content share from clients on/off commands*/
+    ContentShareFromClients
 }

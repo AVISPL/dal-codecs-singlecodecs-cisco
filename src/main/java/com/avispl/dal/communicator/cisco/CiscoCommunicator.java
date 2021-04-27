@@ -1772,48 +1772,49 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
         Arrays.stream(cameras).forEach(cameraConfiguration -> {
             CamerasConfigurationBacklight backlight = cameraConfiguration.getBacklight();
+            String multivaluePropertyKey =  cameraConfiguration.getItem();
             if (backlight != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_BACKLIGHT, cameraConfiguration.getItem()), backlight.getDefaultMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_BACKLIGHT, multivaluePropertyKey), backlight.getDefaultMode().getValue());
             }
 
             CamerasConfigurationBrightness brightness = cameraConfiguration.getBrightness();
             if (brightness != null) {
-                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_LEVEL, cameraConfiguration.getItem()), brightness.getDefaultLevel());
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_MODE, cameraConfiguration.getItem()),
+                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_LEVEL, multivaluePropertyKey), brightness.getDefaultLevel());
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_MODE, multivaluePropertyKey),
                         Arrays.stream(extractTTPARValuespace(valuespace, brightness.getMode().getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), brightness.getMode().getValue());
             }
 
             ValueSpaceRefHolder flip = cameraConfiguration.getFlip();
             if (flip != null) {
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FLIP, cameraConfiguration.getItem()),
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FLIP, multivaluePropertyKey),
                         Arrays.stream(extractTTPARValuespace(valuespace, flip.getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), flip.getValue());
             }
 
             CamerasConfigurationFocus focus = cameraConfiguration.getFocus();
             if (focus != null) {
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FOCUS_MODE, cameraConfiguration.getItem()),
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FOCUS_MODE, multivaluePropertyKey),
                         Arrays.stream(extractTTPARValuespace(valuespace, focus.getMode().getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), focus.getMode().getValue());
             }
 
             CamerasConfigurationGamma gamma = cameraConfiguration.getGamma();
             if (gamma != null) {
-                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_GAMMA_LEVEL, cameraConfiguration.getItem()), gamma.getLevel());
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_GAMMA_MODE, cameraConfiguration.getItem()),
+                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_GAMMA_LEVEL, multivaluePropertyKey), gamma.getLevel());
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_GAMMA_MODE, multivaluePropertyKey),
                         Arrays.stream(extractTTPARValuespace(valuespace, gamma.getMode().getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), gamma.getMode().getValue());
             }
 
             ValueSpaceRefHolder irSensor = cameraConfiguration.getIrSensor();
             if (irSensor != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_IR_SENSOR, cameraConfiguration.getItem()), irSensor.getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_IR_SENSOR, multivaluePropertyKey), irSensor.getValue());
             }
 
             ValueSpaceRefHolder mirror = cameraConfiguration.getMirror();
             if (mirror != null) {
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_MIRROR, cameraConfiguration.getItem()),
+                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_MIRROR, multivaluePropertyKey),
                         Arrays.stream(extractTTPARValuespace(valuespace, mirror.getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), mirror.getValue());
             }
@@ -1822,9 +1823,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (whitebalance != null) {
                 ValueSpaceRefHolder whitebalanceMode = whitebalance.getMode();
                 if(whitebalanceMode != null) {
-                    String multivalueParameterKey = cameraConfiguration.getItem();
-                    addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_LEVEL, multivalueParameterKey), whitebalance.getLevel());
-                    addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_MODE, multivalueParameterKey),
+                    addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_LEVEL, multivaluePropertyKey), whitebalance.getLevel());
+                    addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_MODE, multivaluePropertyKey),
                             Arrays.stream(extractTTPARValuespace(valuespace, whitebalanceMode.getValueSpaceRef()).getValues())
                                     .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), whitebalanceMode.getValue());
                 }

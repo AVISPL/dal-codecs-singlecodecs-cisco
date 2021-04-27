@@ -328,6 +328,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     /**
+     * {@inheritDoc}
      * Configure xmlUnmarshaller for valuespace.xml values parsing. There are a lot of stuff that is irrelevant,
      * so by default - it's fetched as string value and then only relevant parts are parsed.
      */
@@ -445,6 +446,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 dialDevice.getDialString(), dialDevice.getProtocol()));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void hangup(String s) throws Exception {
         controlOperationsLock.lock();
@@ -459,6 +463,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CallStatus retrieveCallStatus(String callId) throws Exception {
         controlOperationsLock.lock();
@@ -513,6 +520,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MuteStatus retrieveMuteStatus() throws Exception {
         CiscoStatus status = doGet(String.format(getXmlPath, microphonesStatusUri), CiscoStatus.class);
@@ -536,6 +546,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     @Override
     public void sendMessage(PopupMessage popupMessage) throws Exception {
         if (popupMessage == null || StringUtils.isNullOrEmpty(popupMessage.getMessage()) || popupMessage.getDuration() == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to send message: message data is not valid.");
+            }
             return;
         }
 
@@ -594,10 +607,16 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateMediaChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
         MediaChannels mediaChannels = ciscoStatus.getMediaChannels();
         if (mediaChannels == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate media channels data: media channels data is empty");
+            }
             return;
         }
         MediaStatsCall[] calls = mediaChannels.getCalls();
         if(calls == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate media channels data: no calls information is available");
+            }
             return;
         }
 
@@ -609,6 +628,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     callsCount));
         }
         if(callsCount == 0) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate media channels data: no active calls is available");
+            }
             return;
         }
 
@@ -682,7 +704,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         return registrationStatus;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Statistics> getMultipleStatistics() throws Exception {
         ExtendedStatistics extendedStatistics = new ExtendedStatistics();
@@ -809,6 +833,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus ciscoStatus) {
         SystemUnit systemUnit = ciscoStatus.getSystemUnit();
         if (systemUnit == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate system unit data: no system unit information available");
+            }
             return;
         }
 
@@ -1067,6 +1094,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateCallData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Call[] calls = ciscoStatus.getCalls();
         if (calls == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate call data: no active calls available");
+            }
             return;
         }
         Arrays.stream(calls).forEach(call -> {
@@ -1171,10 +1201,16 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateConferenceCapabilitiesData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Capabilities capabilities = ciscoStatus.getCapabilities();
         if (capabilities == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate confenrence capabilities data: no capabilities status available");
+            }
             return;
         }
         ConferenceCapabilities conferenceCapabilities = capabilities.getConferenceCapabilities();
         if (conferenceCapabilities == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate confenrence capabilities data: no conference capabilities available");
+            }
             return;
         }
         addStatisticsParameter(statistics, "ConferenceCapabilities#MaxActiveCalls", conferenceCapabilities.getMaxActiveCalls());
@@ -1287,6 +1323,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateNetworkData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Network[] networks = ciscoStatus.getNetworks();
         if (networks == null || networks.length == 0) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate network data: no networks information available");
+            }
             return;
         }
 
@@ -1709,6 +1748,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         CamerasConfiguration camerasConfiguration = configuration.getCameras();
         if (camerasConfiguration == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate cameras configuration data: no cameras configuration available");
+            }
             return;
         }
         CamerasConfigurationPreset camerasPreset = camerasConfiguration.getPreset();
@@ -1723,6 +1765,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         CamerasConfigurationCamera[] cameras = camerasConfiguration.getCameras();
         if (cameras == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate cameras configuration data: no cameras configuration available");
+            }
             return;
         }
         Arrays.stream(cameras).forEach(cameraConfiguration -> {
@@ -1871,14 +1916,23 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void enrichAudioChannelStatsData(AudioChannelStats audioChannelStats, CallStats callStats, Channel channel, Call callInfo) {
         Audio audio = channel.getAudio();
         if (audio == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate audio channel data: no audio status available");
+            }
             return;
         }
         String audioChannelProtocol = audio.getProtocol();
-        if(audioChannelProtocol == null || audioChannelProtocol.equals("Off")) {
+        if(StringUtils.isNullOrEmpty(audioChannelProtocol) || audioChannelProtocol.equals("Off")) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate audio channel data: no audio protocol available");
+            }
             return;
         }
         Netstat netstat = channel.getNetstat();
         if(netstat == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate audio channel data: no netstat data available");
+            }
             return;
         }
         audioChannelStats.setCodec(audioChannelProtocol);
@@ -1918,16 +1972,27 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void enrichVideoChannelStatsData(VideoChannelStats videoChannelStats, CallStats callStats, ContentChannelStats contentChannelStats, Channel channel, Call callInfo) {
         Video video = channel.getVideo();
-        if ("Presentation".equals(video.getChannelRole())) {
+        if(video == null) {
+            return;
+        }
+        String channelRole = video.getChannelRole();
+        if ("Presentation".equals(channelRole) || "Data".equals(channelRole)) {
             enrichContentChannelStatsData(contentChannelStats, channel);
+            // skip on "Data" (i.e. Cisco SX) or "Presentation" (i.e. Cisco WebEx) type channels
             return;
         }
         String videoChannelProtocol = video.getProtocol();
         if (videoChannelProtocol == null || videoChannelProtocol.equals("Off")) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate video channel data: no video channel protocol information available");
+            }
             return;
         }
         Netstat netstat = channel.getNetstat();
         if(netstat == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate video channel data: no netstat information available");
+            }
             return;
         }
         String netstatChannelRate = netstat.getChannelRate();
@@ -1968,11 +2033,17 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void enrichContentChannelStatsData(ContentChannelStats contentChannelStats, Channel channel) {
         Video video = channel.getVideo();
         if(video == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate content channel data: no video information available");
+            }
             return;
         }
 
         Netstat netstat = channel.getNetstat();
         if (netstat == null) {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Unable to populate content channel data: no netstat information available");
+            }
             return;
         }
 
@@ -2107,6 +2178,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void authenticate() throws Exception {
     }
@@ -2201,6 +2275,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void controlProperty(ControllableProperty controllableProperty) throws Exception {
         String property = controllableProperty.getProperty();
@@ -2443,6 +2520,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void controlProperties(List<ControllableProperty> list) throws Exception {
         if (CollectionUtils.isEmpty(list)) {
@@ -2495,12 +2575,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param value value of the parameter
      */
     private void addStatisticsParameter(Map<String, String> statistics, String parameterName, ValueSpaceRefHolder value) {
-        if(value == null) {
-            return;
-        }
-        String parameterValue = value.getValue();
-        if (!StringUtils.isNullOrEmpty(parameterValue)) {
-            statistics.put(parameterName, parameterValue);
+        if(value != null) {
+            String parameterValue = value.getValue();
+            if (!StringUtils.isNullOrEmpty(parameterValue)) {
+                statistics.put(parameterName, parameterValue);
+            }
         }
     }
 
@@ -2514,16 +2593,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void addStatisticsParameterWithSlider(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, ValueSpaceRefHolder value) {
-        if(value == null) {
-            return;
-        }
-        String parameterValue = value.getValue();
-        List<Object> minMaxValues = value.getValues();
-        if (isNumeric(parameterValue) && !minMaxValues.isEmpty()
-                && (value.getType().equals(ValueSpaceRefHolderType.INT) || value.getType().equals(ValueSpaceRefHolderType.VS_INT))) {
-            statistics.put(parameterName, "");
-            controllableProperties.add(createSlider(parameterName, Float.valueOf(String.valueOf(minMaxValues.get(0))),
-                    Float.valueOf(String.valueOf(minMaxValues.get(1))), Float.valueOf(parameterValue)));
+        if(value != null) {
+            String parameterValue = value.getValue();
+            List<Object> minMaxValues = value.getValues();
+            if (isNumeric(parameterValue) && !minMaxValues.isEmpty()
+                    && (value.getType().equals(ValueSpaceRefHolderType.INT) || value.getType().equals(ValueSpaceRefHolderType.VS_INT))) {
+                statistics.put(parameterName, "");
+                controllableProperties.add(createSlider(parameterName, Float.valueOf(String.valueOf(minMaxValues.get(0))),
+                        Float.valueOf(String.valueOf(minMaxValues.get(1))), Float.valueOf(parameterValue)));
+            }
         }
     }
 
@@ -2556,7 +2634,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void addStatisticsParameterWithSwitch(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, String value) {
-        if (value != null) {
+        if (!StringUtils.isNullOrEmpty(value)) {
             statistics.put(parameterName, "");
             controllableProperties.add(createSwitch(parameterName, "Off".equals(value) ? 0 : 1));
         }
@@ -2572,13 +2650,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void addStatisticsParameterWithSwitch(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, ValueSpaceRefHolder value) {
-        if(value == null) {
-            return;
-        }
-        String parameterValue = value.getValue();
-        if (!StringUtils.isNullOrEmpty(parameterValue)) {
-            statistics.put(parameterName, "");
-            controllableProperties.add(createSwitch(parameterName, "Off".equals(parameterValue) ? 0 : 1));
+        if(value != null) {
+            String parameterValue = value.getValue();
+            if (!StringUtils.isNullOrEmpty(parameterValue)) {
+                statistics.put(parameterName, "");
+                controllableProperties.add(createSwitch(parameterName, "Off".equals(parameterValue) ? 0 : 1));
+            }
         }
     }
 
@@ -2593,7 +2670,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void addStatisticsParameterWithDropdown(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                     String parameterName, List<String> values, String value) {
-        if (value != null) {
+        if (!StringUtils.isNullOrEmpty(value) && !values.isEmpty()) {
             statistics.put(parameterName, "");
             controllableProperties.add(createDropdown(parameterName, values, value));
         }
@@ -2612,12 +2689,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                                                     String parameterName, ValueSpaceRefHolder value, String valueSpace) {
         if (value != null) {
             String parameterValue = value.getValue();
-            if(StringUtils.isNullOrEmpty(parameterValue)) {
-                return;
+            if(!StringUtils.isNullOrEmpty(parameterValue)) {
+                statistics.put(parameterName, "");
+                controllableProperties.add(createDropdown(parameterName, Arrays.stream(extractTTPARValuespace(valueSpace,
+                        value.getValueSpaceRef()).getValues()).map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), parameterValue));
             }
-            statistics.put(parameterName, "");
-            controllableProperties.add(createDropdown(parameterName, Arrays.stream(extractTTPARValuespace(valueSpace,
-                    value.getValueSpaceRef()).getValues()).map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), parameterValue));
         }
     }
 

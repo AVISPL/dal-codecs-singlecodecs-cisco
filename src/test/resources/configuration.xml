@@ -1,0 +1,437 @@
+<?xml version="1.0"?>
+<Configuration product="Cisco Codec" version="ce9.1.4.3ae3106" apiVersion="4">
+    <Audio>
+        <DefaultVolume valueSpaceRef="/Valuespace/INT_0_100">50</DefaultVolume>
+        <Input>
+            <Line item="1" maxOccurrence="1">
+                <VideoAssociation>
+                    <MuteOnInactiveVideo valueSpaceRef="/Valuespace/TTPAR_OnOff">On</MuteOnInactiveVideo>
+                    <VideoInputSource valueSpaceRef="/Valuespace/TTPAR_PresentationSources_2">2</VideoInputSource>
+                </VideoAssociation>
+            </Line>
+            <Microphone item="1" maxOccurrence="2">
+                <EchoControl>
+                    <Dereverberation valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</Dereverberation>
+                    <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+                    <NoiseReduction valueSpaceRef="/Valuespace/TTPAR_OnOff">On</NoiseReduction>
+                </EchoControl>
+                <Level valueSpaceRef="/Valuespace/INT_0_24">24</Level>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+            </Microphone>
+            <Microphone item="2" maxOccurrence="2">
+                <EchoControl>
+                    <Dereverberation valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</Dereverberation>
+                    <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+                    <NoiseReduction valueSpaceRef="/Valuespace/TTPAR_OnOff">On</NoiseReduction>
+                </EchoControl>
+                <Level valueSpaceRef="/Valuespace/INT_0_24">14</Level>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+            </Microphone>
+        </Input>
+        <Microphones>
+            <Mute>
+                <Enabled valueSpaceRef="/Valuespace/TTPAR_MuteEnabled">True</Enabled>
+            </Mute>
+        </Microphones>
+        <Output>
+            <Line item="1" maxOccurrence="1">
+                <Delay>
+                    <DelayMs valueSpaceRef="/Valuespace/INT_0_290">0</DelayMs>
+                    <Mode valueSpaceRef="/Valuespace/TTPAR_AudioOutDelayMode">RelativeToHDMI</Mode>
+                </Delay>
+            </Line>
+        </Output>
+        <SoundsAndAlerts>
+            <RingTone valueSpaceRef="/Valuespace/STR_1_100_Ringtone">Vibes</RingTone>
+            <RingVolume valueSpaceRef="/Valuespace/INT_0_100">25</RingVolume>
+        </SoundsAndAlerts>
+    </Audio>
+    <Cameras>
+        <Camera item="1" maxOccurrence="1">
+            <Backlight>
+                <DefaultMode valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</DefaultMode>
+            </Backlight>
+            <Brightness>
+                <DefaultLevel valueSpaceRef="/Valuespace/INT_1_31">20</DefaultLevel>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_AutoManual">Auto</Mode>
+            </Brightness>
+            <Flip valueSpaceRef="/Valuespace/TTPAR_OnOffAuto">On</Flip>
+            <Focus>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_AutoManual">Auto</Mode>
+            </Focus>
+            <Gamma>
+                <Level valueSpaceRef="/Valuespace/INT_0_7">0</Level>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_AutoManual">Auto</Mode>
+            </Gamma>
+            <IrSensor valueSpaceRef="/Valuespace/TTPAR_OnOff">On</IrSensor>
+            <Mirror valueSpaceRef="/Valuespace/TTPAR_OnOffAuto">Auto</Mirror>
+            <Whitebalance>
+                <Level valueSpaceRef="/Valuespace/INT_1_16">1</Level>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_AutoManual">Auto</Mode>
+            </Whitebalance>
+        </Camera>
+        <Preset>
+            <TriggerAutofocus valueSpaceRef="/Valuespace/TTPAR_OnOffAuto">Auto</TriggerAutofocus>
+        </Preset>
+    </Cameras>
+    <Conference>
+        <AutoAnswer>
+            <Delay valueSpaceRef="/Valuespace/INT_0_50">0</Delay>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+            <Mute valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mute>
+        </AutoAnswer>
+        <DefaultCall>
+            <Protocol valueSpaceRef="/Valuespace/TTPAR_CallProtocol">Sip</Protocol>
+            <Rate valueSpaceRef="/Valuespace/INT_64_6000">6000</Rate>
+        </DefaultCall>
+        <DoNotDisturb>
+            <DefaultTimeout valueSpaceRef="/Valuespace/INT_1_1440">60</DefaultTimeout>
+        </DoNotDisturb>
+        <Encryption>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_BestEffortOnOff">BestEffort</Mode>
+        </Encryption>
+        <FarEndControl>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+        </FarEndControl>
+        <MaxReceiveCallRate valueSpaceRef="/Valuespace/INT_64_6000">6000</MaxReceiveCallRate>
+        <MaxTotalReceiveCallRate valueSpaceRef="/Valuespace/INT_64_6000">6000</MaxTotalReceiveCallRate>
+        <MaxTotalTransmitCallRate valueSpaceRef="/Valuespace/INT_64_6000">6000</MaxTotalTransmitCallRate>
+        <MaxTransmitCallRate valueSpaceRef="/Valuespace/INT_64_6000">6000</MaxTransmitCallRate>
+        <MultiStream>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_Off">Off</Mode>
+        </MultiStream>
+    </Conference>
+    <H323>
+        <Authentication>
+            <LoginName valueSpaceRef="/Valuespace/STR_0_50_NoFilt"></LoginName>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</Mode>
+            <Password valueSpaceRef="/Valuespace/PASSWORD_0_50_NoFilt">***</Password>
+        </Authentication>
+        <CallSetup>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_H323_GkMode">Gatekeeper</Mode>
+        </CallSetup>
+        <Encryption>
+            <KeySize valueSpaceRef="/Valuespace/TTPAR_H323_EncKeySize">Min1024bit</KeySize>
+        </Encryption>
+        <Gatekeeper>
+            <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">172.31.254.64</Address>
+        </Gatekeeper>
+        <H323Alias>
+            <E164 valueSpaceRef="/Valuespace/STR_0_30_NoFilt">7771991010</E164>
+            <ID valueSpaceRef="/Valuespace/STR_0_49_NoFilt">NH-SX20@nh.vnoc1.com</ID>
+        </H323Alias>
+        <NAT>
+            <Address valueSpaceRef="/Valuespace/STR_0_64_NoFilt"></Address>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOffAuto">Off</Mode>
+        </NAT>
+    </H323>
+    <Network item="1" maxOccurrence="1">
+        <DNS>
+            <Domain>
+                <Name valueSpaceRef="/Valuespace/STR_0_64_NoFilt">nh.vnoc1.com</Name>
+            </Domain>
+            <Server item="1" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_64_IPv4v6">***REMOVED***</Address>
+            </Server>
+            <Server item="2" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_64_IPv4v6">172.31.254.12</Address>
+            </Server>
+            <Server item="3" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_64_IPv4v6"></Address>
+            </Server>
+        </DNS>
+        <IEEE8021X>
+            <AnonymousIdentity valueSpaceRef="/Valuespace/STR_0_64_NoFilt"></AnonymousIdentity>
+            <Eap>
+                <Md5 valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Md5>
+                <Peap valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Peap>
+                <Tls valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Tls>
+                <Ttls valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Ttls>
+            </Eap>
+            <Identity valueSpaceRef="/Valuespace/STR_0_64_NoFilt"></Identity>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</Mode>
+            <Password valueSpaceRef="/Valuespace/PASSWORD_0_50_NoFilt">***</Password>
+            <TlsVerify valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</TlsVerify>
+            <UseClientCertificate valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</UseClientCertificate>
+        </IEEE8021X>
+        <IPStack valueSpaceRef="/Valuespace/TTPAR_IpProtocolWithDual">Dual</IPStack>
+        <IPv4>
+            <Address valueSpaceRef="/Valuespace/STR_0_64_IPv4">172.31.254.109</Address>
+            <Assignment valueSpaceRef="/Valuespace/TTPAR_IpAssignment">Static</Assignment>
+            <Gateway valueSpaceRef="/Valuespace/STR_0_64_IPv4">172.31.254.2</Gateway>
+            <SubnetMask valueSpaceRef="/Valuespace/STR_0_64_IPv4">255.255.255.0</SubnetMask>
+        </IPv4>
+        <IPv6>
+            <Address valueSpaceRef="/Valuespace/STR_0_64_IPv6WithNetmask"></Address>
+            <Assignment valueSpaceRef="/Valuespace/TTPAR_IPv6Assignment">DHCPv6</Assignment>
+            <DHCPOptions valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</DHCPOptions>
+            <Gateway valueSpaceRef="/Valuespace/STR_0_64_IPv6"></Gateway>
+        </IPv6>
+        <MTU valueSpaceRef="/Valuespace/INT_576_1500">1500</MTU>
+        <QoS>
+            <Diffserv>
+                <Audio valueSpaceRef="/Valuespace/INT_0_63">0</Audio>
+                <Data valueSpaceRef="/Valuespace/INT_0_63">0</Data>
+                <ICMPv6 valueSpaceRef="/Valuespace/INT_0_63">0</ICMPv6>
+                <NTP valueSpaceRef="/Valuespace/INT_0_63">0</NTP>
+                <Signalling valueSpaceRef="/Valuespace/INT_0_63">0</Signalling>
+                <Video valueSpaceRef="/Valuespace/INT_0_63">0</Video>
+            </Diffserv>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_QoSMode">Off</Mode>
+        </QoS>
+        <RemoteAccess>
+            <Allow valueSpaceRef="/Valuespace/STR_0_255_IP-List"></Allow>
+        </RemoteAccess>
+        <Speed valueSpaceRef="/Valuespace/TTPAR_InterfaceSpeed">Auto</Speed>
+        <VLAN>
+            <Voice>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_Dot1qMode">Auto</Mode>
+                <VlanId valueSpaceRef="/Valuespace/INT_1_4094">1</VlanId>
+            </Voice>
+        </VLAN>
+    </Network>
+    <NetworkServices>
+        <CDP>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+        </CDP>
+        <H323>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+        </H323>
+        <HTTP>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_HTTPModes">HTTP+HTTPS</Mode>
+        </HTTP>
+        <HTTPS>
+            <Server>
+                <MinimumTLSVersion valueSpaceRef="/Valuespace/TTPAR_TLSVersions_min_11">TLSv1.1</MinimumTLSVersion>
+            </Server>
+            <StrictTransportSecurity valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</StrictTransportSecurity>
+            <VerifyClientCertificate valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</VerifyClientCertificate>
+            <VerifyServerCertificate valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</VerifyServerCertificate>
+        </HTTPS>
+        <NTP>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_AutoManualOff">Auto</Mode>
+            <Server item="1" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">***REMOVED***</Address>
+            </Server>
+            <Server item="2" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">0.pool.ntp.org</Address>
+            </Server>
+            <Server item="3" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">1.pool.ntp.org</Address>
+            </Server>
+        </NTP>
+        <SIP>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+        </SIP>
+        <SNMP>
+            <CommunityName valueSpaceRef="/Valuespace/STR_0_50_NoFilt">public</CommunityName>
+            <Host item="1" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">209.251.8.11</Address>
+            </Host>
+            <Host item="2" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Address>
+            </Host>
+            <Host item="3" maxOccurrence="3">
+                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Address>
+            </Host>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_SnmpService">ReadOnly</Mode>
+            <SystemContact valueSpaceRef="/Valuespace/STR_0_50_NoFilt">daniel.berry@avispl.com</SystemContact>
+            <SystemLocation valueSpaceRef="/Valuespace/STR_0_50_NoFilt">NH Office</SystemLocation>
+        </SNMP>
+        <SSH>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+        </SSH>
+        <Telnet>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+        </Telnet>
+        <UPnP>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+        </UPnP>
+        <WelcomeText valueSpaceRef="/Valuespace/TTPAR_OnOff">On</WelcomeText>
+    </NetworkServices>
+    <Peripherals>
+        <Profile>
+            <Cameras valueSpaceRef="/Valuespace/TTPAR_CameraCount">Minimum1</Cameras>
+            <ControlSystems valueSpaceRef="/Valuespace/TTPAR_ControlSystemsCount">NotSet</ControlSystems>
+            <TouchPanels valueSpaceRef="/Valuespace/TTPAR_TouchPanelCount">NotSet</TouchPanels>
+        </Profile>
+    </Peripherals>
+    <Phonebook>
+        <Server item="1" maxOccurrence="1">
+            <ID valueSpaceRef="/Valuespace/STR_0_64_NoFilt">default</ID>
+            <Type valueSpaceRef="/Valuespace/TTPAR_PhonebookTypes">TMS</Type>
+            <URL valueSpaceRef="/Valuespace/STR_0_255_NoInvalidXmlChars">https://172.31.11.70/tms/public/external/phonebook/phonebookservice.asmx</URL>
+        </Server>
+    </Phonebook>
+    <Provisioning>
+        <Connectivity valueSpaceRef="/Valuespace/TTPAR_ConnectivityVS">Auto</Connectivity>
+        <ExternalManager>
+            <Address valueSpaceRef="/Valuespace/STR_0_64_NoFilt">172.31.11.70</Address>
+            <AlternateAddress valueSpaceRef="/Valuespace/STR_0_64_NoFilt"></AlternateAddress>
+            <Domain valueSpaceRef="/Valuespace/STR_0_64_BasicDomainNameCheck"></Domain>
+            <Path valueSpaceRef="/Valuespace/STR_0_255_NoFilt">tms/public/external/management/systemmanagementservice.asmx</Path>
+            <Protocol valueSpaceRef="/Valuespace/TTPAR_HttpProtocols">HTTPS</Protocol>
+        </ExternalManager>
+        <HttpMethod valueSpaceRef="/Valuespace/TTPAR_HttpMethods">POST</HttpMethod>
+        <LoginName valueSpaceRef="/Valuespace/STR_0_80_NoFilt"></LoginName>
+        <Mode valueSpaceRef="/Valuespace/TTPAR_ProvisioningModes">TMS</Mode>
+        <Password valueSpaceRef="/Valuespace/PASSWORD_0_64_NoFilt">***</Password>
+    </Provisioning>
+    <Proximity>
+        <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</Mode>
+        <Services>
+            <CallControl valueSpaceRef="/Valuespace/TTPAR_EnabledDisabled">Disabled</CallControl>
+            <ContentShare>
+                <FromClients valueSpaceRef="/Valuespace/TTPAR_EnabledDisabled">Enabled</FromClients>
+                <ToClients valueSpaceRef="/Valuespace/TTPAR_EnabledDisabled">Disabled</ToClients>
+            </ContentShare>
+        </Services>
+    </Proximity>
+    <RoomAnalytics>
+        <PeoplePresenceDetector valueSpaceRef="/Valuespace/TTPAR_OnOff">On</PeoplePresenceDetector>
+    </RoomAnalytics>
+    <SIP>
+        <Authentication>
+            <Password valueSpaceRef="/Valuespace/PASSWORD_0_128_NoFilt">***</Password>
+            <UserName valueSpaceRef="/Valuespace/STR_0_128_NoFilt">acme</UserName>
+        </Authentication>
+        <DefaultTransport valueSpaceRef="/Valuespace/TTPAR_SIP_DEF_TRNSP">TCP</DefaultTransport>
+        <DisplayName valueSpaceRef="/Valuespace/STR_0_550_NoFilt">NH-SX20</DisplayName>
+        <Ice>
+            <DefaultCandidate valueSpaceRef="/Valuespace/TTPAR_IceDefault">Host</DefaultCandidate>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_IceMode">Auto</Mode>
+        </Ice>
+        <ListenPort valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</ListenPort>
+        <Proxy item="1" maxOccurrence="4">
+            <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">172.31.254.64</Address>
+        </Proxy>
+        <Proxy item="2" maxOccurrence="4">
+            <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Address>
+        </Proxy>
+        <Proxy item="3" maxOccurrence="4">
+            <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Address>
+        </Proxy>
+        <Proxy item="4" maxOccurrence="4">
+            <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Address>
+        </Proxy>
+        <Turn>
+            <Password valueSpaceRef="/Valuespace/PASSWORD_0_128_NoFilt">***</Password>
+            <Server valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Server>
+            <UserName valueSpaceRef="/Valuespace/STR_0_128_NoFilt"></UserName>
+        </Turn>
+        <URI valueSpaceRef="/Valuespace/STR_0_255_NoFilt">NH-SX20@nh.vnoc1.com</URI>
+    </SIP>
+    <SerialPort>
+        <BaudRate valueSpaceRef="/Valuespace/TTPAR_SerialBaud">38400</BaudRate>
+        <LoginRequired valueSpaceRef="/Valuespace/TTPAR_OnOff">On</LoginRequired>
+        <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+    </SerialPort>
+    <Standby>
+        <BootAction valueSpaceRef="/Valuespace/TTPAR_WakeupBootAction">RestoreCameraPosition</BootAction>
+        <Control valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Control>
+        <Delay valueSpaceRef="/Valuespace/INT_1_480">10</Delay>
+        <StandbyAction valueSpaceRef="/Valuespace/TTPAR_StandbyAction">PrivacyPosition</StandbyAction>
+        <WakeupAction valueSpaceRef="/Valuespace/TTPAR_WakeupBootAction">RestoreCameraPosition</WakeupAction>
+    </Standby>
+    <SystemUnit>
+        <IrSensor valueSpaceRef="/Valuespace/TTPAR_IRSensorSetting">Auto</IrSensor>
+        <Name valueSpaceRef="/Valuespace/STR_0_50_NoFilt">NH-SX20</Name>
+    </SystemUnit>
+    <Time>
+        <DateFormat valueSpaceRef="/Valuespace/TTPAR_DateFormat">DD_MM_YY</DateFormat>
+        <TimeFormat valueSpaceRef="/Valuespace/TTPAR_TimeFormat">12H</TimeFormat>
+        <Zone valueSpaceRef="/Valuespace/TTPAR_OlsonTimeZone">America/New_York</Zone>
+    </Time>
+    <UserInterface>
+        <ContactInfo>
+            <Type valueSpaceRef="/Valuespace/TTPAR_ContactInfoVs">Auto</Type>
+        </ContactInfo>
+        <KeyTones>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+        </KeyTones>
+        <Language valueSpaceRef="/Valuespace/TTPAR_MenuLanguages">English</Language>
+        <OSD>
+            <Output valueSpaceRef="/Valuespace/TTPAR_OsdOutput_2_Auto">1</Output>
+        </OSD>
+    </UserInterface>
+    <UserManagement>
+        <LDAP>
+            <Admin>
+                <Filter valueSpaceRef="/Valuespace/STR_0_1024_NoFilt"></Filter>
+                <Group valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Group>
+            </Admin>
+            <Attribute valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Attribute>
+            <BaseDN valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></BaseDN>
+            <Encryption valueSpaceRef="/Valuespace/TTPAR_LDAPEncryption">LDAPS</Encryption>
+            <MinimumTLSVersion valueSpaceRef="/Valuespace/TTPAR_TLSVersions_min_10">TLSv1.2</MinimumTLSVersion>
+            <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</Mode>
+            <Server>
+                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt"></Address>
+                <Port valueSpaceRef="/Valuespace/INT_0_65535">0</Port>
+            </Server>
+            <VerifyServerCertificate valueSpaceRef="/Valuespace/TTPAR_OnOff">On</VerifyServerCertificate>
+        </LDAP>
+    </UserManagement>
+    <Video>
+        <DefaultMainSource valueSpaceRef="/Valuespace/TTPAR_PresentationSources_3">1</DefaultMainSource>
+        <Input>
+            <Connector item="1" maxOccurrence="2">
+                <CameraControl>
+                    <CameraId valueSpaceRef="/Valuespace/TTPAR_CameraIdOneCamera">1</CameraId>
+                    <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+                </CameraControl>
+                <InputSourceType valueSpaceRef="/Valuespace/TTPAR_VideoInputSourceType">camera</InputSourceType>
+                <Name valueSpaceRef="/Valuespace/STR_0_50_NoFilt"></Name>
+                <PresentationSelection valueSpaceRef="/Valuespace/TTPAR_VideoInputPresentationSelection">Manual</PresentationSelection>
+                <Quality valueSpaceRef="/Valuespace/TTPAR_MotionSharpness">Motion</Quality>
+                <Visibility valueSpaceRef="/Valuespace/TTPAR_ConnectorVisibility">IfSignal</Visibility>
+            </Connector>
+            <Connector item="2" maxOccurrence="2">
+                <CameraControl>
+                    <CameraId valueSpaceRef="/Valuespace/TTPAR_CameraIdOneCamera">1</CameraId>
+                    <Mode valueSpaceRef="/Valuespace/TTPAR_Off">Off</Mode>
+                </CameraControl>
+                <DviType valueSpaceRef="/Valuespace/TTPAR_DviType">AutoDetect</DviType>
+                <InputSourceType valueSpaceRef="/Valuespace/TTPAR_VideoInputSourceType">PC</InputSourceType>
+                <Name valueSpaceRef="/Valuespace/STR_0_50_NoFilt"></Name>
+                <PresentationSelection valueSpaceRef="/Valuespace/TTPAR_VideoInputPresentationSelection">OnConnect</PresentationSelection>
+                <Quality valueSpaceRef="/Valuespace/TTPAR_MotionSharpness">Sharpness</Quality>
+                <Visibility valueSpaceRef="/Valuespace/TTPAR_ConnectorVisibility">Always</Visibility>
+            </Connector>
+        </Input>
+        <Monitors valueSpaceRef="/Valuespace/TTPAR_Monitors_Dual">Auto</Monitors>
+        <Output>
+            <Connector item="1" maxOccurrence="2">
+                <CEC>
+                    <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+                </CEC>
+                <MonitorRole valueSpaceRef="/Valuespace/TTPAR_MonitorRole_Dual_Auto">First</MonitorRole>
+                <OverscanLevel valueSpaceRef="/Valuespace/TTPAR_OverscanLevel">None</OverscanLevel>
+                <Resolution valueSpaceRef="/Valuespace/TTPAR_ScreenSettingsLimited">1920_1080_60</Resolution>
+            </Connector>
+            <Connector item="2" maxOccurrence="2">
+                <CEC>
+                    <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">Off</Mode>
+                </CEC>
+                <MonitorRole valueSpaceRef="/Valuespace/TTPAR_MonitorRole_Dual_Auto">Second</MonitorRole>
+                <OverscanLevel valueSpaceRef="/Valuespace/TTPAR_OverscanLevel">None</OverscanLevel>
+                <Resolution valueSpaceRef="/Valuespace/TTPAR_ScreenSettingsLimited">Auto</Resolution>
+            </Connector>
+        </Output>
+        <Presentation>
+            <DefaultSource valueSpaceRef="/Valuespace/TTPAR_PresentationSources_2">2</DefaultSource>
+        </Presentation>
+        <Selfview>
+            <Default>
+                <FullscreenMode valueSpaceRef="/Valuespace/TTPAR_OnOffCurrent">Current</FullscreenMode>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_OnOffCurrent">Current</Mode>
+                <OnMonitorRole valueSpaceRef="/Valuespace/TTPAR_MonitorRole_Dual_BasicCurrent">Current</OnMonitorRole>
+                <PIPPosition valueSpaceRef="/Valuespace/TTPAR_PIPPositionCurrent">Current</PIPPosition>
+            </Default>
+            <OnCall>
+                <Duration valueSpaceRef="/Valuespace/INT_1_60">10</Duration>
+                <Mode valueSpaceRef="/Valuespace/TTPAR_OnOff">On</Mode>
+            </OnCall>
+        </Selfview>
+    </Video>
+</Configuration>

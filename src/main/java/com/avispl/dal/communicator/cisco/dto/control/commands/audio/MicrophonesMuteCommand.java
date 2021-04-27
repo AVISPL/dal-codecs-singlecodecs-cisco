@@ -6,7 +6,7 @@ package com.avispl.dal.communicator.cisco.dto.control.commands.audio;
 import javax.xml.bind.annotation.*;
 
 /**
- * Microphone Mute command class.
+ * Microphone Mute command template.
  * This class is responsible for generating Mute/Unmute commands
  *
  * @author Maksym.Rossiitsev / Symphony Dev Team<br>
@@ -47,10 +47,14 @@ public class MicrophonesMuteCommand extends AudioCommand {
         @XmlAttribute(name = "command")
         protected String command = "True";
 
+        /**
+         * Retrieves {@code {@link #command}}
+         *
+         * @return value of {@link #command}
+         */
         public String getCommand() {
             return command;
         }
-
     }
 
     /**

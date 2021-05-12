@@ -745,7 +745,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if(propertyGroupQualifiedForDisplay(propertyGroups, "Audio")) {
                 populateAudioData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Camera")) {
+            if(propertyGroupQualifiedForDisplay(propertyGroups, "Cameras")) {
                 populateCameraData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
             if(propertyGroupQualifiedForDisplay(propertyGroups, "Conference")) {
@@ -781,7 +781,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if(propertyGroupQualifiedForDisplay(propertyGroups, "Security")) {
                 populateSecurityData(statisticsMap, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Network")) {
+            if(propertyGroupQualifiedForDisplay(propertyGroups, "Networks")) {
                 populateNetworkData(statisticsMap, ciscoStatus);
             }
             if(propertyGroupQualifiedForDisplay(propertyGroups, "USB")) {
@@ -1711,7 +1711,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     addStatisticsParameter(statistics, String.format(N_CAMERA_SERIAL_SOFTWARE_ID, itemCounter), camera.getSoftwareId());
 
                     CameraPosition cameraPosition = camera.getPosition();
-                    if (cameraPosition != null && cameraCommand.getCameraCommand() != null) {
+                    if (cameraPosition != null && cameraCommand != null && cameraCommand.getCameraCommand() != null) {
                         CameraPositionSetCommand positionSetCommand = cameraCommand.getCameraCommand().getPositionSetCommand();
 
                         ValueSpaceRefHolder[] focus = positionSetCommand.getFocus();
@@ -2142,6 +2142,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
     /***
      * Retrieve templates for camera controls (zoom, pan, tilt, focus).
+     * If no controls are available - EmptyResult node is returned.
+     *
      * By default, values are limited as follows:
      * Pan: <-65535..65535>
      * Tilt: <-65535..65535>
@@ -2154,7 +2156,24 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private Command retrieveCameraCommands() throws Exception {
-        return doGet(String.format(getXmlPath, cameraCommandUri), Command.class);
+        try {
+            return doGet(String.format(getXmlPath, cameraCommandUri), Command.class);
+        } catch (RestClientException ex) {
+            // Jaxb is not able to handle multiple RootNodes as well as ignoring them.
+            // If there are no description for camera commands - <EmptyResult\> node will be populated instead of <Command>,
+            // so Jaxb expects that to be in place at all times (as opposed to Jackson, which will just handle that as
+            // blank value for the Command root)
+            // So, if EmptyResult substring was found - it is due to the <EmptyResult/> root node, which means there
+            // are no available Camera commands available on the device.
+            String message = ex.getMessage();
+            if(!StringUtils.isNullOrEmpty(message) && message.contains("EmptyResult")) {
+                if(logger.isDebugEnabled()) {
+                    logger.debug("Camera controls are not available on the device. Skipping.");
+                }
+                return null;
+            }
+            throw ex;
+        }
     }
 
     /***

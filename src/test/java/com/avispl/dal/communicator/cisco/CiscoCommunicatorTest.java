@@ -34,7 +34,7 @@ public class CiscoCommunicatorTest {
     public void setUp() throws Exception {
 //        wireMockRule.start();
         ciscoCommunicator = new CiscoCommunicator();
-        ciscoCommunicator.setHost("172.31.254.167");
+        ciscoCommunicator.setHost("172.31.254.121");
         ciscoCommunicator.setPort(443);
         ciscoCommunicator.setProtocol("https");
         ciscoCommunicator.setPassword("1234");
@@ -73,6 +73,7 @@ public class CiscoCommunicatorTest {
     @Test
     public void testSerializeProperties() throws Exception {
         ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
+        ciscoCommunicator.setDisplayPropertyGroups("All");
         List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();
         Assert.assertEquals(2, statistics.size());
 

@@ -1015,7 +1015,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if(videoLayout != null) {
                 VideoLayoutFamily videoLayoutFamily = videoLayout.getLayoutFamily();
                 if(videoLayoutFamily != null) {
-                    addStatisticsParameter(statistics, "Video#LayoutFamity", videoLayoutFamily.getLocal());
+                    addStatisticsParameter(statistics, "Video#LayoutFamily", videoLayoutFamily.getLocal());
                 }
             }
 

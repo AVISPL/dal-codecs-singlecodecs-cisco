@@ -487,6 +487,7 @@ public class ControlPayloadGenerator {
                 featuresCall.setMidCallControls(new ValueSpaceRefHolder(value));
                 features.setCall(featuresCall);
                 userInterfaceConfiguration.setFeatures(features);
+                break;
             case HideAllFeatures:
                 features = new UserInterfaceConfigurationFeatures();
                 features.setHideAll(new ValueSpaceRefHolder(value));

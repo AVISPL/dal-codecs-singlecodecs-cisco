@@ -101,176 +101,176 @@ import static com.avispl.dal.communicator.cisco.controller.ControlPayloadGenerat
  * Communicator based on Cisco XML API
  * {@link com.avispl.dal.communicator.cisco.controller.ControlPayloadGenerator} is used for generating
  * configuration/command request payloads based on a command type
- *
+ * <p>
  * Properties are divided into groups:
  * Audio,SystemUnit,Standby,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,
  * ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity,SystemTime
- *
+ * <p>
  * By default, 2 groups are only exposed: SystemUnit,Audio
- *
+ * <p>
  * Adding more groups in a csv format will increase amount of information populated to Symphony.
- *
+ * <p>
  * Adapter keeps track of the set of device properties. There are 3 categories of properties: Monitored, Controlled via
  * Commands and Controlled via Configuration.
- *
- *  System Time
- *  System TimeZone
- *  Audio: Microphone EC Reference Delay
- *  Audio: Microphone status
- *  Audio: Microphones mute
- *  Audio: Output Line Delay(MS)
- *  Audio: Ultrasound MAX Volume
- *  Audio: Volume
- *  Audio: Volume Mute
- *
- *  Cameras: Camera Backlight
- *  Cameras: Camera Brightness Level
- *  Cameras: Camera Brightness Mode
- *  Cameras: Camera Connected
- *  Cameras: Camera Flip
- *  Cameras: Camera Focus Mode
- *  Cameras: Camera Gamma Level
- *  Cameras: Camera Gamma Mode
- *  Cameras: Camera Hardware Id
- *  Cameras: Camera MAC Address
- *  Cameras: Camera Manufacturer
- *  Cameras: Camera Mirror
- *  Cameras: Camera Model
- *  Cameras: Camera Pan
- *  Cameras: Camera Serial Number
- *  Cameras: Camera Software Id
- *  Cameras: Camera Tilt
- *  Cameras: Camera Whitebalance Level
- *  Cameras: Camera Whitebalance Mode
- *  Cameras: Camera Zoom
- *
- *  Conference: Auto Answer Delay
- *  Conference: Auto Answer Mode
- *  Conference: Auto Answer Mute
- *  Conference: Default Call Protocol
- *  Conference: Default Call Rate
- *  Conference: Do Not Disturb
- *  Conference: Do Not Disturb Timeout
- *  Conference: Far End Control
- *  Conference: Multipoint Mode
- *  Conference: Presentation Call Id
- *  Conference: Presentation Mode
- *  Conference: Speaker Lock Call Id
- *  Conference: Speaker Lock Mode
- *
- *  Conference Capabilities: Max Active Calls
- *  Conference Capabilities: Max Audio Calls
- *  Conference Capabilities: Max Calls
- *  Conference Capabilities: Max Video Calls
- *
- *  Networks: Network CDP Address
- *  Networks: Network CDP Device Id
- *  Networks: Network CDP Duplex
- *  Networks: Network CDP Platform
- *  Networks: Network CDP Port Id
- *  Networks: Network CDP Primary Mgmt Address
- *  Networks: Network CDP Sys Name
- *  Networks: Network CDP Sys Object Id
- *  Networks: Network CDP Version
- *  Networks: Network CDP Vtp Mgmt Domain
- *  Networks: Network CDP Capabilities
- *  Networks: Network CDP Address
- *  Networks: Network CDP Domain Name
- *  Networks: Network Ethernet MAC Address
- *  Networks: Network IPv4 Address
- *  Networks: Network IPv4 Gateway
- *  Networks: Network IPv4 Subnet Mask
- *  Networks: Network IPv6 Address
- *  Networks: Network IPv6 Gateway
- *
- *  Network Services: CDP Mode
- *  Network Services: HTTP Mode
- *  Network Services: HTTP Minimum TLS Version
- *  Network Services: HTTP Strict Transport Security
- *  Network Services: HTTP Verify Client Certificate
- *  Network Services: SIP Mode
- *  Network Services: SNMP Community Name
- *  Network Services: SNMP Mode
- *  Network Services: SSH Mode
- *  Network Services: UPnP Mode
- *  Network Services: Telnet Mode
- *  Network Services: Welcome Text
- *
- *  Proximity Services: Call Control
- *  Proximity Services: Content Share From Clients
- *  Proximity Services: Content Share To Clients
- *  Proximity Services: Proximity Services Mode
- *
- *  Room Analytics: Ambient Noise Level A
- *  Room Analytics: Current People Count
- *  Room Analytics: People Presence
- *  Room Analytics: People Presence Detection
- *  Room Analytics: Sound Level A
- *
- *  Standby: Boot Action
- *  Standby: Control
- *  Standby: Delay
- *  Standby: Standby Action
- *  Standby: Wakeup Action
- *  Standby: State
- *
- *  System Unit: Active Calls Number
- *  System Unit: Compatibility Level
- *  System Unit: Display Name
- *  System Unit: In Progress Calls Number
- *  System Unit: Name
- *  System Unit: Product Id
- *  System Unit: Product Platform
- *  System Unit: Product Type
- *  System Unit: Release Date
- *  System Unit: Serial Number
- *  System Unit: Suspended Calls Number
- *  System Unit: Version
- *
- *  User Interface: Awake Branding Colors
- *  User Interface: Contact Info Type
- *  User Interface: Features Call End
- *  User Interface: Features Call Start
- *  User Interface: Features Mid Call Controls
- *  User Interface: Hide All Features
- *  User Interface: Incoming Call Notification
- *  User Interface: Key Tones
- *  User Interface: Language
- *  User Interface: OSD Output
- *  User Interface: Share Start
- *
- *  Video: Active Speaker PIP Position
- *  Video: Connector Connected
- *  Video: Connector Connected Device Name
- *  Video: Connector Connected Device Preferred Format
- *  Video: Connector Type
- *  Video: Default Main Source
- *  Video: Default Presentation Source
- *  Video: Input Source Name
- *  Video: Input Source Presentation Selection
- *  Video: Input Source Quality
- *  Video: Input Source Type
- *  Video: Input Source Visibility
- *  Video: Layout Family
- *  Video: Main Video Source
- *  Video: Monitors
- *  Video: Output Source CEC Mode
- *  Video: Output Source Monitor Role
- *  Video: Output Source Resolution
- *
- *  Video Selfview: Default Fullscreen Mode
- *  Video Selfview: Default Mode
- *  Video Selfview: Default On Monitor Role
- *  Video Selfview: Default PIP Position
- *  Video Selfview: Fullscreen Mode
- *  Video Selfview: Mode
- *  Video Selfview: On Call Duration
- *  Video Selfview: On Call Mode
- *  Video Selfview: On Monitor Role
- *  Video Selfview: PIP Position
- *
- *  Supported device models: SX80, SX20, SX10, MX800, MX700, MX300 G2, MX200 G2, DX80, DX70, Room Kit, Room Kit Mini,
- *  Codec Plus, Codec Pro, Room 70, Room 55 Dual, Room 70 G2, Room 55, Board 55, 55S, 70, 70s, 85s
+ * <p>
+ * System Time
+ * System TimeZone
+ * Audio: Microphone EC Reference Delay
+ * Audio: Microphone status
+ * Audio: Microphones mute
+ * Audio: Output Line Delay(MS)
+ * Audio: Ultrasound MAX Volume
+ * Audio: Volume
+ * Audio: Volume Mute
+ * <p>
+ * Cameras: Camera Backlight
+ * Cameras: Camera Brightness Level
+ * Cameras: Camera Brightness Mode
+ * Cameras: Camera Connected
+ * Cameras: Camera Flip
+ * Cameras: Camera Focus Mode
+ * Cameras: Camera Gamma Level
+ * Cameras: Camera Gamma Mode
+ * Cameras: Camera Hardware Id
+ * Cameras: Camera MAC Address
+ * Cameras: Camera Manufacturer
+ * Cameras: Camera Mirror
+ * Cameras: Camera Model
+ * Cameras: Camera Pan
+ * Cameras: Camera Serial Number
+ * Cameras: Camera Software Id
+ * Cameras: Camera Tilt
+ * Cameras: Camera Whitebalance Level
+ * Cameras: Camera Whitebalance Mode
+ * Cameras: Camera Zoom
+ * <p>
+ * Conference: Auto Answer Delay
+ * Conference: Auto Answer Mode
+ * Conference: Auto Answer Mute
+ * Conference: Default Call Protocol
+ * Conference: Default Call Rate
+ * Conference: Do Not Disturb
+ * Conference: Do Not Disturb Timeout
+ * Conference: Far End Control
+ * Conference: Multipoint Mode
+ * Conference: Presentation Call Id
+ * Conference: Presentation Mode
+ * Conference: Speaker Lock Call Id
+ * Conference: Speaker Lock Mode
+ * <p>
+ * Conference Capabilities: Max Active Calls
+ * Conference Capabilities: Max Audio Calls
+ * Conference Capabilities: Max Calls
+ * Conference Capabilities: Max Video Calls
+ * <p>
+ * Networks: Network CDP Address
+ * Networks: Network CDP Device Id
+ * Networks: Network CDP Duplex
+ * Networks: Network CDP Platform
+ * Networks: Network CDP Port Id
+ * Networks: Network CDP Primary Mgmt Address
+ * Networks: Network CDP Sys Name
+ * Networks: Network CDP Sys Object Id
+ * Networks: Network CDP Version
+ * Networks: Network CDP Vtp Mgmt Domain
+ * Networks: Network CDP Capabilities
+ * Networks: Network CDP Address
+ * Networks: Network CDP Domain Name
+ * Networks: Network Ethernet MAC Address
+ * Networks: Network IPv4 Address
+ * Networks: Network IPv4 Gateway
+ * Networks: Network IPv4 Subnet Mask
+ * Networks: Network IPv6 Address
+ * Networks: Network IPv6 Gateway
+ * <p>
+ * Network Services: CDP Mode
+ * Network Services: HTTP Mode
+ * Network Services: HTTP Minimum TLS Version
+ * Network Services: HTTP Strict Transport Security
+ * Network Services: HTTP Verify Client Certificate
+ * Network Services: SIP Mode
+ * Network Services: SNMP Community Name
+ * Network Services: SNMP Mode
+ * Network Services: SSH Mode
+ * Network Services: UPnP Mode
+ * Network Services: Telnet Mode
+ * Network Services: Welcome Text
+ * <p>
+ * Proximity Services: Call Control
+ * Proximity Services: Content Share From Clients
+ * Proximity Services: Content Share To Clients
+ * Proximity Services: Proximity Services Mode
+ * <p>
+ * Room Analytics: Ambient Noise Level A
+ * Room Analytics: Current People Count
+ * Room Analytics: People Presence
+ * Room Analytics: People Presence Detection
+ * Room Analytics: Sound Level A
+ * <p>
+ * Standby: Boot Action
+ * Standby: Control
+ * Standby: Delay
+ * Standby: Standby Action
+ * Standby: Wakeup Action
+ * Standby: State
+ * <p>
+ * System Unit: Active Calls Number
+ * System Unit: Compatibility Level
+ * System Unit: Display Name
+ * System Unit: In Progress Calls Number
+ * System Unit: Name
+ * System Unit: Product Id
+ * System Unit: Product Platform
+ * System Unit: Product Type
+ * System Unit: Release Date
+ * System Unit: Serial Number
+ * System Unit: Suspended Calls Number
+ * System Unit: Version
+ * <p>
+ * User Interface: Awake Branding Colors
+ * User Interface: Contact Info Type
+ * User Interface: Features Call End
+ * User Interface: Features Call Start
+ * User Interface: Features Mid Call Controls
+ * User Interface: Hide All Features
+ * User Interface: Incoming Call Notification
+ * User Interface: Key Tones
+ * User Interface: Language
+ * User Interface: OSD Output
+ * User Interface: Share Start
+ * <p>
+ * Video: Active Speaker PIP Position
+ * Video: Connector Connected
+ * Video: Connector Connected Device Name
+ * Video: Connector Connected Device Preferred Format
+ * Video: Connector Type
+ * Video: Default Main Source
+ * Video: Default Presentation Source
+ * Video: Input Source Name
+ * Video: Input Source Presentation Selection
+ * Video: Input Source Quality
+ * Video: Input Source Type
+ * Video: Input Source Visibility
+ * Video: Layout Family
+ * Video: Main Video Source
+ * Video: Monitors
+ * Video: Output Source CEC Mode
+ * Video: Output Source Monitor Role
+ * Video: Output Source Resolution
+ * <p>
+ * Video Selfview: Default Fullscreen Mode
+ * Video Selfview: Default Mode
+ * Video Selfview: Default On Monitor Role
+ * Video Selfview: Default PIP Position
+ * Video Selfview: Fullscreen Mode
+ * Video Selfview: Mode
+ * Video Selfview: On Call Duration
+ * Video Selfview: On Call Mode
+ * Video Selfview: On Monitor Role
+ * Video Selfview: PIP Position
+ * <p>
+ * Supported device models: SX80, SX20, SX10, MX800, MX700, MX300 G2, MX200 G2, DX80, DX70, Room Kit, Room Kit Mini,
+ * Codec Plus, Codec Pro, Room 70, Room 55 Dual, Room 70 G2, Room 55, Board 55, 55S, 70, 70s, 85s
  */
 public class CiscoCommunicator extends RestCommunicator implements CallController, Monitorable, Controller {
 
@@ -411,7 +411,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         List<Call> connectedCalls = getConnectedCalls();
         if (connectedCalls.size() > 0) {
             Call call = connectedCalls.get(0);
-            if(logger.isInfoEnabled()) {
+            if (logger.isInfoEnabled()) {
                 logger.info("There is an active call in progress: " + call.getDisplayName());
             }
             return call.getItem();
@@ -514,7 +514,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             // So, if EmptyResult substring was found - it is due to the <EmptyResult/> root node, which means there
             // are no Calls registered on the device.
             String message = ex.getMessage();
-            if(!StringUtils.isNullOrEmpty(message) && message.contains("EmptyResult")) {
+            if (!StringUtils.isNullOrEmpty(message) && message.contains("EmptyResult")) {
                 return Collections.emptyList();
             }
             throw ex;
@@ -534,20 +534,20 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * {@inheritDoc}
      *
      * <Command>
-     *   <UserInterface>
-     *     <Message>
-     *       <Display command="True">
-     *         <Duration>10</Duration>
-     *         <Text>test message</Text>
-     *       </Display>
-     *     </Message>
-     *   </UserInterface>
+     * <UserInterface>
+     * <Message>
+     * <Display command="True">
+     * <Duration>10</Duration>
+     * <Text>test message</Text>
+     * </Display>
+     * </Message>
+     * </UserInterface>
      * </Command>
      */
     @Override
     public void sendMessage(PopupMessage popupMessage) throws Exception {
         if (popupMessage == null || StringUtils.isNullOrEmpty(popupMessage.getMessage()) || popupMessage.getDuration() == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to send message: message data is not valid.");
             }
             return;
@@ -600,22 +600,21 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Populate media channels data, retrieved from the device, and set it into the {@link EndpointStatistics} instance
      *
-     * @param ciscoStatus data retrieved from {@link #statusPath}, containing all necessary status information of the device
+     * @param ciscoStatus        data retrieved from {@link #statusPath}, containing all necessary status information of the device
      * @param endpointStatistics an instance of {@link EndpointStatistics} to set data to
-     *
      * @throws RuntimeException if more than 1 connected calls is found
      */
     private void populateMediaChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
         MediaChannels mediaChannels = ciscoStatus.getMediaChannels();
         if (mediaChannels == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate media channels data: media channels data is empty");
             }
             return;
         }
         MediaStatsCall[] calls = mediaChannels.getCalls();
-        if(calls == null) {
-            if(logger.isDebugEnabled()) {
+        if (calls == null) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate media channels data: no calls information is available");
             }
             return;
@@ -628,8 +627,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             throw new IllegalStateException(String.format("Ambiguous active calls found: %s, 1 expected. Unable to proceed.",
                     callsCount));
         }
-        if(callsCount == 0) {
-            if(logger.isDebugEnabled()) {
+        if (callsCount == 0) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate media channels data: no active calls is available");
             }
             return;
@@ -742,58 +741,58 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             List<String> propertyGroups = Arrays.stream(displayPropertyGroups.split(",")).map(String::trim).collect(Collectors.toList());
 
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Audio")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Audio")) {
                 populateAudioData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Camera")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Cameras")) {
                 populateCameraData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Conference")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Conference")) {
                 populateConferenceData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Standby")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Standby")) {
                 populateStandbyData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "NetworkServices")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "NetworkServices")) {
                 populateNetworkServicesData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Video")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Video")) {
                 populateVideoData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "UserInterface")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "UserInterface")) {
                 populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
                 populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
                 populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "ActiveCall")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "ActiveCall")) {
                 populateCallData(statisticsMap, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "H323")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "H323")) {
                 populateH323Data(statisticsMap, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "SIP")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "SIP")) {
                 populateSIPData(statisticsMap, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Security")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Security")) {
                 populateSecurityData(statisticsMap, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Network")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Networks")) {
                 populateNetworkData(statisticsMap, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "USB")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "USB")) {
                 populateUSBData(statisticsMap, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "RoomAnalytics")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "RoomAnalytics")) {
                 populateRoomAnalyticsData(statisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoStatus);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "Proximity")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Proximity")) {
                 populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
             }
-            if(propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
                 statisticsMap.put("SystemTime#Time", ciscoStatus.getTime().getSystemTime());
                 TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
                 if (timeConfiguration != null) {
@@ -817,7 +816,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * variable, so in order to have an external control over the set of groups to display - this variable should
      * contain either CSV list of Group names, or an "All" entry, which will qualify all the available groups for display.
      *
-     * @param groupsList list of groups, currently set for the display, without spaces.
+     * @param groupsList        list of groups, currently set for the display, without spaces.
      * @param propertyGroupName name of a group to qualify for
      * @return boolean value, indicating whether the group is qualified for the display or not
      */
@@ -829,12 +828,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * Populate SystemUnit section parameters.
      *
      * @param ciscoStatus device response data
-     * @param statistics map to set data to
+     * @param statistics  map to set data to
      */
     private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus ciscoStatus) {
         SystemUnit systemUnit = ciscoStatus.getSystemUnit();
         if (systemUnit == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate system unit data: no system unit information available");
             }
             return;
@@ -844,7 +843,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         controls.add(createButton(SYSTEM_UNIT_RESTART, "Restart", "Restarting...", restartGracePeriod));
 
         String uptime = systemUnit.getUptime();
-        if(!StringUtils.isNullOrEmpty(uptime)) {
+        if (!StringUtils.isNullOrEmpty(uptime)) {
             addStatisticsParameter(statistics, "SystemUnit#Uptime", normalizeUptime(uptime));
         }
 
@@ -883,11 +882,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Audio statistics/controls values
      *
-     * @param statistics map to set statistics data to
+     * @param statistics             map to set statistics data to
      * @param controllableProperties list of controls to add controllable properties to
-     * @param status device status data fetched from {@link #statusPath}
-     * @param configuration device configuration data fetched from {@link #configurationPath}
-     * @param valuespace device valuespace data fetched from {@link #valuespacePath}
+     * @param status                 device status data fetched from {@link #statusPath}
+     * @param configuration          device configuration data fetched from {@link #configurationPath}
+     * @param valuespace             device valuespace data fetched from {@link #valuespacePath}
      */
     private void populateAudioData(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                    CiscoStatus status, CiscoConfiguration configuration, String valuespace) {
@@ -972,11 +971,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Video statistics/controls values
      *
-     * @param statistics map to set statistics data to
+     * @param statistics             map to set statistics data to
      * @param controllableProperties list of controls to add controllable properties to
-     * @param ciscoStatus device status data fetched from {@link #statusPath}
-     * @param configuration device configuration data fetched from {@link #configurationPath}
-     * @param valuespace device valuespace data fetched from {@link #valuespacePath}
+     * @param ciscoStatus            device status data fetched from {@link #statusPath}
+     * @param configuration          device configuration data fetched from {@link #configurationPath}
+     * @param valuespace             device valuespace data fetched from {@link #valuespacePath}
      */
     private void populateVideoData(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                    CiscoStatus ciscoStatus, CiscoConfiguration configuration, String valuespace) {
@@ -1012,7 +1011,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             }
 
             VideoLayout videoLayout = videoStatus.getLayout();
-            if(videoLayout != null) {
+            if (videoLayout != null) {
                 VideoLayoutFamily videoLayoutFamily = videoLayout.getLayoutFamily();
                 if(videoLayoutFamily != null) {
                     addStatisticsParameter(statistics, "Video#LayoutFamily", videoLayoutFamily.getLocal());
@@ -1073,7 +1072,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             VideoConfigurationSelfview selfviewConfiguration = videoConfiguration.getSelfview();
             if (selfviewConfiguration != null) {
                 VideoConfigurationSelfviewDefault defaultSelfview = selfviewConfiguration.getSelfviewDefault();
-                if(defaultSelfview != null) {
+                if (defaultSelfview != null) {
                     addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_SELFVIEW_DEFAULT_FULLSCREEN_MODE, defaultSelfview.getFullscreenMode(), valuespace);
                     addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_SELFVIEW_DEFAULT_MODE, defaultSelfview.getMode(), valuespace);
                     addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_SELFVIEW_DEFAULT_ON_MONITOR_ROLE, defaultSelfview.getOnMonitorRole(), valuespace);
@@ -1081,7 +1080,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
 
                 VideoConfigurationSelfviewOnCall onCall = selfviewConfiguration.getOnCall();
-                if(onCall != null) {
+                if (onCall != null) {
                     addStatisticsParameterWithSlider(statistics, controllableProperties, VIDEO_SELFVIEW_ON_CALL_DURATION, onCall.getDuration());
                     addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_SELFVIEW_ON_CALL_MODE, onCall.getMode(), valuespace);
                 }
@@ -1092,13 +1091,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Call statistics data
      *
-     * @param statistics map to set statistics data to
+     * @param statistics  map to set statistics data to
      * @param ciscoStatus device status data fetched from {@link #statusPath}
      */
     private void populateCallData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Call[] calls = ciscoStatus.getCalls();
         if (calls == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate call data: no active calls available");
             }
             return;
@@ -1122,11 +1121,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Conference statistics/controls values
      *
-     * @param statistics map to set statistics data to
-     * @param controls list of controls to add controllable properties to
-     * @param ciscoStatus device status data fetched from {@link #statusPath}
+     * @param statistics    map to set statistics data to
+     * @param controls      list of controls to add controllable properties to
+     * @param ciscoStatus   device status data fetched from {@link #statusPath}
      * @param configuration device configuration data fetched from {@link #configurationPath}
-     * @param valuespace device valuespace data fetched from {@link #valuespacePath}
+     * @param valuespace    device valuespace data fetched from {@link #valuespacePath}
      */
     private void populateConferenceData(Map<String, String> statistics, List<AdvancedControllableProperty> controls,
                                         CiscoStatus ciscoStatus, CiscoConfiguration configuration, String valuespace) {
@@ -1199,20 +1198,20 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Conference capabilities statistics data
      *
-     * @param statistics map to set statistics data to
+     * @param statistics  map to set statistics data to
      * @param ciscoStatus device status data fetched from {@link #statusPath}
      */
     private void populateConferenceCapabilitiesData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Capabilities capabilities = ciscoStatus.getCapabilities();
         if (capabilities == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate confenrence capabilities data: no capabilities status available");
             }
             return;
         }
         ConferenceCapabilities conferenceCapabilities = capabilities.getConferenceCapabilities();
         if (conferenceCapabilities == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate confenrence capabilities data: no conference capabilities available");
             }
             return;
@@ -1226,7 +1225,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve H323 statistics data
      *
-     * @param statistics map to set statistics data to
+     * @param statistics  map to set statistics data to
      * @param ciscoStatus device status data fetched from {@link #statusPath}
      */
     private void populateH323Data(Map<String, String> statistics, CiscoStatus ciscoStatus) {
@@ -1250,7 +1249,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve SIP statistics data
      *
-     * @param statistics map to set statistics data to
+     * @param statistics  map to set statistics data to
      * @param ciscoStatus device status data fetched from {@link #statusPath}
      */
     private void populateSIPData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
@@ -1297,7 +1296,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Security statistics data
      *
-     * @param statistics map to set statistics data to
+     * @param statistics  map to set statistics data to
      * @param ciscoStatus device status data fetched from {@link #statusPath}
      */
     private void populateSecurityData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
@@ -1321,13 +1320,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Network statistics data
      *
-     * @param statistics map to set statistics data to
+     * @param statistics  map to set statistics data to
      * @param ciscoStatus device status data fetched from {@link #statusPath}
      */
     private void populateNetworkData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Network[] networks = ciscoStatus.getNetworks();
         if (networks == null || networks.length == 0) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate network data: no networks information available");
             }
             return;
@@ -1387,11 +1386,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Network Services statistics/controls values
      *
-     * @param statistics map to set statistics data to
-     * @param controls list of controls to add controllable properties to
-     * @param ciscoStatus device status data fetched from {@link #statusPath}
+     * @param statistics         map to set statistics data to
+     * @param controls           list of controls to add controllable properties to
+     * @param ciscoStatus        device status data fetched from {@link #statusPath}
      * @param ciscoConfiguration device configuration data fetched from {@link #configurationPath}
-     * @param valuespace device valuespace data fetched from {@link #valuespacePath}
+     * @param valuespace         device valuespace data fetched from {@link #valuespacePath}
      */
     private void populateNetworkServicesData(Map<String, String> statistics, List<AdvancedControllableProperty> controls,
                                              CiscoStatus ciscoStatus, CiscoConfiguration ciscoConfiguration, String valuespace) {
@@ -1455,7 +1454,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             NetworkServicesConfigurationHTTPS httpsConfiguration = networkServicesConfiguration.getHttps();
             if (httpsConfiguration != null) {
                 NetworkConfigurationServer networkConfigurationServer = httpsConfiguration.getServer();
-                if(networkConfigurationServer != null) {
+                if (networkConfigurationServer != null) {
                     addStatisticsParameter(statistics, "NetworkServices#HTTPSMinimumTLSVersion", networkConfigurationServer.getMinimumTLSVersion());
                 }
                 addStatisticsParameter(statistics, "NetworkServices#HTTPSStrictTransportSecurity", httpsConfiguration.getStrictTransportSecurity());
@@ -1485,7 +1484,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve USB statistics data
      *
-     * @param statistics map to set statistics data to
+     * @param statistics  map to set statistics data to
      * @param ciscoStatus device status data fetched from {@link #statusPath}
      */
     private void populateUSBData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
@@ -1505,17 +1504,17 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Room Analytics statistics/controls values
      *
-     * @param statistics map to set statistics data to
-     * @param controls list of controls to add controllable properties to
-     * @param status device status data fetched from {@link #statusPath}
+     * @param statistics    map to set statistics data to
+     * @param controls      list of controls to add controllable properties to
+     * @param status        device status data fetched from {@link #statusPath}
      * @param configuration device configuration data fetched from {@link #configurationPath}
      */
-    private void populateRoomAnalyticsData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoConfiguration configuration, CiscoStatus status){
+    private void populateRoomAnalyticsData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoConfiguration configuration, CiscoStatus status) {
         RoomAnalytics roomAnalytics = status.getRoomAnalytics();
         if (roomAnalytics != null) {
             addStatisticsParameter(statistics, "RoomAnalytics#PeoplePresence", roomAnalytics.getPeoplePresence());
             RoomAnalyticsConfiguration roomAnalyticsConfiguration = configuration.getRoomAnalytics();
-            if(roomAnalyticsConfiguration != null) {
+            if (roomAnalyticsConfiguration != null) {
                 ValueSpaceRefHolder peoplePresenceDetectorState = roomAnalyticsConfiguration.getPeoplePresenceDetector();
                 if (peoplePresenceDetectorState != null) {
                     addStatisticsParameterWithSwitch(statistics, controls, ROOM_ANALYTICS_PEOPLE_PRESENCE_DETECTION, peoplePresenceDetectorState);
@@ -1553,8 +1552,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Proximity statistics/controls values
      *
-     * @param statistics map to set statistics data to
-     * @param controls list of controls to add controllable properties to
+     * @param statistics    map to set statistics data to
+     * @param controls      list of controls to add controllable properties to
      * @param configuration device configuration data fetched from {@link #configurationPath}
      */
     private void populateProximityData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoConfiguration configuration) {
@@ -1595,10 +1594,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve User Interface statistics/controls values
      *
-     * @param statistics map to set statistics data to
-     * @param controls list of controls to add controllable properties to
+     * @param statistics    map to set statistics data to
+     * @param controls      list of controls to add controllable properties to
      * @param configuration device configuration data fetched from {@link #configurationPath}
-     * @param valuespace device valuespace data fetched from {@link #valuespacePath}
+     * @param valuespace    device valuespace data fetched from {@link #valuespacePath}
      */
     private void populateUserInterfaceData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoConfiguration configuration, String valuespace) {
         UserInterfaceConfiguration userInterfaceConfiguration = configuration.getUserInterface();
@@ -1606,7 +1605,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             addStatisticsParameterWithDropdown(statistics, controls, USER_INTERFACE_LANGUAGE, userInterfaceConfiguration.getLanguage(), valuespace);
 
             UserInterfaceConfigurationKeyTones keyTones = userInterfaceConfiguration.getKeyTones();
-            if(keyTones != null) {
+            if (keyTones != null) {
                 addStatisticsParameterWithSwitch(statistics, controls, USER_INTERFACE_KEY_TONES, keyTones.getMode().getValue());
             }
 
@@ -1660,11 +1659,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Standby statistics/controls values
      *
-     * @param statistics map to set statistics data to
-     * @param controls list of controls to add controllable properties to
-     * @param status device status data fetched from {@link #statusPath}
+     * @param statistics    map to set statistics data to
+     * @param controls      list of controls to add controllable properties to
+     * @param status        device status data fetched from {@link #statusPath}
      * @param configuration device configuration data fetched from {@link #configurationPath}
-     * @param valuespace device valuespace data fetched from {@link #valuespacePath}
+     * @param valuespace    device valuespace data fetched from {@link #valuespacePath}
      */
     private void populateStandbyData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus status, CiscoConfiguration configuration, String valuespace) {
         Standby standbyStatus = status.getStandby();
@@ -1675,7 +1674,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         StandbyConfiguration standbyConfiguration = configuration.getStandby();
         if (standbyConfiguration != null) {
             ValueSpaceRefHolder control = standbyConfiguration.getControl();
-            if(control != null) {
+            if (control != null) {
                 addStatisticsParameterWithSwitch(statistics, controls, STANDBY_CONTROL, control.getValue());
             }
             addStatisticsParameterWithDropdown(statistics, controls, STANDBY_BOOT_ACTION, standbyConfiguration.getBootAction(), valuespace);
@@ -1688,11 +1687,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Retrieve Camera statistics/controls values
      *
-     * @param statistics map to set statistics data to
-     * @param controls list of controls to add controllable properties to
-     * @param status device status data fetched from {@link #statusPath}
+     * @param statistics    map to set statistics data to
+     * @param controls      list of controls to add controllable properties to
+     * @param status        device status data fetched from {@link #statusPath}
      * @param configuration device configuration data fetched from {@link #configurationPath}
-     * @param valuespace device valuespace data fetched from {@link #valuespacePath}
+     * @param valuespace    device valuespace data fetched from {@link #valuespacePath}
      */
     private void populateCameraData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus status, CiscoConfiguration configuration, String valuespace) throws Exception {
         Cameras camerasStatus = status.getCameras();
@@ -1711,7 +1710,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     addStatisticsParameter(statistics, String.format(N_CAMERA_SERIAL_SOFTWARE_ID, itemCounter), camera.getSoftwareId());
 
                     CameraPosition cameraPosition = camera.getPosition();
-                    if (cameraPosition != null && cameraCommand.getCameraCommand() != null) {
+                    if (cameraPosition != null && cameraCommand != null && cameraCommand.getCameraCommand() != null) {
                         CameraPositionSetCommand positionSetCommand = cameraCommand.getCameraCommand().getPositionSetCommand();
 
                         ValueSpaceRefHolder[] focus = positionSetCommand.getFocus();
@@ -1752,7 +1751,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         CamerasConfiguration camerasConfiguration = configuration.getCameras();
         if (camerasConfiguration == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate cameras configuration data: no cameras configuration available");
             }
             return;
@@ -1760,7 +1759,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         CamerasConfigurationPreset camerasPreset = camerasConfiguration.getPreset();
         if (camerasPreset != null) {
             ValueSpaceRefHolder triggerAutofocus = camerasPreset.getTriggerAutofocus();
-            if(triggerAutofocus != null) {
+            if (triggerAutofocus != null) {
                 addStatisticsParameterWithDropdown(statistics, controls, CAMERAS_TRIGGER_AUTOFOCUS_PRESET,
                         Arrays.stream(extractTTPARValuespace(valuespace, triggerAutofocus.getValueSpaceRef()).getValues())
                                 .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), triggerAutofocus.getValue());
@@ -1769,14 +1768,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         CamerasConfigurationCamera[] cameras = camerasConfiguration.getCameras();
         if (cameras == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate cameras configuration data: no cameras configuration available");
             }
             return;
         }
         Arrays.stream(cameras).forEach(cameraConfiguration -> {
             CamerasConfigurationBacklight backlight = cameraConfiguration.getBacklight();
-            String itemCounter =  cameraConfiguration.getItem();
+            String itemCounter = cameraConfiguration.getItem();
             if (backlight != null) {
                 addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_BACKLIGHT, itemCounter), backlight.getDefaultMode().getValue());
             }
@@ -1826,7 +1825,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             CamerasConfigurationWhitebalance whitebalance = cameraConfiguration.getWhitebalance();
             if (whitebalance != null) {
                 ValueSpaceRefHolder whitebalanceMode = whitebalance.getMode();
-                if(whitebalanceMode != null) {
+                if (whitebalanceMode != null) {
                     addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_LEVEL, itemCounter), whitebalance.getLevel());
                     addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_MODE, itemCounter),
                             Arrays.stream(extractTTPARValuespace(valuespace, whitebalanceMode.getValueSpaceRef()).getValues())
@@ -1920,21 +1919,21 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void enrichAudioChannelStatsData(AudioChannelStats audioChannelStats, CallStats callStats, Channel channel, Call callInfo) {
         Audio audio = channel.getAudio();
         if (audio == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate audio channel data: no audio status available");
             }
             return;
         }
         String audioChannelProtocol = audio.getProtocol();
-        if(StringUtils.isNullOrEmpty(audioChannelProtocol) || audioChannelProtocol.equals("Off")) {
-            if(logger.isDebugEnabled()) {
+        if (StringUtils.isNullOrEmpty(audioChannelProtocol) || audioChannelProtocol.equals("Off")) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate audio channel data: no audio protocol available");
             }
             return;
         }
         Netstat netstat = channel.getNetstat();
-        if(netstat == null) {
-            if(logger.isDebugEnabled()) {
+        if (netstat == null) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate audio channel data: no netstat data available");
             }
             return;
@@ -1976,7 +1975,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void enrichVideoChannelStatsData(VideoChannelStats videoChannelStats, CallStats callStats, ContentChannelStats contentChannelStats, Channel channel, Call callInfo) {
         Video video = channel.getVideo();
-        if(video == null) {
+        if (video == null) {
             return;
         }
         String channelRole = video.getChannelRole();
@@ -1987,14 +1986,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
         String videoChannelProtocol = video.getProtocol();
         if (videoChannelProtocol == null || videoChannelProtocol.equals("Off")) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate video channel data: no video channel protocol information available");
             }
             return;
         }
         Netstat netstat = channel.getNetstat();
-        if(netstat == null) {
-            if(logger.isDebugEnabled()) {
+        if (netstat == null) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate video channel data: no netstat information available");
             }
             return;
@@ -2036,8 +2035,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void enrichContentChannelStatsData(ContentChannelStats contentChannelStats, Channel channel) {
         Video video = channel.getVideo();
-        if(video == null) {
-            if(logger.isDebugEnabled()) {
+        if (video == null) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate content channel data: no video information available");
             }
             return;
@@ -2045,7 +2044,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         Netstat netstat = channel.getNetstat();
         if (netstat == null) {
-            if(logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate content channel data: no netstat information available");
             }
             return;
@@ -2075,8 +2074,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     private Integer extractValueInt(String value) {
-        if(!isNumeric(value)) {
-            if(logger.isDebugEnabled()) {
+        if (!isNumeric(value)) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Value is missing or has incorrect format. Skipping.");
             }
             return null;
@@ -2085,8 +2084,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     private Integer extractAndReduceValueInt(String value, int reducer) {
-        if(!isNumeric(value)) {
-            if(logger.isDebugEnabled()) {
+        if (!isNumeric(value)) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Value is missing or has incorrect format. Skipping.");
             }
             return null;
@@ -2095,8 +2094,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     private Float extractValueFloat(String value) {
-        if(!isNumeric(value)) {
-            if(logger.isDebugEnabled()) {
+        if (!isNumeric(value)) {
+            if (logger.isDebugEnabled()) {
                 logger.debug("Value is missing or has incorrect format. Skipping.");
             }
             return null;
@@ -2142,6 +2141,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
     /***
      * Retrieve templates for camera controls (zoom, pan, tilt, focus).
+     * If no controls are available - EmptyResult node is returned.
+     *
      * By default, values are limited as follows:
      * Pan: <-65535..65535>
      * Tilt: <-65535..65535>
@@ -2154,7 +2155,24 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private Command retrieveCameraCommands() throws Exception {
-        return doGet(String.format(getXmlPath, cameraCommandUri), Command.class);
+        try {
+            return doGet(String.format(getXmlPath, cameraCommandUri), Command.class);
+        } catch (RestClientException ex) {
+            // Jaxb is not able to handle multiple RootNodes as well as ignoring them.
+            // If there are no description for camera commands - <EmptyResult\> node will be populated instead of <Command>,
+            // so Jaxb expects that to be in place at all times (as opposed to Jackson, which will just handle that as
+            // blank value for the Command root)
+            // So, if EmptyResult substring was found - it is due to the <EmptyResult/> root node, which means there
+            // are no available Camera commands available on the device.
+            String message = ex.getMessage();
+            if (!StringUtils.isNullOrEmpty(message) && message.contains("EmptyResult")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Camera controls are not available on the device. Skipping.");
+                }
+                return null;
+            }
+            throw ex;
+        }
     }
 
     /***
@@ -2169,7 +2187,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @return {@link ValueSpace} instance of the target schema
      */
     private ValueSpace extractTTPARValuespace(String valuespaceResponse, String valuespaceName) {
-        if(xmlUnmarshaller == null) {
+        if (xmlUnmarshaller == null) {
             throw new RuntimeException("XML Unmarshaller is not initialized.");
         }
         int firstIndex = valuespaceResponse.indexOf("<" + valuespaceName) - 1;
@@ -2207,7 +2225,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (property.endsWith("Focus")) {
             postCommandRequest(generateCameraControlCommandPayload(value, cameraIdMatcher.group(), CameraControlCommandType.CameraFocus), property, value);
         } else if (property.endsWith("Pan")) {
-            postCommandRequest( generateCameraControlCommandPayload(value, cameraIdMatcher.group(), CameraControlCommandType.CameraPan), property, value);
+            postCommandRequest(generateCameraControlCommandPayload(value, cameraIdMatcher.group(), CameraControlCommandType.CameraPan), property, value);
         } else if (property.endsWith("Tilt")) {
             postCommandRequest(generateCameraControlCommandPayload(value, cameraIdMatcher.group(), CameraControlCommandType.CameraTilt), property, value);
         } else if (property.endsWith("Zoom")) {
@@ -2235,7 +2253,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         } else if (property.endsWith("WhitebalanceMode")) {
             postConfigurationRequest(generateCameraConfigurationPayload(value, cameraIdMatcher.group(), CameraConfigurationCommandType.CameraWhitebalanceMode), property, value);
         } else {
-            if(logger.isWarnEnabled()) {
+            if (logger.isWarnEnabled()) {
                 logger.warn(String.format("Command is not supported. Property: %s, value: %s", property, value));
             }
         }
@@ -2273,7 +2291,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         } else if (property.endsWith("Resolution")) {
             postConfigurationRequest(generateVideoConfigurationPayload(value, sourceMatcher.group(), VideoConfigurationCommandType.Resolution), property, value);
         } else {
-            if(logger.isWarnEnabled()) {
+            if (logger.isWarnEnabled()) {
                 logger.warn(String.format("Command is not supported. Property: %s, value: %s", property, value));
             }
         }
@@ -2470,7 +2488,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     postConfigurationRequest(generateAudioConfigurationPayload(value, AudioConfigurationCommandType.MaxUltrasoundVolume), property, value);
                     break;
                 default:
-                    if(logger.isWarnEnabled()) {
+                    if (logger.isWarnEnabled()) {
                         logger.warn(String.format("Command is not supported. Property: %s, value: %s", property, value));
                     }
                     break;
@@ -2488,14 +2506,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * (if command="True" attribute is missing, expected INT value has Decimal places etc.)
      *
      * @param configuration payload to post to the device API
-     * @param property control property to update after the control operation success
-     * @param value of the control property to update after the control operation success
-     *
+     * @param property      control property to update after the control operation success
+     * @param value         of the control property to update after the control operation success
      * @throws CommandFailureException if the request payload is not valid, but 200 code is still received
      */
     private void postConfigurationRequest(CiscoConfiguration configuration, String property, String value) throws Exception {
         String response = doPost("putxml", configuration, String.class);
-        if(response.contains("status=\"OK\"") || response.contains("Success")) {
+        if (response.contains("status=\"OK\"") || response.contains("Success")) {
             updateLatestControlTimestamp();
             updateLocalControllableProperty(property, value);
         } else {
@@ -2510,13 +2527,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * Generally, the request payload itself may be valid, but some parameter may be missing or have incorrect format
      * (if command="True" attribute is missing, expected INT value has Decimal places etc.)
      *
-     * @param command payload to post to the device API
+     * @param command  payload to post to the device API
      * @param property control property to update after the control operation success
-     * @param value of the control property to update after the control operation success
+     * @param value    of the control property to update after the control operation success
      */
     private void postCommandRequest(Command command, String property, String value) throws Exception {
         String response = doPost("putxml", command, String.class);
-        if(response.contains("status=\"OK\"")) {
+        if (response.contains("status=\"OK\"")) {
             updateLatestControlTimestamp();
             updateLocalControllableProperty(property, value);
         } else {
@@ -2561,9 +2578,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Add statistics parameter to the target map, if the value is not null
      *
-     * @param statistics map to add data to
+     * @param statistics    map to add data to
      * @param parameterName name of the parameter to set
-     * @param value value of the parameter
+     * @param value         value of the parameter
      */
     private void addStatisticsParameter(Map<String, String> statistics, String parameterName, String value) {
         if (value != null) {
@@ -2574,12 +2591,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Add statistics parameter to the target map, if the {@link ValueSpaceRefHolder} is not null and it's value is not null or empty
      *
-     * @param statistics map to add data to
+     * @param statistics    map to add data to
      * @param parameterName name of the parameter to set
-     * @param value value of the parameter
+     * @param value         value of the parameter
      */
     private void addStatisticsParameter(Map<String, String> statistics, String parameterName, ValueSpaceRefHolder value) {
-        if(value != null) {
+        if (value != null) {
             String parameterValue = value.getValue();
             if (!StringUtils.isNullOrEmpty(parameterValue)) {
                 statistics.put(parameterName, parameterValue);
@@ -2590,14 +2607,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Add statistics parameter and slider controllable property for it, based on its {@link ValueSpaceRefHolder} value
      *
-     * @param statistics map to add data to
+     * @param statistics             map to add data to
      * @param controllableProperties to add slider controllable property to
-     * @param parameterName name of the parameter to set
-     * @param value value of the parameter to fetch value and min/max thresholds from as well as the current param value
+     * @param parameterName          name of the parameter to set
+     * @param value                  value of the parameter to fetch value and min/max thresholds from as well as the current param value
      */
     private void addStatisticsParameterWithSlider(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, ValueSpaceRefHolder value) {
-        if(value != null) {
+        if (value != null) {
             String parameterValue = value.getValue();
             List<Object> minMaxValues = value.getValues();
             ValueSpaceRefHolderType type = value.getType();
@@ -2614,12 +2631,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Add statistics parameter and slider controllable property for it
      *
-     * @param statistics map to add data to
+     * @param statistics             map to add data to
      * @param controllableProperties to add slider controllable property to
-     * @param parameterName name of the parameter to set
-     * @param value current value of the parameter
-     * @param rangeStart min threshold for slider
-     * @param rangeEnd  max threshold for slider
+     * @param parameterName          name of the parameter to set
+     * @param value                  current value of the parameter
+     * @param rangeStart             min threshold for slider
+     * @param rangeEnd               max threshold for slider
      */
     private void addStatisticsParameterWithSlider(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, String value, float rangeStart, float rangeEnd) {
@@ -2632,10 +2649,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Add statistics parameter and switch controllable property
      *
-     * @param statistics map to add data to
+     * @param statistics             map to add data to
      * @param controllableProperties to add slider controllable property to
-     * @param parameterName name of the parameter to set
-     * @param value current value of the parameter
+     * @param parameterName          name of the parameter to set
+     * @param value                  current value of the parameter
      */
     private void addStatisticsParameterWithSwitch(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, String value) {
@@ -2648,14 +2665,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Add statistics parameter and switch controllable property based on {@link ValueSpaceRefHolder} value
      *
-     * @param statistics map to add data to
+     * @param statistics             map to add data to
      * @param controllableProperties to add slider controllable property to
-     * @param parameterName name of the parameter to set
-     * @param value current value of the parameter
+     * @param parameterName          name of the parameter to set
+     * @param value                  current value of the parameter
      */
     private void addStatisticsParameterWithSwitch(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, ValueSpaceRefHolder value) {
-        if(value != null) {
+        if (value != null) {
             String parameterValue = value.getValue();
             if (!StringUtils.isNullOrEmpty(parameterValue)) {
                 statistics.put(parameterName, "");
@@ -2667,11 +2684,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Add statistics parameter and dropdown controllable property
      *
-     * @param statistics map to add data to
+     * @param statistics             map to add data to
      * @param controllableProperties to add slider controllable property to
-     * @param parameterName name of the parameter to set
-     * @param value current value of the parameter
-     * @param values list of values for dropdown
+     * @param parameterName          name of the parameter to set
+     * @param value                  current value of the parameter
+     * @param values                 list of values for dropdown
      */
     private void addStatisticsParameterWithDropdown(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                     String parameterName, List<String> values, String value) {
@@ -2684,17 +2701,17 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Add statistics parameter and dropdown controllable property
      *
-     * @param statistics map to add data to
+     * @param statistics             map to add data to
      * @param controllableProperties to add slider controllable property to
-     * @param parameterName name of the parameter to set
-     * @param value current value of the parameter
-     * @param valueSpace valuespace parameter to fetch all the possible dropdown values from (valuespace.xml)
+     * @param parameterName          name of the parameter to set
+     * @param value                  current value of the parameter
+     * @param valueSpace             valuespace parameter to fetch all the possible dropdown values from (valuespace.xml)
      */
     private void addStatisticsParameterWithDropdown(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                     String parameterName, ValueSpaceRefHolder value, String valueSpace) {
         if (value != null) {
             String parameterValue = value.getValue();
-            if(!StringUtils.isNullOrEmpty(parameterValue)) {
+            if (!StringUtils.isNullOrEmpty(parameterValue)) {
                 statistics.put(parameterName, "");
                 controllableProperties.add(createDropdown(parameterName, Arrays.stream(extractTTPARValuespace(valueSpace,
                         value.getValueSpaceRef()).getValues()).map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), parameterValue));

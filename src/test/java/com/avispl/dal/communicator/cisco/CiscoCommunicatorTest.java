@@ -34,7 +34,7 @@ public class CiscoCommunicatorTest {
     public void setUp() throws Exception {
 //        wireMockRule.start();
         ciscoCommunicator = new CiscoCommunicator();
-        ciscoCommunicator.setHost("172.31.254.121");
+        ciscoCommunicator.setHost("172.31.254.109");
         ciscoCommunicator.setPort(443);
         ciscoCommunicator.setProtocol("https");
         ciscoCommunicator.setPassword("1234");
@@ -295,7 +295,7 @@ public class CiscoCommunicatorTest {
     public void testCameraFlip() throws Exception {
         ControllableProperty controllableProperty = new ControllableProperty();
         controllableProperty.setProperty("Cameras#Camera1Flip");
-        controllableProperty.setValue("Off");
+        controllableProperty.setValue("Auto");
         ciscoCommunicator.controlProperty(controllableProperty);
     }
 
@@ -359,7 +359,7 @@ public class CiscoCommunicatorTest {
     public void testCameraMirrorMode() throws Exception {
         ControllableProperty controllableProperty = new ControllableProperty();
         controllableProperty.setProperty("Cameras#Camera1Mirror");
-        controllableProperty.setValue("Off");
+        controllableProperty.setValue("Auto");
         ciscoCommunicator.controlProperty(controllableProperty);
     }
 

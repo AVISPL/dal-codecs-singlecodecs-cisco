@@ -1356,9 +1356,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 if (dnsDomain != null) {
                     addStatisticsParameter(statistics, String.format(N_NETWORK_DNS_DOMAIN_NAME, id), dnsDomain.getName());
                 }
-                DNSServer dnsServer = dns.getDnsServer();
-                if (dnsServer != null) {
-                    addStatisticsParameter(statistics, String.format(N_NETWORK_DNS_ADDRESS, id), dnsServer.getAddress());
+                DNSServer[] dnsServers = dns.getDnsServers();
+                if (dnsServers != null) {
+                    Arrays.stream(dnsServers).forEach(dnsServer ->
+                            addStatisticsParameter(statistics, String.format(N_NETWORK_DNS_ADDRESS, id, dnsServer.getItem()), dnsServer.getAddress()));
                 }
             }
 

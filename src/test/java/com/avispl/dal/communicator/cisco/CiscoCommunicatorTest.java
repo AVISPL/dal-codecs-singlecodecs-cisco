@@ -34,7 +34,7 @@ public class CiscoCommunicatorTest {
     public void setUp() throws Exception {
 //        wireMockRule.start();
         ciscoCommunicator = new CiscoCommunicator();
-        ciscoCommunicator.setHost("172.31.254.121");
+        ciscoCommunicator.setHost("172.31.254.109");
         ciscoCommunicator.setPort(443);
         ciscoCommunicator.setProtocol("https");
         ciscoCommunicator.setPassword("1234");
@@ -447,7 +447,7 @@ public class CiscoCommunicatorTest {
     @Test
     public void testDial() throws Exception {
         DialDevice dialDevice = new DialDevice();
-        dialDevice.setDialString("NH-StudioX30@nh.vnoc1.com");
+        dialDevice.setDialString("172.31.254.144");
         dialDevice.setProtocol(Protocol.SIP);
         String response = ciscoCommunicator.dial(dialDevice);
         Assert.assertNotNull(response, "CallId should not be null");

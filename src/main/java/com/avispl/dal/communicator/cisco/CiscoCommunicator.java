@@ -312,7 +312,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * A number of attempts to perform for getting the conference (call) status while performing
      * {@link #dial(DialDevice)} operation
      */
-    private static final int MAX_STATUS_POLL_ATTEMPT = 10;
+    private int maxStatusPollAttempt = 10;
 
     private final ReentrantLock controlOperationsLock = new ReentrantLock();
     private ExtendedStatistics localStatistics;
@@ -355,6 +355,24 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     public void setDisplayPropertyGroups(String displayPropertyGroups) {
         this.displayPropertyGroups = displayPropertyGroups;
+    }
+
+    /**
+     * Retrieves {@code {@link #maxStatusPollAttempt}}
+     *
+     * @return value of {@link #maxStatusPollAttempt}
+     */
+    public int getMaxStatusPollAttempt() {
+        return maxStatusPollAttempt;
+    }
+
+    /**
+     * Sets {@code maxStatusPollAttempt}
+     *
+     * @param maxStatusPollAttempt the {@code int} field
+     */
+    public void setMaxStatusPollAttempt(int maxStatusPollAttempt) {
+        this.maxStatusPollAttempt = maxStatusPollAttempt;
     }
 
     /**
@@ -432,7 +450,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         Command response = doPost("putxml", dialCommand, Command.class);
         String callId = response.getDialResult().getCallId();
 
-        for (int i = 0; i < MAX_STATUS_POLL_ATTEMPT; i++) {
+        for (int i = 0; i < maxStatusPollAttempt; i++) {
             List<Call> calls = getConnectedCalls();
 
             for (Call call : calls) {
@@ -789,7 +807,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (propertyGroupQualifiedForDisplay(propertyGroups, "RoomAnalytics")) {
                 populateRoomAnalyticsData(statisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoStatus);
             }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Proximity")) {
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "ProximityServices")) {
                 populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
@@ -1356,9 +1374,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 if (dnsDomain != null) {
                     addStatisticsParameter(statistics, String.format(N_NETWORK_DNS_DOMAIN_NAME, id), dnsDomain.getName());
                 }
-                DNSServer dnsServer = dns.getDnsServer();
-                if (dnsServer != null) {
-                    addStatisticsParameter(statistics, String.format(N_NETWORK_DNS_ADDRESS, id), dnsServer.getAddress());
+                DNSServer[] dnsServers = dns.getDnsServers();
+                if (dnsServers != null) {
+                    Arrays.stream(dnsServers).forEach(dnsServer ->
+                            addStatisticsParameter(statistics, String.format(N_NETWORK_DNS_ADDRESS, id, dnsServer.getItem()), dnsServer.getAddress()));
                 }
             }
 

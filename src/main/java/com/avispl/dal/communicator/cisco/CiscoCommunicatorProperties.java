@@ -7,10 +7,10 @@ final class CiscoCommunicatorProperties {
      static final String N_MICROPHONE_STATUS = "Audio#Microphone%sStatus";
      static final String N_MICROPHONE_EC_REFERENCE_DELAY = "Audio#Microphone%sEcReferenceDelay";
      static final String N_INPUT_LINE_DELAY = "Audio#OutputLine%sDelay(MS)";
-     static final String N_VIDEO_CONNECTOR_TYPE = "Video#Connector%sType";
-     static final String N_VIDEO_CONNECTOR_CONNECTED = "Video#Connector%sConnected";
-     static final String N_VIDEO_CONNECTOR_CONNECTED_DEVICE_NAME = "Video#Connector%sConnectedDeviceName";
-     static final String N_VIDEO_CONNECTOR_CONNECTED_DEVICE_PREFERRED_FORMAT = "Video#Connector%sConnectedDevicePreferredFormat";
+     static final String N_VIDEO_CONNECTOR_TYPE = "Video#OutputConnector%sType";
+     static final String N_VIDEO_CONNECTOR_CONNECTED = "Video#OutputConnector%sConnected";
+     static final String N_VIDEO_CONNECTOR_CONNECTED_DEVICE_NAME = "Video#OutputConnector%sConnectedDeviceName";
+     static final String N_VIDEO_CONNECTOR_CONNECTED_DEVICE_PREFERRED_FORMAT = "Video#OutputConnector%sConnectedDevicePreferredFormat";
      static final String N_INPUT_SOURCE_TYPE = "Video#InputSource%sType";
      static final String N_INPUT_SOURCE_VISIBILITY = "Video#InputSource%sVisibility";
      static final String N_INPUT_SOURCE_PRESENTATION_SELECTION = "Video#InputSource%sPresentationSelection";
@@ -49,7 +49,7 @@ final class CiscoCommunicatorProperties {
      static final String N_NETWORK_CDP_VOIP_APPLIANCE_VLAN_ID = "Networks#Network%sCDPVoipApplianceVlanId";
      static final String N_NETWORK_CDP_VTP_MGMT_DOMAIN = "Networks#Network%sCDPVtpMgmtDomain";
      static final String N_NETWORK_DNS_DOMAIN_NAME = "Networks#Network%sDNSDomainName";
-     static final String N_NETWORK_DNS_ADDRESS = "Networks#Network%sDNSAddress";
+     static final String N_NETWORK_DNS_ADDRESS = "Networks#Network%sDNSServerAddress%s";
      static final String N_NETWORK_ETHERNET_MAC_ADDRESS = "Networks#Network%sEthernetMacAddress";
      static final String N_NETWORK_ETHERNET_SPEED = "Networks#Network%sEthernetSpeed";
      static final String N_NETWORK_IPV4_ADDRESS = "Networks#Network%sIPv4Address";

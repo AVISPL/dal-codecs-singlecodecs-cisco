@@ -20,7 +20,7 @@ public class DNS {
     @XmlElement(name = "Domain")
     private DNSDomain dnsDomain;
     @XmlElement(name = "Server")
-    private DNSServer dnsServer;
+    private DNSServer[] dnsServers;
 
     /**
      * Retrieves {@code {@link #dnsDomain}}
@@ -41,20 +41,20 @@ public class DNS {
     }
 
     /**
-     * Retrieves {@code {@link #dnsServer}}
+     * Retrieves {@code {@link #dnsServers}}
      *
-     * @return value of {@link #dnsServer}
+     * @return value of {@link #dnsServers}
      */
-    public DNSServer getDnsServer() {
-        return dnsServer;
+    public DNSServer[] getDnsServers() {
+        return dnsServers;
     }
 
     /**
-     * Sets {@code dnsServer}
+     * Sets {@code dnsServers}
      *
-     * @param dnsServer the {@code com.avispl.dal.communicator.cisco.dto.status.network.dns.DNSServer} field
+     * @param dnsServers the {@code com.avispl.dal.communicator.cisco.dto.status.network.dns.DNSServer[]} field
      */
-    public void setDnsServer(DNSServer dnsServer) {
-        this.dnsServer = dnsServer;
+    public void setDnsServers(DNSServer[] dnsServers) {
+        this.dnsServers = dnsServers;
     }
 }

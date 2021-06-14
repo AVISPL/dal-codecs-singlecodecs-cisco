@@ -3,6 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.network.dns;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,8 +17,28 @@ import javax.xml.bind.annotation.XmlAccessorType;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 public class DNSServer {
+    @XmlAttribute(name = "item")
+    private String item;
     @XmlElement(name = "Address")
     private String address;
+
+    /**
+     * Retrieves {@code {@link #item}}
+     *
+     * @return value of {@link #item}
+     */
+    public String getItem() {
+        return item;
+    }
+
+    /**
+     * Sets {@code item}
+     *
+     * @param item the {@code java.lang.String} field
+     */
+    public void setItem(String item) {
+        this.item = item;
+    }
 
     /**
      * Retrieves {@code {@link #address}}

@@ -461,8 +461,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             }
             Thread.sleep(1000);
         }
-        throw new RuntimeException(String.format("An error occurred during dialing out to %s with protocol %s.",
-                dialString, dialDevice.getProtocol()));
+        // Some devices (like SX20) appear slower than the other ones, so if we throw an exception here - it would
+        // be populate to UI, but call status will still be updated afterwards.
+        return null;
     }
 
     /**

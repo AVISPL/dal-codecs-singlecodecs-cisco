@@ -1,0 +1,60 @@
+/*
+ * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ */
+package com.avispl.dal.communicator.cisco.dto.configuration.video;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+/**
+ * Device Video Configuration Selfview class.
+ * Serves both for collecting data and changing device's config.
+ *
+ * @author Maksym.Rossiitsev / Symphony Dev Team<br>
+ * Created on Apr 26, 2021
+ * @since 1.0
+ */
+@XmlAccessorType(XmlAccessType.NONE)
+public class VideoConfigurationSelfview {
+    @XmlElement(name = "Default")
+    private VideoConfigurationSelfviewDefault selfviewDefault;
+    @XmlElement(name = "OnCall")
+    private VideoConfigurationSelfviewOnCall onCall;
+
+    /**
+     * Retrieves {@code {@link #selfviewDefault}}
+     *
+     * @return value of {@link #selfviewDefault}
+     */
+    public VideoConfigurationSelfviewDefault getSelfviewDefault() {
+        return selfviewDefault;
+    }
+
+    /**
+     * Sets {@code selfviewDefault}
+     *
+     * @param selfviewDefault the {@code com.avispl.dal.communicator.cisco.dto.configuration.video.VideoConfigurationSelfviewDefault} field
+     */
+    public void setSelfviewDefault(VideoConfigurationSelfviewDefault selfviewDefault) {
+        this.selfviewDefault = selfviewDefault;
+    }
+
+    /**
+     * Retrieves {@code {@link #onCall}}
+     *
+     * @return value of {@link #onCall}
+     */
+    public VideoConfigurationSelfviewOnCall getOnCall() {
+        return onCall;
+    }
+
+    /**
+     * Sets {@code onCall}
+     *
+     * @param onCall the {@code com.avispl.dal.communicator.cisco.dto.configuration.video.VideoConfigurationSelfviewOnCall} field
+     */
+    public void setOnCall(VideoConfigurationSelfviewOnCall onCall) {
+        this.onCall = onCall;
+    }
+}

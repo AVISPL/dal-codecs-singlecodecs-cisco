@@ -3,9 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.roomanalytics;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device room analytics status class
@@ -15,17 +13,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class RoomAnalytics {
-    @XmlElement(name = "PeoplePresence")
+    @JacksonXmlProperty(localName="PeoplePresence")
     private String peoplePresence;
-    @XmlElement(name = "AmbientNoise")
+    @JacksonXmlProperty(localName="AmbientNoise")
     private AmbientNoise ambientNoise;
-    @XmlElement(name = "Engagement")
+    @JacksonXmlProperty(localName="Engagement")
     private Engagement engagement;
-    @XmlElement(name = "PeopleCount")
+    @JacksonXmlProperty(localName="PeopleCount")
     private PeopleCount peopleCount;
-    @XmlElement(name = "Sound")
+    @JacksonXmlProperty(localName="Sound")
     private Sound sound;
 
     /**

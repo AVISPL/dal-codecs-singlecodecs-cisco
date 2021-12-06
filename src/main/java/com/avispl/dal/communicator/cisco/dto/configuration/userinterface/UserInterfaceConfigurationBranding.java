@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.userinterface;
 
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device User Interface Configuration Branding class.
@@ -16,9 +13,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class UserInterfaceConfigurationBranding {
-    @XmlElement(name = "AwakeBranding")
+    @JacksonXmlProperty(localName="AwakeBranding")
     private UserInterfaceConfigurationAwakeBranding awakeBranding;
 
     /**

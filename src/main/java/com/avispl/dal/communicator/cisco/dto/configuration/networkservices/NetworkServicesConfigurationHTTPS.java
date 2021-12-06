@@ -5,10 +5,7 @@ package com.avispl.dal.communicator.cisco.dto.configuration.networkservices;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
 import com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationServer;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Services Configuration HTTPS class.
@@ -18,15 +15,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class NetworkServicesConfigurationHTTPS {
-    @XmlElement(name = "Server")
+    @JacksonXmlProperty(localName="Server")
     private NetworkConfigurationServer server;
-    @XmlElement(name = "StrictTransportSecurity")
+    @JacksonXmlProperty(localName="StrictTransportSecurity")
     private ValueSpaceRefHolder strictTransportSecurity;
-    @XmlElement(name = "VerifyClientCertificate")
+    @JacksonXmlProperty(localName="VerifyClientCertificate")
     private ValueSpaceRefHolder verifyClientCertificate;
-    @XmlElement(name = "VerifyServerCertificate")
+    @JacksonXmlProperty(localName="VerifyServerCertificate")
     private ValueSpaceRefHolder verifyServerCertificate;
 
     /**

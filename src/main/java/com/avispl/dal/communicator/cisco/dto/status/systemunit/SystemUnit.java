@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.systemunit;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device system unit status class
  * Represents system unit node from /status.xml information payload
@@ -14,21 +13,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class SystemUnit {
-    @XmlElement(name = "Hardware")
+    @JacksonXmlProperty(localName="Hardware")
     private Hardware hardware;
-    @XmlElement(name = "Software")
+    @JacksonXmlProperty(localName="Software")
     private Software software;
-    @XmlElement(name = "State")
+    @JacksonXmlProperty(localName="State")
     private State state;
-    @XmlElement(name = "ProductId")
+    @JacksonXmlProperty(localName="ProductId")
     private String productId;
-    @XmlElement(name = "ProductPlatform")
+    @JacksonXmlProperty(localName="ProductPlatform")
     private String productPlatform;
-    @XmlElement(name = "ProductType")
+    @JacksonXmlProperty(localName="ProductType")
     private String productType;
-    @XmlElement(name = "Uptime")
+    @JacksonXmlProperty(localName="Uptime")
     private String uptime;
 
     /**

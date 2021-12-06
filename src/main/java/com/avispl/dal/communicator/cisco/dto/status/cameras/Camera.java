@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.cameras;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Camera status class.
@@ -16,29 +13,29 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Camera {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "Capabilities")
+    @JacksonXmlProperty(localName="Capabilities")
     private CameraCapabilities capabilities;
-    @XmlElement(name = "Connected")
+    @JacksonXmlProperty(localName="Connected")
     private String connected;
-    @XmlElement(name = "Flip")
+    @JacksonXmlProperty(localName="Flip")
     private String flip;
-    @XmlElement(name = "HardwareID")
+    @JacksonXmlProperty(localName="HardwareID")
     private String hardwareId;
-    @XmlElement(name = "MacAddress")
+    @JacksonXmlProperty(localName="MacAddress")
     private String macAddress;
-    @XmlElement(name = "Manufacturer")
+    @JacksonXmlProperty(localName="Manufacturer")
     private String manufacturer;
-    @XmlElement(name = "Model")
+    @JacksonXmlProperty(localName="Model")
     private String model;
-    @XmlElement(name = "Position")
+    @JacksonXmlProperty(localName="Position")
     private CameraPosition position;
-    @XmlElement(name = "SerialNumber")
+    @JacksonXmlProperty(localName="SerialNumber")
     private String serialNumber;
-    @XmlElement(name = "SoftwareID")
+    @JacksonXmlProperty(localName="SoftwareID")
     private String softwareId;
 
     /**

@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.control.commands.standby;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /***
  * Standby command is a root template for any standby related commands
@@ -15,7 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class StandbyCommand {
     /***
      * Standby activate command
@@ -25,7 +22,7 @@ public class StandbyCommand {
      * @since 1.0
      */
     public static class Activate {
-        @XmlAttribute
+        @JacksonXmlProperty(isAttribute = true)
         private final String command = "True";
 
         /**
@@ -46,7 +43,7 @@ public class StandbyCommand {
      * @since 1.0
      */
     public static class Deactivate {
-        @XmlAttribute
+        @JacksonXmlProperty(isAttribute = true)
         private final String command = "True";
 
         /**
@@ -58,9 +55,9 @@ public class StandbyCommand {
             return command;
         }
     }
-    @XmlElement(name = "Activate")
+    @JacksonXmlProperty(localName="Activate")
     private Activate activate;
-    @XmlElement(name = "Deactivate")
+    @JacksonXmlProperty(localName="Deactivate")
     private Deactivate deactivate;
 
     /**

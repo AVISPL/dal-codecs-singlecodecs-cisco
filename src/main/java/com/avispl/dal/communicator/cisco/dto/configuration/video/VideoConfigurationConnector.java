@@ -4,12 +4,7 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.video;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Video Configuration Connector class.
@@ -19,29 +14,29 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoConfigurationConnector {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "CameraControl")
+    @JacksonXmlProperty(localName="CameraControl")
     private VideoConfigurationCameraControl cameraControl;
-    @XmlElement(name = "InputSourceType")
+    @JacksonXmlProperty(localName="InputSourceType")
     private ValueSpaceRefHolder inputSourceType;
-    @XmlElement(name = "Name")
+    @JacksonXmlProperty(localName="Name")
     private ValueSpaceRefHolder name;
-    @XmlElement(name = "PresentationSelection")
+    @JacksonXmlProperty(localName="PresentationSelection")
     private ValueSpaceRefHolder presentationSelection;
-    @XmlElement(name = "Quality")
+    @JacksonXmlProperty(localName="Quality")
     private ValueSpaceRefHolder quality;
-    @XmlElement(name = "Visibility")
+    @JacksonXmlProperty(localName="Visibility")
     private ValueSpaceRefHolder visibility;
-    @XmlElement(name = "MonitorRole")
+    @JacksonXmlProperty(localName="MonitorRole")
     private ValueSpaceRefHolder monitorRole;
-    @XmlElement(name = "OverscanLevel")
+    @JacksonXmlProperty(localName="OverscanLevel")
     private ValueSpaceRefHolder overscanLevel;
-    @XmlElement(name = "Resolution")
+    @JacksonXmlProperty(localName="Resolution")
     private ValueSpaceRefHolder resolution;
-    @XmlElement(name = "CEC")
+    @JacksonXmlProperty(localName="CEC")
     private VideoConfigurationCEC cec;
 
     /**

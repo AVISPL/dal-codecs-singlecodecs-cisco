@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.sip;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device call forward SIP status class
  * Represents call forward SIP node from /status.xml information payload
@@ -14,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class CallForward {
-    @XmlElement(name = "DisplayName")
+    @JacksonXmlProperty(localName="DisplayName")
     private String displayName;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private String mode;
-    @XmlElement(name = "URI")
+    @JacksonXmlProperty(localName="URI")
     private String uri;
 
     /**

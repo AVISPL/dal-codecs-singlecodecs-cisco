@@ -4,10 +4,7 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.cameras;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Cameras Configuration Whitebalance class.
@@ -17,11 +14,11 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class CamerasConfigurationWhitebalance {
-    @XmlElement(name = "Level")
+    @JacksonXmlProperty(localName="Level")
     private ValueSpaceRefHolder level;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private ValueSpaceRefHolder mode;
 
     /**

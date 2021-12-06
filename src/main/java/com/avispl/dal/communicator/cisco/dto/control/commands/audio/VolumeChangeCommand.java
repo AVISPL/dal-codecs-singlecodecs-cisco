@@ -3,7 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.control.commands.audio;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /***
  * Volume change command template
@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VolumeChangeCommand extends AudioCommand {
 
     /***
@@ -22,9 +22,9 @@ public class VolumeChangeCommand extends AudioCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    @XmlAccessorType(XmlAccessType.NONE)
+
     private static class Volume {
-        @XmlElement(name = "Set")
+        @JacksonXmlProperty(localName="Set")
         private SetCommand setCommand;
 
         /**
@@ -44,11 +44,11 @@ public class VolumeChangeCommand extends AudioCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    @XmlAccessorType(XmlAccessType.NONE)
+
     private static class SetCommand {
-        @XmlAttribute
+        @JacksonXmlProperty(isAttribute = true)
         private final String command = "True";
-        @XmlElement(name = "Level")
+        @JacksonXmlProperty(localName="Level")
         private final Integer level;
 
         /**
@@ -79,7 +79,7 @@ public class VolumeChangeCommand extends AudioCommand {
         }
     }
 
-    @XmlElement(name = "Volume")
+    @JacksonXmlProperty(localName="Volume")
     private final Volume volume;
 
     /**

@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.networkservices;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device ntp status class
@@ -15,13 +14,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class NTP {
-    @XmlElement(name = "CurrentAddress")
+    @JacksonXmlProperty(localName="CurrentAddress")
     private String currentAddress;
-    @XmlElement(name = "Discarded")
+    @JacksonXmlProperty(localName="Discarded")
     private String discarded;
-    @XmlElement(name = "Server")
+    @JacksonXmlProperty(localName="Server")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private NTPServer[] servers;
 
     /**

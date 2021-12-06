@@ -50,6 +50,7 @@ import com.avispl.dal.communicator.cisco.dto.status.roomanalytics.*;
 import com.avispl.dal.communicator.cisco.dto.status.root.Capabilities;
 import com.avispl.dal.communicator.cisco.dto.status.root.ConferenceCapabilities;
 import com.avispl.dal.communicator.cisco.dto.status.root.Standby;
+import com.avispl.dal.communicator.cisco.dto.status.root.Time;
 import com.avispl.dal.communicator.cisco.dto.status.security.FIPS;
 import com.avispl.dal.communicator.cisco.dto.status.security.Persistency;
 import com.avispl.dal.communicator.cisco.dto.status.security.Security;
@@ -70,24 +71,19 @@ import com.avispl.symphony.api.dal.dto.control.call.MuteStatus;
 import com.avispl.symphony.api.dal.dto.control.call.PopupMessage;
 import com.avispl.symphony.api.dal.dto.monitor.*;
 import com.avispl.symphony.api.dal.error.CommandFailureException;
+import com.avispl.symphony.api.dal.error.ResourceNotReachableException;
 import com.avispl.symphony.api.dal.monitor.Monitorable;
 import com.avispl.symphony.dal.communicator.RestCommunicator;
 import com.avispl.symphony.dal.util.StringUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.StringReader;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
@@ -277,7 +273,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private final String callStatusUri = "/Status/Call";
     private final String cameraCommandUri = "/Command/Camera";
     private final String microphonesStatusUri = "/Status/Audio/Microphones";
-    private final String getXmlPath = "getxml/?location=%s";
+    private final String getXmlPath = "getxml?location=%s";
 
     private final String configurationPath = "configuration.xml";
     private final String statusPath = "status.xml";
@@ -318,7 +314,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private ExtendedStatistics localStatistics;
     private EndpointStatistics localEndpointStatistics;
 
-    Unmarshaller xmlUnmarshaller;
+    XmlMapper xmlMapper;
 
     /**
      * Instantiate {@link CiscoCommunicator}
@@ -335,8 +331,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     @Override
     protected void internalInit() throws Exception {
         super.internalInit();
-        JAXBContext jc = JAXBContext.newInstance(ValueSpace.class);
-        xmlUnmarshaller = jc.createUnmarshaller();
+        setJacksonDataformatXMLSupported(true);
+        xmlMapper = new XmlMapper();
     }
 
     /**
@@ -391,25 +387,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     public void setRestartGracePeriod(long restartGracePeriod) {
         this.restartGracePeriod = restartGracePeriod;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected RestTemplate obtainRestTemplate() throws Exception {
-        RestTemplate restTemplate = super.obtainRestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-
-        // For control/config operations request/response
-        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
-        Jaxb2RootElementHttpMessageConverter jaxb2RootElementHttpMessageConverter = new Jaxb2RootElementHttpMessageConverter();
-        jaxb2RootElementHttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-        messageConverters.add(jaxb2RootElementHttpMessageConverter);
-        messageConverters.add((stringHttpMessageConverter));
-
-        restTemplate.setMessageConverters(messageConverters);
-        return restTemplate;
     }
 
     /**
@@ -526,6 +503,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             return Arrays.stream(status.getCalls()).filter(call -> "Connected".equals(call.getStatus()))
                     .collect(Collectors.toList());
         } catch (RestClientException ex) {
+            // TODO: double check, since it's jackson now
             // Jaxb is not able to handle multiple RootNodes as well as ignoring them.
             // If there are no calls - <EmptyResult\> node will be populated instead of <Status>,
             // so Jaxb expects that to be in place at all times (as opposed to Jackson, which will just handle that as
@@ -751,9 +729,31 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             List<AdvancedControllableProperty> advancedControllableProperties = new ArrayList<>();
             Map<String, String> statisticsMap = new HashMap<>();
 
-            String valuespace = retrieveValuespace();
-            CiscoConfiguration ciscoConfiguration = retrieveConfiguration();
-            CiscoStatus ciscoStatus = retrieveStatus();
+            String valuespace = "";
+            try {
+                valuespace = retrieveValuespace();
+            } catch (ResourceNotReachableException e) {
+                logger.warn("/valuespace.xml is not available on device " + getHost());
+            }
+
+            CiscoConfiguration ciscoConfiguration = null;
+            CiscoStatus ciscoStatus = null;
+
+            try {
+                ciscoConfiguration = retrieveConfiguration();
+            } catch (ResourceNotReachableException e) {
+                logger.warn("/configuration.xml is not available on device " + getHost());
+            }
+
+            try {
+                ciscoStatus = retrieveStatus();
+            } catch (ResourceNotReachableException e) {
+                logger.warn("/status.xml is not available on device " + getHost());
+            }
+
+            if (StringUtils.isNullOrEmpty(valuespace) && ciscoConfiguration == null && ciscoStatus == null) {
+                return Arrays.asList(extendedStatistics, endpointStatistics);
+            }
 
             populateMediaChannelsData(ciscoStatus, endpointStatistics);
             endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
@@ -812,10 +812,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
-                statisticsMap.put("SystemTime#Time", ciscoStatus.getTime().getSystemTime());
-                TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
-                if (timeConfiguration != null) {
-                    addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), valuespace);
+                Time time = ciscoStatus.getTime();
+                if (time != null) {
+                    statisticsMap.put("SystemTime#Time", time.getSystemTime());
+                    TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
+                    if (timeConfiguration != null) {
+                        addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), valuespace);
+                    }
                 }
             }
 
@@ -1049,8 +1052,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         VideoConfiguration videoConfiguration = configuration.getVideo();
         if (videoConfiguration != null) {
             addStatisticsParameterWithDropdown(statistics, controllableProperties, USER_INTERFACE_DEFAULT_MAIN_SOURCE, videoConfiguration.getDefaultMainSource(), valuespace);
-            addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_DEFAULT_PRESENTATION_SOURCE, videoConfiguration.getPresentation().getDefaultSource(), valuespace);
             addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_MONITORS, videoConfiguration.getMonitors(), valuespace);
+
+            VideoConfigurationPresentation videoConfigurationPresentation = videoConfiguration.getPresentation();
+            if (videoConfigurationPresentation != null) {
+                addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_DEFAULT_PRESENTATION_SOURCE, videoConfigurationPresentation.getDefaultSource(), valuespace);
+            }
 
             VideoConfigurationInput inputConfiguration = videoConfiguration.getInput();
             if (inputConfiguration != null) {
@@ -2178,6 +2185,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         try {
             return doGet(String.format(getXmlPath, cameraCommandUri), Command.class);
         } catch (RestClientException ex) {
+            // TODO double check since it's jackson now
             // Jaxb is not able to handle multiple RootNodes as well as ignoring them.
             // If there are no description for camera commands - <EmptyResult\> node will be populated instead of <Command>,
             // so Jaxb expects that to be in place at all times (as opposed to Jackson, which will just handle that as
@@ -2207,15 +2215,19 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @return {@link ValueSpace} instance of the target schema
      */
     private ValueSpace extractTTPARValuespace(String valuespaceResponse, String valuespaceName) {
-        if (xmlUnmarshaller == null) {
-            throw new RuntimeException("XML Unmarshaller is not initialized.");
+        if (xmlMapper == null) {
+            throw new RuntimeException("XML mapper is not initialized.");
+        }
+        if (valuespaceName.contains("/ValueSpace/")) {
+            // For old versions
+            valuespaceName = valuespaceName.replace("/ValueSpace/", "").split("\\[")[0];
         }
         int firstIndex = valuespaceResponse.indexOf("<" + valuespaceName) - 1;
         int lastIndex = valuespaceResponse.lastIndexOf(valuespaceName + ">") + valuespaceName.length() + 1;
         try {
             String response = valuespaceResponse.substring(firstIndex, lastIndex).replaceAll(valuespaceName, "ValueSpace");
-            return (ValueSpace) xmlUnmarshaller.unmarshal(new StringReader(response));
-        } catch (JAXBException e) {
+            return xmlMapper.readValue(response, ValueSpace.class);
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(String.format("An error occurred during valuespace information extraction for %s", valuespaceName), e);
         }
     }
@@ -2536,7 +2548,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             updateLatestControlTimestamp();
             updateLocalControllableProperty(property, value);
         } else {
-            throw new CommandFailureException("putxml", new ObjectMapper().writeValueAsString(configuration), response);
+            throw new CommandFailureException("putxml", xmlMapper.writeValueAsString(configuration), response);
         }
     }
 

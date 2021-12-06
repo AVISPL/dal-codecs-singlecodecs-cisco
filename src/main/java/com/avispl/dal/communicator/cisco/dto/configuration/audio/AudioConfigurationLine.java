@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.audio;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Audio Configuration Line class.
@@ -16,13 +13,13 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class AudioConfigurationLine {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "Delay")
+    @JacksonXmlProperty(localName="Delay")
     private AudioConfigurationDelay delay;
-    @XmlElement(name = "VideoAssociation")
+    @JacksonXmlProperty(localName="VideoAssociation")
     private AudioConfigurationVideoAssociation videoAssociation;
 
     /**

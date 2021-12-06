@@ -21,8 +21,10 @@ import com.avispl.dal.communicator.cisco.dto.status.sip.SIP;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.SystemUnit;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.VideoStatus;
-
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * Represents root status node of /status.xml payload
@@ -31,50 +33,52 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlRootElement(name = "Status")
-@XmlAccessorType(XmlAccessType.NONE)
+@JacksonXmlRootElement(localName = "Status")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CiscoStatus {
-    @XmlAttribute(name = "product")
+    @JacksonXmlProperty(isAttribute = true, localName="product")
     private String product;
-    @XmlAttribute(name = "version")
+    @JacksonXmlProperty(isAttribute = true, localName="version")
     private String version;
-    @XmlAttribute(name = "apiVersion")
+    @JacksonXmlProperty(isAttribute = true, localName="apiVersion")
     private String apiVersion;
-    @XmlElement(name = "Call")
+    @JacksonXmlProperty(localName="Call")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Call[] calls;
-    @XmlElement(name = "Audio")
+    @JacksonXmlProperty(localName="Audio")
     private AudioStatus audio;
-    @XmlElement(name = "Cameras")
+    @JacksonXmlProperty(localName="Cameras")
     private Cameras cameras;
-    @XmlElement(name = "Capabilities")
+    @JacksonXmlProperty(localName="Capabilities")
     private Capabilities capabilities;
-    @XmlElement(name = "Conference")
+    @JacksonXmlProperty(localName="Conference")
     private ConferenceStatus conference;
-    @XmlElement(name = "H323")
+    @JacksonXmlProperty(localName="H323")
     private H323 h323;
-    @XmlElement(name = "SIP")
+    @JacksonXmlProperty(localName="SIP")
     private SIP sip;
-    @XmlElement(name = "Network")
+    @JacksonXmlProperty(localName="Network")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Network[] networks;
-    @XmlElement(name = "NetworkServices")
+    @JacksonXmlProperty(localName="NetworkServices")
     private NetworkServices networkServices;
-    @XmlElement(name = "Proximity")
+    @JacksonXmlProperty(localName="Proximity")
     private Proximity proximity;
-    @XmlElement(name = "RoomAnalytics")
+    @JacksonXmlProperty(localName="RoomAnalytics")
     private RoomAnalytics roomAnalytics;
-    @XmlElement(name = "Security")
+    @JacksonXmlProperty(localName="Security")
     private Security security;
-    @XmlElement(name = "Standby")
+    @JacksonXmlProperty(localName="Standby")
     private Standby standby;
-    @XmlElement(name = "SystemUnit")
+    @JacksonXmlProperty(localName="SystemUnit")
     private SystemUnit systemUnit;
-    @XmlElement(name = "Time")
+    @JacksonXmlProperty(localName="Time")
     private Time time;
-    @XmlElement(name = "USB")
+    @JacksonXmlProperty(localName="USB")
     private USB usb;
-    @XmlElement(name = "Video")
+    @JacksonXmlProperty(localName="Video")
     private VideoStatus video;
-    @XmlElement(name = "MediaChannels")
+    @JacksonXmlProperty(localName="MediaChannels")
     private MediaChannels mediaChannels;
 
     /**

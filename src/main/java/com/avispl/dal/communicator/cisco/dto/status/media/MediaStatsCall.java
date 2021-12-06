@@ -3,11 +3,9 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.media;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device media stats call status class
  * Represents media stats node from /status.xml information payload
@@ -16,11 +14,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class MediaStatsCall {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "Channel")
+    @JacksonXmlProperty(localName="Channel")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Channel[] channels;
 
     /**

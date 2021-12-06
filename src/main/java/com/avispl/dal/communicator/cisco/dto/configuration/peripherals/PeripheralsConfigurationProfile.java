@@ -4,12 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.peripherals;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlElement;
-
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Device Peripherals Configuration Profile class.
@@ -19,13 +15,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class PeripheralsConfigurationProfile {
-    @XmlElement(name = "Cameras")
+    @JacksonXmlProperty(localName="Cameras")
     private ValueSpaceRefHolder cameras;
-    @XmlElement(name = "ControlSystems")
+    @JacksonXmlProperty(localName="ControlSystems")
     private ValueSpaceRefHolder controlSystems;
-    @XmlElement(name = "TouchPanels")
+    @JacksonXmlProperty(localName="TouchPanels")
     private ValueSpaceRefHolder touchPanels;
 
     /**

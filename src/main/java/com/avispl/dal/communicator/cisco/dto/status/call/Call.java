@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.call;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device call status class.
@@ -16,41 +13,41 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Call {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "AnswerState")
+    @JacksonXmlProperty(localName="AnswerState")
     private String answerState;
-    @XmlElement(name = "CallType")
+    @JacksonXmlProperty(localName="CallType")
     private String callType;
-    @XmlElement(name = "CallbackNumber")
+    @JacksonXmlProperty(localName="CallbackNumber")
     private String callbackNumber;
-    @XmlElement(name = "DeviceType")
+    @JacksonXmlProperty(localName="DeviceType")
     private String deviceType;
-    @XmlElement(name = "Direction")
+    @JacksonXmlProperty(localName="Direction")
     private String direction;
-    @XmlElement(name = "DisplayName")
+    @JacksonXmlProperty(localName="DisplayName")
     private String displayName;
-    @XmlElement(name = "Duration")
+    @JacksonXmlProperty(localName="Duration")
     private String duration;
-    @XmlElement(name = "Encryption")
+    @JacksonXmlProperty(localName="Encryption")
     private CallEncryption encryption;
-    @XmlElement(name = "FacilityServiceId")
+    @JacksonXmlProperty(localName="FacilityServiceId")
     private String facilityServiceId;
-    @XmlElement(name = "HoldReason")
+    @JacksonXmlProperty(localName="HoldReason")
     private String holdReason;
-    @XmlElement(name = "PlacedOnHold")
+    @JacksonXmlProperty(localName="PlacedOnHold")
     private String placedOnHold;
-    @XmlElement(name = "Protocol")
+    @JacksonXmlProperty(localName="Protocol")
     private String protocol;
-    @XmlElement(name = "ReceiveCallRate")
+    @JacksonXmlProperty(localName="ReceiveCallRate")
     private String receiveCallRate;
-    @XmlElement(name = "RemoteNumber")
+    @JacksonXmlProperty(localName="RemoteNumber")
     private String remoteNumber;
-    @XmlElement(name = "Status")
+    @JacksonXmlProperty(localName="Status")
     private String status;
-    @XmlElement(name = "TransmitCallRate")
+    @JacksonXmlProperty(localName="TransmitCallRate")
     private String transmitCallRate;
 
     /**

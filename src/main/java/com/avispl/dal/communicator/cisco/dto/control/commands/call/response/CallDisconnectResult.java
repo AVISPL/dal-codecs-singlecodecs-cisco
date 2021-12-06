@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.control.commands.call.response;
 
-import javax.xml.bind.annotation.XmlAttribute;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /***
  * Call disconnect command response template
  *
@@ -14,9 +12,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class CallDisconnectResult {
-    @XmlAttribute(name = "status")
+    @JacksonXmlProperty(isAttribute = true, localName="status")
     private String status;
 
     /**

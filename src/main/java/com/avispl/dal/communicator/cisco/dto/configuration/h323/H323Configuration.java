@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.h323;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device H323 Configuration class.
@@ -15,17 +14,17 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class H323Configuration {
-    @XmlElement(name = "CallSetup")
+    @JacksonXmlProperty(localName="CallSetup")
     private H323ConfigurationCallSetup callSetup;
-    @XmlElement(name = "Encryption")
+    @JacksonXmlProperty(localName="Encryption")
     private H323ConfigurationEncryption encryption;
-    @XmlElement(name = "Gatekeeper")
+    @JacksonXmlProperty(localName="Gatekeeper")
     private H323ConfigurationGatekeeper gatekeeper;
-    @XmlElement(name = "H323Alias")
+    @JacksonXmlProperty(localName="H323Alias")
     private H323ConfigurationAlias alias;
-    @XmlElement(name = "NAT")
+    @JacksonXmlProperty(localName="NAT")
     private H323ConfigurationNAT nat;
 
     /**

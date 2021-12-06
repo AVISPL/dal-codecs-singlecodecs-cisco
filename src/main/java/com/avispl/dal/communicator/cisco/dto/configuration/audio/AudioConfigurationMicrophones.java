@@ -3,9 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.audio;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Audio Configuration Microphone Mute class.
@@ -15,9 +13,9 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class AudioConfigurationMicrophones {
-    @XmlElement(name = "Mute")
+    @JacksonXmlProperty(localName="Mute")
     private AudioConfigurationMute mute;
 
     /**

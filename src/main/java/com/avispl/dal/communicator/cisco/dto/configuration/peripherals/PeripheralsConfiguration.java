@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.peripherals;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Peripherals Configuration class.
@@ -15,9 +14,9 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PeripheralsConfiguration {
-    @XmlElement(name = "Profile")
+    @JacksonXmlProperty(localName="Profile")
     private PeripheralsConfigurationProfile profile;
 
     /**

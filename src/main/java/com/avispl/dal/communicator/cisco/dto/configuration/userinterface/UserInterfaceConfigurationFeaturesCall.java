@@ -4,13 +4,9 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.userinterface;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlElement;
-
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Device User Interface Configuration Features - Call class.
@@ -20,13 +16,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class UserInterfaceConfigurationFeaturesCall {
-    @XmlElement(name = "End")
+    @JacksonXmlProperty(localName="End")
     private ValueSpaceRefHolder end;
-    @XmlElement(name = "MidCallControls")
+    @JacksonXmlProperty(localName="MidCallControls")
     private ValueSpaceRefHolder midCallControls;
-    @XmlElement(name = "Start")
+    @JacksonXmlProperty(localName="Start")
     private ValueSpaceRefHolder start;
 
     /**

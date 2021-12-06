@@ -4,11 +4,7 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.network;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Configuration Server class.
@@ -18,13 +14,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class NetworkConfigurationServer {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "MinimumTLSVersion")
+    @JacksonXmlProperty(localName="MinimumTLSVersion")
     private ValueSpaceRefHolder minimumTLSVersion;
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private ValueSpaceRefHolder address;
 
     /**

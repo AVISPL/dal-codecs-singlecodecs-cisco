@@ -4,10 +4,7 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.network;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Configuration IPv6 class.
@@ -17,15 +14,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class NetworkConfigurationIPv6 {
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private ValueSpaceRefHolder address;
-    @XmlElement(name = "Assignment")
+    @JacksonXmlProperty(localName="Assignment")
     private ValueSpaceRefHolder assignment;
-    @XmlElement(name = "DHCPOptions")
+    @JacksonXmlProperty(localName="DHCPOptions")
     private ValueSpaceRefHolder dhcpOptions;
-    @XmlElement(name = "Gateway")
+    @JacksonXmlProperty(localName="Gateway")
     private ValueSpaceRefHolder gateway;
 
     /**

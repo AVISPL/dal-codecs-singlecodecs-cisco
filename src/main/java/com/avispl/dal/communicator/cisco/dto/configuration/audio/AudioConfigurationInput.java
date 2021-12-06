@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.audio;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Audio Configuration Input class.
@@ -17,13 +15,15 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class AudioConfigurationInput {
-    @XmlElement(name = "MicrophoneMode")
+    @JacksonXmlProperty(localName="MicrophoneMode")
     private ValueSpaceRefHolder microphoneMode;
-    @XmlElement(name = "Line")
+    @JacksonXmlProperty(localName="Line")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private AudioConfigurationLine[] lines;
-    @XmlElement(name = "Microphone")
+    @JacksonXmlProperty(localName="Microphone")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private AudioConfigurationMicrophone[] microphones;
 
     /**

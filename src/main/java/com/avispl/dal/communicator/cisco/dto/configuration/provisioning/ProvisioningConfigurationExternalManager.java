@@ -4,12 +4,9 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.provisioning;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlElement;
 
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device Provisioning Configuration External Manager class.
  * Serves both for collecting data and changing device's config.
@@ -18,17 +15,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class ProvisioningConfigurationExternalManager {
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private ValueSpaceRefHolder address;
-    @XmlElement(name = "AlternateAddress")
+    @JacksonXmlProperty(localName="AlternateAddress")
     private ValueSpaceRefHolder alternateAddress;
-    @XmlElement(name = "Domain")
+    @JacksonXmlProperty(localName="Domain")
     private ValueSpaceRefHolder domain;
-    @XmlElement(name = "Path")
+    @JacksonXmlProperty(localName="Path")
     private ValueSpaceRefHolder path;
-    @XmlElement(name = "Protocol")
+    @JacksonXmlProperty(localName="Protocol")
     private ValueSpaceRefHolder protocol;
 
     /**

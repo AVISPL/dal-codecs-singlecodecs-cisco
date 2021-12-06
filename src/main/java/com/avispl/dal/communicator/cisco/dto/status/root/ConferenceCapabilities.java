@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.root;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device conference capabilities status class
  * Represents conference capabilities node from /status.xml information payload
@@ -15,15 +13,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class ConferenceCapabilities {
-    @XmlElement(name = "MaxActiveCalls")
+    @JacksonXmlProperty(localName="MaxActiveCalls")
     private String maxActiveCalls;
-    @XmlElement(name = "MaxAudioCalls")
+    @JacksonXmlProperty(localName="MaxAudioCalls")
     private String maxAudioCalls;
-    @XmlElement(name = "MaxCalls")
+    @JacksonXmlProperty(localName="MaxCalls")
     private String maxCalls;
-    @XmlElement(name = "MaxVideoCalls")
+    @JacksonXmlProperty(localName="MaxVideoCalls")
     private String maxVideoCalls;
 
     /**

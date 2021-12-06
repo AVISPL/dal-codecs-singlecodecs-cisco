@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.video;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device video status class
  * Represents video status node from /status.xml information payload
@@ -14,21 +13,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoStatus {
-    @XmlElement(name = "ActiveSpeaker")
+    @JacksonXmlProperty(localName="ActiveSpeaker")
     private ActiveSpeaker activeSpeaker;
-    @XmlElement(name = "Input")
+    @JacksonXmlProperty(localName="Input")
     private VideoInput input;
-    @XmlElement(name = "Output")
+    @JacksonXmlProperty(localName="Output")
     private VideoOutput output;
-    @XmlElement(name = "Layout")
+    @JacksonXmlProperty(localName="Layout")
     private VideoLayout layout;
-    @XmlElement(name = "Monitors")
+    @JacksonXmlProperty(localName="Monitors")
     private String monitors;
-    @XmlElement(name = "Presentation")
+    @JacksonXmlProperty(localName="Presentation")
     private VideoPresentation presentation;
-    @XmlElement(name = "Selfview")
+    @JacksonXmlProperty(localName="Selfview")
     private VideoSelfview selfView;
 
     /**

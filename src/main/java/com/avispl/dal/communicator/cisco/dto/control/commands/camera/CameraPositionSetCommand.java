@@ -4,8 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.control.commands.camera;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /***
  * Position set camera command template containing all the possible camera command options
@@ -14,19 +14,24 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class CameraPositionSetCommand {
-    @XmlAttribute
+    @JacksonXmlProperty(isAttribute = true)
     private String command = "True";
-    @XmlElement(name = "CameraId")
+    @JacksonXmlProperty(localName="CameraId")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private ValueSpaceRefHolder[] cameraId;
-    @XmlElement(name = "Pan")
+    @JacksonXmlProperty(localName="Pan")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private ValueSpaceRefHolder[] pan;
-    @XmlElement(name = "Tilt")
+    @JacksonXmlProperty(localName="Tilt")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private ValueSpaceRefHolder[] tilt;
-    @XmlElement(name = "Zoom")
+    @JacksonXmlProperty(localName="Zoom")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private ValueSpaceRefHolder[] zoom;
-    @XmlElement(name = "Focus")
+    @JacksonXmlProperty(localName="Focus")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private ValueSpaceRefHolder[] focus;
 
     /**

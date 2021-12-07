@@ -138,7 +138,7 @@ public class ControlPayloadGenerator {
                 camera.setIrSensor(new ValueSpaceRefHolder(normalizeSwitchValue(value, "On", "Off")));
                 break;
             case CameraMirror:
-                camera.setMirror(new ValueSpaceRefHolder(normalizeSwitchValue(value, "On", "Off")));
+                camera.setMirror(new ValueSpaceRefHolder(value));
                 break;
             case CameraWhitebalanceLevel:
                 cameraWhitebalance = new CamerasConfigurationWhitebalance();
@@ -487,6 +487,7 @@ public class ControlPayloadGenerator {
                 featuresCall.setMidCallControls(new ValueSpaceRefHolder(value));
                 features.setCall(featuresCall);
                 userInterfaceConfiguration.setFeatures(features);
+                break;
             case HideAllFeatures:
                 features = new UserInterfaceConfigurationFeatures();
                 features.setHideAll(new ValueSpaceRefHolder(value));

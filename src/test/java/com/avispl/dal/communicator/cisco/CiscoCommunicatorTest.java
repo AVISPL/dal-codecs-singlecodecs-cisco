@@ -34,7 +34,7 @@ public class CiscoCommunicatorTest {
     public void setUp() throws Exception {
 //        wireMockRule.start();
         ciscoCommunicator = new CiscoCommunicator();
-        ciscoCommunicator.setHost("***REMOVED***7");
+        ciscoCommunicator.setHost("172.31.254.109");
         ciscoCommunicator.setPort(443);
         ciscoCommunicator.setProtocol("https");
         ciscoCommunicator.setPassword("1234");
@@ -73,6 +73,7 @@ public class CiscoCommunicatorTest {
     @Test
     public void testSerializeProperties() throws Exception {
         ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
+        ciscoCommunicator.setDisplayPropertyGroups("All");
         List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();
         Assert.assertEquals(2, statistics.size());
 
@@ -294,7 +295,7 @@ public class CiscoCommunicatorTest {
     public void testCameraFlip() throws Exception {
         ControllableProperty controllableProperty = new ControllableProperty();
         controllableProperty.setProperty("Cameras#Camera1Flip");
-        controllableProperty.setValue("Off");
+        controllableProperty.setValue("Auto");
         ciscoCommunicator.controlProperty(controllableProperty);
     }
 
@@ -358,7 +359,7 @@ public class CiscoCommunicatorTest {
     public void testCameraMirrorMode() throws Exception {
         ControllableProperty controllableProperty = new ControllableProperty();
         controllableProperty.setProperty("Cameras#Camera1Mirror");
-        controllableProperty.setValue("Off");
+        controllableProperty.setValue("Auto");
         ciscoCommunicator.controlProperty(controllableProperty);
     }
 
@@ -446,7 +447,7 @@ public class CiscoCommunicatorTest {
     @Test
     public void testDial() throws Exception {
         DialDevice dialDevice = new DialDevice();
-        dialDevice.setDialString("NH-StudioX30@nh.vnoc1.com");
+        dialDevice.setDialString("172.31.254.144");
         dialDevice.setProtocol(Protocol.SIP);
         String response = ciscoCommunicator.dial(dialDevice);
         Assert.assertNotNull(response, "CallId should not be null");

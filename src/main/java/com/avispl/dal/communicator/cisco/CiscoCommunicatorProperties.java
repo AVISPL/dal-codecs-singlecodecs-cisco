@@ -142,4 +142,19 @@ final class CiscoCommunicatorProperties {
      static final String AUDIO_ULTRASOUND_MAX_VOLUME = "Audio#UltrasoundMaxVolume";
      static final String AUDIO_MICROPHONES_MUTE = "Audio#MicrophonesMute";
      static final String AUDIO_MICROPHONE_MODE = "Audio#MicrophoneMode";
+
+     static final String PERIPHERALS_DISCONNECTED_TEMPLATE = "PeripheralsDisconnected%ss";
+     static final String PERIPHERALS_CONNECTED_TEMPLATE = "PeripheralsConnected%ss";
+     static final String PROPERTY_UPGRADE_STATUS = "#UpgradeStatus";
+     static final String PROPERTY_HARDWARE_INFO = "#HardwareInfo";
+     static final String PROPERTY_CONNECTION_METHOD = "#ConnectionMethod";
+     static final String PROPERTY_NETWORK_ADDRESS = "#NetworkAddress";
+     static final String PROPERTY_LAST_SEEN = "#LastSeen";
+     static final String PROPERTY_ID = "#ID";
+     static final String PROPERTY_NAME = "#Name";
+     static final String PROPERTY_SERIAL_NUMBER = "#SerialNumber";
+     static final String PROPERTY_SOFTWARE_INFO = "#SoftwareInfo";
+     static final String PROPERTY_TYPE = "#Type";
+     static final String PROPERTY_TOTAL_DEVICES_COUNT = "#TotalDevicesCount";
+     static final String PROPERTY_STATUS = "#Status";
 }

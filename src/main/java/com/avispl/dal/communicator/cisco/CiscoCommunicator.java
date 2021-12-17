@@ -94,7 +94,6 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1624,8 +1623,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 Arrays.stream(peripheralsListResult.getPeripheralsDevices()).forEach(connectedDevice -> {
                     int totalDevicesOfStateAndType = 0;
                     // %ss is intentional here - in order to make Type plural
-                    String disconnectedKey = String.format("PeripheralsDisconnected%ss", connectedDevice.getType());
-                    String connectedKey = String.format("PeripheralsConnected%ss", connectedDevice.getType());
+                    String disconnectedKey = String.format(PERIPHERALS_DISCONNECTED_TEMPLATE, connectedDevice.getType());
+                    String connectedKey = String.format(PERIPHERALS_CONNECTED_TEMPLATE, connectedDevice.getType());
                     String key = disconnectedKey;
 
                     Optional<ConnectedDevice> connectedDeviceStatus = Optional.empty();
@@ -1641,7 +1640,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         String deviceStatus = cd.getStatus();
 
                         if ("connected".equalsIgnoreCase(deviceStatus)) {
-                            if(connectedTypedStats.containsKey(type)) {
+                            if (connectedTypedStats.containsKey(type)) {
                                 typedStats = connectedTypedStats.get(type);
                             } else {
                                 typedStats = new HashMap<>();
@@ -1650,7 +1649,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
                             key = connectedKey;
                         } else {
-                            if(disconnectedTypedStats.containsKey(type)) {
+                            if (disconnectedTypedStats.containsKey(type)) {
                                 typedStats = disconnectedTypedStats.get(type);
                             } else {
                                 typedStats = new HashMap<>();
@@ -1658,31 +1657,31 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                             }
                         }
 
-                        String upgradeStatusKey = key + "#UpgradeStatus";
-                        addStatisticsParameter(typedStats, key + "#Status", cd.getStatus());
+                        String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
+                        addStatisticsParameter(typedStats, key + PROPERTY_STATUS, cd.getStatus());
                         addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), cd.getUpgradeStatus(), "; "));
                     } else {
                         key = disconnectedKey;
-                        if(disconnectedTypedStats.containsKey(type)) {
+                        if (disconnectedTypedStats.containsKey(type)) {
                             typedStats = disconnectedTypedStats.get(type);
                         } else {
                             typedStats = new HashMap<>();
                             disconnectedTypedStats.put(type, typedStats);
                         }
-                        String upgradeStatusKey = key + "#UpgradeStatus";
-                        addStatisticsParameter(typedStats, key + "#Status", "Disconnected");
+                        String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
+                        addStatisticsParameter(typedStats, key + PROPERTY_STATUS, "Disconnected");
                         addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), "-", "; "));
                     }
 
-                    String hardwareInfoKey = key + "#HardwareInfo";
-                    String connectionMethodKey = key + "#ConnectionMethod";
-                    String networkAddressKey = key + "#NetworkAddress";
-                    String lastSeenKey = key + "#LastSeen";
-                    String idKey = key + "#ID";
-                    String nameKey = key + "#Name";
-                    String serialNumberKey = key + "#SerialNumber";
-                    String softwareInfoKey = key + "#SoftwareInfo";
-                    String typeKey = key + "#Type";
+                    String hardwareInfoKey = key + PROPERTY_HARDWARE_INFO;
+                    String connectionMethodKey = key + PROPERTY_CONNECTION_METHOD;
+                    String networkAddressKey = key + PROPERTY_NETWORK_ADDRESS;
+                    String lastSeenKey = key + PROPERTY_LAST_SEEN;
+                    String idKey = key + PROPERTY_ID;
+                    String nameKey = key + PROPERTY_NAME;
+                    String serialNumberKey = key + PROPERTY_SERIAL_NUMBER;
+                    String softwareInfoKey = key + PROPERTY_SOFTWARE_INFO;
+                    String typeKey = key + PROPERTY_TYPE;
 
                     addStatisticsParameter(typedStats, hardwareInfoKey, mergeAndNormalizeStrings(typedStats.get(hardwareInfoKey), connectedDevice.getHardwareInfo(), "; "));
                     addStatisticsParameter(typedStats, connectionMethodKey, mergeAndNormalizeStrings(typedStats.get(connectionMethodKey), connectedDevice.getConnectionMethod(), "; "));
@@ -1693,7 +1692,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     addStatisticsParameter(typedStats, serialNumberKey, mergeAndNormalizeStrings(typedStats.get(serialNumberKey), connectedDevice.getSerialNumber(), "; "));
                     addStatisticsParameter(typedStats, softwareInfoKey, mergeAndNormalizeStrings(typedStats.get(softwareInfoKey), connectedDevice.getSoftwareInfo(), "; "));
                     addStatisticsParameter(typedStats, typeKey, mergeAndNormalizeStrings(typedStats.get(typeKey), connectedDevice.getType(), "; "));
-                    addStatisticsParameter(typedStats, key + "#TotalDevicesCount", String.valueOf(++totalDevicesOfStateAndType));
+                    addStatisticsParameter(typedStats, key + PROPERTY_TOTAL_DEVICES_COUNT, String.valueOf(++totalDevicesOfStateAndType));
                 });
 
                 disconnectedTypedStats.values().forEach(statistics::putAll);
@@ -1720,15 +1719,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     /**
-    * Merge 2 strings together with a separator in between. If 1st string is empty or null - 2nd string is returned.
-    *
-    * @param s1 first string to add to merge result
-    * @param s2 second string to add to merge result
-    * @param separator to separate 2 substrings
-    *
-    * @return {@link String} merge result with separator
-    * */
-    private String mergeAndNormalizeStrings (String s1, String s2, String separator) {
+     * Merge 2 strings together with a separator in between. If 1st string is empty or null - 2nd string is returned.
+     *
+     * @param s1        first string to add to merge result
+     * @param s2        second string to add to merge result
+     * @param separator to separate 2 substrings
+     * @return {@link String} merge result with separator
+     */
+    private String mergeAndNormalizeStrings(String s1, String s2, String separator) {
         if (StringUtils.isNullOrEmpty(s1)) {
             return s2;
         }

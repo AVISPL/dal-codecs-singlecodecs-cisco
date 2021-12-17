@@ -4,6 +4,7 @@
 package com.avispl.dal.communicator.cisco.dto.control.commands.camera;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CameraPositionSetCommand {
     @JacksonXmlProperty(isAttribute = true)
     private String command = "True";

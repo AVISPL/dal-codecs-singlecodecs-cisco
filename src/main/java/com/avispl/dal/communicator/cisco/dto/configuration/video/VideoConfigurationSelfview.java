@@ -3,6 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.video;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * @since 1.0
  */
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class VideoConfigurationSelfview {
     @JacksonXmlProperty(localName="Default")
     private VideoConfigurationSelfviewDefault selfviewDefault;

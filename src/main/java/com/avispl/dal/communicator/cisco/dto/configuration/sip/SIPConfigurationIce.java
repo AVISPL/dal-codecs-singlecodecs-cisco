@@ -4,6 +4,7 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.sip;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * @since 1.0
  */
 
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SIPConfigurationIce {
     @JacksonXmlProperty(localName="DefaultCandidate")
     private ValueSpaceRefHolder defaultCandidate;

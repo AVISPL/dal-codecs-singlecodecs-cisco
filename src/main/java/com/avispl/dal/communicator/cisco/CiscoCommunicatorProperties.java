@@ -111,6 +111,10 @@ final class CiscoCommunicatorProperties {
      static final String NETWORK_SERVICES_UPNP_MODE = "NetworkServices#UPnPMode";
      static final String NETWORK_SERVICES_NTP_MODE = "NetworkServices#NTPMode";
      static final String NETWORK_SERVICES_WELCOME_TEXT = "NetworkServices#WelcomeText";
+     static final String PERIPHERALS_CAMERA_PROFILE_CONTROL = "PeripheralsConfiguration#CamerasProfile";
+     static final String PERIPHERALS_CONTROL_SYSTEM_PROFILE_CONTROL = "PeripheralsConfiguration#ControlSystemsProfile";
+     static final String PERIPHERALS_TOUCH_PANEL_PROFILE_CONTROL = "PeripheralsConfiguration#TouchPanelsProfile";
+     static final String PERIPHERALS_TOUCH_PANEL_REMOTE_PAIRING = "PeripheralsConfiguration#TouchPanelsRemotePairing";
      static final String USER_INTERFACE_LANGUAGE = "UserInterface#Language";
      static final String USER_INTERFACE_KEY_TONES = "UserInterface#KeyTones";
      static final String USER_INTERFACE_CONTACT_INFO_TYPE = "UserInterface#ContactInfoType";

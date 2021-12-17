@@ -12,6 +12,10 @@ import com.avispl.dal.communicator.cisco.dto.configuration.audio.AudioConfigurat
 import com.avispl.dal.communicator.cisco.dto.configuration.cameras.*;
 import com.avispl.dal.communicator.cisco.dto.configuration.conference.*;
 import com.avispl.dal.communicator.cisco.dto.configuration.networkservices.*;
+import com.avispl.dal.communicator.cisco.dto.configuration.peripherals.CiscoTouchPanels;
+import com.avispl.dal.communicator.cisco.dto.configuration.peripherals.PeripheralsConfiguration;
+import com.avispl.dal.communicator.cisco.dto.configuration.peripherals.PeripheralsConfigurationProfile;
+import com.avispl.dal.communicator.cisco.dto.configuration.peripherals.PeripheralsPairing;
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfigurationContentShare;
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfigurationServices;
@@ -313,6 +317,47 @@ public class ControlPayloadGenerator {
         return ciscoConfiguration;
     }
 
+
+    /**
+     * Generate peripherals profile configuration command.
+     *
+     * @param value control operation value
+     * @param type  type of the network service configuration command, to use as a reference for command payload creation
+     * @return {@link CiscoConfiguration} instance with correct values set
+     */
+    public static CiscoConfiguration generatePeripheralsConfigurationPayload(String value, PeripheralsProfileConfigurationCommandType type) {
+        CiscoConfiguration ciscoConfiguration = new CiscoConfiguration();
+        PeripheralsConfiguration peripheralsConfiguration = new PeripheralsConfiguration();
+        ciscoConfiguration.setPeripherals(peripheralsConfiguration);
+
+        ValueSpaceRefHolder valueSpaceRefHolder = new ValueSpaceRefHolder(value);
+        if (type == PeripheralsProfileConfigurationCommandType.TOUCH_PANEL_REMOTE_PAIRING) {
+            PeripheralsPairing peripheralsPairing = new PeripheralsPairing();
+            peripheralsPairing.setCiscoTouchPanels(new CiscoTouchPanels(valueSpaceRefHolder));
+            peripheralsConfiguration.setPairing(peripheralsPairing);
+            return ciscoConfiguration;
+        }
+
+        PeripheralsConfigurationProfile configurationProfile = new PeripheralsConfigurationProfile();
+        peripheralsConfiguration.setProfile(configurationProfile);
+        switch (type) {
+            case CAMERA:
+                configurationProfile.setCameras(valueSpaceRefHolder);
+                break;
+            case CONTROL_SYSTEM:
+                configurationProfile.setControlSystems(valueSpaceRefHolder);
+                break;
+            case TOUCH_PANEL:
+                configurationProfile.setTouchPanels(valueSpaceRefHolder);
+                break;
+            default:
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn(String.format("Command is not supported. Property: %s, value: %s", type, value));
+                }
+                break;
+        }
+        return ciscoConfiguration;
+    }
 
     /**
      * Generate room analytics configuration command.

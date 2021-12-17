@@ -5,6 +5,7 @@ package com.avispl.dal.communicator.cisco.dto.configuration.networkservices;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
 import com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationServer;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class NetworkServicesConfigurationHTTPS {
     @JacksonXmlProperty(localName="Server")
     private NetworkConfigurationServer server;

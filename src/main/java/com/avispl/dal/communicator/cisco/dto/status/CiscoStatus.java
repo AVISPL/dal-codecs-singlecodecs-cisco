@@ -11,6 +11,7 @@ import com.avispl.dal.communicator.cisco.dto.status.h323.H323;
 import com.avispl.dal.communicator.cisco.dto.status.media.MediaChannels;
 import com.avispl.dal.communicator.cisco.dto.status.network.Network;
 import com.avispl.dal.communicator.cisco.dto.status.networkservices.NetworkServices;
+import com.avispl.dal.communicator.cisco.dto.status.peripherals.Peripherals;
 import com.avispl.dal.communicator.cisco.dto.status.roomanalytics.RoomAnalytics;
 import com.avispl.dal.communicator.cisco.dto.status.root.Capabilities;
 import com.avispl.dal.communicator.cisco.dto.status.root.Proximity;
@@ -80,6 +81,8 @@ public class CiscoStatus {
     private VideoStatus video;
     @JacksonXmlProperty(localName="MediaChannels")
     private MediaChannels mediaChannels;
+    @JacksonXmlProperty(localName="Peripherals")
+    private Peripherals periherals;
 
     /**
      * Retrieves {@code {@link #product}}
@@ -457,5 +460,23 @@ public class CiscoStatus {
      */
     public void setMediaChannels(MediaChannels mediaChannels) {
         this.mediaChannels = mediaChannels;
+    }
+
+    /**
+     * Retrieves {@code {@link #periherals}}
+     *
+     * @return value of {@link #periherals}
+     */
+    public Peripherals getPeriherals() {
+        return periherals;
+    }
+
+    /**
+     * Sets {@code periherals}
+     *
+     * @param periherals the {@code com.avispl.dal.communicator.cisco.dto.status.peripherals.Peripherals} field
+     */
+    public void setPeriherals(Peripherals periherals) {
+        this.periherals = periherals;
     }
 }

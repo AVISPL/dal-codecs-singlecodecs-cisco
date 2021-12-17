@@ -3,6 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.audio;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
@@ -13,7 +14,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AudioConfigurationLine {
     @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;

@@ -13,10 +13,16 @@ jobs:
         java-version: 1.8
     - name: Build and test with Maven
       run: mvn -B clean test install -Dgroups="test"
+    - id: shortrev
+      run: git rev-parse --short HEAD
+    - id: pversion
+      run: mvn -o org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | grep -v '\['
+    - name: Version set
+      run: mvn versions:set versions:commit -DnewVersion=${{pversion}}-${{shortrev}}
     - name: PMD check
       run: mvn pmd:check
     - id: getfilename
-      run: echo "::set-output name=file::$(ls target/symphony-dal-communicator-cisco-[0-9].[0-9].[0-9].jar)"
+      run: echo "::set-output name=file::$(ls target/symphony-dal-communicator-cisco-[0-9].[0-9].[0-9]-${{shortrev}}.jar)"
     - uses: actions/upload-artifact@v1
       with:
         name: Cisco

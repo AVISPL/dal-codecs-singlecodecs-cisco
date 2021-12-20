@@ -1,6 +1,10 @@
 name: Java CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - develop
+      - 'feature/**'
 
 jobs:
   prep:
@@ -17,7 +21,7 @@ jobs:
     - id: shortrev
       run: echo ::set-output name=rev::$(git rev-parse --short HEAD)
     - id: pversion
-      run: echo ::set-output name=ver::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+      run: echo ::set-output name=ver::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | sed -e 's/-SNAPSHOT//g')
   build:
     runs-on: ubuntu-latest
     needs: prep
@@ -28,13 +32,13 @@ jobs:
       with:
         java-version: 1.8
     - name: Version set
-      run: mvn versions:set versions:commit -DnewVersion=${{ needs.prep.outputs.rev }}-${{ needs.prep.outputs.ver }}
-    - name: PMD check
-      run: mvn pmd:check
+      run: mvn versions:set versions:commit -DnewVersion=${{ needs.prep.outputs.ver }}.${{ needs.prep.outputs.rev }}-SNAPSHOT
     - name: Build and test with Maven
       run: mvn -B clean test install -Dgroups="test"
+    - name: PMD check
+      run: mvn pmd:check
     - id: getfilename
-      run: echo "::set-output name=file::$(ls target/symphony-dal-communicator-cisco-[0-9].[0-9].[0-9]-[.+?].jar)"
+      run: echo "::set-output name=file::$(ls target/symphony-dal-communicator-cisco-[0-9].[0-9].[0-9]-[.+?]-SNAPSHOT.jar)"
     - uses: actions/upload-artifact@v1
       with:
         name: Cisco

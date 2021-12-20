@@ -14,11 +14,11 @@ jobs:
     - name: Build and test with Maven
       run: mvn -B clean test install -Dgroups="test"
     - id: shortrev
-      run: git rev-parse --short HEAD
+      run: echo "::set-output name=rev::$(git rev-parse --short HEAD)"
     - id: pversion
-      run: mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+      run: echo "::set-output name=ver::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
     - name: Version set
-      run: mvn versions:set versions:commit -DnewVersion=${{steps.pversion}}-${{steps.shortrev}}
+      run: mvn versions:set versions:commit -DnewVersion=${{steps.pversion.outputs.rev}}-${{steps.shortrev.outputs.ver}}
     - name: PMD check
       run: mvn pmd:check
     - id: getfilename

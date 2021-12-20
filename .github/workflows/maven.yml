@@ -32,13 +32,13 @@ jobs:
       with:
         java-version: 1.8
     - name: Version set
-      run: mvn versions:set versions:commit -DnewVersion=${{ needs.prep.outputs.ver }}.${{ needs.prep.outputs.rev }}-SNAPSHOT
+      run: mvn versions:set versions:commit -DnewVersion=${{ needs.prep.outputs.ver }}-SNAPSHOT-${{ needs.prep.outputs.rev }}
     - name: Build and test with Maven
       run: mvn -B clean test install -Dgroups="test"
     - name: PMD check
       run: mvn pmd:check
     - id: getfilename
-      run: echo "::set-output name=file::$(ls target/symphony-dal-communicator-cisco-[0-9].[0-9].[0-9].*-SNAPSHOT.jar)"
+      run: echo "::set-output name=file::$(ls target/symphony-dal-communicator-cisco-[0-9].[0-9].[0-9]-SNAPSHOT-*.jar)"
     - uses: actions/upload-artifact@v1
       with:
         name: Cisco

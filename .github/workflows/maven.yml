@@ -18,7 +18,7 @@ jobs:
     - id: pversion
       run: echo "::set-output name=ver::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
     - name: Version set
-      run: mvn versions:set versions:commit -DnewVersion=${{steps.pversion.outputs.rev}}-${{steps.shortrev.outputs.ver}}
+      run: mvn versions:set versions:commit -DnewVersion=${{ steps.pversion.outputs.rev }}-${{ steps.shortrev.outputs.ver }}
     - name: PMD check
       run: mvn pmd:check
     - id: getfilename

@@ -12,10 +12,10 @@ jobs:
       with:
         java-version: 1.8
     - id: shortrev
-      run: echo "::set-output name=rev::$(git rev-parse --short HEAD)"
+      run: echo ::set-output name=rev::$(git rev-parse --short HEAD)
     - id: pversion
-      run: echo "::set-output name=ver::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)"
-  test:
+      run: echo ::set-output name=ver::$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1

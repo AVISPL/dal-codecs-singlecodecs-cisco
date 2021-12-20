@@ -18,11 +18,11 @@ jobs:
     - id: pversion
       run: mvn -o org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | grep -v '\['
     - name: Version set
-      run: mvn versions:set versions:commit -DnewVersion=${{pversion}}-${{shortrev}}
+      run: mvn versions:set versions:commit -DnewVersion=${{steps.pversion}}-${{steps.shortrev}}
     - name: PMD check
       run: mvn pmd:check
     - id: getfilename
-      run: echo "::set-output name=file::$(ls target/symphony-dal-communicator-cisco-[0-9].[0-9].[0-9]-${{shortrev}}.jar)"
+      run: echo "::set-output name=file::$(ls target/symphony-dal-communicator-cisco-[0-9].[0-9].[0-9]-[.+?].jar)"
     - uses: actions/upload-artifact@v1
       with:
         name: Cisco

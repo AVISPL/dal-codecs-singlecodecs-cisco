@@ -27,6 +27,7 @@ jobs:
     needs: prep
     outputs:
       version: ${{ steps.version.outputs.version }}
+    steps:
     - id: version
       run: echo ::set-output name=version::${{ needs.prep.outputs.ver }}-${{ needs.prep.outputs.rev }}
   build:

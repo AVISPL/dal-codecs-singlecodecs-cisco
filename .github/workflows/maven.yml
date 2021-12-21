@@ -20,7 +20,7 @@ jobs:
       with:
         java-version: 1.8
     - id: date
-      run: echo "::set-output name=date::$(date +'%yy%m%d')"
+      run: echo "::set-output name=date::$(date +'%y%m%d' | cut -c 2-)"
     - id: shortrev
       run: echo ::set-output name=rev::$(git rev-parse --short HEAD)
     - id: pversion

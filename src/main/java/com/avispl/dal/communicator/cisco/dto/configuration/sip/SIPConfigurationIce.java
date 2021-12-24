@@ -4,12 +4,10 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.sip;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlElement;
 
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device SIP Configuration Ice class.
  * Serves both for collecting data and changing device's config.
@@ -18,11 +16,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SIPConfigurationIce {
-    @XmlElement(name = "DefaultCandidate")
+    @JacksonXmlProperty(localName="DefaultCandidate")
     private ValueSpaceRefHolder defaultCandidate;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private ValueSpaceRefHolder mode;
 
     /**

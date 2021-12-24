@@ -14,6 +14,10 @@ import com.avispl.dal.communicator.cisco.dto.configuration.cameras.*;
 import com.avispl.dal.communicator.cisco.dto.configuration.conference.*;
 import com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationServer;
 import com.avispl.dal.communicator.cisco.dto.configuration.networkservices.*;
+import com.avispl.dal.communicator.cisco.dto.configuration.peripherals.CiscoTouchPanels;
+import com.avispl.dal.communicator.cisco.dto.configuration.peripherals.PeripheralsConfiguration;
+import com.avispl.dal.communicator.cisco.dto.configuration.peripherals.PeripheralsConfigurationProfile;
+import com.avispl.dal.communicator.cisco.dto.configuration.peripherals.PeripheralsPairing;
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfigurationContentShare;
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfigurationServices;
@@ -27,6 +31,9 @@ import com.avispl.dal.communicator.cisco.dto.control.commands.audio.MicrophonesM
 import com.avispl.dal.communicator.cisco.dto.control.commands.call.CallDisconnectCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.call.DialCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.camera.CameraPositionSetCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.ListCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.PeripheralsCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.response.PeripheralsListResult;
 import com.avispl.dal.communicator.cisco.dto.control.commands.userinterface.UserInterfaceCommand;
 import com.avispl.dal.communicator.cisco.dto.status.CiscoStatus;
 import com.avispl.dal.communicator.cisco.dto.status.audio.*;
@@ -46,10 +53,13 @@ import com.avispl.dal.communicator.cisco.dto.status.network.dns.DNSServer;
 import com.avispl.dal.communicator.cisco.dto.status.networkservices.NTP;
 import com.avispl.dal.communicator.cisco.dto.status.networkservices.NTPServer;
 import com.avispl.dal.communicator.cisco.dto.status.networkservices.NetworkServices;
+import com.avispl.dal.communicator.cisco.dto.status.peripherals.ConnectedDevice;
+import com.avispl.dal.communicator.cisco.dto.status.peripherals.Peripherals;
 import com.avispl.dal.communicator.cisco.dto.status.roomanalytics.*;
 import com.avispl.dal.communicator.cisco.dto.status.root.Capabilities;
 import com.avispl.dal.communicator.cisco.dto.status.root.ConferenceCapabilities;
 import com.avispl.dal.communicator.cisco.dto.status.root.Standby;
+import com.avispl.dal.communicator.cisco.dto.status.root.Time;
 import com.avispl.dal.communicator.cisco.dto.status.security.FIPS;
 import com.avispl.dal.communicator.cisco.dto.status.security.Persistency;
 import com.avispl.dal.communicator.cisco.dto.status.security.Security;
@@ -70,24 +80,19 @@ import com.avispl.symphony.api.dal.dto.control.call.MuteStatus;
 import com.avispl.symphony.api.dal.dto.control.call.PopupMessage;
 import com.avispl.symphony.api.dal.dto.monitor.*;
 import com.avispl.symphony.api.dal.error.CommandFailureException;
+import com.avispl.symphony.api.dal.error.ResourceNotReachableException;
 import com.avispl.symphony.api.dal.monitor.Monitorable;
 import com.avispl.symphony.dal.communicator.RestCommunicator;
 import com.avispl.symphony.dal.util.StringUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.StringReader;
 import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
@@ -277,7 +282,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private final String callStatusUri = "/Status/Call";
     private final String cameraCommandUri = "/Command/Camera";
     private final String microphonesStatusUri = "/Status/Audio/Microphones";
-    private final String getXmlPath = "getxml/?location=%s";
+    private final String getXmlPath = "getxml?location=%s";
 
     private final String configurationPath = "configuration.xml";
     private final String statusPath = "status.xml";
@@ -318,7 +323,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private ExtendedStatistics localStatistics;
     private EndpointStatistics localEndpointStatistics;
 
-    Unmarshaller xmlUnmarshaller;
+    XmlMapper xmlMapper;
 
     /**
      * Instantiate {@link CiscoCommunicator}
@@ -335,8 +340,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     @Override
     protected void internalInit() throws Exception {
         super.internalInit();
-        JAXBContext jc = JAXBContext.newInstance(ValueSpace.class);
-        xmlUnmarshaller = jc.createUnmarshaller();
+        setJacksonDataformatXMLSupported(true);
+        xmlMapper = new XmlMapper();
     }
 
     /**
@@ -391,25 +396,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     public void setRestartGracePeriod(long restartGracePeriod) {
         this.restartGracePeriod = restartGracePeriod;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected RestTemplate obtainRestTemplate() throws Exception {
-        RestTemplate restTemplate = super.obtainRestTemplate();
-        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-
-        // For control/config operations request/response
-        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
-        Jaxb2RootElementHttpMessageConverter jaxb2RootElementHttpMessageConverter = new Jaxb2RootElementHttpMessageConverter();
-        jaxb2RootElementHttpMessageConverter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-        messageConverters.add(jaxb2RootElementHttpMessageConverter);
-        messageConverters.add((stringHttpMessageConverter));
-
-        restTemplate.setMessageConverters(messageConverters);
-        return restTemplate;
     }
 
     /**
@@ -526,6 +512,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             return Arrays.stream(status.getCalls()).filter(call -> "Connected".equals(call.getStatus()))
                     .collect(Collectors.toList());
         } catch (RestClientException ex) {
+            // TODO: double check, since it's jackson now
             // Jaxb is not able to handle multiple RootNodes as well as ignoring them.
             // If there are no calls - <EmptyResult\> node will be populated instead of <Status>,
             // so Jaxb expects that to be in place at all times (as opposed to Jackson, which will just handle that as
@@ -751,9 +738,31 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             List<AdvancedControllableProperty> advancedControllableProperties = new ArrayList<>();
             Map<String, String> statisticsMap = new HashMap<>();
 
-            String valuespace = retrieveValuespace();
-            CiscoConfiguration ciscoConfiguration = retrieveConfiguration();
-            CiscoStatus ciscoStatus = retrieveStatus();
+            String valuespace = "";
+            try {
+                valuespace = retrieveValuespace();
+            } catch (ResourceNotReachableException e) {
+                logger.warn("/valuespace.xml is not available on device " + getHost());
+            }
+
+            CiscoConfiguration ciscoConfiguration = null;
+            CiscoStatus ciscoStatus = null;
+
+            try {
+                ciscoConfiguration = retrieveConfiguration();
+            } catch (ResourceNotReachableException e) {
+                logger.warn("/configuration.xml is not available on device " + getHost());
+            }
+
+            try {
+                ciscoStatus = retrieveStatus();
+            } catch (ResourceNotReachableException e) {
+                logger.warn("/status.xml is not available on device " + getHost());
+            }
+
+            if (StringUtils.isNullOrEmpty(valuespace) && ciscoConfiguration == null && ciscoStatus == null) {
+                return Arrays.asList(extendedStatistics, endpointStatistics);
+            }
 
             populateMediaChannelsData(ciscoStatus, endpointStatistics);
             endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
@@ -811,11 +820,17 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ProximityServices")) {
                 populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
             }
+            if (propertyGroupQualifiedForDisplay(propertyGroups, "Peripherals")) {
+                populatePeripheralsData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
+            }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
-                statisticsMap.put("SystemTime#Time", ciscoStatus.getTime().getSystemTime());
-                TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
-                if (timeConfiguration != null) {
-                    addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), valuespace);
+                Time time = ciscoStatus.getTime();
+                if (time != null) {
+                    statisticsMap.put("SystemTime#Time", time.getSystemTime());
+                    TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
+                    if (timeConfiguration != null) {
+                        addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), valuespace);
+                    }
                 }
             }
 
@@ -1032,7 +1047,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             VideoLayout videoLayout = videoStatus.getLayout();
             if (videoLayout != null) {
                 VideoLayoutFamily videoLayoutFamily = videoLayout.getLayoutFamily();
-                if(videoLayoutFamily != null) {
+                if (videoLayoutFamily != null) {
                     addStatisticsParameter(statistics, "Video#LayoutFamily", videoLayoutFamily.getLocal());
                 }
             }
@@ -1049,8 +1064,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         VideoConfiguration videoConfiguration = configuration.getVideo();
         if (videoConfiguration != null) {
             addStatisticsParameterWithDropdown(statistics, controllableProperties, USER_INTERFACE_DEFAULT_MAIN_SOURCE, videoConfiguration.getDefaultMainSource(), valuespace);
-            addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_DEFAULT_PRESENTATION_SOURCE, videoConfiguration.getPresentation().getDefaultSource(), valuespace);
             addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_MONITORS, videoConfiguration.getMonitors(), valuespace);
+
+            VideoConfigurationPresentation videoConfigurationPresentation = videoConfiguration.getPresentation();
+            if (videoConfigurationPresentation != null) {
+                addStatisticsParameterWithDropdown(statistics, controllableProperties, VIDEO_DEFAULT_PRESENTATION_SOURCE, videoConfigurationPresentation.getDefaultSource(), valuespace);
+            }
 
             VideoConfigurationInput inputConfiguration = videoConfiguration.getInput();
             if (inputConfiguration != null) {
@@ -1567,6 +1586,151 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 addStatisticsParameter(statistics, "RoomAnalytics#CurrentPeopleCount", peopleCount.getCurrent());
             }
         }
+    }
+
+    /**
+     * Retrieve Peripherals statistics/controls values. In order to do so - we need to perform a control command
+     * unlike data is normally received with status/configuration xml payloads. Status payload only contains connected
+     * devices data, but in oder to retrieve registered devices also - command action is needed.
+     *
+     * @param statistics             map to set statistics data to
+     * @param controllableProperties list of controls to add controllable properties to
+     * @param status                 device status data fetched from {@link #statusPath}
+     * @param configuration          device configuration data fetched from {@link #configurationPath}
+     * @param valuespace             device valuespace data fetched from {@link #valuespacePath}
+     */
+    private void populatePeripheralsData(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
+                                         CiscoStatus status, CiscoConfiguration configuration, String valuespace) throws Exception {
+        // This is a unique case of retrieval statistics data, so it is not exposed to a separate method
+        Command command = new Command();
+        PeripheralsCommand peripheralsCommand = new PeripheralsCommand();
+        peripheralsCommand.setList(new ListCommand());
+        command.setPeripheralsCommand(peripheralsCommand);
+        Command peripheralsListCommandResponse = doPost("putxml", command, Command.class);
+
+        Peripherals peripheralsStatus = status.getPeriherals();
+        List<ConnectedDevice> connectedDevices = new ArrayList<>();
+        if (peripheralsStatus != null) {
+            connectedDevices.addAll(Arrays.asList(peripheralsStatus.getConnectedDevice()));
+        }
+
+        if (peripheralsListCommandResponse != null) {
+            PeripheralsListResult peripheralsListResult = peripheralsListCommandResponse.getPeripheralsListResult();
+            if (peripheralsListResult != null && "OK".equals(peripheralsListResult.getStatus())) {
+                Map<String, Map<String, String>> connectedTypedStats = new HashMap<>();
+                Map<String, Map<String, String>> disconnectedTypedStats = new HashMap<>();
+
+                Arrays.stream(peripheralsListResult.getPeripheralsDevices()).forEach(connectedDevice -> {
+                    int totalDevicesOfStateAndType = 0;
+                    // %ss is intentional here - in order to make Type plural
+                    String disconnectedKey = String.format(PERIPHERALS_DISCONNECTED_TEMPLATE, connectedDevice.getType());
+                    String connectedKey = String.format(PERIPHERALS_CONNECTED_TEMPLATE, connectedDevice.getType());
+                    String key = disconnectedKey;
+
+                    Optional<ConnectedDevice> connectedDeviceStatus = Optional.empty();
+                    if (!connectedDevices.isEmpty()) {
+                        connectedDeviceStatus = connectedDevices.stream().filter(cd -> cd.getSerialNumber().equals(connectedDevice.getSerialNumber())).findFirst();
+                    }
+
+                    Map<String, String> typedStats;
+                    String type = connectedDevice.getType();
+
+                    if (connectedDeviceStatus.isPresent()) {
+                        ConnectedDevice cd = connectedDeviceStatus.get();
+                        String deviceStatus = cd.getStatus();
+
+                        if ("connected".equalsIgnoreCase(deviceStatus)) {
+                            if (connectedTypedStats.containsKey(type)) {
+                                typedStats = connectedTypedStats.get(type);
+                            } else {
+                                typedStats = new HashMap<>();
+                                connectedTypedStats.put(type, typedStats);
+                            }
+
+                            key = connectedKey;
+                        } else {
+                            if (disconnectedTypedStats.containsKey(type)) {
+                                typedStats = disconnectedTypedStats.get(type);
+                            } else {
+                                typedStats = new HashMap<>();
+                                disconnectedTypedStats.put(type, typedStats);
+                            }
+                        }
+
+                        String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
+                        addStatisticsParameter(typedStats, key + PROPERTY_STATUS, cd.getStatus());
+                        addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), cd.getUpgradeStatus(), "; "));
+                    } else {
+                        key = disconnectedKey;
+                        if (disconnectedTypedStats.containsKey(type)) {
+                            typedStats = disconnectedTypedStats.get(type);
+                        } else {
+                            typedStats = new HashMap<>();
+                            disconnectedTypedStats.put(type, typedStats);
+                        }
+                        String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
+                        addStatisticsParameter(typedStats, key + PROPERTY_STATUS, "Disconnected");
+                        addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), "-", "; "));
+                    }
+
+                    String hardwareInfoKey = key + PROPERTY_HARDWARE_INFO;
+                    String connectionMethodKey = key + PROPERTY_CONNECTION_METHOD;
+                    String networkAddressKey = key + PROPERTY_NETWORK_ADDRESS;
+                    String lastSeenKey = key + PROPERTY_LAST_SEEN;
+                    String idKey = key + PROPERTY_ID;
+                    String nameKey = key + PROPERTY_NAME;
+                    String serialNumberKey = key + PROPERTY_SERIAL_NUMBER;
+                    String softwareInfoKey = key + PROPERTY_SOFTWARE_INFO;
+                    String typeKey = key + PROPERTY_TYPE;
+
+                    addStatisticsParameter(typedStats, hardwareInfoKey, mergeAndNormalizeStrings(typedStats.get(hardwareInfoKey), connectedDevice.getHardwareInfo(), "; "));
+                    addStatisticsParameter(typedStats, connectionMethodKey, mergeAndNormalizeStrings(typedStats.get(connectionMethodKey), connectedDevice.getConnectionMethod(), "; "));
+                    addStatisticsParameter(typedStats, networkAddressKey, mergeAndNormalizeStrings(typedStats.get(networkAddressKey), connectedDevice.getNetworkAddress(), "; "));
+                    addStatisticsParameter(typedStats, lastSeenKey, mergeAndNormalizeStrings(typedStats.get(lastSeenKey), connectedDevice.getLastSeen(), "; "));
+                    addStatisticsParameter(typedStats, idKey, mergeAndNormalizeStrings(typedStats.get(idKey), connectedDevice.getID(), "; "));
+                    addStatisticsParameter(typedStats, nameKey, mergeAndNormalizeStrings(typedStats.get(nameKey), connectedDevice.getName(), "; "));
+                    addStatisticsParameter(typedStats, serialNumberKey, mergeAndNormalizeStrings(typedStats.get(serialNumberKey), connectedDevice.getSerialNumber(), "; "));
+                    addStatisticsParameter(typedStats, softwareInfoKey, mergeAndNormalizeStrings(typedStats.get(softwareInfoKey), connectedDevice.getSoftwareInfo(), "; "));
+                    addStatisticsParameter(typedStats, typeKey, mergeAndNormalizeStrings(typedStats.get(typeKey), connectedDevice.getType(), "; "));
+                    addStatisticsParameter(typedStats, key + PROPERTY_TOTAL_DEVICES_COUNT, String.valueOf(++totalDevicesOfStateAndType));
+                });
+
+                disconnectedTypedStats.values().forEach(statistics::putAll);
+                connectedTypedStats.values().forEach(statistics::putAll);
+            }
+        }
+
+        PeripheralsConfiguration peripheralsConfiguration = configuration.getPeripherals();
+        if (peripheralsConfiguration != null) {
+            PeripheralsConfigurationProfile peripheralsConfigurationProfile = peripheralsConfiguration.getProfile();
+            if (peripheralsConfigurationProfile != null) {
+                addStatisticsParameterWithDropdown(statistics, controllableProperties, PERIPHERALS_CAMERA_PROFILE_CONTROL, peripheralsConfigurationProfile.getCameras(), valuespace);
+                addStatisticsParameterWithDropdown(statistics, controllableProperties, PERIPHERALS_CONTROL_SYSTEM_PROFILE_CONTROL, peripheralsConfigurationProfile.getControlSystems(), valuespace);
+                addStatisticsParameterWithDropdown(statistics, controllableProperties, PERIPHERALS_TOUCH_PANEL_PROFILE_CONTROL, peripheralsConfigurationProfile.getTouchPanels(), valuespace);
+            }
+            PeripheralsPairing peripheralsPairing = peripheralsConfiguration.getPairing();
+            if (peripheralsPairing != null) {
+                CiscoTouchPanels ciscoTouchPanels = peripheralsPairing.getCiscoTouchPanels();
+                if (ciscoTouchPanels != null) {
+                    addStatisticsParameterWithDropdown(statistics, controllableProperties, PERIPHERALS_TOUCH_PANEL_REMOTE_PAIRING, ciscoTouchPanels.getRemotePairing(), valuespace);
+                }
+            }
+        }
+    }
+
+    /**
+     * Merge 2 strings together with a separator in between. If 1st string is empty or null - 2nd string is returned.
+     *
+     * @param s1        first string to add to merge result
+     * @param s2        second string to add to merge result
+     * @param separator to separate 2 substrings
+     * @return {@link String} merge result with separator
+     */
+    private String mergeAndNormalizeStrings(String s1, String s2, String separator) {
+        if (StringUtils.isNullOrEmpty(s1)) {
+            return s2;
+        }
+        return String.format("%s%s%s", s1, separator, s2);
     }
 
     /**
@@ -2178,6 +2342,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         try {
             return doGet(String.format(getXmlPath, cameraCommandUri), Command.class);
         } catch (RestClientException ex) {
+            // TODO double check since it's jackson now
             // Jaxb is not able to handle multiple RootNodes as well as ignoring them.
             // If there are no description for camera commands - <EmptyResult\> node will be populated instead of <Command>,
             // so Jaxb expects that to be in place at all times (as opposed to Jackson, which will just handle that as
@@ -2207,15 +2372,19 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @return {@link ValueSpace} instance of the target schema
      */
     private ValueSpace extractTTPARValuespace(String valuespaceResponse, String valuespaceName) {
-        if (xmlUnmarshaller == null) {
-            throw new RuntimeException("XML Unmarshaller is not initialized.");
+        if (xmlMapper == null) {
+            throw new RuntimeException("XML mapper is not initialized.");
+        }
+        if (valuespaceName.contains("/ValueSpace/")) {
+            // For old versions
+            valuespaceName = valuespaceName.replace("/ValueSpace/", "").split("\\[")[0];
         }
         int firstIndex = valuespaceResponse.indexOf("<" + valuespaceName) - 1;
         int lastIndex = valuespaceResponse.lastIndexOf(valuespaceName + ">") + valuespaceName.length() + 1;
         try {
             String response = valuespaceResponse.substring(firstIndex, lastIndex).replaceAll(valuespaceName, "ValueSpace");
-            return (ValueSpace) xmlUnmarshaller.unmarshal(new StringReader(response));
-        } catch (JAXBException e) {
+            return xmlMapper.readValue(response, ValueSpace.class);
+        } catch (JsonProcessingException e) {
             throw new RuntimeException(String.format("An error occurred during valuespace information extraction for %s", valuespaceName), e);
         }
     }
@@ -2422,6 +2591,18 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 case NETWORK_SERVICES_WELCOME_TEXT:
                     postConfigurationRequest(generateNetworkServicesConfigurationPayload(value, NetworkServicesConfigurationCommandType.WelcomeText), property, value);
                     break;
+                case PERIPHERALS_CAMERA_PROFILE_CONTROL:
+                    postConfigurationRequest(generatePeripheralsConfigurationPayload(value, PeripheralsProfileConfigurationCommandType.CAMERA), property, value);
+                    break;
+                case PERIPHERALS_CONTROL_SYSTEM_PROFILE_CONTROL:
+                    postConfigurationRequest(generatePeripheralsConfigurationPayload(value, PeripheralsProfileConfigurationCommandType.CONTROL_SYSTEM), property, value);
+                    break;
+                case PERIPHERALS_TOUCH_PANEL_PROFILE_CONTROL:
+                    postConfigurationRequest(generatePeripheralsConfigurationPayload(value, PeripheralsProfileConfigurationCommandType.TOUCH_PANEL), property, value);
+                    break;
+                case PERIPHERALS_TOUCH_PANEL_REMOTE_PAIRING:
+                    postConfigurationRequest(generatePeripheralsConfigurationPayload(value, PeripheralsProfileConfigurationCommandType.TOUCH_PANEL_REMOTE_PAIRING), property, value);
+                    break;
                 case USER_INTERFACE_LANGUAGE:
                     postConfigurationRequest(generateUserInterfaceConfigurationPayload(value, UserInterfaceConfigurationCommandType.Language), property, value);
                     break;
@@ -2536,7 +2717,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             updateLatestControlTimestamp();
             updateLocalControllableProperty(property, value);
         } else {
-            throw new CommandFailureException("putxml", new ObjectMapper().writeValueAsString(configuration), response);
+            throw new CommandFailureException("putxml", xmlMapper.writeValueAsString(configuration), response);
         }
     }
 

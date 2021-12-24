@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.networkservices;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Services Configuration class.
@@ -17,29 +15,29 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class NetworkServicesConfiguration {
-    @XmlElement(name = "CDP")
+    @JacksonXmlProperty(localName="CDP")
     private NetworkServicesConfigurationCDP cdp;
-    @XmlElement(name = "H323")
+    @JacksonXmlProperty(localName="H323")
     private NetworkServicesConfigurationH323 h323;
-    @XmlElement(name = "HTTP")
+    @JacksonXmlProperty(localName="HTTP")
     private NetworkServicesConfigurationHTTP http;
-    @XmlElement(name = "HTTPS")
+    @JacksonXmlProperty(localName="HTTPS")
     private NetworkServicesConfigurationHTTPS https;
-    @XmlElement(name = "NTP")
+    @JacksonXmlProperty(localName="NTP")
     private NetworkServicesConfigurationNTP ntp;
-    @XmlElement(name = "SIP")
+    @JacksonXmlProperty(localName="SIP")
     private NetworkServicesConfigurationSIP sip;
-    @XmlElement(name = "SNMP")
+    @JacksonXmlProperty(localName="SNMP")
     private NetworkServicesConfigurationSNMP snmp;
-    @XmlElement(name = "SSH")
+    @JacksonXmlProperty(localName="SSH")
     private NetworkServicesConfigurationSSH ssh;
-    @XmlElement(name = "Telnet")
+    @JacksonXmlProperty(localName="Telnet")
     private NetworkServicesConfigurationTelnet telnet;
-    @XmlElement(name = "UPnP")
+    @JacksonXmlProperty(localName="UPnP")
     private NetworkServicesConfigurationUPnP uPnP;
-    @XmlElement(name = "WelcomeText")
+    @JacksonXmlProperty(localName="WelcomeText")
     private ValueSpaceRefHolder welcomeText;
 
     /**

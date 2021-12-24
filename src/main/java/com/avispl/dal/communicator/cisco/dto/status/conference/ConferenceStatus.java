@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.conference;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device conference status class
  * Represents conferenceStatus node from /status.xml information payload
@@ -15,17 +13,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class ConferenceStatus {
-    @XmlElement(name = "ActiveSpeaker")
+    @JacksonXmlProperty(localName="ActiveSpeaker")
     private ActiveConferenceSpeaker activeSpeaker;
-    @XmlElement(name = "DoNotDisturb")
+    @JacksonXmlProperty(localName="DoNotDisturb")
     private String doNotDisturb;
-    @XmlElement(name = "Multipoint")
+    @JacksonXmlProperty(localName="Multipoint")
     private Multipoint multipoint;
-    @XmlElement(name = "Presentation")
+    @JacksonXmlProperty(localName="Presentation")
     private Presentation presentation;
-    @XmlElement(name = "SpeakerLock")
+    @JacksonXmlProperty(localName="SpeakerLock")
     private SpeakerLock speakerLock;
 
     /**

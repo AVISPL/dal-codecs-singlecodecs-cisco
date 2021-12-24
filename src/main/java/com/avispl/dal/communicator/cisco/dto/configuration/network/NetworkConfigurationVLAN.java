@@ -3,9 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.network;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Configuration VLAN class.
@@ -15,9 +13,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class NetworkConfigurationVLAN {
-    @XmlElement(name = "Voice")
+    @JacksonXmlProperty(localName="Voice")
     private NetworkConfigurationVoice voice;
 
     /**

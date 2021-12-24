@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.audio;
 
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Audio headset usb devices status class.
@@ -16,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class AudioDevicesHeadsetUSB {
-    @XmlElement(name = "ConnectionStatus")
+    @JacksonXmlProperty(localName="ConnectionStatus")
     private String connectionStatus;
-    @XmlElement(name = "Description")
+    @JacksonXmlProperty(localName="Description")
     private String description;
-    @XmlElement(name = "Manufacturer")
+    @JacksonXmlProperty(localName="Manufacturer")
     private String manufacturer;
 
     /**

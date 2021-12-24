@@ -3,9 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.network;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device ipv6 status class
@@ -15,11 +13,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class IPv6 {
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private String address;
-    @XmlElement(name = "Gateway")
+    @JacksonXmlProperty(localName="Gateway")
     private String gateway;
 
     /**

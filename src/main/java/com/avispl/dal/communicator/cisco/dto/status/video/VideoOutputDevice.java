@@ -3,9 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.video;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device video output device status class
@@ -15,11 +13,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoOutputDevice {
-    @XmlElement(name = "Name")
+    @JacksonXmlProperty(localName="Name")
     private String name;
-    @XmlElement(name = "PreferredFormat")
+    @JacksonXmlProperty(localName="PreferredFormat")
     private String preferredFormat;
 
     /**

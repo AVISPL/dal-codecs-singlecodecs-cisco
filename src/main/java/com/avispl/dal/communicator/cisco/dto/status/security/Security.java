@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.security;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device security status class
  * Represents security node from /status.xml information payload
@@ -14,11 +13,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Security {
-    @XmlElement(name = "FIPS")
+    @JacksonXmlProperty(localName="FIPS")
     private FIPS fips;
-    @XmlElement(name = "Persistency")
+    @JacksonXmlProperty(localName="Persistency")
     private Persistency persistency;
 
     /**

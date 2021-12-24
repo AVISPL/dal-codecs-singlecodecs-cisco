@@ -4,11 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.network;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Configuration class.
@@ -18,27 +15,27 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class NetworkConfiguration {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "DNS")
+    @JacksonXmlProperty(localName="DNS")
     private NetworkConfigurationDNS DNS;
-    @XmlElement(name = "IEEE8021X")
+    @JacksonXmlProperty(localName="IEEE8021X")
     private NetworkConfigurationIEEE8021X IEEE8021X;
-    @XmlElement(name = "IPv4")
+    @JacksonXmlProperty(localName="IPv4")
     private NetworkConfigurationIPv4 IPv4;
-    @XmlElement(name = "IPv6")
+    @JacksonXmlProperty(localName="IPv6")
     private NetworkConfigurationIPv4 IPv6;
-    @XmlElement(name = "QoS")
+    @JacksonXmlProperty(localName="QoS")
     private NetworkConfigurationQoS QoS;
-    @XmlElement(name = "VLAN")
+    @JacksonXmlProperty(localName="VLAN")
     private NetworkConfigurationVLAN vlan;
-    @XmlElement(name = "IPStack")
+    @JacksonXmlProperty(localName="IPStack")
     private ValueSpaceRefHolder ipStack;
-    @XmlElement(name = "MTU")
+    @JacksonXmlProperty(localName="MTU")
     private ValueSpaceRefHolder mtu;
-    @XmlElement(name = "Speed")
+    @JacksonXmlProperty(localName="Speed")
     private ValueSpaceRefHolder speed;
 
     /**

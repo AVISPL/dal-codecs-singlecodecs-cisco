@@ -2,10 +2,8 @@
  * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status.audio;
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Audio input connectors status class.
@@ -15,9 +13,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class AudioInputConnectors {
-    @XmlElement(name = "Microphone")
+    @JacksonXmlProperty(localName="Microphone")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Microphone[] microphones;
 
     /**

@@ -3,9 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.network;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device CDP status class
@@ -15,31 +13,31 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class CDP {
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private String address;
-    @XmlElement(name = "Capabilities")
+    @JacksonXmlProperty(localName="Capabilities")
     private String capabilities;
-    @XmlElement(name = "DeviceId")
+    @JacksonXmlProperty(localName="DeviceId")
     private String deviceId;
-    @XmlElement(name = "Duplex")
+    @JacksonXmlProperty(localName="Duplex")
     private String duplex;
-    @XmlElement(name = "Platform")
+    @JacksonXmlProperty(localName="Platform")
     private String platform;
-    @XmlElement(name = "PortID")
+    @JacksonXmlProperty(localName="PortID")
     private String portId;
-    @XmlElement(name = "PrimaryMgmtAddress")
+    @JacksonXmlProperty(localName="PrimaryMgmtAddress")
     private String primaryMgmtAddress;
-    @XmlElement(name = "SysName")
+    @JacksonXmlProperty(localName="SysName")
     private String sysName;
-    @XmlElement(name = "SysObjectID")
+    @JacksonXmlProperty(localName="SysObjectID")
     private String sysObjectId;
-    @XmlElement(name = "VTPMgmtDomain")
+    @JacksonXmlProperty(localName="VTPMgmtDomain")
     private String vtpMgmtDomain;
-    @XmlElement(name = "Version")
+    @JacksonXmlProperty(localName="Version")
     private String version;
-    @XmlElement(name = "VoipApplianceVlanID")
+    @JacksonXmlProperty(localName="VoipApplianceVlanID")
     private String voipApplianceVlanId;
 
     /**

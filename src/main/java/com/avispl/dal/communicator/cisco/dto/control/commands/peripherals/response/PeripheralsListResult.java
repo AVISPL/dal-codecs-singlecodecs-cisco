@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2022 AVI-SPL Inc. All Rights Reserved.
+ */
 package com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.response;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;

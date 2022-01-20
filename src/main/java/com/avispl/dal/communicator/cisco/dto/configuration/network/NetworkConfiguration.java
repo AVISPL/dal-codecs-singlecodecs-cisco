@@ -24,11 +24,11 @@ public class NetworkConfiguration {
     @JacksonXmlProperty(localName="IEEE8021X")
     private NetworkConfigurationIEEE8021X IEEE8021X;
     @JacksonXmlProperty(localName="IPv4")
-    private NetworkConfigurationIPv4 IPv4;
+    private NetworkConfigurationIPv4 ipV4;
     @JacksonXmlProperty(localName="IPv6")
-    private NetworkConfigurationIPv4 IPv6;
+    private NetworkConfigurationIPv4 ipV6;
     @JacksonXmlProperty(localName="QoS")
-    private NetworkConfigurationQoS QoS;
+    private NetworkConfigurationQoS qos;
     @JacksonXmlProperty(localName="VLAN")
     private NetworkConfigurationVLAN vlan;
     @JacksonXmlProperty(localName="IPStack")
@@ -93,48 +93,48 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #IPv4}}
+     * Retrieves {@code {@link #ipV4 }}
      *
-     * @return value of {@link #IPv4}
+     * @return value of {@link #ipV4}
      */
-    public NetworkConfigurationIPv4 getIPv4() {
-        return IPv4;
+    public NetworkConfigurationIPv4 getIpV4() {
+        return ipV4;
     }
 
     /**
      * Sets {@code IPv4}
      *
-     * @param IPv4 the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIPv4} field
+     * @param ipV4 the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIPv4} field
      */
-    public void setIPv4(NetworkConfigurationIPv4 IPv4) {
-        this.IPv4 = IPv4;
+    public void setIpV4(NetworkConfigurationIPv4 ipV4) {
+        this.ipV4 = ipV4;
     }
 
     /**
-     * Retrieves {@code {@link #IPv6}}
+     * Retrieves {@code {@link #ipV6 }}
      *
-     * @return value of {@link #IPv6}
+     * @return value of {@link #ipV6}
      */
-    public NetworkConfigurationIPv4 getIPv6() {
-        return IPv6;
+    public NetworkConfigurationIPv4 getIpV6() {
+        return ipV6;
     }
 
     /**
      * Sets {@code IPv6}
      *
-     * @param IPv6 the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIPv4} field
+     * @param ipV6 the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIPv4} field
      */
-    public void setIPv6(NetworkConfigurationIPv4 IPv6) {
-        this.IPv6 = IPv6;
+    public void setIpV6(NetworkConfigurationIPv4 ipV6) {
+        this.ipV6 = ipV6;
     }
 
     /**
-     * Retrieves {@code {@link #QoS}}
+     * Retrieves {@code {@link #qos }}
      *
-     * @return value of {@link #QoS}
+     * @return value of {@link #qos}
      */
-    public NetworkConfigurationQoS getQoS() {
-        return QoS;
+    public NetworkConfigurationQoS getQos() {
+        return qos;
     }
 
     /**
@@ -142,8 +142,8 @@ public class NetworkConfiguration {
      *
      * @param QoS the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationQoS} field
      */
-    public void setQoS(NetworkConfigurationQoS qoS) {
-        QoS = qoS;
+    public void setQos(NetworkConfigurationQoS qos) {
+        this.qos = qos;
     }
 
     /**

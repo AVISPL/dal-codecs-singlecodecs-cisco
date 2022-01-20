@@ -37,6 +37,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * This class generates control/configuration requests for Cisco API based on {@link CiscoConfiguration} and
  * {@link Command} classes.
+ *
+ * @since 1.0
  */
 public class ControlPayloadGenerator {
     private static final Log LOG = LogFactory.getLog(ControlPayloadGenerator.class);
@@ -324,6 +326,8 @@ public class ControlPayloadGenerator {
      * @param value control operation value
      * @param type  type of the network service configuration command, to use as a reference for command payload creation
      * @return {@link CiscoConfiguration} instance with correct values set
+     *
+     * @since 1.1.0
      */
     public static CiscoConfiguration generatePeripheralsConfigurationPayload(String value, PeripheralsProfileConfigurationCommandType type) {
         CiscoConfiguration ciscoConfiguration = new CiscoConfiguration();

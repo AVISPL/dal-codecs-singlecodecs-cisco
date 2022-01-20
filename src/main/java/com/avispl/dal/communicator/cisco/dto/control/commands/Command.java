@@ -36,10 +36,12 @@ public class Command {
     private CallDisconnectCommand callDisconnectCommand;
     @JacksonXmlProperty(localName="Camera")
     private CameraCommand cameraCommand;
+    /** @since 1.1.0 */
     @JacksonXmlProperty(localName="Peripherals")
     private PeripheralsCommand peripheralsCommand;
     @JacksonXmlProperty(localName="DialResult")
     private DialResult dialResult;
+    /** @since 1.1.0 */
     @JacksonXmlProperty(localName="PeripheralsListResult")
     private PeripheralsListResult peripheralsListResult;
     @JacksonXmlProperty(localName="CallDisconnectResult")
@@ -127,6 +129,7 @@ public class Command {
      * Retrieves {@code {@link #peripheralsCommand}}
      *
      * @return value of {@link #peripheralsCommand}
+     * @since 1.1.0
      */
     public PeripheralsCommand getPeripheralsCommand() {
         return peripheralsCommand;
@@ -136,6 +139,7 @@ public class Command {
      * Sets {@code peripheralsCommand}
      *
      * @param peripheralsCommand the {@code com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.PeripheralsCommand} field
+     * @since 1.1.0
      */
     public void setPeripheralsCommand(PeripheralsCommand peripheralsCommand) {
         this.peripheralsCommand = peripheralsCommand;
@@ -145,6 +149,7 @@ public class Command {
      * Retrieves {@code {@link #peripheralsListResult}}
      *
      * @return value of {@link #peripheralsListResult}
+     * @since 1.1.0
      */
     public PeripheralsListResult getPeripheralsListResult() {
         return peripheralsListResult;
@@ -154,6 +159,7 @@ public class Command {
      * Sets {@code peripheralsListResult}
      *
      * @param peripheralsListResult the {@code com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.response.PeripheralsListResult} field
+     * @since 1.1.0
      */
     public void setPeripheralsListResult(PeripheralsListResult peripheralsListResult) {
         this.peripheralsListResult = peripheralsListResult;

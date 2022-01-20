@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2022 AVI-SPL Inc. All Rights Reserved.
+ */
 package com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -19,7 +22,7 @@ public class PeripheralsDevice {
     @JacksonXmlProperty(localName = "HardwareInfo")
     private String hardwareInfo;
     @JacksonXmlProperty(localName = "ID")
-    private String ID;
+    private String id;
     @JacksonXmlProperty(localName = "LastSeen")
     private String lastSeen;
     @JacksonXmlProperty(localName = "Name")
@@ -88,21 +91,21 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #ID}}
+     * Retrieves {@code {@link #id }}
      *
-     * @return value of {@link #ID}
+     * @return value of {@link #id}
      */
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
 
     /**
      * Sets {@code ID}
      *
-     * @param ID the {@code java.lang.String} field
+     * @param id the {@code java.lang.String} field
      */
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**

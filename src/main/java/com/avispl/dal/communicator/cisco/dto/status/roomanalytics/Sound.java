@@ -6,7 +6,7 @@ package com.avispl.dal.communicator.cisco.dto.status.roomanalytics;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
- * Device room analycits sound status class
+ * Device room analytics sound status class
  * Represents room analytics sound node from /status.xml information payload
  *
  * @author Maksym.Rossiitsev / Symphony Dev Team<br>

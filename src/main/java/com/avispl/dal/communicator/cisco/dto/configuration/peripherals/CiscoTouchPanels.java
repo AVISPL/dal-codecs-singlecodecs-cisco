@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2022 AVI-SPL Inc. All Rights Reserved.
+ */
 package com.avispl.dal.communicator.cisco.dto.configuration.peripherals;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
@@ -15,9 +18,19 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CiscoTouchPanels {
 
+    /**
+     * Default CiscoTouchPanels constructor, creating blank instance of the class.
+     */
     public CiscoTouchPanels() {
     }
 
+    /**
+     * CiscoTouchPanels constructor, that takes remotePairing value as parameter to build instance over.
+     *
+     * @param remotePairing value, containing xml attribute values, on top of the string value itself,
+     *                      that helps to determine the right set of values of the controllable property meant
+     *                      for the parameter.
+    */
     public CiscoTouchPanels(ValueSpaceRefHolder remotePairing) {
         this.remotePairing = remotePairing;
     }

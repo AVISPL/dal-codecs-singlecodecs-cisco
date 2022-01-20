@@ -9,6 +9,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Configuration Diffserv class.
+ * DiffServ is a set of end-to-end quality of service (QoS) capabilities.
+ * End-to-end QoS is the ability of the
+ * network to deliver service required by specific network traffic from one end of the network to another.
+ *
  * Serves both for collecting data and changing device's config.
  *
  * @author Maksym.Rossiitsev / Symphony Dev Team<br>

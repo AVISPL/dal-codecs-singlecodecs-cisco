@@ -20,23 +20,23 @@ public class NetworkConfiguration {
     @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
     @JacksonXmlProperty(localName="DNS")
-    private NetworkConfigurationDNS DNS;
+    private NetworkConfigurationDNS networkConfigurationDNS;
     @JacksonXmlProperty(localName="IEEE8021X")
-    private NetworkConfigurationIEEE8021X IEEE8021X;
+    private NetworkConfigurationIEEE8021X networkConfigurationIEEE8021X;
     @JacksonXmlProperty(localName="IPv4")
-    private NetworkConfigurationIPv4 ipV4;
+    private NetworkConfigurationIPv4 networkConfigurationIPv4;
     @JacksonXmlProperty(localName="IPv6")
-    private NetworkConfigurationIPv4 ipV6;
+    private NetworkConfigurationIPv6 networkConfigurationIPv6;
     @JacksonXmlProperty(localName="QoS")
-    private NetworkConfigurationQoS qos;
+    private NetworkConfigurationQoS networkConfigurationQoS;
     @JacksonXmlProperty(localName="VLAN")
-    private NetworkConfigurationVLAN vlan;
+    private NetworkConfigurationVLAN networkConfigurationVLAN;
     @JacksonXmlProperty(localName="IPStack")
-    private ValueSpaceRefHolder ipStack;
+    private ValueSpaceRefHolder networkConfigurationIPStack;
     @JacksonXmlProperty(localName="MTU")
-    private ValueSpaceRefHolder mtu;
+    private ValueSpaceRefHolder networkConfigurationMTU;
     @JacksonXmlProperty(localName="Speed")
-    private ValueSpaceRefHolder speed;
+    private ValueSpaceRefHolder networkConfigurationSpeed;
 
     /**
      * Retrieves {@code {@link #item}}
@@ -57,84 +57,84 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #DNS}}
+     * Retrieves {@code {@link #networkConfigurationDNS }}
      *
-     * @return value of {@link #DNS}
+     * @return value of {@link #networkConfigurationDNS}
      */
-    public NetworkConfigurationDNS getDNS() {
-        return DNS;
+    public NetworkConfigurationDNS getNetworkConfigurationDNS() {
+        return networkConfigurationDNS;
     }
 
     /**
      * Sets {@code DNS}
      *
-     * @param DNS the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationDNS} field
+     * @param networkConfigurationDNS the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationDNS} field
      */
-    public void setDNS(NetworkConfigurationDNS DNS) {
-        this.DNS = DNS;
+    public void setNetworkConfigurationDNS(NetworkConfigurationDNS networkConfigurationDNS) {
+        this.networkConfigurationDNS = networkConfigurationDNS;
     }
 
     /**
-     * Retrieves {@code {@link #IEEE8021X}}
+     * Retrieves {@code {@link #networkConfigurationIEEE8021X }}
      *
-     * @return value of {@link #IEEE8021X}
+     * @return value of {@link #networkConfigurationIEEE8021X}
      */
-    public NetworkConfigurationIEEE8021X getIEEE8021X() {
-        return IEEE8021X;
+    public NetworkConfigurationIEEE8021X getNetworkConfigurationIEEE8021X() {
+        return networkConfigurationIEEE8021X;
     }
 
     /**
      * Sets {@code IEEE8021X}
      *
-     * @param IEEE8021X the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIEEE8021X} field
+     * @param networkConfigurationIEEE8021X the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIEEE8021X} field
      */
-    public void setIEEE8021X(NetworkConfigurationIEEE8021X IEEE8021X) {
-        this.IEEE8021X = IEEE8021X;
+    public void setNetworkConfigurationIEEE8021X(NetworkConfigurationIEEE8021X networkConfigurationIEEE8021X) {
+        this.networkConfigurationIEEE8021X = networkConfigurationIEEE8021X;
     }
 
     /**
-     * Retrieves {@code {@link #ipV4 }}
+     * Retrieves {@code {@link #networkConfigurationIPv4 }}
      *
-     * @return value of {@link #ipV4}
+     * @return value of {@link #networkConfigurationIPv4}
      */
-    public NetworkConfigurationIPv4 getIpV4() {
-        return ipV4;
+    public NetworkConfigurationIPv4 getNetworkConfigurationIPv4() {
+        return networkConfigurationIPv4;
     }
 
     /**
      * Sets {@code IPv4}
      *
-     * @param ipV4 the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIPv4} field
+     * @param networkConfigurationIPv4 the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIPv4} field
      */
-    public void setIpV4(NetworkConfigurationIPv4 ipV4) {
-        this.ipV4 = ipV4;
+    public void setNetworkConfigurationIPv4(NetworkConfigurationIPv4 networkConfigurationIPv4) {
+        this.networkConfigurationIPv4 = networkConfigurationIPv4;
     }
 
     /**
-     * Retrieves {@code {@link #ipV6 }}
+     * Retrieves {@code {@link #networkConfigurationIPv6 }}
      *
-     * @return value of {@link #ipV6}
+     * @return value of {@link #networkConfigurationIPv6}
      */
-    public NetworkConfigurationIPv4 getIpV6() {
-        return ipV6;
+    public NetworkConfigurationIPv6 getNetworkConfigurationIPv6() {
+        return networkConfigurationIPv6;
     }
 
     /**
      * Sets {@code IPv6}
      *
-     * @param ipV6 the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIPv4} field
+     * @param networkConfigurationIPv6 the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationIPv4} field
      */
-    public void setIpV6(NetworkConfigurationIPv4 ipV6) {
-        this.ipV6 = ipV6;
+    public void setNetworkConfigurationIPv6(NetworkConfigurationIPv6 networkConfigurationIPv6) {
+        this.networkConfigurationIPv6 = networkConfigurationIPv6;
     }
 
     /**
-     * Retrieves {@code {@link #qos }}
+     * Retrieves {@code {@link #networkConfigurationQoS }}
      *
-     * @return value of {@link #qos}
+     * @return value of {@link #networkConfigurationQoS}
      */
-    public NetworkConfigurationQoS getQos() {
-        return qos;
+    public NetworkConfigurationQoS getNetworkConfigurationQoS() {
+        return networkConfigurationQoS;
     }
 
     /**
@@ -142,79 +142,79 @@ public class NetworkConfiguration {
      *
      * @param QoS the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationQoS} field
      */
-    public void setQos(NetworkConfigurationQoS qos) {
-        this.qos = qos;
+    public void setNetworkConfigurationQoS(NetworkConfigurationQoS networkConfigurationQoS) {
+        this.networkConfigurationQoS = networkConfigurationQoS;
     }
 
     /**
-     * Retrieves {@code {@link #vlan}}
+     * Retrieves {@code {@link #networkConfigurationVLAN }}
      *
-     * @return value of {@link #vlan}
+     * @return value of {@link #networkConfigurationVLAN}
      */
-    public NetworkConfigurationVLAN getVlan() {
-        return vlan;
+    public NetworkConfigurationVLAN getNetworkConfigurationVLAN() {
+        return networkConfigurationVLAN;
     }
 
     /**
      * Sets {@code vlan}
      *
-     * @param vlan the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationVLAN} field
+     * @param networkConfigurationVLAN the {@code com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationVLAN} field
      */
-    public void setVlan(NetworkConfigurationVLAN vlan) {
-        this.vlan = vlan;
+    public void setNetworkConfigurationVLAN(NetworkConfigurationVLAN networkConfigurationVLAN) {
+        this.networkConfigurationVLAN = networkConfigurationVLAN;
     }
 
     /**
-     * Retrieves {@code {@link #ipStack}}
+     * Retrieves {@code {@link #networkConfigurationIPStack }}
      *
-     * @return value of {@link #ipStack}
+     * @return value of {@link #networkConfigurationIPStack}
      */
-    public ValueSpaceRefHolder getIpStack() {
-        return ipStack;
+    public ValueSpaceRefHolder getNetworkConfigurationIPStack() {
+        return networkConfigurationIPStack;
     }
 
     /**
      * Sets {@code ipStack}
      *
-     * @param ipStack the {@code com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder} field
+     * @param networkConfigurationIPStack the {@code com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder} field
      */
-    public void setIpStack(ValueSpaceRefHolder ipStack) {
-        this.ipStack = ipStack;
+    public void setNetworkConfigurationIPStack(ValueSpaceRefHolder networkConfigurationIPStack) {
+        this.networkConfigurationIPStack = networkConfigurationIPStack;
     }
 
     /**
-     * Retrieves {@code {@link #mtu}}
+     * Retrieves {@code {@link #networkConfigurationMTU }}
      *
-     * @return value of {@link #mtu}
+     * @return value of {@link #networkConfigurationMTU}
      */
-    public ValueSpaceRefHolder getMtu() {
-        return mtu;
+    public ValueSpaceRefHolder getNetworkConfigurationMTU() {
+        return networkConfigurationMTU;
     }
 
     /**
      * Sets {@code mtu}
      *
-     * @param mtu the {@code com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder} field
+     * @param networkConfigurationMTU the {@code com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder} field
      */
-    public void setMtu(ValueSpaceRefHolder mtu) {
-        this.mtu = mtu;
+    public void setNetworkConfigurationMTU(ValueSpaceRefHolder networkConfigurationMTU) {
+        this.networkConfigurationMTU = networkConfigurationMTU;
     }
 
     /**
-     * Retrieves {@code {@link #speed}}
+     * Retrieves {@code {@link #networkConfigurationSpeed }}
      *
-     * @return value of {@link #speed}
+     * @return value of {@link #networkConfigurationSpeed}
      */
-    public ValueSpaceRefHolder getSpeed() {
-        return speed;
+    public ValueSpaceRefHolder getNetworkConfigurationSpeed() {
+        return networkConfigurationSpeed;
     }
 
     /**
      * Sets {@code speed}
      *
-     * @param speed the {@code com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder} field
+     * @param networkConfigurationSpeed the {@code com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder} field
      */
-    public void setSpeed(ValueSpaceRefHolder speed) {
-        this.speed = speed;
+    public void setNetworkConfigurationSpeed(ValueSpaceRefHolder networkConfigurationSpeed) {
+        this.networkConfigurationSpeed = networkConfigurationSpeed;
     }
 }

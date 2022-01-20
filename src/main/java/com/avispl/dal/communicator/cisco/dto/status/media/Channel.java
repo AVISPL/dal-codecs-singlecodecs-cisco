@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.media;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device channel status class
  * Represents channel node from /status.xml information payload
@@ -15,19 +13,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Channel {
-    @XmlElement(name = "Audio")
+    @JacksonXmlProperty(localName="Audio")
     private Audio audio;
-    @XmlElement(name = "Video")
+    @JacksonXmlProperty(localName="Video")
     private Video video;
-    @XmlElement(name = "Netstat")
+    @JacksonXmlProperty(localName="Netstat")
     private Netstat netstat;
-    @XmlElement(name = "Direction")
+    @JacksonXmlProperty(localName="Direction")
     private String direction;
-    @XmlElement(name = "Encryption")
+    @JacksonXmlProperty(localName="Encryption")
     private String encryption;
-    @XmlElement(name = "Type")
+    @JacksonXmlProperty(localName="Type")
     private String type;
 
     /**

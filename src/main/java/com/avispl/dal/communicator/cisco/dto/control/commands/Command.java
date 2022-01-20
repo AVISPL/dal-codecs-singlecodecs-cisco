@@ -9,15 +9,15 @@ import com.avispl.dal.communicator.cisco.dto.control.commands.call.DialCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.call.response.CallDisconnectResult;
 import com.avispl.dal.communicator.cisco.dto.control.commands.call.response.DialResult;
 import com.avispl.dal.communicator.cisco.dto.control.commands.camera.CameraCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.PeripheralsCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.response.PeripheralsListResult;
 import com.avispl.dal.communicator.cisco.dto.control.commands.standby.StandbyCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.systemunit.SystemUnitCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.userinterface.UserInterfaceCommand;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /***
  * A holder for a Command templates. Being transformed to an xml command afterwards.
  *
@@ -25,26 +25,32 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlRootElement(name = "Command")
-@XmlAccessorType(XmlAccessType.NONE)
+@JacksonXmlRootElement(localName = "Command")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Command {
-    @XmlElement(name = "Dial")
+    @JacksonXmlProperty(localName="Dial")
     private DialCommand dialCommand;
-    @XmlElement(name = "Audio")
+    @JacksonXmlProperty(localName="Audio")
     private AudioCommand audioCommand;
-    @XmlElement(name = "Call")
+    @JacksonXmlProperty(localName="Call")
     private CallDisconnectCommand callDisconnectCommand;
-    @XmlElement(name = "Camera")
+    @JacksonXmlProperty(localName="Camera")
     private CameraCommand cameraCommand;
-    @XmlElement(name = "DialResult")
+    /** @since 1.1.0 */
+    @JacksonXmlProperty(localName="Peripherals")
+    private PeripheralsCommand peripheralsCommand;
+    @JacksonXmlProperty(localName="DialResult")
     private DialResult dialResult;
-    @XmlElement(name = "CallDisconnectResult")
+    /** @since 1.1.0 */
+    @JacksonXmlProperty(localName="PeripheralsListResult")
+    private PeripheralsListResult peripheralsListResult;
+    @JacksonXmlProperty(localName="CallDisconnectResult")
     private CallDisconnectResult disconnectResult;
-    @XmlElement(name = "UserInterface")
+    @JacksonXmlProperty(localName="UserInterface")
     private UserInterfaceCommand userInterface;
-    @XmlElement(name = "Standby")
+    @JacksonXmlProperty(localName="Standby")
     private StandbyCommand standbyCommand;
-    @XmlElement(name = "SystemUnit")
+    @JacksonXmlProperty(localName="SystemUnit")
     private SystemUnitCommand systemUnitCommand;
 
     /**
@@ -117,6 +123,46 @@ public class Command {
      */
     public void setCameraCommand(CameraCommand cameraCommand) {
         this.cameraCommand = cameraCommand;
+    }
+
+    /**
+     * Retrieves {@code {@link #peripheralsCommand}}
+     *
+     * @return value of {@link #peripheralsCommand}
+     * @since 1.1.0
+     */
+    public PeripheralsCommand getPeripheralsCommand() {
+        return peripheralsCommand;
+    }
+
+    /**
+     * Sets {@code peripheralsCommand}
+     *
+     * @param peripheralsCommand the {@code com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.PeripheralsCommand} field
+     * @since 1.1.0
+     */
+    public void setPeripheralsCommand(PeripheralsCommand peripheralsCommand) {
+        this.peripheralsCommand = peripheralsCommand;
+    }
+
+    /**
+     * Retrieves {@code {@link #peripheralsListResult}}
+     *
+     * @return value of {@link #peripheralsListResult}
+     * @since 1.1.0
+     */
+    public PeripheralsListResult getPeripheralsListResult() {
+        return peripheralsListResult;
+    }
+
+    /**
+     * Sets {@code peripheralsListResult}
+     *
+     * @param peripheralsListResult the {@code com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.response.PeripheralsListResult} field
+     * @since 1.1.0
+     */
+    public void setPeripheralsListResult(PeripheralsListResult peripheralsListResult) {
+        this.peripheralsListResult = peripheralsListResult;
     }
 
     /**

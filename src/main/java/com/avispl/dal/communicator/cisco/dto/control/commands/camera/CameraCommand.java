@@ -3,11 +3,9 @@
  */
 package com.avispl.dal.communicator.cisco.dto.control.commands.camera;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /***
  * Camera command a root template for the camera commands
@@ -16,10 +14,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlRootElement(name = "Camera")
-@XmlAccessorType(XmlAccessType.NONE)
+@JacksonXmlRootElement(localName = "Camera")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CameraCommand {
-    @XmlElement(name = "PositionSet")
+    @JacksonXmlProperty(localName="PositionSet")
     private CameraPositionSetCommand positionSetCommand;
 
     /**

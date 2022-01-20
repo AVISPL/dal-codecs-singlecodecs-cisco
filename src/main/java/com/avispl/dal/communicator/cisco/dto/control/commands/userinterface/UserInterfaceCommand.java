@@ -4,13 +4,9 @@
 package com.avispl.dal.communicator.cisco.dto.control.commands.userinterface;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /***
  * User interface command is a template for any command that can be performed for user interface
  *
@@ -18,7 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserInterfaceCommand {
     /***
      * Message is one of the entities that user interface actions can be performed towards
@@ -27,7 +23,7 @@ public class UserInterfaceCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    @XmlAccessorType(XmlAccessType.NONE)
+
     public static class Message {
         /***
          * Text line is one of the message actions that can be performed
@@ -36,7 +32,7 @@ public class UserInterfaceCommand {
          * Created on Apr 26, 2021
          * @since 1.0
          */
-        @XmlAccessorType(XmlAccessType.NONE)
+
         public static class TextLine {
             /***
              * Display is the specific action that can be performed towards the Message
@@ -45,13 +41,13 @@ public class UserInterfaceCommand {
              * Created on Apr 26, 2021
              * @since 1.0
              */
-            @XmlAccessorType(XmlAccessType.NONE)
+
             public static class Display {
-                @XmlAttribute
+                @JacksonXmlProperty(isAttribute = true)
                 private final String command = "True";
-                @XmlElement(name = "Text")
+                @JacksonXmlProperty(localName="Text")
                 private ValueSpaceRefHolder text;
-                @XmlElement(name = "Duration")
+                @JacksonXmlProperty(localName="Duration")
                 private ValueSpaceRefHolder duration;
 
                 /**
@@ -114,7 +110,7 @@ public class UserInterfaceCommand {
                     return command;
                 }
             }
-            @XmlElement(name = "Display")
+            @JacksonXmlProperty(localName="Display")
             private Display display;
 
             /**
@@ -135,7 +131,7 @@ public class UserInterfaceCommand {
                 this.display = display;
             }
         }
-        @XmlElement(name = "TextLine")
+        @JacksonXmlProperty(localName="TextLine")
         private TextLine textLine;
 
         /**
@@ -172,7 +168,7 @@ public class UserInterfaceCommand {
         }
     }
 
-    @XmlElement(name = "Message")
+    @JacksonXmlProperty(localName="Message")
     private Message message;
 
     /**

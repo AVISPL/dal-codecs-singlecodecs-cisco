@@ -642,6 +642,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 VideoChannelStats videoChannelStats = new VideoChannelStats();
                 ContentChannelStats contentChannelStats = new ContentChannelStats();
                 CallStats callStats = new CallStats();
+                callStats.setCallId(call.getItem());
+                callStats.setRemoteAddress(activeCall.getRemoteNumber());
                 Arrays.stream(ciscoStatus.getCalls()).filter(fcall -> fcall.getStatus().equals("Connected")).findFirst().ifPresent(callInfo -> {
                     for (Channel channel : call.getChannels()) {
                         switch (channel.getType()) {

@@ -34,7 +34,7 @@ public class CiscoCommunicatorTest {
     public void setUp() throws Exception {
 //        wireMockRule.start();
         ciscoCommunicator = new CiscoCommunicator();
-        ciscoCommunicator.setHost("172.31.254.114");
+        ciscoCommunicator.setHost("172.31.254.144");
         ciscoCommunicator.setPort(443);
         ciscoCommunicator.setProtocol("https");
         ciscoCommunicator.setPassword("1234");

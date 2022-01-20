@@ -22,7 +22,10 @@ import com.avispl.dal.communicator.cisco.dto.configuration.systemunit.SystemUnit
 import com.avispl.dal.communicator.cisco.dto.configuration.time.TimeConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.userinterface.UserInterfaceConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.video.VideoConfiguration;
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * Device Configuration class. This is a root class for all the device configuration.
@@ -32,52 +35,54 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlRootElement(name = "Configuration")
-@XmlAccessorType(XmlAccessType.NONE)
+@JacksonXmlRootElement(localName = "Configuration")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CiscoConfiguration {
-    @XmlAttribute(name = "product")
+    @JacksonXmlProperty(isAttribute = true, localName = "product")
     private String product;
-    @XmlAttribute(name = "version")
+    @JacksonXmlProperty(isAttribute = true, localName="version")
     private String version;
-    @XmlAttribute(name = "apiVersion")
+    @JacksonXmlProperty(isAttribute = true, localName="apiVersion")
     private String apiVersion;
-    @XmlElement(name = "Audio")
+    @JacksonXmlProperty(localName="Audio")
     private AudioConfiguration audio;
-    @XmlElement(name = "Conference")
+    @JacksonXmlProperty(localName="Conference")
     private ConferenceConfiguration conference;
-    @XmlElement(name = "Cameras")
+    @JacksonXmlProperty(localName="Cameras")
     private CamerasConfiguration cameras;
-    @XmlElement(name = "H323")
+    @JacksonXmlProperty(localName="H323")
     private H323Configuration h323;
-    @XmlElement(name = "Network")
+    @JacksonXmlProperty(localName="Network")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private NetworkConfiguration[] network;
-    @XmlElement(name = "NetworkServices")
+    @JacksonXmlProperty(localName="NetworkServices")
     private NetworkServicesConfiguration networkServices;
-    @XmlElement(name = "Peripherals")
+    @JacksonXmlProperty(localName="Peripherals")
     private PeripheralsConfiguration peripherals;
-    @XmlElement(name = "Phonebook")
+    @JacksonXmlProperty(localName="Phonebook")
     private PhonebookConfiguration phonebook;
-    @XmlElement(name = "Provisioning")
+    @JacksonXmlProperty(localName="Provisioning")
     private ProvisioningConfiguration provisioning;
-    @XmlElement(name = "Proximity")
+    @JacksonXmlProperty(localName="Proximity")
     private ProximityConfiguration proximity;
-    @XmlElement(name = "RoomAnalytics")
+    @JacksonXmlProperty(localName="RoomAnalytics")
     private RoomAnalyticsConfiguration roomAnalytics;
-    @XmlElement(name = "SIP")
+    @JacksonXmlProperty(localName="SIP")
     private SIPConfiguration sip;
-    @XmlElement(name = "SerialPort")
+    @JacksonXmlProperty(localName="SerialPort")
     private SerialPortConfiguration serialPort;
-    @XmlElement(name = "Standby")
+    @JacksonXmlProperty(localName="Standby")
     private StandbyConfiguration standby;
-    @XmlElement(name = "SystemUnit")
+    @JacksonXmlProperty(localName="SystemUnit")
     private SystemUnitConfiguration systemUnit;
-    @XmlElement(name = "Time")
+    @JacksonXmlProperty(localName="Time")
     private TimeConfiguration time;
-    @XmlElement(name = "UserInterface")
+    @JacksonXmlProperty(localName="UserInterface")
     private UserInterfaceConfiguration userInterface;
-    @XmlElement(name = "Video")
+    @JacksonXmlProperty(localName="Video")
     private VideoConfiguration video;
-    @XmlElement(name = "NetworkPort")
+    @JacksonXmlProperty(localName="NetworkPort")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private NetworkPortConfiguration[] networkPorts;
 
     /**

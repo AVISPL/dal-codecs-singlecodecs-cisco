@@ -4,10 +4,7 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.conference;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Conference Configuration Do Not Disturb class.
@@ -17,9 +14,9 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class ConferenceConfigurationDoNotDisturb {
-    @XmlElement(name = "DefaultTimeout")
+    @JacksonXmlProperty(localName="DefaultTimeout")
     private ValueSpaceRefHolder defaultTimeout;
 
     /**

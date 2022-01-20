@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.media;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device Audio status class
  * Represents Audio node from /status.xml information payload
@@ -15,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Audio {
-    @XmlElement(name = "Channels")
+    @JacksonXmlProperty(localName="Channels")
     private String channels;
-    @XmlElement(name = "Mute")
+    @JacksonXmlProperty(localName="Mute")
     private String mute;
-    @XmlElement(name = "Protocol")
+    @JacksonXmlProperty(localName="Protocol")
     private String protocol;
 
     /**

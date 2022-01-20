@@ -11,31 +11,28 @@ package com.avispl.dal.communicator.cisco.dto.status.audio;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-@XmlAccessorType(XmlAccessType.NONE)
 public class AudioStatus {
-    @XmlElement(name = "Devices")
+    @JacksonXmlProperty(localName="Devices")
     private AudioDevices devices;
-    @XmlElement(name = "Input")
+    @JacksonXmlProperty(localName="Input")
     private AudioInput input;
-    @XmlElement(name = "Microphones")
+    @JacksonXmlProperty(localName="Microphones")
     private Microphones microphones;
-    @XmlElement(name = "Output")
+    @JacksonXmlProperty(localName="Output")
     private AudioOutput output;
-    @XmlElement(name = "Volume")
+    @JacksonXmlProperty(localName="Volume")
     private String volume;
-    @XmlElement(name = "SelectedDevice")
+    @JacksonXmlProperty(localName="SelectedDevice")
     private String selectedDevice;
-    @XmlElement(name = "VolumeHeadsetUsb")
+    @JacksonXmlProperty(localName="VolumeHeadsetUsb")
     private String volumeHeadsetUsb;
-    @XmlElement(name = "VolumeHeadsetBluetooth")
+    @JacksonXmlProperty(localName="VolumeHeadsetBluetooth")
     private String volumeHeadsetBluetooth;
-    @XmlElement(name = "VolumeHandsetUsb")
+    @JacksonXmlProperty(localName="VolumeHandsetUsb")
     private String volumeHandsetUsb;
-    @XmlElement(name = "VolumeMute")
+    @JacksonXmlProperty(localName="VolumeMute")
     private String volumeMute;
 
     /**

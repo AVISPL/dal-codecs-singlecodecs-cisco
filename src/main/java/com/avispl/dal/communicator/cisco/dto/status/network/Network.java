@@ -4,12 +4,7 @@
 package com.avispl.dal.communicator.cisco.dto.status.network;
 
 import com.avispl.dal.communicator.cisco.dto.status.network.dns.DNS;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device network status class
@@ -19,19 +14,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Network {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "CDP")
+    @JacksonXmlProperty(localName="CDP")
     private CDP cdp;
-    @XmlElement(name = "DNS")
+    @JacksonXmlProperty(localName="DNS")
     private DNS dns;
-    @XmlElement(name = "Ethernet")
+    @JacksonXmlProperty(localName="Ethernet")
     private Ethernet ethernet;
-    @XmlElement(name = "IPv4")
+    @JacksonXmlProperty(localName="IPv4")
     private IPv4 iPv4;
-    @XmlElement(name = "IPv6")
+    @JacksonXmlProperty(localName="IPv6")
     private IPv6 iPv6;
 
     /**

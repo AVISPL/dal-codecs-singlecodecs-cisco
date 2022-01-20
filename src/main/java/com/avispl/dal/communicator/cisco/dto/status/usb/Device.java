@@ -3,11 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.usb;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device usb device status class
  * Represents usb device node from /status.xml information payload
@@ -16,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Device {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "State")
+    @JacksonXmlProperty(localName="State")
     private String state;
-    @XmlElement(name = "Type")
+    @JacksonXmlProperty(localName="Type")
     private String type;
 
     /**

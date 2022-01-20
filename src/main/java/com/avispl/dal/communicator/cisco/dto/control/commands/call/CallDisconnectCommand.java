@@ -5,11 +5,7 @@ package com.avispl.dal.communicator.cisco.dto.control.commands.call;
 
 
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /***
  * Call disconnect command template
@@ -18,10 +14,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class CallDisconnectCommand {
     private static class Disconnect {
-        @XmlAttribute
+        @JacksonXmlProperty(isAttribute = true)
         private final String command = "True";
 
         /**
@@ -34,7 +30,7 @@ public class CallDisconnectCommand {
         }
     }
 
-    @XmlElement(name = "Disconnect")
+    @JacksonXmlProperty(localName="Disconnect")
     private final Disconnect disconnectCommand;
 
     /**

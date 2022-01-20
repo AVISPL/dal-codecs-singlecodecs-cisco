@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.security;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device persistency status class
  * Represents persistency node from /status.xml information payload
@@ -14,15 +13,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Persistency {
-    @XmlElement(name = "CallHistory")
+    @JacksonXmlProperty(localName="CallHistory")
     private String callHistory;
-    @XmlElement(name = "Configurations")
+    @JacksonXmlProperty(localName="Configurations")
     private String configurations;
-    @XmlElement(name = "DHCP")
+    @JacksonXmlProperty(localName="DHCP")
     private String dhcp;
-    @XmlElement(name = "LocalPhonebook")
+    @JacksonXmlProperty(localName="LocalPhonebook")
     private String localPhonebook;
 
     /**

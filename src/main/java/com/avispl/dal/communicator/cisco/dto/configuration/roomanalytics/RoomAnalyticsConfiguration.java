@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.roomanalytics;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Room Analytics Configuration class.
@@ -17,9 +15,9 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class RoomAnalyticsConfiguration {
-    @XmlElement(name = "PeoplePresenceDetector")
+    @JacksonXmlProperty(localName="PeoplePresenceDetector")
     private ValueSpaceRefHolder peoplePresenceDetector;
 
     /**

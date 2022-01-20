@@ -81,6 +81,7 @@ public class CiscoStatus {
     private VideoStatus video;
     @JacksonXmlProperty(localName="MediaChannels")
     private MediaChannels mediaChannels;
+    /** @since 1.1.0 */
     @JacksonXmlProperty(localName="Peripherals")
     private Peripherals periherals;
 
@@ -466,6 +467,7 @@ public class CiscoStatus {
      * Retrieves {@code {@link #periherals}}
      *
      * @return value of {@link #periherals}
+     * @since 1.1.0
      */
     public Peripherals getPeriherals() {
         return periherals;
@@ -475,6 +477,7 @@ public class CiscoStatus {
      * Sets {@code periherals}
      *
      * @param periherals the {@code com.avispl.dal.communicator.cisco.dto.status.peripherals.Peripherals} field
+     * @since 1.1.0
      */
     public void setPeriherals(Peripherals periherals) {
         this.periherals = periherals;

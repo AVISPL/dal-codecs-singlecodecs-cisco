@@ -1,3 +1,6 @@
+/*
+ * Copyright (c) 2022 AVI-SPL Inc. All Rights Reserved.
+ */
 package com.avispl.dal.communicator.cisco.dto.configuration.peripherals;
 
 import com.fasterxml.jackson.annotation.JsonInclude;

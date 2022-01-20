@@ -3,6 +3,13 @@
  */
 package com.avispl.dal.communicator.cisco;
 
+/**
+ * Properties and property group names variables
+ *
+ * @author Maksym.Rossiitsev / Symphony Dev Team<br>
+ * Created on Dec 17, 2021
+ * @since 1.0
+ */
 final class CiscoCommunicatorProperties {
      static final String N_MICROPHONE_STATUS = "Audio#Microphone%sStatus";
      static final String N_MICROPHONE_EC_REFERENCE_DELAY = "Audio#Microphone%sEcReferenceDelay";
@@ -111,9 +118,13 @@ final class CiscoCommunicatorProperties {
      static final String NETWORK_SERVICES_UPNP_MODE = "NetworkServices#UPnPMode";
      static final String NETWORK_SERVICES_NTP_MODE = "NetworkServices#NTPMode";
      static final String NETWORK_SERVICES_WELCOME_TEXT = "NetworkServices#WelcomeText";
+     /** @since 1.1.0 */
      static final String PERIPHERALS_CAMERA_PROFILE_CONTROL = "PeripheralsConfiguration#CamerasProfile";
+     /** @since 1.1.0 */
      static final String PERIPHERALS_CONTROL_SYSTEM_PROFILE_CONTROL = "PeripheralsConfiguration#ControlSystemsProfile";
+     /** @since 1.1.0 */
      static final String PERIPHERALS_TOUCH_PANEL_PROFILE_CONTROL = "PeripheralsConfiguration#TouchPanelsProfile";
+     /** @since 1.1.0 */
      static final String PERIPHERALS_TOUCH_PANEL_REMOTE_PAIRING = "PeripheralsConfiguration#TouchPanelsRemotePairing";
      static final String USER_INTERFACE_LANGUAGE = "UserInterface#Language";
      static final String USER_INTERFACE_KEY_TONES = "UserInterface#KeyTones";
@@ -143,18 +154,32 @@ final class CiscoCommunicatorProperties {
      static final String AUDIO_MICROPHONES_MUTE = "Audio#MicrophonesMute";
      static final String AUDIO_MICROPHONE_MODE = "Audio#MicrophoneMode";
 
+     /** @since 1.1.0 */
      static final String PERIPHERALS_DISCONNECTED_TEMPLATE = "PeripheralsDisconnected%ss";
+     /** @since 1.1.0 */
      static final String PERIPHERALS_CONNECTED_TEMPLATE = "PeripheralsConnected%ss";
+     /** @since 1.1.0 */
      static final String PROPERTY_UPGRADE_STATUS = "#UpgradeStatus";
+     /** @since 1.1.0 */
      static final String PROPERTY_HARDWARE_INFO = "#HardwareInfo";
+     /** @since 1.1.0 */
      static final String PROPERTY_CONNECTION_METHOD = "#ConnectionMethod";
+     /** @since 1.1.0 */
      static final String PROPERTY_NETWORK_ADDRESS = "#NetworkAddress";
+     /** @since 1.1.0 */
      static final String PROPERTY_LAST_SEEN = "#LastSeen";
+     /** @since 1.1.0 */
      static final String PROPERTY_ID = "#ID";
+     /** @since 1.1.0 */
      static final String PROPERTY_NAME = "#Name";
+     /** @since 1.1.0 */
      static final String PROPERTY_SERIAL_NUMBER = "#SerialNumber";
+     /** @since 1.1.0 */
      static final String PROPERTY_SOFTWARE_INFO = "#SoftwareInfo";
+     /** @since 1.1.0 */
      static final String PROPERTY_TYPE = "#Type";
+     /** @since 1.1.0 */
      static final String PROPERTY_TOTAL_DEVICES_COUNT = "#TotalDevicesCount";
+     /** @since 1.1.0 */
      static final String PROPERTY_STATUS = "#Status";
 }

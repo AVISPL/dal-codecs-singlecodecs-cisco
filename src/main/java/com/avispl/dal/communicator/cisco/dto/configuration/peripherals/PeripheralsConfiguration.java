@@ -19,6 +19,7 @@ public class PeripheralsConfiguration {
     @JacksonXmlProperty(localName="Profile")
     private PeripheralsConfigurationProfile profile;
 
+    /** @since 1.1.0 */
     @JacksonXmlProperty(localName="Pairing")
     private PeripheralsPairing pairing;
     /**
@@ -43,6 +44,7 @@ public class PeripheralsConfiguration {
      * Retrieves {@code {@link #pairing}}
      *
      * @return value of {@link #pairing}
+     * @since 1.1.0
      */
     public PeripheralsPairing getPairing() {
         return pairing;
@@ -52,6 +54,7 @@ public class PeripheralsConfiguration {
      * Sets {@code pairing}
      *
      * @param pairing the {@code com.avispl.dal.communicator.cisco.dto.configuration.peripherals.PeripheralsPairing} field
+     * @since 1.1.0
      */
     public void setPairing(PeripheralsPairing pairing) {
         this.pairing = pairing;

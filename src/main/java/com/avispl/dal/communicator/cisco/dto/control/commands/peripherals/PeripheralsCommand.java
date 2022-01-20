@@ -1,10 +1,13 @@
+/*
+ * Copyright (c) 2022 AVI-SPL Inc. All Rights Reserved.
+ */
 package com.avispl.dal.communicator.cisco.dto.control.commands.peripherals;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
- * Audio Command class.
+ * Peripherals Command class.
  * A base abstract class for mute and volume change commands
  *
  * @author Maksym.Rossiitsev / Symphony Dev Team<br>

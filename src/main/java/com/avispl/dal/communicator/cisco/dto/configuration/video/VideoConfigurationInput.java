@@ -3,6 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.video;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
@@ -15,8 +16,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  */
 
 public class VideoConfigurationInput {
-    @JacksonXmlProperty(localName="Connector")
-
+    @JacksonXmlProperty(localName = "Connector")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private VideoConfigurationConnector[] connectors;
 
     /**

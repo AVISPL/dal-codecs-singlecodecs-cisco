@@ -93,7 +93,7 @@ public class ValueSpace {
     }
 
     @JacksonXmlProperty(isAttribute = true, localName="type")
-    private String type;;
+    private String type;
 
     @JacksonXmlProperty(localName="Value")
     @JacksonXmlElementWrapper(useWrapping = false)

@@ -7,7 +7,12 @@ import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
- * Device Network Services Configuration CDP class.
+ * Device Network Services Configuration CDP(Cisco Discovery Protocol) class.
+ * It is a Layer 2, media-independent, and network-independent protocol that runs on
+ * Cisco devices and enables networking applications to learn about directly connected devices nearby.
+ * This protocol facilitates the management of Cisco devices by discovering these devices,
+ * determining how they are configured, and allowing systems using different network-layer protocols to learn about each other.
+ *
  * Serves both for collecting data and changing device's config.
  *
  * @author Maksym.Rossiitsev / Symphony Dev Team<br>

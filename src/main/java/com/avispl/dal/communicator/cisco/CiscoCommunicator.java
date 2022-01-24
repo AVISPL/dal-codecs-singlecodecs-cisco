@@ -1611,7 +1611,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             Peripherals peripheralsStatus = status.getPeriherals();
             List<ConnectedDevice> connectedDevices = new ArrayList<>();
             if (peripheralsStatus != null) {
-                connectedDevices.addAll(Arrays.asList(peripheralsStatus.getConnectedDevice()));
+                ConnectedDevice[] devices = peripheralsStatus.getConnectedDevice();
+                if (devices != null) {
+                    connectedDevices.addAll(Arrays.asList(devices));
+                }
             }
 
             if (peripheralsListCommandResponse != null) {

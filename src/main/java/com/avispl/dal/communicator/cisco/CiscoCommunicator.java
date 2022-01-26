@@ -858,7 +858,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     valuespace = retrieveValuespace();
                 } catch (ResourceNotReachableException e) {
                     // We don't want to produce an API error if one of the xml files is not available
-                    logger.warn("/valuespace.xml is not available on device " + getHost());
+                    logger.warn("/valuespace.xml is not available on device " + getHost(), e);
                 }
 
                 CiscoConfiguration ciscoConfiguration = null;
@@ -868,14 +868,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     ciscoConfiguration = retrieveConfiguration();
                 } catch (ResourceNotReachableException e) {
                     // We don't want to produce an API error if one of the xml files is not available
-                    logger.warn("/configuration.xml is not available on device " + getHost());
+                    logger.warn("/configuration.xml is not available on device " + getHost(), e);
                 }
 
                 try {
                     ciscoStatus = retrieveStatus();
                 } catch (ResourceNotReachableException e) {
                     // We don't want to produce an API error if one of the xml files is not available
-                    logger.warn("/status.xml is not available on device " + getHost());
+                    logger.warn("/status.xml is not available on device " + getHost(), e);
                 }
 
                 if (StringUtils.isNullOrEmpty(valuespace) && ciscoConfiguration == null && ciscoStatus == null) {

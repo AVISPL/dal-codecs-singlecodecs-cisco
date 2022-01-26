@@ -27,7 +27,7 @@ public class VideoOutputConnector {
     private SourceResolution resolution;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -45,7 +45,7 @@ public class VideoOutputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #connected}}
+     * Retrieves {@link #connected}
      *
      * @return value of {@link #connected}
      */
@@ -63,7 +63,7 @@ public class VideoOutputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -81,7 +81,7 @@ public class VideoOutputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #connectedDevice}}
+     * Retrieves {@link #connectedDevice}
      *
      * @return value of {@link #connectedDevice}
      */
@@ -99,7 +99,7 @@ public class VideoOutputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #resolution}}
+     * Retrieves {@link #resolution}
      *
      * @return value of {@link #resolution}
      */

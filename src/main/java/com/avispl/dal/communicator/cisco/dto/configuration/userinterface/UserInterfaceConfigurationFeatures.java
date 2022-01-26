@@ -30,7 +30,7 @@ public class UserInterfaceConfigurationFeatures {
     private UserInterfaceConfigurationFeaturesWhiteboard whiteboard;
 
     /**
-     * Retrieves {@code {@link #hideAll}}
+     * Retrieves {@link #hideAll}
      *
      * @return value of {@link #hideAll}
      */
@@ -48,7 +48,7 @@ public class UserInterfaceConfigurationFeatures {
     }
 
     /**
-     * Retrieves {@code {@link #call}}
+     * Retrieves {@link #call}
      *
      * @return value of {@link #call}
      */
@@ -66,7 +66,7 @@ public class UserInterfaceConfigurationFeatures {
     }
 
     /**
-     * Retrieves {@code {@link #share}}
+     * Retrieves {@link #share}
      *
      * @return value of {@link #share}
      */
@@ -84,7 +84,7 @@ public class UserInterfaceConfigurationFeatures {
     }
 
     /**
-     * Retrieves {@code {@link #whiteboard}}
+     * Retrieves {@link #whiteboard}
      *
      * @return value of {@link #whiteboard}
      */

@@ -19,7 +19,7 @@ public class Engagement {
     private String closeProximity;
 
     /**
-     * Retrieves {@code {@link #closeProximity}}
+     * Retrieves {@link #closeProximity}
      *
      * @return value of {@link #closeProximity}
      */

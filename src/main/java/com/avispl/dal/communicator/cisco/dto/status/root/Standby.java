@@ -19,7 +19,7 @@ public class Standby {
     private String state;
 
     /**
-     * Retrieves {@code {@link #state}}
+     * Retrieves {@link #state}
      *
      * @return value of {@link #state}
      */

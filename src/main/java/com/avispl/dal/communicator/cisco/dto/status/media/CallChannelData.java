@@ -29,7 +29,7 @@ public class CallChannelData {
     private String codec;
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */
@@ -47,7 +47,7 @@ public class CallChannelData {
     }
 
     /**
-     * Retrieves {@code {@link #rate}}
+     * Retrieves {@link #rate}
      *
      * @return value of {@link #rate}
      */
@@ -65,7 +65,7 @@ public class CallChannelData {
     }
 
     /**
-     * Retrieves {@code {@link #dynamicRate}}
+     * Retrieves {@link #dynamicRate}
      *
      * @return value of {@link #dynamicRate}
      */
@@ -83,7 +83,7 @@ public class CallChannelData {
     }
 
     /**
-     * Retrieves {@code {@link #totalPackets}}
+     * Retrieves {@link #totalPackets}
      *
      * @return value of {@link #totalPackets}
      */
@@ -101,7 +101,7 @@ public class CallChannelData {
     }
 
     /**
-     * Retrieves {@code {@link #packetLoss}}
+     * Retrieves {@link #packetLoss}
      *
      * @return value of {@link #packetLoss}
      */
@@ -119,7 +119,7 @@ public class CallChannelData {
     }
 
     /**
-     * Retrieves {@code {@link #jitter}}
+     * Retrieves {@link #jitter}
      *
      * @return value of {@link #jitter}
      */
@@ -137,7 +137,7 @@ public class CallChannelData {
     }
 
     /**
-     * Retrieves {@code {@link #codec}}
+     * Retrieves {@link #codec}
      *
      * @return value of {@link #codec}
      */

@@ -28,7 +28,7 @@ public class UserInterfaceConfigurationFeaturesCall {
     private ValueSpaceRefHolder start;
 
     /**
-     * Retrieves {@code {@link #end}}
+     * Retrieves {@link #end}
      *
      * @return value of {@link #end}
      */
@@ -46,7 +46,7 @@ public class UserInterfaceConfigurationFeaturesCall {
     }
 
     /**
-     * Retrieves {@code {@link #midCallControls}}
+     * Retrieves {@link #midCallControls}
      *
      * @return value of {@link #midCallControls}
      */
@@ -64,7 +64,7 @@ public class UserInterfaceConfigurationFeaturesCall {
     }
 
     /**
-     * Retrieves {@code {@link #start}}
+     * Retrieves {@link #start}
      *
      * @return value of {@link #start}
      */

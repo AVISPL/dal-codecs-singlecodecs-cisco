@@ -42,7 +42,7 @@ public class VideoConfigurationConnector {
     private VideoConfigurationCEC cec;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -60,7 +60,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #cameraControl}}
+     * Retrieves {@link #cameraControl}
      *
      * @return value of {@link #cameraControl}
      */
@@ -78,7 +78,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #inputSourceType}}
+     * Retrieves {@link #inputSourceType}
      *
      * @return value of {@link #inputSourceType}
      */
@@ -96,7 +96,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */
@@ -114,7 +114,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #presentationSelection}}
+     * Retrieves {@link #presentationSelection}
      *
      * @return value of {@link #presentationSelection}
      */
@@ -132,7 +132,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #quality}}
+     * Retrieves {@link #quality}
      *
      * @return value of {@link #quality}
      */
@@ -150,7 +150,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #visibility}}
+     * Retrieves {@link #visibility}
      *
      * @return value of {@link #visibility}
      */
@@ -168,7 +168,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #monitorRole}}
+     * Retrieves {@link #monitorRole}
      *
      * @return value of {@link #monitorRole}
      */
@@ -186,7 +186,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #overscanLevel}}
+     * Retrieves {@link #overscanLevel}
      *
      * @return value of {@link #overscanLevel}
      */
@@ -204,7 +204,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #resolution}}
+     * Retrieves {@link #resolution}
      *
      * @return value of {@link #resolution}
      */
@@ -222,7 +222,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #cec}}
+     * Retrieves {@link #cec}
      *
      * @return value of {@link #cec}
      */

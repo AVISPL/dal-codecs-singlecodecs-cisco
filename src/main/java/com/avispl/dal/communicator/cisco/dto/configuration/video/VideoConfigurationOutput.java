@@ -21,7 +21,7 @@ public class VideoConfigurationOutput {
     private VideoConfigurationConnector[] connectors;
 
     /**
-     * Retrieves {@code {@link #connectors}}
+     * Retrieves {@link #connectors}
      *
      * @return value of {@link #connectors}
      */

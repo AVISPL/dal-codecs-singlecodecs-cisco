@@ -27,7 +27,7 @@ public class NetworkConfigurationIPv6 {
     private ValueSpaceRefHolder gateway;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -45,7 +45,7 @@ public class NetworkConfigurationIPv6 {
     }
 
     /**
-     * Retrieves {@code {@link #assignment}}
+     * Retrieves {@link #assignment}
      *
      * @return value of {@link #assignment}
      */
@@ -63,7 +63,7 @@ public class NetworkConfigurationIPv6 {
     }
 
     /**
-     * Retrieves {@code {@link #dhcpOptions}}
+     * Retrieves {@link #dhcpOptions}
      *
      * @return value of {@link #dhcpOptions}
      */
@@ -81,7 +81,7 @@ public class NetworkConfigurationIPv6 {
     }
 
     /**
-     * Retrieves {@code {@link #gateway}}
+     * Retrieves {@link #gateway}
      *
      * @return value of {@link #gateway}
      */

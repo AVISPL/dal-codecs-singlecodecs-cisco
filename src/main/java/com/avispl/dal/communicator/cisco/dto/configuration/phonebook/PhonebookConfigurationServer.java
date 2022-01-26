@@ -26,7 +26,7 @@ public class PhonebookConfigurationServer {
     private ValueSpaceRefHolder url;
 
     /**
-     * Retrieves {@code {@link #id}}
+     * Retrieves {@link #id}
      *
      * @return value of {@link #id}
      */
@@ -44,7 +44,7 @@ public class PhonebookConfigurationServer {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -62,7 +62,7 @@ public class PhonebookConfigurationServer {
     }
 
     /**
-     * Retrieves {@code {@link #url}}
+     * Retrieves {@link #url}
      *
      * @return value of {@link #url}
      */

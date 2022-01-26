@@ -24,7 +24,7 @@ public class NetworkConfigurationVoice {
     private ValueSpaceRefHolder vlanId;
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -42,7 +42,7 @@ public class NetworkConfigurationVoice {
     }
 
     /**
-     * Retrieves {@code {@link #vlanId}}
+     * Retrieves {@link #vlanId}
      *
      * @return value of {@link #vlanId}
      */

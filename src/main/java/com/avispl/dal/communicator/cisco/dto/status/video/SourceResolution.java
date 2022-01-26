@@ -23,7 +23,7 @@ public class SourceResolution {
     private String width;
 
     /**
-     * Retrieves {@code {@link #height}}
+     * Retrieves {@link #height}
      *
      * @return value of {@link #height}
      */
@@ -41,7 +41,7 @@ public class SourceResolution {
     }
 
     /**
-     * Retrieves {@code {@link #refreshRate}}
+     * Retrieves {@link #refreshRate}
      *
      * @return value of {@link #refreshRate}
      */
@@ -59,7 +59,7 @@ public class SourceResolution {
     }
 
     /**
-     * Retrieves {@code {@link #width}}
+     * Retrieves {@link #width}
      *
      * @return value of {@link #width}
      */

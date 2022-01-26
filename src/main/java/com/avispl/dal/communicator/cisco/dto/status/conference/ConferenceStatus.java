@@ -27,7 +27,7 @@ public class ConferenceStatus {
     private SpeakerLock speakerLock;
 
     /**
-     * Retrieves {@code {@link #activeSpeaker}}
+     * Retrieves {@link #activeSpeaker}
      *
      * @return value of {@link #activeSpeaker}
      */
@@ -45,7 +45,7 @@ public class ConferenceStatus {
     }
 
     /**
-     * Retrieves {@code {@link #doNotDisturb}}
+     * Retrieves {@link #doNotDisturb}
      *
      * @return value of {@link #doNotDisturb}
      */
@@ -63,7 +63,7 @@ public class ConferenceStatus {
     }
 
     /**
-     * Retrieves {@code {@link #multipoint}}
+     * Retrieves {@link #multipoint}
      *
      * @return value of {@link #multipoint}
      */
@@ -81,7 +81,7 @@ public class ConferenceStatus {
     }
 
     /**
-     * Retrieves {@code {@link #presentation}}
+     * Retrieves {@link #presentation}
      *
      * @return value of {@link #presentation}
      */
@@ -99,7 +99,7 @@ public class ConferenceStatus {
     }
 
     /**
-     * Retrieves {@code {@link #speakerLock}}
+     * Retrieves {@link #speakerLock}
      *
      * @return value of {@link #speakerLock}
      */

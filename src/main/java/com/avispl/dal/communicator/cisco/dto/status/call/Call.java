@@ -71,8 +71,8 @@ public class Call {
 
 
     /**
-     * Retrieves callId value, based on either {@code {@link #attributeLogTag}}
-     * or {@code {@link #item}} values
+     * Retrieves callId value, based on either {@link #attributeLogTag}
+     * or {@link #item} values
      *
      * @return String value of the callId
      * @since 1.1.1
@@ -85,7 +85,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -103,7 +103,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #attributeStatus}}
+     * Retrieves {@link #attributeStatus}
      *
      * @return value of {@link #attributeStatus}
      * @since 1.1.1
@@ -123,7 +123,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #attributeProtocol}}
+     * Retrieves {@link #attributeProtocol}
      *
      * @return value of {@link #attributeProtocol}
      * @since 1.1.1
@@ -143,7 +143,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #attributeDirection}}
+     * Retrieves {@link #attributeDirection}
      *
      * @return value of {@link #attributeDirection}
      * @since 1.1.1
@@ -163,7 +163,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #attributeLogTag}}
+     * Retrieves {@link #attributeLogTag}
      *
      * @return value of {@link #attributeLogTag}
      * @since 1.1.1
@@ -183,7 +183,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #answerState}}
+     * Retrieves {@link #answerState}
      *
      * @return value of {@link #answerState}
      */
@@ -201,7 +201,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #callType}}
+     * Retrieves {@link #callType}
      *
      * @return value of {@link #callType}
      */
@@ -219,7 +219,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #callbackNumber}}
+     * Retrieves {@link #callbackNumber}
      *
      * @return value of {@link #callbackNumber}
      */
@@ -237,7 +237,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #deviceType}}
+     * Retrieves {@link #deviceType}
      *
      * @return value of {@link #deviceType}
      */
@@ -255,8 +255,8 @@ public class Call {
     }
 
     /**
-     * Retrieves call direction based on either {@code {@link #attributeDirection}} or
-     * {@code {@link #direction}}, if former is present and latter is not - former is used
+     * Retrieves call direction based on either {@link #attributeDirection} or
+     * {@link #direction}, if former is present and latter is not - former is used
      *
      * @return value of {@link #direction}
      */
@@ -277,7 +277,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #displayName}}
+     * Retrieves {@link #displayName}
      *
      * @return value of {@link #displayName}
      */
@@ -295,7 +295,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #duration}}
+     * Retrieves {@link #duration}
      *
      * @return value of {@link #duration}
      */
@@ -313,7 +313,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #encryption}}
+     * Retrieves {@link #encryption}
      *
      * @return value of {@link #encryption}
      */
@@ -331,7 +331,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #facilityServiceId}}
+     * Retrieves {@link #facilityServiceId}
      *
      * @return value of {@link #facilityServiceId}
      */
@@ -349,7 +349,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #holdReason}}
+     * Retrieves {@link #holdReason}
      *
      * @return value of {@link #holdReason}
      */
@@ -367,7 +367,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #placedOnHold}}
+     * Retrieves {@link #placedOnHold}
      *
      * @return value of {@link #placedOnHold}
      */
@@ -385,8 +385,8 @@ public class Call {
     }
 
     /**
-     * Retrieves protocol value, based on either {@code {@link #attributeProtocol}} or
-     * {@code {@link #protocol}} if former is present and latter is not - former is used
+     * Retrieves protocol value, based on either {@link #attributeProtocol} or
+     * {@link #protocol} if former is present and latter is not - former is used
      *
      * @return value of {@link #protocol}
      */
@@ -407,7 +407,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #receiveCallRate}}
+     * Retrieves {@link #receiveCallRate}
      *
      * @return value of {@link #receiveCallRate}
      */
@@ -425,7 +425,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #remoteNumber}}
+     * Retrieves {@link #remoteNumber}
      *
      * @return value of {@link #remoteNumber}
      */
@@ -443,8 +443,8 @@ public class Call {
     }
 
     /**
-     * Retrieves call status value, based on either {@code {@link #attributeStatus}} or
-     * {@code {@link #status}} if former is present and latter is not - former is used
+     * Retrieves call status value, based on either {@link #attributeStatus} or
+     * {@link #status} if former is present and latter is not - former is used
      *
      * @return value of {@link #status}
      */
@@ -465,7 +465,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #transmitCallRate}}
+     * Retrieves {@link #transmitCallRate}
      *
      * @return value of {@link #transmitCallRate}
      */
@@ -483,7 +483,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #channels}}
+     * Retrieves {@link #channels}
      *
      * @return value of {@link #channels}
      * @since 1.1.1

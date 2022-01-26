@@ -20,7 +20,7 @@ public class CamerasConfigurationPreset {
     private ValueSpaceRefHolder triggerAutofocus;
 
     /**
-     * Retrieves {@code {@link #triggerAutofocus}}
+     * Retrieves {@link #triggerAutofocus}
      *
      * @return value of {@link #triggerAutofocus}
      */

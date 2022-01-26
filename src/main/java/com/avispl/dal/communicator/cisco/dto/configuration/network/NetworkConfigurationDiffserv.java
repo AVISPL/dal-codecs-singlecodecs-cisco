@@ -35,7 +35,7 @@ public class NetworkConfigurationDiffserv {
     private ValueSpaceRefHolder video;
 
     /**
-     * Retrieves {@code {@link #audio}}
+     * Retrieves {@link #audio}
      *
      * @return value of {@link #audio}
      */
@@ -53,7 +53,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #data}}
+     * Retrieves {@link #data}
      *
      * @return value of {@link #data}
      */
@@ -71,7 +71,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #icmpv6}}
+     * Retrieves {@link #icmpv6}
      *
      * @return value of {@link #icmpv6}
      */
@@ -89,7 +89,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #ntp}}
+     * Retrieves {@link #ntp}
      *
      * @return value of {@link #ntp}
      */
@@ -107,7 +107,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #signalling}}
+     * Retrieves {@link #signalling}
      *
      * @return value of {@link #signalling}
      */
@@ -125,7 +125,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #video}}
+     * Retrieves {@link #video}
      *
      * @return value of {@link #video}
      */

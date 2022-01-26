@@ -25,7 +25,7 @@ public class ProximityConfigurationServices {
     private ProximityConfigurationContentShare contentShare;
 
     /**
-     * Retrieves {@code {@link #callControl}}
+     * Retrieves {@link #callControl}
      *
      * @return value of {@link #callControl}
      */
@@ -43,7 +43,7 @@ public class ProximityConfigurationServices {
     }
 
     /**
-     * Retrieves {@code {@link #contentShare}}
+     * Retrieves {@link #contentShare}
      *
      * @return value of {@link #contentShare}
      */

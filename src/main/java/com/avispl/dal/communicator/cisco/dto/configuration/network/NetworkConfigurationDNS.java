@@ -21,7 +21,7 @@ public class NetworkConfigurationDNS {
     private NetworkConfigurationServer[] servers;
 
     /**
-     * Retrieves {@code {@link #servers}}
+     * Retrieves {@link #servers}
      *
      * @return value of {@link #servers}
      */

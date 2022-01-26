@@ -25,7 +25,7 @@ public class Persistency {
     private String localPhonebook;
 
     /**
-     * Retrieves {@code {@link #callHistory}}
+     * Retrieves {@link #callHistory}
      *
      * @return value of {@link #callHistory}
      */
@@ -43,7 +43,7 @@ public class Persistency {
     }
 
     /**
-     * Retrieves {@code {@link #configurations}}
+     * Retrieves {@link #configurations}
      *
      * @return value of {@link #configurations}
      */
@@ -61,7 +61,7 @@ public class Persistency {
     }
 
     /**
-     * Retrieves {@code {@link #dhcp}}
+     * Retrieves {@link #dhcp}
      *
      * @return value of {@link #dhcp}
      */
@@ -79,7 +79,7 @@ public class Persistency {
     }
 
     /**
-     * Retrieves {@code {@link #localPhonebook}}
+     * Retrieves {@link #localPhonebook}
      *
      * @return value of {@link #localPhonebook}
      */

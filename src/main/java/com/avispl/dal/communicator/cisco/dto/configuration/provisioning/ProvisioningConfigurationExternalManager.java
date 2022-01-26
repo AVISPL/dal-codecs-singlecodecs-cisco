@@ -30,7 +30,7 @@ public class ProvisioningConfigurationExternalManager {
     private ValueSpaceRefHolder protocol;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -48,7 +48,7 @@ public class ProvisioningConfigurationExternalManager {
     }
 
     /**
-     * Retrieves {@code {@link #alternateAddress}}
+     * Retrieves {@link #alternateAddress}
      *
      * @return value of {@link #alternateAddress}
      */
@@ -66,7 +66,7 @@ public class ProvisioningConfigurationExternalManager {
     }
 
     /**
-     * Retrieves {@code {@link #domain}}
+     * Retrieves {@link #domain}
      *
      * @return value of {@link #domain}
      */
@@ -84,7 +84,7 @@ public class ProvisioningConfigurationExternalManager {
     }
 
     /**
-     * Retrieves {@code {@link #path}}
+     * Retrieves {@link #path}
      *
      * @return value of {@link #path}
      */
@@ -102,7 +102,7 @@ public class ProvisioningConfigurationExternalManager {
     }
 
     /**
-     * Retrieves {@code {@link #protocol}}
+     * Retrieves {@link #protocol}
      *
      * @return value of {@link #protocol}
      */

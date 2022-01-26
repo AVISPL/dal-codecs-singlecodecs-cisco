@@ -28,7 +28,7 @@ public class NetworkServicesConfigurationHTTPS {
     private ValueSpaceRefHolder verifyServerCertificate;
 
     /**
-     * Retrieves {@code {@link #server}}
+     * Retrieves {@link #server}
      *
      * @return value of {@link #server}
      */
@@ -46,7 +46,7 @@ public class NetworkServicesConfigurationHTTPS {
     }
 
     /**
-     * Retrieves {@code {@link #strictTransportSecurity}}
+     * Retrieves {@link #strictTransportSecurity}
      *
      * @return value of {@link #strictTransportSecurity}
      */
@@ -64,7 +64,7 @@ public class NetworkServicesConfigurationHTTPS {
     }
 
     /**
-     * Retrieves {@code {@link #verifyClientCertificate}}
+     * Retrieves {@link #verifyClientCertificate}
      *
      * @return value of {@link #verifyClientCertificate}
      */
@@ -82,7 +82,7 @@ public class NetworkServicesConfigurationHTTPS {
     }
 
     /**
-     * Retrieves {@code {@link #verifyServerCertificate}}
+     * Retrieves {@link #verifyServerCertificate}
      *
      * @return value of {@link #verifyServerCertificate}
      */

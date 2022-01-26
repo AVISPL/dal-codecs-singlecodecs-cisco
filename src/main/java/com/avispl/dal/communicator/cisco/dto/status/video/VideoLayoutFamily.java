@@ -19,7 +19,7 @@ public class VideoLayoutFamily {
     private String local;
 
     /**
-     * Retrieves {@code {@link #local}}
+     * Retrieves {@link #local}
      *
      * @return value of {@link #local}
      */

@@ -23,7 +23,7 @@ public class VideoConfigurationCEC {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

@@ -21,7 +21,7 @@ public class NTPServer {
     private String address;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -39,7 +39,7 @@ public class NTPServer {
     }
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */

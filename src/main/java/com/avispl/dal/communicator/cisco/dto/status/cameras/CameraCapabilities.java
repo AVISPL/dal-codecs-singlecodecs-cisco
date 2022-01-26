@@ -19,7 +19,7 @@ public class CameraCapabilities {
     private String options;
 
     /**
-     * Retrieves {@code {@link #options}}
+     * Retrieves {@link #options}
      *
      * @return value of {@link #options}
      */

@@ -29,7 +29,7 @@ public class VideoConfigurationSelfviewDefault {
     private ValueSpaceRefHolder pipPosition;
 
     /**
-     * Retrieves {@code {@link #fullscreenMode}}
+     * Retrieves {@link #fullscreenMode}
      *
      * @return value of {@link #fullscreenMode}
      */
@@ -47,7 +47,7 @@ public class VideoConfigurationSelfviewDefault {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -65,7 +65,7 @@ public class VideoConfigurationSelfviewDefault {
     }
 
     /**
-     * Retrieves {@code {@link #onMonitorRole}}
+     * Retrieves {@link #onMonitorRole}
      *
      * @return value of {@link #onMonitorRole}
      */
@@ -83,7 +83,7 @@ public class VideoConfigurationSelfviewDefault {
     }
 
     /**
-     * Retrieves {@code {@link #pipPosition}}
+     * Retrieves {@link #pipPosition}
      *
      * @return value of {@link #pipPosition}
      */

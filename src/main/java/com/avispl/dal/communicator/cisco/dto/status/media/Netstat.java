@@ -35,7 +35,7 @@ public class Netstat {
     private String packets;
 
     /**
-     * Retrieves {@code {@link #bytes}}
+     * Retrieves {@link #bytes}
      *
      * @return value of {@link #bytes}
      */
@@ -53,7 +53,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #channelRate}}
+     * Retrieves {@link #channelRate}
      *
      * @return value of {@link #channelRate}
      */
@@ -71,7 +71,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #drop}}
+     * Retrieves {@link #drop}
      *
      * @return value of {@link #drop}
      */
@@ -89,7 +89,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #jitter}}
+     * Retrieves {@link #jitter}
      *
      * @return value of {@link #jitter}
      */
@@ -107,7 +107,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #lastIntervalLost}}
+     * Retrieves {@link #lastIntervalLost}
      *
      * @return value of {@link #lastIntervalLost}
      */
@@ -125,7 +125,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #lastIntervalReceived}}
+     * Retrieves {@link #lastIntervalReceived}
      *
      * @return value of {@link #lastIntervalReceived}
      */
@@ -143,7 +143,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #loss}}
+     * Retrieves {@link #loss}
      *
      * @return value of {@link #loss}
      */
@@ -161,7 +161,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #maxJitter}}
+     * Retrieves {@link #maxJitter}
      *
      * @return value of {@link #maxJitter}
      */
@@ -179,7 +179,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #packets}}
+     * Retrieves {@link #packets}
      *
      * @return value of {@link #packets}
      */

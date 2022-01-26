@@ -20,7 +20,7 @@ public class CamerasConfigurationBacklight {
     private ValueSpaceRefHolder defaultMode;
 
     /**
-     * Retrieves {@code {@link #defaultMode}}
+     * Retrieves {@link #defaultMode}
      *
      * @return value of {@link #defaultMode}
      */

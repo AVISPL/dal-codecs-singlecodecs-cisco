@@ -23,7 +23,7 @@ public class SoftwareOptionKeys {
     private String remoteMonitoring;
 
     /**
-     * Retrieves {@code {@link #encryption}}
+     * Retrieves {@link #encryption}
      *
      * @return value of {@link #encryption}
      */
@@ -41,7 +41,7 @@ public class SoftwareOptionKeys {
     }
 
     /**
-     * Retrieves {@code {@link #multiSite}}
+     * Retrieves {@link #multiSite}
      *
      * @return value of {@link #multiSite}
      */
@@ -59,7 +59,7 @@ public class SoftwareOptionKeys {
     }
 
     /**
-     * Retrieves {@code {@link #remoteMonitoring}}
+     * Retrieves {@link #remoteMonitoring}
      *
      * @return value of {@link #remoteMonitoring}
      */

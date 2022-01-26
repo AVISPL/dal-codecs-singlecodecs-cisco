@@ -21,7 +21,7 @@ public class H323Mode {
     private String status;
 
     /**
-     * Retrieves {@code {@link #reason}}
+     * Retrieves {@link #reason}
      *
      * @return value of {@link #reason}
      */
@@ -39,7 +39,7 @@ public class H323Mode {
     }
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */

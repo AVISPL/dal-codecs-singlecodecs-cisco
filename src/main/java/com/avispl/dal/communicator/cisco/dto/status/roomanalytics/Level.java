@@ -19,7 +19,7 @@ public class Level {
     private String a;
 
     /**
-     * Retrieves {@code {@link #a}}
+     * Retrieves {@link #a}
      *
      * @return value of {@link #a}
      */

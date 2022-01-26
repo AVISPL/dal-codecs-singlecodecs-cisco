@@ -19,7 +19,7 @@ public class UserInterfaceConfigurationBranding {
     private UserInterfaceConfigurationAwakeBranding awakeBranding;
 
     /**
-     * Retrieves {@code {@link #awakeBranding}}
+     * Retrieves {@link #awakeBranding}
      *
      * @return value of {@link #awakeBranding}
      */

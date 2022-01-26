@@ -41,7 +41,7 @@ public class ConnectedDevice {
     private String upgradeStatus;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -59,7 +59,7 @@ public class ConnectedDevice {
     }
 
     /**
-     * Retrieves {@code {@link #hardwareInfo}}
+     * Retrieves {@link #hardwareInfo}
      *
      * @return value of {@link #hardwareInfo}
      */
@@ -77,7 +77,7 @@ public class ConnectedDevice {
     }
 
     /**
-     * Retrieves {@code {@link #id}}
+     * Retrieves {@link #id}
      *
      * @return value of {@link #id}
      */
@@ -95,7 +95,7 @@ public class ConnectedDevice {
     }
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */
@@ -113,7 +113,7 @@ public class ConnectedDevice {
     }
 
     /**
-     * Retrieves {@code {@link #serialNumber}}
+     * Retrieves {@link #serialNumber}
      *
      * @return value of {@link #serialNumber}
      */
@@ -131,7 +131,7 @@ public class ConnectedDevice {
     }
 
     /**
-     * Retrieves {@code {@link #softwareInfo}}
+     * Retrieves {@link #softwareInfo}
      *
      * @return value of {@link #softwareInfo}
      */
@@ -149,7 +149,7 @@ public class ConnectedDevice {
     }
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */
@@ -167,7 +167,7 @@ public class ConnectedDevice {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -185,7 +185,7 @@ public class ConnectedDevice {
     }
 
     /**
-     * Retrieves {@code {@link #upgradeStatus}}
+     * Retrieves {@link #upgradeStatus}
      *
      * @return value of {@link #upgradeStatus}
      */

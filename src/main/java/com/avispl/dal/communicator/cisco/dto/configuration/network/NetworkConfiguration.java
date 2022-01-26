@@ -39,7 +39,7 @@ public class NetworkConfiguration {
     private ValueSpaceRefHolder networkConfigurationSpeed;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -57,7 +57,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationDNS }}
+     * Retrieves {@link #networkConfigurationDNS }
      *
      * @return value of {@link #networkConfigurationDNS}
      */
@@ -75,7 +75,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationIEEE8021X }}
+     * Retrieves {@link #networkConfigurationIEEE8021X }
      *
      * @return value of {@link #networkConfigurationIEEE8021X}
      */
@@ -93,7 +93,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationIPv4 }}
+     * Retrieves {@link #networkConfigurationIPv4 }
      *
      * @return value of {@link #networkConfigurationIPv4}
      */
@@ -111,7 +111,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationIPv6 }}
+     * Retrieves {@link #networkConfigurationIPv6 }
      *
      * @return value of {@link #networkConfigurationIPv6}
      */
@@ -129,7 +129,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationQoS }}
+     * Retrieves {@link #networkConfigurationQoS }
      *
      * @return value of {@link #networkConfigurationQoS}
      */
@@ -147,7 +147,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationVLAN }}
+     * Retrieves {@link #networkConfigurationVLAN }
      *
      * @return value of {@link #networkConfigurationVLAN}
      */
@@ -165,7 +165,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationIPStack }}
+     * Retrieves {@link #networkConfigurationIPStack }
      *
      * @return value of {@link #networkConfigurationIPStack}
      */
@@ -183,7 +183,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationMTU }}
+     * Retrieves {@link #networkConfigurationMTU }
      *
      * @return value of {@link #networkConfigurationMTU}
      */
@@ -201,7 +201,7 @@ public class NetworkConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkConfigurationSpeed }}
+     * Retrieves {@link #networkConfigurationSpeed }
      *
      * @return value of {@link #networkConfigurationSpeed}
      */

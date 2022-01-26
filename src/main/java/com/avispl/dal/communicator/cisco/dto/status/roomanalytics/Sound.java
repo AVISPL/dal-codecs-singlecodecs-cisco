@@ -19,7 +19,7 @@ public class Sound {
     private Level level;
 
     /**
-     * Retrieves {@code {@link #level}}
+     * Retrieves {@link #level}
      *
      * @return value of {@link #level}
      */

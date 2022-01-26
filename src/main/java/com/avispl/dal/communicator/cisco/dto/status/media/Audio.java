@@ -21,7 +21,7 @@ public class Audio extends CallChannelData {
     private String mute;
 
     /**
-     * Retrieves {@code {@link #channels}}
+     * Retrieves {@link #channels}
      *
      * @return value of {@link #channels}
      */
@@ -39,7 +39,7 @@ public class Audio extends CallChannelData {
     }
 
     /**
-     * Retrieves {@code {@link #mute}}
+     * Retrieves {@link #mute}
      *
      * @return value of {@link #mute}
      */

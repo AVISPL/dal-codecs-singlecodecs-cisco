@@ -24,7 +24,7 @@ public class AudioConfigurationLine {
     private AudioConfigurationVideoAssociation videoAssociation;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -42,7 +42,7 @@ public class AudioConfigurationLine {
     }
 
     /**
-     * Retrieves {@code {@link #delay}}
+     * Retrieves {@link #delay}
      *
      * @return value of {@link #delay}
      */
@@ -60,7 +60,7 @@ public class AudioConfigurationLine {
     }
 
     /**
-     * Retrieves {@code {@link #videoAssociation}}
+     * Retrieves {@link #videoAssociation}
      *
      * @return value of {@link #videoAssociation}
      */

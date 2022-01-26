@@ -23,7 +23,7 @@ public class PeripheralsConfiguration {
     @JacksonXmlProperty(localName="Pairing")
     private PeripheralsPairing pairing;
     /**
-     * Retrieves {@code {@link #profile}}
+     * Retrieves {@link #profile}
      *
      * @return value of {@link #profile}
      */
@@ -41,7 +41,7 @@ public class PeripheralsConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #pairing}}
+     * Retrieves {@link #pairing}
      *
      * @return value of {@link #pairing}
      * @since 1.1.0

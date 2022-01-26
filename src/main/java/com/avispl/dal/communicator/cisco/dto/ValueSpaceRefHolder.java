@@ -60,7 +60,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #value}}
+     * Retrieves {@link #value}
      *
      * @return value of {@link #value}
      */
@@ -69,7 +69,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -87,7 +87,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #valueSpaceRef}}
+     * Retrieves {@link #valueSpaceRef}
      *
      * @return value of {@link #valueSpaceRef}
      */
@@ -132,7 +132,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -150,7 +150,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #values}}
+     * Retrieves {@link #values}
      *
      * @return value of {@link #values}
      */

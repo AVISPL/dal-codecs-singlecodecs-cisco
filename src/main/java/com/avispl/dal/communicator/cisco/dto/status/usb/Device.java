@@ -23,7 +23,7 @@ public class Device {
     private String type;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -41,7 +41,7 @@ public class Device {
     }
 
     /**
-     * Retrieves {@code {@link #state}}
+     * Retrieves {@link #state}
      *
      * @return value of {@link #state}
      */
@@ -59,7 +59,7 @@ public class Device {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */

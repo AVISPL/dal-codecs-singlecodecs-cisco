@@ -25,7 +25,7 @@ public class SerialPortConfiguration {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #baudRate}}
+     * Retrieves {@link #baudRate}
      *
      * @return value of {@link #baudRate}
      */
@@ -43,7 +43,7 @@ public class SerialPortConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #loginRequired}}
+     * Retrieves {@link #loginRequired}
      *
      * @return value of {@link #loginRequired}
      */
@@ -61,7 +61,7 @@ public class SerialPortConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

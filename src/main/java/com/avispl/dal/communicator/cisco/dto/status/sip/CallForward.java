@@ -23,7 +23,7 @@ public class CallForward {
     private String uri;
 
     /**
-     * Retrieves {@code {@link #displayName}}
+     * Retrieves {@link #displayName}
      *
      * @return value of {@link #displayName}
      */
@@ -41,7 +41,7 @@ public class CallForward {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -59,7 +59,7 @@ public class CallForward {
     }
 
     /**
-     * Retrieves {@code {@link #uri}}
+     * Retrieves {@link #uri}
      *
      * @return value of {@link #uri}
      */

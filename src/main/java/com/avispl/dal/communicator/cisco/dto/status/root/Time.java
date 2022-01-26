@@ -19,7 +19,7 @@ public class Time {
     private String systemTime;
 
     /**
-     * Retrieves {@code {@link #systemTime}}
+     * Retrieves {@link #systemTime}
      *
      * @return value of {@link #systemTime}
      */

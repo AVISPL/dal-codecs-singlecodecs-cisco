@@ -30,7 +30,7 @@ public class Network {
     private IPv6 iPv6;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -48,7 +48,7 @@ public class Network {
     }
 
     /**
-     * Retrieves {@code {@link #cdp}}
+     * Retrieves {@link #cdp}
      *
      * @return value of {@link #cdp}
      */
@@ -66,7 +66,7 @@ public class Network {
     }
 
     /**
-     * Retrieves {@code {@link #dns}}
+     * Retrieves {@link #dns}
      *
      * @return value of {@link #dns}
      */
@@ -84,7 +84,7 @@ public class Network {
     }
 
     /**
-     * Retrieves {@code {@link #ethernet}}
+     * Retrieves {@link #ethernet}
      *
      * @return value of {@link #ethernet}
      */
@@ -102,7 +102,7 @@ public class Network {
     }
 
     /**
-     * Retrieves {@code {@link #iPv4}}
+     * Retrieves {@link #iPv4}
      *
      * @return value of {@link #iPv4}
      */
@@ -120,7 +120,7 @@ public class Network {
     }
 
     /**
-     * Retrieves {@code {@link #iPv6}}
+     * Retrieves {@link #iPv6}
      *
      * @return value of {@link #iPv6}
      */

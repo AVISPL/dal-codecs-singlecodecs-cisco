@@ -19,7 +19,7 @@ public class VideoLayout {
     private VideoLayoutFamily layoutFamily;
 
     /**
-     * Retrieves {@code {@link #layoutFamily}}
+     * Retrieves {@link #layoutFamily}
      *
      * @return value of {@link #layoutFamily}
      */

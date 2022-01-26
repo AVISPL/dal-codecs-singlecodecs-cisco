@@ -31,7 +31,7 @@ public class VideoConfiguration {
     private ValueSpaceRefHolder monitors;
 
     /**
-     * Retrieves {@code {@link #defaultMainSource}}
+     * Retrieves {@link #defaultMainSource}
      *
      * @return value of {@link #defaultMainSource}
      */
@@ -49,7 +49,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #input}}
+     * Retrieves {@link #input}
      *
      * @return value of {@link #input}
      */
@@ -67,7 +67,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #output}}
+     * Retrieves {@link #output}
      *
      * @return value of {@link #output}
      */
@@ -85,7 +85,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #presentation}}
+     * Retrieves {@link #presentation}
      *
      * @return value of {@link #presentation}
      */
@@ -103,7 +103,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #selfview}}
+     * Retrieves {@link #selfview}
      *
      * @return value of {@link #selfview}
      */
@@ -121,7 +121,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #monitors}}
+     * Retrieves {@link #monitors}
      *
      * @return value of {@link #monitors}
      */

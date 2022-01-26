@@ -25,7 +25,7 @@ public class VideoSelfview {
     private String pipPosition;
 
     /**
-     * Retrieves {@code {@link #fullscreenMode}}
+     * Retrieves {@link #fullscreenMode}
      *
      * @return value of {@link #fullscreenMode}
      */
@@ -43,7 +43,7 @@ public class VideoSelfview {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -61,7 +61,7 @@ public class VideoSelfview {
     }
 
     /**
-     * Retrieves {@code {@link #onMonitorRole}}
+     * Retrieves {@link #onMonitorRole}
      *
      * @return value of {@link #onMonitorRole}
      */
@@ -79,7 +79,7 @@ public class VideoSelfview {
     }
 
     /**
-     * Retrieves {@code {@link #pipPosition}}
+     * Retrieves {@link #pipPosition}
      *
      * @return value of {@link #pipPosition}
      */

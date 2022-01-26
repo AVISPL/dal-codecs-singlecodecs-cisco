@@ -19,7 +19,7 @@ public class NetworkConfigurationVLAN {
     private NetworkConfigurationVoice voice;
 
     /**
-     * Retrieves {@code {@link #voice}}
+     * Retrieves {@link #voice}
      *
      * @return value of {@link #voice}
      */

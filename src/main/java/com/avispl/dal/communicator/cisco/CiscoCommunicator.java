@@ -363,7 +363,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     /**
-     * Retrieves {@code {@link #maxStatusPollAttempt}}
+     * Retrieves {@link #maxStatusPollAttempt}
      *
      * @return value of {@link #maxStatusPollAttempt}
      */

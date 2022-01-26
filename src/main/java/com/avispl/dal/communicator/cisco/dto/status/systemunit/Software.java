@@ -27,7 +27,7 @@ public class Software {
     private SoftwareOptionKeys optionKeys;
 
     /**
-     * Retrieves {@code {@link #displayName}}
+     * Retrieves {@link #displayName}
      *
      * @return value of {@link #displayName}
      */
@@ -45,7 +45,7 @@ public class Software {
     }
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */
@@ -63,7 +63,7 @@ public class Software {
     }
 
     /**
-     * Retrieves {@code {@link #releaseDate}}
+     * Retrieves {@link #releaseDate}
      *
      * @return value of {@link #releaseDate}
      */
@@ -81,7 +81,7 @@ public class Software {
     }
 
     /**
-     * Retrieves {@code {@link #version}}
+     * Retrieves {@link #version}
      *
      * @return value of {@link #version}
      */
@@ -99,7 +99,7 @@ public class Software {
     }
 
     /**
-     * Retrieves {@code {@link #optionKeys}}
+     * Retrieves {@link #optionKeys}
      *
      * @return value of {@link #optionKeys}
      */

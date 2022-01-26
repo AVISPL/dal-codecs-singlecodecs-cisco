@@ -21,7 +21,7 @@ public class AudioOutputLine {
     private String delayMs;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -39,7 +39,7 @@ public class AudioOutputLine {
     }
 
     /**
-     * Retrieves {@code {@link #delayMs}}
+     * Retrieves {@link #delayMs}
      *
      * @return value of {@link #delayMs}
      */

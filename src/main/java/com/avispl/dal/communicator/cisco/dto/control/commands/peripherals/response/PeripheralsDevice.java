@@ -37,7 +37,7 @@ public class PeripheralsDevice {
     private String type;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -55,7 +55,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #connectionMethod}}
+     * Retrieves {@link #connectionMethod}
      *
      * @return value of {@link #connectionMethod}
      */
@@ -73,7 +73,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #hardwareInfo}}
+     * Retrieves {@link #hardwareInfo}
      *
      * @return value of {@link #hardwareInfo}
      */
@@ -91,7 +91,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #id }}
+     * Retrieves {@link #id }
      *
      * @return value of {@link #id}
      */
@@ -109,7 +109,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #lastSeen}}
+     * Retrieves {@link #lastSeen}
      *
      * @return value of {@link #lastSeen}
      */
@@ -127,7 +127,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */
@@ -145,7 +145,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #networkAddress }}
+     * Retrieves {@link #networkAddress }
      *
      * @return value of {@link #networkAddress}
      */
@@ -163,7 +163,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #serialNumber}}
+     * Retrieves {@link #serialNumber}
      *
      * @return value of {@link #serialNumber}
      */
@@ -181,7 +181,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #softwareInfo}}
+     * Retrieves {@link #softwareInfo}
      *
      * @return value of {@link #softwareInfo}
      */
@@ -199,7 +199,7 @@ public class PeripheralsDevice {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */

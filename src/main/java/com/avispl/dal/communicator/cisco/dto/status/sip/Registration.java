@@ -25,7 +25,7 @@ public class Registration {
     private String uri;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -43,7 +43,7 @@ public class Registration {
     }
 
     /**
-     * Retrieves {@code {@link #reason}}
+     * Retrieves {@link #reason}
      *
      * @return value of {@link #reason}
      */
@@ -61,7 +61,7 @@ public class Registration {
     }
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */
@@ -79,7 +79,7 @@ public class Registration {
     }
 
     /**
-     * Retrieves {@code {@link #uri}}
+     * Retrieves {@link #uri}
      *
      * @return value of {@link #uri}
      */

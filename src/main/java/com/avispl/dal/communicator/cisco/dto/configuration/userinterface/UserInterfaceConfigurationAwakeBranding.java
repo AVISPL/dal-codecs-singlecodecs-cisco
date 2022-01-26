@@ -21,7 +21,7 @@ public class UserInterfaceConfigurationAwakeBranding {
     private ValueSpaceRefHolder colors;
 
     /**
-     * Retrieves {@code {@link #colors}}
+     * Retrieves {@link #colors}
      *
      * @return value of {@link #colors}
      */

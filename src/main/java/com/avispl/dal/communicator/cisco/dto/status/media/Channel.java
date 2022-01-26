@@ -38,7 +38,7 @@ public class Channel {
     private String type;
 
     /**
-     * Retrieves {@code {@link #attributeDirection}}
+     * Retrieves {@link #attributeDirection}
      *
      * @return value of {@link #attributeDirection}
      * @since 1.1.0
@@ -58,7 +58,7 @@ public class Channel {
     }
 
     /**
-     * Retrieves {@code {@link #audio}}
+     * Retrieves {@link #audio}
      *
      * @return value of {@link #audio}
      */
@@ -76,7 +76,7 @@ public class Channel {
     }
 
     /**
-     * Retrieves {@code {@link #video}}
+     * Retrieves {@link #video}
      *
      * @return value of {@link #video}
      */
@@ -94,7 +94,7 @@ public class Channel {
     }
 
     /**
-     * Retrieves {@code {@link #data}}
+     * Retrieves {@link #data}
      *
      * @return value of {@link #data}
      * @since 1.1.0
@@ -114,7 +114,7 @@ public class Channel {
     }
 
     /**
-     * Retrieves {@code {@link #netstat}}
+     * Retrieves {@link #netstat}
      *
      * @return value of {@link #netstat}
      */
@@ -132,8 +132,8 @@ public class Channel {
     }
 
     /**
-     * Retrieves call direction value based on {@code {@link #attributeDirection}} or
-     * {@code {@link #direction}}. If the former is present and latter is not - former is used.
+     * Retrieves call direction value based on {@link #attributeDirection} or
+     * {@link #direction}. If the former is present and latter is not - former is used.
      *
      * @return value of {@link #direction}
      */
@@ -154,7 +154,7 @@ public class Channel {
     }
 
     /**
-     * Retrieves {@code {@link #encryption}}
+     * Retrieves {@link #encryption}
      *
      * @return value of {@link #encryption}
      */
@@ -172,7 +172,7 @@ public class Channel {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */

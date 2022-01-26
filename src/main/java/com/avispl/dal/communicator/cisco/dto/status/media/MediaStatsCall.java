@@ -23,7 +23,7 @@ public class MediaStatsCall {
     private Channel[] channels;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -41,7 +41,7 @@ public class MediaStatsCall {
     }
 
     /**
-     * Retrieves {@code {@link #channels}}
+     * Retrieves {@link #channels}
      *
      * @return value of {@link #channels}
      */

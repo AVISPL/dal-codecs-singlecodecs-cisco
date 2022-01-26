@@ -19,7 +19,7 @@ public class AudioInput {
     private AudioInputConnectors connectors;
 
     /**
-     * Retrieves {@code {@link #connectors}}
+     * Retrieves {@link #connectors}
      *
      * @return value of {@link #connectors}
      */

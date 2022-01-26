@@ -27,7 +27,7 @@ public class Video extends CallChannelData{
     private String resolution;
 
     /**
-     * Retrieves {@code {@link #channelRole}}
+     * Retrieves {@link #channelRole}
      *
      * @return value of {@link #channelRole}
      */
@@ -45,7 +45,7 @@ public class Video extends CallChannelData{
     }
 
     /**
-     * Retrieves {@code {@link #frameRate}}
+     * Retrieves {@link #frameRate}
      *
      * @return value of {@link #frameRate}
      */
@@ -63,7 +63,7 @@ public class Video extends CallChannelData{
     }
 
     /**
-     * Retrieves {@code {@link #resolutionX}}
+     * Retrieves {@link #resolutionX}
      *
      * @return value of {@link #resolutionX}
      */
@@ -81,7 +81,7 @@ public class Video extends CallChannelData{
     }
 
     /**
-     * Retrieves {@code {@link #resolutionY}}
+     * Retrieves {@link #resolutionY}
      *
      * @return value of {@link #resolutionY}
      */
@@ -99,7 +99,7 @@ public class Video extends CallChannelData{
     }
 
     /**
-     * Retrieves {@code {@link #resolution}}
+     * Retrieves {@link #resolution}
      *
      * @return value of {@link #resolution}
      */

@@ -23,7 +23,7 @@ public class Presentation {
     private Whiteboard whiteboard;
 
     /**
-     * Retrieves {@code {@link #callId}}
+     * Retrieves {@link #callId}
      *
      * @return value of {@link #callId}
      */
@@ -41,7 +41,7 @@ public class Presentation {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -59,7 +59,7 @@ public class Presentation {
     }
 
     /**
-     * Retrieves {@code {@link #whiteboard}}
+     * Retrieves {@link #whiteboard}
      *
      * @return value of {@link #whiteboard}
      */

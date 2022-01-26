@@ -21,7 +21,7 @@ public class UserInterfaceConfigurationOSD {
     private ValueSpaceRefHolder output;
 
     /**
-     * Retrieves {@code {@link #output}}
+     * Retrieves {@link #output}
      *
      * @return value of {@link #output}
      */

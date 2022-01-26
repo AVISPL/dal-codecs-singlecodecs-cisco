@@ -35,7 +35,7 @@ public class UserInterfaceConfiguration {
     private UserInterfaceConfigurationAccessibility accessibility;
 
     /**
-     * Retrieves {@code {@link #contactInfo}}
+     * Retrieves {@link #contactInfo}
      *
      * @return value of {@link #contactInfo}
      */
@@ -53,7 +53,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #keyTones}}
+     * Retrieves {@link #keyTones}
      *
      * @return value of {@link #keyTones}
      */
@@ -71,7 +71,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #language}}
+     * Retrieves {@link #language}
      *
      * @return value of {@link #language}
      */
@@ -89,7 +89,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #welcomeText}}
+     * Retrieves {@link #welcomeText}
      *
      * @return value of {@link #welcomeText}
      */
@@ -107,7 +107,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #osd}}
+     * Retrieves {@link #osd}
      *
      * @return value of {@link #osd}
      */
@@ -125,7 +125,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #features}}
+     * Retrieves {@link #features}
      *
      * @return value of {@link #features}
      */
@@ -143,7 +143,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #branding}}
+     * Retrieves {@link #branding}
      *
      * @return value of {@link #branding}
      */
@@ -161,7 +161,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #accessibility}}
+     * Retrieves {@link #accessibility}
      *
      * @return value of {@link #accessibility}
      */

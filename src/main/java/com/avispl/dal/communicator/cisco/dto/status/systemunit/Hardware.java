@@ -23,7 +23,7 @@ public class Hardware {
     private String temperature;
 
     /**
-     * Retrieves {@code {@link #module}}
+     * Retrieves {@link #module}
      *
      * @return value of {@link #module}
      */
@@ -41,7 +41,7 @@ public class Hardware {
     }
 
     /**
-     * Retrieves {@code {@link #monitoring}}
+     * Retrieves {@link #monitoring}
      *
      * @return value of {@link #monitoring}
      */
@@ -59,7 +59,7 @@ public class Hardware {
     }
 
     /**
-     * Retrieves {@code {@link #temperature}}
+     * Retrieves {@link #temperature}
      *
      * @return value of {@link #temperature}
      */

@@ -34,7 +34,7 @@ public class SIP {
     private String verified;
 
     /**
-     * Retrieves {@code {@link #authentication}}
+     * Retrieves {@link #authentication}
      *
      * @return value of {@link #authentication}
      */
@@ -52,7 +52,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #callForward}}
+     * Retrieves {@link #callForward}
      *
      * @return value of {@link #callForward}
      */
@@ -70,7 +70,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #mailbox}}
+     * Retrieves {@link #mailbox}
      *
      * @return value of {@link #mailbox}
      */
@@ -88,7 +88,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #registrations}}
+     * Retrieves {@link #registrations}
      *
      * @return value of {@link #registrations}
      */
@@ -106,7 +106,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #proxies}}
+     * Retrieves {@link #proxies}
      *
      * @return value of {@link #proxies}
      */
@@ -124,7 +124,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #secure}}
+     * Retrieves {@link #secure}
      *
      * @return value of {@link #secure}
      */
@@ -142,7 +142,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #verified}}
+     * Retrieves {@link #verified}
      *
      * @return value of {@link #verified}
      */

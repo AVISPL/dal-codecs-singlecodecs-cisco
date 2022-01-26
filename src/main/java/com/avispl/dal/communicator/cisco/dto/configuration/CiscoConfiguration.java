@@ -86,7 +86,7 @@ public class CiscoConfiguration {
     private NetworkPortConfiguration[] networkPorts;
 
     /**
-     * Retrieves {@code {@link #product}}
+     * Retrieves {@link #product}
      *
      * @return value of {@link #product}
      */
@@ -104,7 +104,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #version}}
+     * Retrieves {@link #version}
      *
      * @return value of {@link #version}
      */
@@ -122,7 +122,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #apiVersion}}
+     * Retrieves {@link #apiVersion}
      *
      * @return value of {@link #apiVersion}
      */
@@ -140,7 +140,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #audio}}
+     * Retrieves {@link #audio}
      *
      * @return value of {@link #audio}
      */
@@ -158,7 +158,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #conference}}
+     * Retrieves {@link #conference}
      *
      * @return value of {@link #conference}
      */
@@ -176,7 +176,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #cameras}}
+     * Retrieves {@link #cameras}
      *
      * @return value of {@link #cameras}
      */
@@ -194,7 +194,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #h323}}
+     * Retrieves {@link #h323}
      *
      * @return value of {@link #h323}
      */
@@ -212,7 +212,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #network}}
+     * Retrieves {@link #network}
      *
      * @return value of {@link #network}
      */
@@ -230,7 +230,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkServices}}
+     * Retrieves {@link #networkServices}
      *
      * @return value of {@link #networkServices}
      */
@@ -248,7 +248,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #peripherals}}
+     * Retrieves {@link #peripherals}
      *
      * @return value of {@link #peripherals}
      */
@@ -266,7 +266,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #phonebook}}
+     * Retrieves {@link #phonebook}
      *
      * @return value of {@link #phonebook}
      */
@@ -284,7 +284,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #provisioning}}
+     * Retrieves {@link #provisioning}
      *
      * @return value of {@link #provisioning}
      */
@@ -302,7 +302,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #proximity}}
+     * Retrieves {@link #proximity}
      *
      * @return value of {@link #proximity}
      */
@@ -320,7 +320,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #roomAnalytics}}
+     * Retrieves {@link #roomAnalytics}
      *
      * @return value of {@link #roomAnalytics}
      */
@@ -338,7 +338,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #sip}}
+     * Retrieves {@link #sip}
      *
      * @return value of {@link #sip}
      */
@@ -356,7 +356,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #serialPort}}
+     * Retrieves {@link #serialPort}
      *
      * @return value of {@link #serialPort}
      */
@@ -374,7 +374,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #standby}}
+     * Retrieves {@link #standby}
      *
      * @return value of {@link #standby}
      */
@@ -392,7 +392,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #systemUnit}}
+     * Retrieves {@link #systemUnit}
      *
      * @return value of {@link #systemUnit}
      */
@@ -410,7 +410,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #time}}
+     * Retrieves {@link #time}
      *
      * @return value of {@link #time}
      */
@@ -428,7 +428,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #userInterface}}
+     * Retrieves {@link #userInterface}
      *
      * @return value of {@link #userInterface}
      */
@@ -446,7 +446,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #video}}
+     * Retrieves {@link #video}
      *
      * @return value of {@link #video}
      */
@@ -464,7 +464,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkPorts}}
+     * Retrieves {@link #networkPorts}
      *
      * @return value of {@link #networkPorts}
      */

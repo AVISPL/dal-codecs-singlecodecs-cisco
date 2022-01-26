@@ -39,7 +39,7 @@ public class Camera {
     private String softwareId;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -57,7 +57,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #capabilities}}
+     * Retrieves {@link #capabilities}
      *
      * @return value of {@link #capabilities}
      */
@@ -75,7 +75,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #connected}}
+     * Retrieves {@link #connected}
      *
      * @return value of {@link #connected}
      */
@@ -93,7 +93,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #flip}}
+     * Retrieves {@link #flip}
      *
      * @return value of {@link #flip}
      */
@@ -111,7 +111,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #hardwareId}}
+     * Retrieves {@link #hardwareId}
      *
      * @return value of {@link #hardwareId}
      */
@@ -129,7 +129,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #macAddress}}
+     * Retrieves {@link #macAddress}
      *
      * @return value of {@link #macAddress}
      */
@@ -147,7 +147,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #manufacturer}}
+     * Retrieves {@link #manufacturer}
      *
      * @return value of {@link #manufacturer}
      */
@@ -165,7 +165,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #model}}
+     * Retrieves {@link #model}
      *
      * @return value of {@link #model}
      */
@@ -183,7 +183,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #position}}
+     * Retrieves {@link #position}
      *
      * @return value of {@link #position}
      */
@@ -201,7 +201,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #serialNumber}}
+     * Retrieves {@link #serialNumber}
      *
      * @return value of {@link #serialNumber}
      */
@@ -219,7 +219,7 @@ public class Camera {
     }
 
     /**
-     * Retrieves {@code {@link #softwareId}}
+     * Retrieves {@link #softwareId}
      *
      * @return value of {@link #softwareId}
      */

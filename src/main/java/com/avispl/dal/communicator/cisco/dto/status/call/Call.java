@@ -75,7 +75,7 @@ public class Call {
      * or {@code {@link #item}} values
      *
      * @return String value of the callId
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public String getCallId() {
        if (!StringUtils.isNullOrEmpty(attributeLogTag)) {
@@ -106,7 +106,7 @@ public class Call {
      * Retrieves {@code {@link #attributeStatus}}
      *
      * @return value of {@link #attributeStatus}
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public String getAttributeStatus() {
         return attributeStatus;
@@ -116,7 +116,7 @@ public class Call {
      * Sets {@code attributeStatus}
      *
      * @param attributeStatus the {@code java.lang.String} field
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public void setAttributeStatus(String attributeStatus) {
         this.attributeStatus = attributeStatus;
@@ -126,7 +126,7 @@ public class Call {
      * Retrieves {@code {@link #attributeProtocol}}
      *
      * @return value of {@link #attributeProtocol}
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public String getAttributeProtocol() {
         return attributeProtocol;
@@ -136,7 +136,7 @@ public class Call {
      * Sets {@code attributeProtocol}
      *
      * @param attributeProtocol the {@code java.lang.String} field
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public void setAttributeProtocol(String attributeProtocol) {
         this.attributeProtocol = attributeProtocol;
@@ -146,7 +146,7 @@ public class Call {
      * Retrieves {@code {@link #attributeDirection}}
      *
      * @return value of {@link #attributeDirection}
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public String getAttributeDirection() {
         return attributeDirection;
@@ -156,7 +156,7 @@ public class Call {
      * Sets {@code attributeDirection}
      *
      * @param attributeDirection the {@code java.lang.String} field
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public void setAttributeDirection(String attributeDirection) {
         this.attributeDirection = attributeDirection;
@@ -166,7 +166,7 @@ public class Call {
      * Retrieves {@code {@link #attributeLogTag}}
      *
      * @return value of {@link #attributeLogTag}
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public String getAttributeLogTag() {
         return attributeLogTag;
@@ -176,7 +176,7 @@ public class Call {
      * Sets {@code attributeLogTag}
      *
      * @param attributeLogTag the {@code java.lang.String} field
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public void setAttributeLogTag(String attributeLogTag) {
         this.attributeLogTag = attributeLogTag;
@@ -486,7 +486,7 @@ public class Call {
      * Retrieves {@code {@link #channels}}
      *
      * @return value of {@link #channels}
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public Channel[] getChannels() {
         return channels;
@@ -496,25 +496,17 @@ public class Call {
      * Sets {@code channels}
      *
      * @param channels the {@code com.avispl.dal.communicator.cisco.dto.status.media.Channel[]} field
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public void setChannels(Channel[] channels) {
         this.channels = channels;
     }
 
     /**
-     * Retrieves {@code {@link #callRate}}
-     *
-     * @return value of {@link #callRate}
-     */
-    public Integer getCallRate() {
-        return callRate;
-    }
-
-    /**
      * Sets {@code callRate}
      *
      * @param callRate the {@code java.lang.Integer} field
+     * @since 1.1.1
      */
     public void setCallRate(Integer callRate) {
         this.callRate = callRate;

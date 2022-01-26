@@ -21,7 +21,7 @@ public class DNSServer {
     private String address;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -39,7 +39,7 @@ public class DNSServer {
     }
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */

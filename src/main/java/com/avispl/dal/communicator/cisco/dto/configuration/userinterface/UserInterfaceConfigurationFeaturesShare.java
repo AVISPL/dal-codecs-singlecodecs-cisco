@@ -21,7 +21,7 @@ public class UserInterfaceConfigurationFeaturesShare {
     private ValueSpaceRefHolder start;
 
     /**
-     * Retrieves {@code {@link #start}}
+     * Retrieves {@link #start}
      *
      * @return value of {@link #start}
      */

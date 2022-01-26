@@ -20,7 +20,7 @@ public class AudioConfigurationUltrasound {
     private ValueSpaceRefHolder maxVolume;
 
     /**
-     * Retrieves {@code {@link #maxVolume}}
+     * Retrieves {@link #maxVolume}
      *
      * @return value of {@link #maxVolume}
      */

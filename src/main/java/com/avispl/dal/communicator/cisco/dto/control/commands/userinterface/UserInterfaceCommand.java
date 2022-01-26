@@ -66,7 +66,7 @@ public class UserInterfaceCommand {
                 }
 
                 /**
-                 * Retrieves {@code {@link #text}}
+                 * Retrieves {@link #text}
                  *
                  * @return value of {@link #text}
                  */
@@ -84,7 +84,7 @@ public class UserInterfaceCommand {
                 }
 
                 /**
-                 * Retrieves {@code {@link #duration}}
+                 * Retrieves {@link #duration}
                  *
                  * @return value of {@link #duration}
                  */
@@ -102,7 +102,7 @@ public class UserInterfaceCommand {
                 }
 
                 /**
-                 * Retrieves {@code {@link #command}}
+                 * Retrieves {@link #command}
                  *
                  * @return value of {@link #command}
                  */
@@ -114,7 +114,7 @@ public class UserInterfaceCommand {
             private Display display;
 
             /**
-             * Retrieves {@code {@link #display}}
+             * Retrieves {@link #display}
              *
              * @return value of {@link #display}
              */
@@ -150,7 +150,7 @@ public class UserInterfaceCommand {
         }
 
         /**
-         * Retrieves {@code {@link #textLine}}
+         * Retrieves {@link #textLine}
          *
          * @return value of {@link #textLine}
          */
@@ -172,7 +172,7 @@ public class UserInterfaceCommand {
     private Message message;
 
     /**
-     * Retrieves {@code {@link #message}}
+     * Retrieves {@link #message}
      *
      * @return value of {@link #message}
      */

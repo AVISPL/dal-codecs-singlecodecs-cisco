@@ -20,7 +20,7 @@ public class AudioInputConnectors {
     private Microphone[] microphones;
 
     /**
-     * Retrieves {@code {@link #microphones}}
+     * Retrieves {@link #microphones}
      *
      * @return value of {@link #microphones}
      */

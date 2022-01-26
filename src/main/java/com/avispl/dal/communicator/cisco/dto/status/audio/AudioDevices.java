@@ -23,7 +23,7 @@ public class AudioDevices {
     private AudioDevicesHeadsetUSB headsetUSB;
 
     /**
-     * Retrieves {@code {@link #bluetooth}}
+     * Retrieves {@link #bluetooth}
      *
      * @return value of {@link #bluetooth}
      */
@@ -41,7 +41,7 @@ public class AudioDevices {
     }
 
     /**
-     * Retrieves {@code {@link #handsetUSB}}
+     * Retrieves {@link #handsetUSB}
      *
      * @return value of {@link #handsetUSB}
      */
@@ -59,7 +59,7 @@ public class AudioDevices {
     }
 
     /**
-     * Retrieves {@code {@link #headsetUSB}}
+     * Retrieves {@link #headsetUSB}
      *
      * @return value of {@link #headsetUSB}
      */

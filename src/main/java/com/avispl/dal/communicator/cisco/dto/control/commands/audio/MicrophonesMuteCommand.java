@@ -49,7 +49,7 @@ public class MicrophonesMuteCommand extends AudioCommand {
         protected String command = "True";
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -96,7 +96,7 @@ public class MicrophonesMuteCommand extends AudioCommand {
     }
 
     /**
-     * Retrieves {@code {@link #microphones}}
+     * Retrieves {@link #microphones}
      *
      * @return value of {@link #microphones}
      */

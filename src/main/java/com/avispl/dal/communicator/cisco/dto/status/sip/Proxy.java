@@ -23,7 +23,7 @@ public class Proxy {
     private String status;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -41,7 +41,7 @@ public class Proxy {
     }
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -59,7 +59,7 @@ public class Proxy {
     }
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */

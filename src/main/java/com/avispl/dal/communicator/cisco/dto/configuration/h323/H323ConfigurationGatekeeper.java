@@ -20,7 +20,7 @@ public class H323ConfigurationGatekeeper {
     private ValueSpaceRefHolder address;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */

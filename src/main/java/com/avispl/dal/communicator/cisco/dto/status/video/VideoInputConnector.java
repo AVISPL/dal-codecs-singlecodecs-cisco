@@ -25,7 +25,7 @@ public class VideoInputConnector {
     private String type;
 
     /**
-     * Retrieves {@code {@link #connected}}
+     * Retrieves {@link #connected}
      *
      * @return value of {@link #connected}
      */
@@ -43,7 +43,7 @@ public class VideoInputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #signalState}}
+     * Retrieves {@link #signalState}
      *
      * @return value of {@link #signalState}
      */
@@ -61,7 +61,7 @@ public class VideoInputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #sourceId}}
+     * Retrieves {@link #sourceId}
      *
      * @return value of {@link #sourceId}
      */
@@ -79,7 +79,7 @@ public class VideoInputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */

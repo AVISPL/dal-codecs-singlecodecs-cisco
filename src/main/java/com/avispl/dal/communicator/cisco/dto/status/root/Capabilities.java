@@ -19,7 +19,7 @@ public class Capabilities {
     private ConferenceCapabilities conferenceCapabilities;
 
     /**
-     * Retrieves {@code {@link #conferenceCapabilities}}
+     * Retrieves {@link #conferenceCapabilities}
      *
      * @return value of {@link #conferenceCapabilities}
      */

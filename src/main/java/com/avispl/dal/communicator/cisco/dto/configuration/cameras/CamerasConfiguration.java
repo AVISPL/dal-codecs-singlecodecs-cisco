@@ -25,7 +25,7 @@ public class CamerasConfiguration {
     private CamerasConfigurationPreset preset;
 
     /**
-     * Retrieves {@code {@link #cameras}}
+     * Retrieves {@link #cameras}
      *
      * @return value of {@link #cameras}
      */
@@ -43,7 +43,7 @@ public class CamerasConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #preset}}
+     * Retrieves {@link #preset}
      *
      * @return value of {@link #preset}
      */

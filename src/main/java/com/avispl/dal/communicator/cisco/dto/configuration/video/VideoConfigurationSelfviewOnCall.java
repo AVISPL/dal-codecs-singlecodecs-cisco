@@ -25,7 +25,7 @@ public class VideoConfigurationSelfviewOnCall {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #duration}}
+     * Retrieves {@link #duration}
      *
      * @return value of {@link #duration}
      */
@@ -43,7 +43,7 @@ public class VideoConfigurationSelfviewOnCall {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

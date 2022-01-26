@@ -20,7 +20,7 @@ public class Cameras {
     private Camera[] cameras;
 
     /**
-     * Retrieves {@code {@link #cameras}}
+     * Retrieves {@link #cameras}
      *
      * @return value of {@link #cameras}
      */

@@ -21,7 +21,7 @@ public class MediaChannels {
     private MediaStatsCall[] calls;
 
     /**
-     * Retrieves {@code {@link #calls}}
+     * Retrieves {@link #calls}
      *
      * @return value of {@link #calls}
      */

@@ -27,7 +27,7 @@ public class VideoInputSource {
     private SourceResolution resolution;
 
     /**
-     * Retrieves {@code {@link #connectorId}}
+     * Retrieves {@link #connectorId}
      *
      * @return value of {@link #connectorId}
      */
@@ -45,7 +45,7 @@ public class VideoInputSource {
     }
 
     /**
-     * Retrieves {@code {@link #formatStatus}}
+     * Retrieves {@link #formatStatus}
      *
      * @return value of {@link #formatStatus}
      */
@@ -63,7 +63,7 @@ public class VideoInputSource {
     }
 
     /**
-     * Retrieves {@code {@link #formatType}}
+     * Retrieves {@link #formatType}
      *
      * @return value of {@link #formatType}
      */
@@ -81,7 +81,7 @@ public class VideoInputSource {
     }
 
     /**
-     * Retrieves {@code {@link #mediaChannelId}}
+     * Retrieves {@link #mediaChannelId}
      *
      * @return value of {@link #mediaChannelId}
      */
@@ -99,7 +99,7 @@ public class VideoInputSource {
     }
 
     /**
-     * Retrieves {@code {@link #resolution}}
+     * Retrieves {@link #resolution}
      *
      * @return value of {@link #resolution}
      */

@@ -27,7 +27,7 @@ public class NetworkConfigurationIEEE8021X {
     private ValueSpaceRefHolder useClientCertificate;
 
     /**
-     * Retrieves {@code {@link #identity}}
+     * Retrieves {@link #identity}
      *
      * @return value of {@link #identity}
      */
@@ -45,7 +45,7 @@ public class NetworkConfigurationIEEE8021X {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -63,7 +63,7 @@ public class NetworkConfigurationIEEE8021X {
     }
 
     /**
-     * Retrieves {@code {@link #tlsVerify}}
+     * Retrieves {@link #tlsVerify}
      *
      * @return value of {@link #tlsVerify}
      */
@@ -81,7 +81,7 @@ public class NetworkConfigurationIEEE8021X {
     }
 
     /**
-     * Retrieves {@code {@link #useClientCertificate}}
+     * Retrieves {@link #useClientCertificate}
      *
      * @return value of {@link #useClientCertificate}
      */

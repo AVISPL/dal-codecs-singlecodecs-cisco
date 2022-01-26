@@ -23,7 +23,7 @@ public class AudioConfigurationDelay {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #delayMs}}
+     * Retrieves {@link #delayMs}
      *
      * @return value of {@link #delayMs}
      */
@@ -41,7 +41,7 @@ public class AudioConfigurationDelay {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

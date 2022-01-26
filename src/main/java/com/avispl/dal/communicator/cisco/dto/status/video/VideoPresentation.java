@@ -19,7 +19,7 @@ public class VideoPresentation {
     private String pipPosition;
 
     /**
-     * Retrieves {@code {@link #pipPosition}}
+     * Retrieves {@link #pipPosition}
      *
      * @return value of {@link #pipPosition}
      */

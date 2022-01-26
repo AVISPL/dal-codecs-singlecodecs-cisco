@@ -28,7 +28,7 @@ public class SIPConfiguration {
     private ValueSpaceRefHolder uri;
 
     /**
-     * Retrieves {@code {@link #ice}}
+     * Retrieves {@link #ice}
      *
      * @return value of {@link #ice}
      */
@@ -46,7 +46,7 @@ public class SIPConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #proxies}}
+     * Retrieves {@link #proxies}
      *
      * @return value of {@link #proxies}
      */
@@ -64,7 +64,7 @@ public class SIPConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #uri}}
+     * Retrieves {@link #uri}
      *
      * @return value of {@link #uri}
      */

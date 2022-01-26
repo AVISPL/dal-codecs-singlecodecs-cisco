@@ -21,7 +21,7 @@ public class UserInterfaceConfigurationAccessibility {
     private ValueSpaceRefHolder incomingCallNotification;
 
     /**
-     * Retrieves {@code {@link #incomingCallNotification}}
+     * Retrieves {@link #incomingCallNotification}
      *
      * @return value of {@link #incomingCallNotification}
      */

@@ -21,7 +21,7 @@ public class AudioDevicesHandsetUSB {
     private String cradle;
 
     /**
-     * Retrieves {@code {@link #connectionStatus}}
+     * Retrieves {@link #connectionStatus}
      *
      * @return value of {@link #connectionStatus}
      */
@@ -39,7 +39,7 @@ public class AudioDevicesHandsetUSB {
     }
 
     /**
-     * Retrieves {@code {@link #cradle}}
+     * Retrieves {@link #cradle}
      *
      * @return value of {@link #cradle}
      */

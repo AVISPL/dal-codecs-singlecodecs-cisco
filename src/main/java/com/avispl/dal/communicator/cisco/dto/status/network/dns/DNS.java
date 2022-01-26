@@ -23,7 +23,7 @@ public class DNS {
     private DNSServer[] dnsServers;
 
     /**
-     * Retrieves {@code {@link #dnsDomain}}
+     * Retrieves {@link #dnsDomain}
      *
      * @return value of {@link #dnsDomain}
      */
@@ -41,7 +41,7 @@ public class DNS {
     }
 
     /**
-     * Retrieves {@code {@link #dnsServers}}
+     * Retrieves {@link #dnsServers}
      *
      * @return value of {@link #dnsServers}
      */

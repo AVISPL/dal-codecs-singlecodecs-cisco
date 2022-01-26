@@ -26,7 +26,7 @@ public class VideoInput {
     private VideoInputSource[] sources;
 
     /**
-     * Retrieves {@code {@link #connectors}}
+     * Retrieves {@link #connectors}
      *
      * @return value of {@link #connectors}
      */
@@ -44,7 +44,7 @@ public class VideoInput {
     }
 
     /**
-     * Retrieves {@code {@link #mainVideoSource}}
+     * Retrieves {@link #mainVideoSource}
      *
      * @return value of {@link #mainVideoSource}
      */
@@ -62,7 +62,7 @@ public class VideoInput {
     }
 
     /**
-     * Retrieves {@code {@link #sources}}
+     * Retrieves {@link #sources}
      *
      * @return value of {@link #sources}
      */

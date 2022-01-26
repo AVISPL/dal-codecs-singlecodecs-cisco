@@ -20,7 +20,7 @@ public class PeripheralsCommand {
     private ListCommand list;
 
     /**
-     * Retrieves {@code {@link #list}}
+     * Retrieves {@link #list}
      *
      * @return value of {@link #list}
      */

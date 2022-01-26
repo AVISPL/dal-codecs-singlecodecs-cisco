@@ -23,7 +23,7 @@ public class Microphone {
     private String ecReferenceDelay;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -41,7 +41,7 @@ public class Microphone {
     }
 
     /**
-     * Retrieves {@code {@link #connectionStatus}}
+     * Retrieves {@link #connectionStatus}
      *
      * @return value of {@link #connectionStatus}
      */
@@ -59,7 +59,7 @@ public class Microphone {
     }
 
     /**
-     * Retrieves {@code {@link #ecReferenceDelay}}
+     * Retrieves {@link #ecReferenceDelay}
      *
      * @return value of {@link #ecReferenceDelay}
      */

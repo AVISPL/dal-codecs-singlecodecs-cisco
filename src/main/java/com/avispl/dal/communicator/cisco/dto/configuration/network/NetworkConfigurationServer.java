@@ -25,7 +25,7 @@ public class NetworkConfigurationServer {
     private ValueSpaceRefHolder address;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -43,7 +43,7 @@ public class NetworkConfigurationServer {
     }
 
     /**
-     * Retrieves {@code {@link #minimumTLSVersion}}
+     * Retrieves {@link #minimumTLSVersion}
      *
      * @return value of {@link #minimumTLSVersion}
      */
@@ -61,7 +61,7 @@ public class NetworkConfigurationServer {
     }
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */

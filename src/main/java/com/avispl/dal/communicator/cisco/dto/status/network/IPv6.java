@@ -21,7 +21,7 @@ public class IPv6 {
     private String gateway;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -39,7 +39,7 @@ public class IPv6 {
     }
 
     /**
-     * Retrieves {@code {@link #gateway}}
+     * Retrieves {@link #gateway}
      *
      * @return value of {@link #gateway}
      */

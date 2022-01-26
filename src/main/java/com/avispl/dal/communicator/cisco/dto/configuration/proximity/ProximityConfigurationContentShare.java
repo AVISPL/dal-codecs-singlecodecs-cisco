@@ -25,7 +25,7 @@ public class ProximityConfigurationContentShare {
     private ValueSpaceRefHolder toClients;
 
     /**
-     * Retrieves {@code {@link #fromClients}}
+     * Retrieves {@link #fromClients}
      *
      * @return value of {@link #fromClients}
      */
@@ -43,7 +43,7 @@ public class ProximityConfigurationContentShare {
     }
 
     /**
-     * Retrieves {@code {@link #toClients}}
+     * Retrieves {@link #toClients}
      *
      * @return value of {@link #toClients}
      */

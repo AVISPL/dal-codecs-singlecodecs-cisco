@@ -31,7 +31,7 @@ public class SystemUnit {
     private String uptime;
 
     /**
-     * Retrieves {@code {@link #hardware}}
+     * Retrieves {@link #hardware}
      *
      * @return value of {@link #hardware}
      */
@@ -49,7 +49,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #software}}
+     * Retrieves {@link #software}
      *
      * @return value of {@link #software}
      */
@@ -67,7 +67,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #state}}
+     * Retrieves {@link #state}
      *
      * @return value of {@link #state}
      */
@@ -85,7 +85,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #productId}}
+     * Retrieves {@link #productId}
      *
      * @return value of {@link #productId}
      */
@@ -103,7 +103,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #productPlatform}}
+     * Retrieves {@link #productPlatform}
      *
      * @return value of {@link #productPlatform}
      */
@@ -121,7 +121,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #productType}}
+     * Retrieves {@link #productType}
      *
      * @return value of {@link #productType}
      */
@@ -139,7 +139,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #uptime}}
+     * Retrieves {@link #uptime}
      *
      * @return value of {@link #uptime}
      */

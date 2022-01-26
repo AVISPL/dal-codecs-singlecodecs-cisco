@@ -27,7 +27,7 @@ public class AudioConfigurationMicrophone {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -45,7 +45,7 @@ public class AudioConfigurationMicrophone {
     }
 
     /**
-     * Retrieves {@code {@link #echoControl}}
+     * Retrieves {@link #echoControl}
      *
      * @return value of {@link #echoControl}
      */
@@ -63,7 +63,7 @@ public class AudioConfigurationMicrophone {
     }
 
     /**
-     * Retrieves {@code {@link #level}}
+     * Retrieves {@link #level}
      *
      * @return value of {@link #level}
      */
@@ -81,7 +81,7 @@ public class AudioConfigurationMicrophone {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

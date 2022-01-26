@@ -23,7 +23,7 @@ public class ProximityConfiguration {
     private ProximityConfigurationServices services;
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -41,7 +41,7 @@ public class ProximityConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #services}}
+     * Retrieves {@link #services}
      *
      * @return value of {@link #services}
      */

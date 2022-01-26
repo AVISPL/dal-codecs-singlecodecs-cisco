@@ -489,8 +489,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     throw new IllegalStateException(String.format("Active calls found: %s, but unable to retrieve call information.",
                             callsCount));
                 }
-                callStatus.setCallId(connectedCall.getItem());
-                 if("Connected".equals(connectedCall.getStatus())) {
+                callStatus.setCallId(connectedCall.getCallId());
+                 if("Connected".equals(connectedCall.getStatus()) || "Synced".equals(connectedCall.getStatus())) {
                     callStatus.setCallStatusState(CallStatus.CallStatusState.Connected);
                  } else {
                     callStatus.setCallStatusState(CallStatus.CallStatusState.Disconnected);
@@ -517,7 +517,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (status.getCalls() == null) {
                 return Collections.emptyList();
             }
-            return Arrays.stream(status.getCalls()).filter(call -> "Connected".equals(call.getStatus()))
+            return Arrays.stream(status.getCalls()).filter(call -> "Connected".equals(call.getStatus()) || "Synced".equals(call.getStatus()))
                     .collect(Collectors.toList());
         }
 
@@ -597,6 +597,123 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             doPost("putxml", muteCommand);
         }
 
+    /**
+     * Route media channel data between the legacy firmware way and the CE9+ way
+     *
+     * @param ciscoStatus to get status information from
+     * @param endpointStatistics to put media channel data to
+     *
+     * @since 1.1.0
+     */
+    private void routeMediaChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
+            MediaChannels mediaChannels = ciscoStatus.getMediaChannels();
+
+            if (mediaChannels == null) {
+                // this may mean that we are going legacy route since channel data is in the different part of payload in this case
+                populateCallChannelsData(ciscoStatus, endpointStatistics);
+            } else {
+                populateMediaChannelsData(ciscoStatus, endpointStatistics);
+            }
+        }
+
+    /**
+     * Populate media channels information, retrieved from the Call statistics of the device
+     *
+     * @param ciscoStatus to retrieve statistics from
+     * @param endpointStatistics to save data to
+     *
+     * @since 1.1.0
+     */
+    private void populateCallChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
+            Call[] calls = ciscoStatus.getCalls();
+            if (calls == null) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to populate media channels data: no calls information is available");
+                }
+                return;
+            }
+
+            List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> "Connected".equals(call.getStatus()) || "Synced".equals(call.getStatus()))
+                    .collect(Collectors.toList());
+            long callsCount = connectedCalls.size();
+            if (callsCount > 1) {
+                throw new IllegalStateException(String.format("Ambiguous active calls found: %s, 1 expected. Unable to proceed.",
+                        callsCount));
+            }
+            if (callsCount == 0) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to populate media channels data: no active calls is available");
+                }
+                return;
+            }
+            Call activeCall = connectedCalls.get(0);
+            Channel[] callChannels = activeCall.getChannels();
+            if (callChannels == null || callChannels.length == 0) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to populate media channels data: no media channels data is available in the calls structure");
+                }
+                return;
+            }
+
+            AudioChannelStats audioChannelStats = new AudioChannelStats();
+            VideoChannelStats videoChannelStats = new VideoChannelStats();
+            CallStats callStats = new CallStats();
+            callStats.setCallId(activeCall.getCallId());
+            callStats.setRemoteAddress(activeCall.getRemoteNumber());
+            callStats.setProtocol(activeCall.getProtocol());
+
+            Arrays.stream(callChannels).forEach(channel -> {
+                String direction = channel.getDirection();
+                Audio[] audioChannels = channel.getAudio();
+                Optional<Audio> audioData = Arrays.stream(audioChannels).filter(a -> Objects.equals("Active", a.getStatus())).findFirst();
+
+                Video[] videoChannels = channel.getVideo();
+                Optional<Video> videoData = Arrays.stream(videoChannels).filter(a -> Objects.equals("Active", a.getStatus())).findFirst();
+
+                switch (direction){
+                    case "Incoming":
+                        if (audioData.isPresent()) {
+                            Audio audio = audioData.get();
+                            audioChannelStats.setJitterRx(audio.getJitter());
+                            audioChannelStats.setPacketLossRx(audio.getPacketLoss());
+                            audioChannelStats.setCodec(audio.getCodec());
+                        }
+                        if (videoData.isPresent()) {
+                            Video video = videoData.get();
+                            videoChannelStats.setJitterRx(video.getJitter());
+                            videoChannelStats.setPacketLossRx(video.getPacketLoss());
+                            videoChannelStats.setCodec(video.getCodec());
+                        }
+                    break;
+                    case "Outcoming":
+                        if (audioData.isPresent()) {
+                            Audio audio = audioData.get();
+                            audioChannelStats.setJitterTx(audio.getJitter());
+                            audioChannelStats.setPacketLossTx(audio.getPacketLoss());
+                            audioChannelStats.setCodec(audio.getCodec());
+                        }
+                        if (videoData.isPresent()) {
+                            Video video = videoData.get();
+                            videoChannelStats.setJitterTx(video.getJitter());
+                            videoChannelStats.setPacketLossTx(video.getPacketLoss());
+                            videoChannelStats.setCodec(video.getCodec());
+                        }
+                    break;
+                    default:
+                        if (logger.isWarnEnabled()) {
+                            logger.warn("Call direction is not supported: " + direction);
+                        }
+                    break;
+                }
+            });
+
+            callStats.setRequestedCallRate(activeCall.getCallRate());
+            endpointStatistics.setInCall(true);
+            endpointStatistics.setCallStats(callStats);
+            endpointStatistics.setAudioChannelStats(audioChannelStats);
+            endpointStatistics.setVideoChannelStats(videoChannelStats);
+        }
+
         /**
          * Populate media channels data, retrieved from the device, and set it into the {@link EndpointStatistics} instance
          *
@@ -606,7 +723,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
          */
         private void populateMediaChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
             MediaChannels mediaChannels = ciscoStatus.getMediaChannels();
+
             if (mediaChannels == null) {
+
                 if (logger.isDebugEnabled()) {
                     logger.debug("Unable to populate media channels data: media channels data is empty");
                 }
@@ -620,7 +739,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 return;
             }
 
-            List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> "Connected".equals(call.getStatus()))
+            List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> "Connected".equals(call.getStatus()) || "Synced".equals(call.getStatus()))
                     .collect(Collectors.toList());
             long callsCount = connectedCalls.size();
             if (callsCount > 1) {
@@ -642,7 +761,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 VideoChannelStats videoChannelStats = new VideoChannelStats();
                 ContentChannelStats contentChannelStats = new ContentChannelStats();
                 CallStats callStats = new CallStats();
-                callStats.setCallId(call.getItem());
+                callStats.setCallId(activeCall.getCallId());
                 callStats.setRemoteAddress(activeCall.getRemoteNumber());
                 Arrays.stream(ciscoStatus.getCalls()).filter(fcall -> fcall.getStatus().equals("Connected")).findFirst().ifPresent(callInfo -> {
                     for (Channel channel : call.getChannels()) {
@@ -763,7 +882,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     return Arrays.asList(extendedStatistics, endpointStatistics);
                 }
 
-                populateMediaChannelsData(ciscoStatus, endpointStatistics);
+                routeMediaChannelsData(ciscoStatus, endpointStatistics);
                 endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
 
                 List<String> propertyGroups = Arrays.stream(displayPropertyGroups.split(",")).map(String::trim).collect(Collectors.toList());
@@ -2107,14 +2226,24 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
          * @param callInfo call information, retrieved from the device
          */
         private void enrichAudioChannelStatsData(AudioChannelStats audioChannelStats, CallStats callStats, Channel channel, Call callInfo) {
-            Audio audio = channel.getAudio();
-            if (audio == null) {
+            Audio[] audioChannels = channel.getAudio();
+            if (audioChannels == null || audioChannels.length == 0) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Unable to populate audio channel data: no audio status available");
                 }
                 return;
             }
-            String audioChannelProtocol = audio.getProtocol();
+
+            Optional<Audio> audioData = Arrays.stream(audioChannels).filter(a -> Objects.equals("Active", a.getStatus()) || !StringUtils.isNullOrEmpty(a.getChannels())).findFirst();
+            if (!audioData.isPresent()) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to populate audio channel data: no audio status data available");
+                }
+                return;
+            }
+
+            Audio audio = audioData.get();
+            String audioChannelProtocol = audio.getCodec();
             if (StringUtils.isNullOrEmpty(audioChannelProtocol) || audioChannelProtocol.equals("Off")) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Unable to populate audio channel data: no audio protocol available");
@@ -2164,7 +2293,23 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
          * @param callInfo call information, retrieved from the device
          */
         private void enrichVideoChannelStatsData(VideoChannelStats videoChannelStats, CallStats callStats, ContentChannelStats contentChannelStats, Channel channel, Call callInfo) {
-            Video video = channel.getVideo();
+            Video[] videoChannels = channel.getVideo();
+            if (videoChannels == null || videoChannels.length == 0) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to populate video channel data: no video status available");
+                }
+                return;
+            }
+
+            Optional<Video> videoData = Arrays.stream(videoChannels).filter(v -> Objects.equals("Active", v.getStatus()) || !StringUtils.isNullOrEmpty(v.getChannelRole())).findFirst();
+            if (!videoData.isPresent()) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to populate video channel data: no video status data available");
+                }
+                return;
+            }
+
+            Video video = videoData.get();
             if (video == null) {
                 return;
             }
@@ -2174,7 +2319,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 // skip on "Data" (i.e. Cisco SX) or "Presentation" (i.e. Cisco WebEx) type channels
                 return;
             }
-            String videoChannelProtocol = video.getProtocol();
+            String videoChannelProtocol = video.getCodec();
             if (videoChannelProtocol == null || videoChannelProtocol.equals("Off")) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Unable to populate video channel data: no video channel protocol information available");
@@ -2224,13 +2369,16 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
          * @param channel data, retrieved from the device
          */
         private void enrichContentChannelStatsData(ContentChannelStats contentChannelStats, Channel channel) {
-            Video video = channel.getVideo();
-            if (video == null) {
+            Video[] videoChannels = channel.getVideo();
+            Optional<Video> videoData = Arrays.stream(videoChannels).filter(a -> Objects.equals("Active", a.getStatus())).findFirst();
+
+            if (!videoData.isPresent()) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Unable to populate content channel data: no video information available");
                 }
                 return;
             }
+            Video video = videoData.get();
 
             Netstat netstat = channel.getNetstat();
             if (netstat == null) {
@@ -2240,7 +2388,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 return;
             }
 
-            contentChannelStats.setCodec(video.getProtocol());
+            contentChannelStats.setCodec(video.getCodec());
 
             switch (channel.getDirection()) {
                 case "Incoming":

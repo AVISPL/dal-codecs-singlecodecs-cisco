@@ -1259,6 +1259,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 return;
             }
             Arrays.stream(calls).forEach(call -> {
+                if(Objects.equals("Disconnected", call.getStatus())) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug(String.format("Call %s is disconnected. Skipping statistics collection", call.getCallId()));
+                    }
+                    return;
+                }
                 String itemCounter = call.getItem();
                 addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_ANSWER_STATE, itemCounter), call.getAnswerState());
                 addStatisticsParameter(statistics, String.format(N_ACTIVE_CALL_TYPE, itemCounter), call.getCallType());

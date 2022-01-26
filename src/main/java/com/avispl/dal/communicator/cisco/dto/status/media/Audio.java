@@ -19,8 +19,6 @@ public class Audio extends CallChannelData {
     private String channels;
     @JacksonXmlProperty(localName="Mute")
     private String mute;
-    @JacksonXmlProperty(localName="Protocol")
-    private String protocol;
 
     /**
      * Retrieves {@code {@link #channels}}
@@ -56,23 +54,5 @@ public class Audio extends CallChannelData {
      */
     public void setMute(String mute) {
         this.mute = mute;
-    }
-
-    /**
-     * Retrieves {@code {@link #protocol}}
-     *
-     * @return value of {@link #protocol}
-     */
-    public String getCodec() {
-        return protocol;
-    }
-
-    /**
-     * Sets {@code protocol}
-     *
-     * @param codec the {@code java.lang.String} field
-     */
-    public void setCodec(String codec) {
-        this.protocol = codec;
     }
 }

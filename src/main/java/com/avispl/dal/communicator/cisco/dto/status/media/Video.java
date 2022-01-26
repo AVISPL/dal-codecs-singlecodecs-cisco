@@ -19,8 +19,6 @@ public class Video extends CallChannelData{
     private String channelRole;
     @JacksonXmlProperty(localName="FrameRate")
     private String frameRate;
-    @JacksonXmlProperty(localName="Protocol")
-    private String protocol;
     @JacksonXmlProperty(localName="ResolutionX")
     private String resolutionX;
     @JacksonXmlProperty(localName="ResolutionY")
@@ -62,24 +60,6 @@ public class Video extends CallChannelData{
      */
     public void setFrameRate(String frameRate) {
         this.frameRate = frameRate;
-    }
-
-    /**
-     * Retrieves {@code {@link #protocol}}
-     *
-     * @return value of {@link #protocol}
-     */
-    public String getCodec() {
-        return protocol;
-    }
-
-    /**
-     * Sets {@code protocol}
-     *
-     * @param codec the {@code java.lang.String} field
-     */
-    public void setCodec(String codec) {
-        this.protocol = codec;
     }
 
     /**

@@ -527,7 +527,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     @Override
     public MuteStatus retrieveMuteStatus() throws Exception {
         CiscoStatus status = doGet(String.format(getXmlPath, microphonesStatusUri), CiscoStatus.class);
-        return "On".equals(status.getAudio().getMicrophones().getMute()) ? MuteStatus.Muted : MuteStatus.Unmuted;
+        return "On".equalsIgnoreCase(status.getAudio().getMicrophones().getMute()) ? MuteStatus.Muted : MuteStatus.Unmuted;
     }
 
     /**
@@ -633,7 +633,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> {
             String callStatus = call.getStatus();
-            if ("Connected".equals(callStatus) || "Synced".equals(callStatus)) {
+            if ("Connected".equalsIgnoreCase(callStatus) || "Synced".equalsIgnoreCase(callStatus)) {
                 return true;
             } else {
                 return false;
@@ -763,7 +763,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             return;
         }
 
-        List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> "Connected".equals(call.getStatus()) || "Synced".equals(call.getStatus()))
+        List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> "Connected".equalsIgnoreCase(call.getStatus()) || "Synced".equalsIgnoreCase(call.getStatus()))
                 .collect(Collectors.toList());
         long callsCount = connectedCalls.size();
         if (callsCount > 1) {
@@ -787,7 +787,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             CallStats callStats = new CallStats();
             callStats.setCallId(activeCall.getCallId());
             callStats.setRemoteAddress(activeCall.getRemoteNumber());
-            Arrays.stream(ciscoStatus.getCalls()).filter(fcall -> fcall.getStatus().equals("Connected")).findFirst().ifPresent(callInfo -> {
+            Arrays.stream(ciscoStatus.getCalls()).filter(fcall -> "Connected".equalsIgnoreCase(fcall.getStatus())).findFirst().ifPresent(callInfo -> {
                 for (Channel channel : call.getChannels()) {
                     switch (channel.getType()) {
                         case "Audio":
@@ -828,7 +828,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             H323Gatekeeper gatekeeper = h323.getGatekeeper();
             if (gatekeeper != null) {
                 registrationStatus.setH323Details(String.format("Port: %s", gatekeeper.getPort()));
-                registrationStatus.setH323Registered("Registered".equals(gatekeeper.getStatus()));
+                registrationStatus.setH323Registered("Registered".equalsIgnoreCase(gatekeeper.getStatus()));
                 registrationStatus.setH323Gatekeeper(gatekeeper.getAddress());
             }
         }
@@ -838,7 +838,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             Registration[] registrations = sip.getRegistrations();
             if (registrations != null && registrations.length > 0) {
                 registrationStatus.setSipDetails(String.format("URI: %s", registrations[0].getUri()));
-                registrationStatus.setSipRegistered("Registered".equals(registrations[0].getStatus()));
+                registrationStatus.setSipRegistered("Registered".equalsIgnoreCase(registrations[0].getStatus()));
             }
             Proxy[] proxies = sip.getProxies();
             if (proxies != null && proxies.length > 0) {
@@ -1909,7 +1909,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 if (callControl != null) {
                     String controlValue = callControl.getValue();
                     addStatisticsParameter(statistics, PROXIMITY_SERVICES_CALL_CONTROL, controlValue);
-                    controls.add(createSwitch(PROXIMITY_SERVICES_CALL_CONTROL, controlValue.equals("Enabled") ? 1 : 0));
+                    controls.add(createSwitch(PROXIMITY_SERVICES_CALL_CONTROL, "Enabled".equalsIgnoreCase(controlValue) ? 1 : 0));
                 }
                 ProximityConfigurationContentShare contentShare = services.getContentShare();
                 if (contentShare != null) {
@@ -1917,13 +1917,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     if (toClients != null) {
                         String toClientsValue = toClients.getValue();
                         addStatisticsParameter(statistics, PROXIMITY_SERVICES_CONTENT_SHARE_TO_CLIENTS, toClientsValue);
-                        controls.add(createSwitch(PROXIMITY_SERVICES_CONTENT_SHARE_TO_CLIENTS, toClientsValue.equals("Enabled") ? 1 : 0));
+                        controls.add(createSwitch(PROXIMITY_SERVICES_CONTENT_SHARE_TO_CLIENTS, "Enabled".equalsIgnoreCase(toClientsValue) ? 1 : 0));
                     }
                     ValueSpaceRefHolder fromClients = contentShare.getFromClients();
                     if (fromClients != null) {
                         String fromClientsValue = fromClients.getValue();
                         addStatisticsParameter(statistics, PROXIMITY_SERVICES_CONTENT_SHARE_FROM_CLIENTS, fromClientsValue);
-                        controls.add(createSwitch(PROXIMITY_SERVICES_CONTENT_SHARE_FROM_CLIENTS, fromClientsValue.equals("Enabled") ? 1 : 0));
+                        controls.add(createSwitch(PROXIMITY_SERVICES_CONTENT_SHARE_FROM_CLIENTS, "Enabled".equalsIgnoreCase(fromClientsValue) ? 1 : 0));
                     }
                 }
             }
@@ -2274,7 +2274,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         Audio audio = audioData.get();
         String audioChannelProtocol = audio.getCodec();
-        if (StringUtils.isNullOrEmpty(audioChannelProtocol) || audioChannelProtocol.equals("Off")) {
+        if (StringUtils.isNullOrEmpty(audioChannelProtocol) || "Off".equalsIgnoreCase(audioChannelProtocol)) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate audio channel data: no audio protocol available");
             }
@@ -2294,7 +2294,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 audioChannelStats.setPacketLossRx(extractValueInt(netstat.getLoss()));
                 audioChannelStats.setJitterRx(extractValueFloat(netstat.getJitter()));
                 audioChannelStats.setBitRateRx(extractAndReduceValueInt(netstatChannelRate, 1000));
-                if ("Audio".equals(callInfo.getCallType())) {
+                if ("Audio".equalsIgnoreCase(callInfo.getCallType())) {
                     callStats.setCallRateRx(extractAndReduceValueInt(netstatChannelRate, 1000));
                 }
                 break;
@@ -2303,7 +2303,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 audioChannelStats.setJitterTx(extractValueFloat(netstat.getJitter()));
                 audioChannelStats.setBitRateTx(extractAndReduceValueInt(netstatChannelRate, 1000));
                 audioChannelStats.setMuteTx(Boolean.valueOf(audio.getMute()));
-                if ("Audio".equals(callInfo.getCallType())) {
+                if ("Audio".equalsIgnoreCase(callInfo.getCallType())) {
                     callStats.setCallRateTx(extractAndReduceValueInt(netstatChannelRate, 1000));
                 }
                 break;
@@ -2347,13 +2347,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         Video video = videoData.get();
         String channelRole = video.getChannelRole();
-        if ("Presentation".equals(channelRole) || "Data".equals(channelRole)) {
+        if ("Presentation".equalsIgnoreCase(channelRole) || "Data".equalsIgnoreCase(channelRole)) {
             enrichContentChannelStatsData(contentChannelStats, channel);
             // skip on "Data" (i.e. Cisco SX) or "Presentation" (i.e. Cisco WebEx) type channels
             return;
         }
         String videoChannelProtocol = video.getCodec();
-        if (videoChannelProtocol == null || videoChannelProtocol.equals("Off")) {
+        if (videoChannelProtocol == null || "Off".equalsIgnoreCase(videoChannelProtocol)) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate video channel data: no video channel protocol information available");
             }
@@ -2375,7 +2375,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 videoChannelStats.setJitterRx(extractValueFloat(netstat.getJitter()));
                 videoChannelStats.setBitRateRx(extractAndReduceValueInt(netstatChannelRate, 1000));
                 videoChannelStats.setPacketLossRx(extractValueInt(netstat.getLoss()));
-                if ("Video".equals(callInfo.getCallType())) {
+                if ("Video".equalsIgnoreCase(callInfo.getCallType())) {
                     callStats.setCallRateRx(extractAndReduceValueInt(netstatChannelRate, 1000));
                 }
                 break;
@@ -2385,7 +2385,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 videoChannelStats.setJitterTx(extractValueFloat(netstat.getJitter()));
                 videoChannelStats.setBitRateTx(extractAndReduceValueInt(netstatChannelRate, 1000));
                 videoChannelStats.setPacketLossTx(extractValueInt(netstat.getLoss()));
-                if ("Audio".equals(callInfo.getCallType())) {
+                if ("Audio".equalsIgnoreCase(callInfo.getCallType())) {
                     callStats.setCallRateTx(extractAndReduceValueInt(netstatChannelRate, 1000));
                 }
                 break;
@@ -3028,7 +3028,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                                                   String parameterName, String value) {
         if (!StringUtils.isNullOrEmpty(value)) {
             statistics.put(parameterName, "");
-            controllableProperties.add(createSwitch(parameterName, "Off".equals(value) ? 0 : 1));
+            controllableProperties.add(createSwitch(parameterName, "Off".equalsIgnoreCase(value) ? 0 : 1));
         }
     }
 
@@ -3046,7 +3046,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             String parameterValue = value.getValue();
             if (!StringUtils.isNullOrEmpty(parameterValue)) {
                 statistics.put(parameterName, "");
-                controllableProperties.add(createSwitch(parameterName, "Off".equals(parameterValue) ? 0 : 1));
+                controllableProperties.add(createSwitch(parameterName, "Off".equalsIgnoreCase(parameterValue) ? 0 : 1));
             }
         }
     }

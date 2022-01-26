@@ -673,7 +673,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
                 return;
             }
+
             String direction = channel.getDirection();
+            if (StringUtils.isNullOrEmpty(direction)) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("No channel direction data, skipping.");
+                }
+                return;
+            }
+
             Audio[] audioChannels = channel.getAudio();
             Optional<Audio> audioData = Optional.empty();
             if (audioChannels != null) {
@@ -2289,7 +2297,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
         audioChannelStats.setCodec(audioChannelProtocol);
         String netstatChannelRate = netstat.getChannelRate();
-        switch (channel.getDirection()) {
+
+        String direction = channel.getDirection();
+        if (StringUtils.isNullOrEmpty(direction)) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("No channel direction data, skipping.");
+            }
+            return;
+        }
+        switch (direction) {
             case "Incoming":
                 audioChannelStats.setPacketLossRx(extractValueInt(netstat.getLoss()));
                 audioChannelStats.setJitterRx(extractValueFloat(netstat.getJitter()));
@@ -2308,7 +2324,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
                 break;
             default:
-                logger.info("Channel direction not supported: " + channel.getDirection());
+                logger.info("Channel direction not supported: " + direction);
                 break;
         }
     }
@@ -2368,7 +2384,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
         String netstatChannelRate = netstat.getChannelRate();
         videoChannelStats.setCodec(videoChannelProtocol);
-        switch (channel.getDirection()) {
+        String direction = channel.getDirection();
+        if (StringUtils.isNullOrEmpty(direction)) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("No channel direction data, skipping.");
+            }
+            return;
+        }
+        switch (direction) {
             case "Incoming":
                 videoChannelStats.setFrameSizeRx(extractValueInt(video.getResolutionX()), extractValueInt(video.getResolutionY()));
                 videoChannelStats.setFrameRateRx(extractValueFloat(video.getFrameRate()));
@@ -2390,7 +2413,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
                 break;
             default:
-                logger.info("Channel direction not supported: " + channel.getDirection());
+                logger.info("Channel direction not supported: " + direction);
                 break;
         }
     }
@@ -2423,7 +2446,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         Video video = videoData.get();
         contentChannelStats.setCodec(video.getCodec());
 
-        switch (channel.getDirection()) {
+        String direction = channel.getDirection();
+        if (StringUtils.isNullOrEmpty(direction)) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("No channel direction data, skipping.");
+            }
+            return;
+        }
+        switch (direction) {
             case "Incoming":
                 contentChannelStats.setJitterRx(Float.valueOf(netstat.getJitter()));
                 contentChannelStats.setBitRateRx(Integer.valueOf(netstat.getChannelRate()));
@@ -2439,7 +2469,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 contentChannelStats.setPacketLossTx(Integer.valueOf(netstat.getLoss()));
                 break;
             default:
-                logger.info("Channel direction not supported: " + channel.getDirection());
+                logger.info("Channel direction not supported: " + direction);
                 break;
         }
     }

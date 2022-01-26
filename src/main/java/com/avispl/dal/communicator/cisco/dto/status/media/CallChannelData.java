@@ -16,7 +16,9 @@ public class CallChannelData {
     @JacksonXmlProperty(isAttribute = true, localName = "status")
     private String status;
     @JacksonXmlProperty(localName="Rate")
-    private Float rate;
+    private Integer rate;
+    @JacksonXmlProperty(localName="DynamicRate")
+    private Integer dynamicRate;
     @JacksonXmlProperty(localName="TotalPackets")
     private Integer totalPackets;
     @JacksonXmlProperty(localName="PacketLoss")
@@ -49,7 +51,7 @@ public class CallChannelData {
      *
      * @return value of {@link #rate}
      */
-    public Float getRate() {
+    public Integer getRate() {
         return rate;
     }
 
@@ -58,8 +60,26 @@ public class CallChannelData {
      *
      * @param rate the {@code java.lang.String} field
      */
-    public void setRate(Float rate) {
+    public void setRate(Integer rate) {
         this.rate = rate;
+    }
+
+    /**
+     * Retrieves {@code {@link #dynamicRate}}
+     *
+     * @return value of {@link #dynamicRate}
+     */
+    public Integer getDynamicRate() {
+        return dynamicRate;
+    }
+
+    /**
+     * Sets {@code dynamicRate}
+     *
+     * @param dynamicRate the {@code java.lang.Integer} field
+     */
+    public void setDynamicRate(Integer dynamicRate) {
+        this.dynamicRate = dynamicRate;
     }
 
     /**

@@ -677,26 +677,32 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                             audioChannelStats.setJitterRx(audio.getJitter());
                             audioChannelStats.setPacketLossRx(audio.getPacketLoss());
                             audioChannelStats.setCodec(audio.getCodec());
+                            audioChannelStats.setBitRateRx(audio.getDynamicRate());
                         }
                         if (videoData.isPresent()) {
                             Video video = videoData.get();
                             videoChannelStats.setJitterRx(video.getJitter());
                             videoChannelStats.setPacketLossRx(video.getPacketLoss());
                             videoChannelStats.setCodec(video.getCodec());
+                            videoChannelStats.setBitRateRx(video.getDynamicRate());
+                            videoChannelStats.setFrameSizeRx(video.getResolution());
                         }
                     break;
-                    case "Outcoming":
+                    case "Outgoing":
                         if (audioData.isPresent()) {
                             Audio audio = audioData.get();
                             audioChannelStats.setJitterTx(audio.getJitter());
                             audioChannelStats.setPacketLossTx(audio.getPacketLoss());
                             audioChannelStats.setCodec(audio.getCodec());
+                            audioChannelStats.setBitRateRx(audio.getDynamicRate());
                         }
                         if (videoData.isPresent()) {
                             Video video = videoData.get();
                             videoChannelStats.setJitterTx(video.getJitter());
                             videoChannelStats.setPacketLossTx(video.getPacketLoss());
                             videoChannelStats.setCodec(video.getCodec());
+                            videoChannelStats.setBitRateTx(video.getDynamicRate());
+                            videoChannelStats.setFrameSizeTx(video.getResolution());
                         }
                     break;
                     default:
@@ -708,6 +714,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             });
 
             callStats.setRequestedCallRate(activeCall.getCallRate());
+            callStats.setCallRateRx(videoChannelStats.getBitRateRx());
+            callStats.setCallRateTx(videoChannelStats.getBitRateTx());
+
             endpointStatistics.setInCall(true);
             endpointStatistics.setCallStats(callStats);
             endpointStatistics.setAudioChannelStats(audioChannelStats);

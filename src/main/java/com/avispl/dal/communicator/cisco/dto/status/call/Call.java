@@ -69,7 +69,6 @@ public class Call {
     @JacksonXmlProperty(localName="CallRate")
     private Integer callRate;
 
-
     /**
      * Retrieves callId value, based on either {@link #attributeLogTag}
      * or {@link #item} values
@@ -500,6 +499,15 @@ public class Call {
      */
     public void setChannels(Channel[] channels) {
         this.channels = channels;
+    }
+
+    /**
+     * Retrieves {@link #callRate}
+     *
+     * @return value of {@link #callRate}
+     */
+    public Integer getCallRate() {
+        return callRate;
     }
 
     /**

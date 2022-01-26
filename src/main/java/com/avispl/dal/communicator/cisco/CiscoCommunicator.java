@@ -3020,7 +3020,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             ValueSpaceRefHolderType type = value.getType();
             if (isNumeric(parameterValue) && !minMaxValues.isEmpty()
                     && (type.equals(ValueSpaceRefHolderType.INT) || type.equals(ValueSpaceRefHolderType.VS_INT))) {
-                statistics.put(parameterName, "");
+                statistics.put(parameterName, parameterValue);
                 controllableProperties.add(createSlider(parameterName, Float.valueOf(String.valueOf(minMaxValues.get(0))),
                         Float.valueOf(String.valueOf(minMaxValues.get(1))), Float.valueOf(parameterValue)));
             }
@@ -3041,7 +3041,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void addStatisticsParameterWithSlider(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, String value, float rangeStart, float rangeEnd) {
         if (isNumeric(value)) {
-            statistics.put(parameterName, "");
+            statistics.put(parameterName, value);
             controllableProperties.add(createSlider(parameterName, rangeStart, rangeEnd, Float.valueOf(value)));
         }
     }
@@ -3057,7 +3057,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void addStatisticsParameterWithSwitch(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                   String parameterName, String value) {
         if (!StringUtils.isNullOrEmpty(value)) {
-            statistics.put(parameterName, "");
+            statistics.put(parameterName, value);
             controllableProperties.add(createSwitch(parameterName, "Off".equalsIgnoreCase(value) ? 0 : 1));
         }
     }
@@ -3075,7 +3075,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (value != null) {
             String parameterValue = value.getValue();
             if (!StringUtils.isNullOrEmpty(parameterValue)) {
-                statistics.put(parameterName, "");
+                statistics.put(parameterName, parameterValue);
                 controllableProperties.add(createSwitch(parameterName, "Off".equalsIgnoreCase(parameterValue) ? 0 : 1));
             }
         }
@@ -3093,7 +3093,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void addStatisticsParameterWithDropdown(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
                                                     String parameterName, List<String> values, String value) {
         if (!StringUtils.isNullOrEmpty(value) && !values.isEmpty()) {
-            statistics.put(parameterName, "");
+            statistics.put(parameterName, value);
             controllableProperties.add(createDropdown(parameterName, values, value));
         }
     }
@@ -3112,7 +3112,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (value != null) {
             String parameterValue = value.getValue();
             if (!StringUtils.isNullOrEmpty(parameterValue)) {
-                statistics.put(parameterName, "");
+                statistics.put(parameterName, parameterValue);
                 controllableProperties.add(createDropdown(parameterName, Arrays.stream(extractTTPARValuespace(valueSpace,
                         value.getValueSpaceRef()).getValues()).map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), parameterValue));
             }

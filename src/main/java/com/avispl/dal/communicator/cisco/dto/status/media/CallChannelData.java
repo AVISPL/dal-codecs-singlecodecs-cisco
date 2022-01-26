@@ -10,7 +10,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * Legacy firmware versions provide media channel content data as a part of Audio/Video nodes within an active Call
  *
  * @author Maksym.Rossiytsev
- * @since 1.1.0
+ * @since 1.1.1
  * */
 public class CallChannelData {
     @JacksonXmlProperty(isAttribute = true, localName = "status")
@@ -137,7 +137,7 @@ public class CallChannelData {
     }
 
     /**
-     * Retrieves {@code {@link #codec }}
+     * Retrieves {@code {@link #codec}}
      *
      * @return value of {@link #codec}
      */
@@ -146,7 +146,7 @@ public class CallChannelData {
     }
 
     /**
-     * Sets {@code protocol}
+     * Sets {@code codec}
      *
      * @param codec the {@code java.lang.String} field
      */

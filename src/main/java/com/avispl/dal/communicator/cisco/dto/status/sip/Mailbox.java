@@ -21,7 +21,7 @@ public class Mailbox {
     private String uri;
 
     /**
-     * Retrieves {@code {@link #messagesWaiting}}
+     * Retrieves {@link #messagesWaiting}
      *
      * @return value of {@link #messagesWaiting}
      */
@@ -39,7 +39,7 @@ public class Mailbox {
     }
 
     /**
-     * Retrieves {@code {@link #uri}}
+     * Retrieves {@link #uri}
      *
      * @return value of {@link #uri}
      */

@@ -21,7 +21,7 @@ public class Security {
     private Persistency persistency;
 
     /**
-     * Retrieves {@code {@link #fips}}
+     * Retrieves {@link #fips}
      *
      * @return value of {@link #fips}
      */
@@ -39,7 +39,7 @@ public class Security {
     }
 
     /**
-     * Retrieves {@code {@link #persistency}}
+     * Retrieves {@link #persistency}
      *
      * @return value of {@link #persistency}
      */

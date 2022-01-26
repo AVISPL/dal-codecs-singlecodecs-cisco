@@ -20,7 +20,7 @@ public class ConferenceConfigurationDoNotDisturb {
     private ValueSpaceRefHolder defaultTimeout;
 
     /**
-     * Retrieves {@code {@link #defaultTimeout}}
+     * Retrieves {@link #defaultTimeout}
      *
      * @return value of {@link #defaultTimeout}
      */

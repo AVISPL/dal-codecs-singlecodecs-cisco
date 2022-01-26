@@ -21,7 +21,7 @@ public class AudioConfigurationOutput {
     private AudioConfigurationLine[] lines;
 
     /**
-     * Retrieves {@code {@link #lines}}
+     * Retrieves {@link #lines}
      *
      * @return value of {@link #lines}
      */

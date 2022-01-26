@@ -19,7 +19,7 @@ public class Microphones {
     private String mute;
 
     /**
-     * Retrieves {@code {@link #mute}}
+     * Retrieves {@link #mute}
      *
      * @return value of {@link #mute}
      */

@@ -23,7 +23,7 @@ public class SystemUnitConfiguration {
     private ValueSpaceRefHolder name;
 
     /**
-     * Retrieves {@code {@link #irSensor}}
+     * Retrieves {@link #irSensor}
      *
      * @return value of {@link #irSensor}
      */
@@ -41,7 +41,7 @@ public class SystemUnitConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */

@@ -17,7 +17,7 @@ public class ListCommand {
     private String command = "True";
 
     /**
-     * Retrieves {@code {@link #command}}
+     * Retrieves {@link #command}
      *
      * @return value of {@link #command}
      */

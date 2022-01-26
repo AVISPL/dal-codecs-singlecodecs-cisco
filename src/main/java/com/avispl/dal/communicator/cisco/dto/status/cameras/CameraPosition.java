@@ -25,7 +25,7 @@ public class CameraPosition {
     private String zoom;
 
     /**
-     * Retrieves {@code {@link #focus}}
+     * Retrieves {@link #focus}
      *
      * @return value of {@link #focus}
      */
@@ -43,7 +43,7 @@ public class CameraPosition {
     }
 
     /**
-     * Retrieves {@code {@link #pan}}
+     * Retrieves {@link #pan}
      *
      * @return value of {@link #pan}
      */
@@ -61,7 +61,7 @@ public class CameraPosition {
     }
 
     /**
-     * Retrieves {@code {@link #tilt}}
+     * Retrieves {@link #tilt}
      *
      * @return value of {@link #tilt}
      */
@@ -79,7 +79,7 @@ public class CameraPosition {
     }
 
     /**
-     * Retrieves {@code {@link #zoom}}
+     * Retrieves {@link #zoom}
      *
      * @return value of {@link #zoom}
      */

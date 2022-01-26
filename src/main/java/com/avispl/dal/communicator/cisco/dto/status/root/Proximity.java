@@ -19,7 +19,7 @@ public class Proximity {
     private ProximityServices proximityServices;
 
     /**
-     * Retrieves {@code {@link #proximityServices}}
+     * Retrieves {@link #proximityServices}
      *
      * @return value of {@link #proximityServices}
      */

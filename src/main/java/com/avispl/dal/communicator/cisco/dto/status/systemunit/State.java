@@ -23,7 +23,7 @@ public class State {
     private String numberOfSuspendedCalls;
 
     /**
-     * Retrieves {@code {@link #numberOfActiveCalls}}
+     * Retrieves {@link #numberOfActiveCalls}
      *
      * @return value of {@link #numberOfActiveCalls}
      */
@@ -41,7 +41,7 @@ public class State {
     }
 
     /**
-     * Retrieves {@code {@link #numberOfInProgressCalls}}
+     * Retrieves {@link #numberOfInProgressCalls}
      *
      * @return value of {@link #numberOfInProgressCalls}
      */
@@ -59,7 +59,7 @@ public class State {
     }
 
     /**
-     * Retrieves {@code {@link #numberOfSuspendedCalls}}
+     * Retrieves {@link #numberOfSuspendedCalls}
      *
      * @return value of {@link #numberOfSuspendedCalls}
      */

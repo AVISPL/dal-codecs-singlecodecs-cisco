@@ -20,7 +20,7 @@ public class PeripheralsPairing {
     private CiscoTouchPanels ciscoTouchPanels;
 
     /**
-     * Retrieves {@code {@link #ciscoTouchPanels}}
+     * Retrieves {@link #ciscoTouchPanels}
      *
      * @return value of {@link #ciscoTouchPanels}
      */

@@ -25,7 +25,7 @@ public class ConferenceCapabilities {
     private String maxVideoCalls;
 
     /**
-     * Retrieves {@code {@link #maxActiveCalls}}
+     * Retrieves {@link #maxActiveCalls}
      *
      * @return value of {@link #maxActiveCalls}
      */
@@ -43,7 +43,7 @@ public class ConferenceCapabilities {
     }
 
     /**
-     * Retrieves {@code {@link #maxAudioCalls}}
+     * Retrieves {@link #maxAudioCalls}
      *
      * @return value of {@link #maxAudioCalls}
      */
@@ -61,7 +61,7 @@ public class ConferenceCapabilities {
     }
 
     /**
-     * Retrieves {@code {@link #maxCalls}}
+     * Retrieves {@link #maxCalls}
      *
      * @return value of {@link #maxCalls}
      */
@@ -79,7 +79,7 @@ public class ConferenceCapabilities {
     }
 
     /**
-     * Retrieves {@code {@link #maxVideoCalls}}
+     * Retrieves {@link #maxVideoCalls}
      *
      * @return value of {@link #maxVideoCalls}
      */

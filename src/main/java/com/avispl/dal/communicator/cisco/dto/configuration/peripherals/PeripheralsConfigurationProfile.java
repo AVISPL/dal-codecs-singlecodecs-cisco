@@ -27,7 +27,7 @@ public class PeripheralsConfigurationProfile {
     private ValueSpaceRefHolder touchPanels;
 
     /**
-     * Retrieves {@code {@link #cameras}}
+     * Retrieves {@link #cameras}
      *
      * @return value of {@link #cameras}
      */
@@ -45,7 +45,7 @@ public class PeripheralsConfigurationProfile {
     }
 
     /**
-     * Retrieves {@code {@link #controlSystems}}
+     * Retrieves {@link #controlSystems}
      *
      * @return value of {@link #controlSystems}
      */
@@ -63,7 +63,7 @@ public class PeripheralsConfigurationProfile {
     }
 
     /**
-     * Retrieves {@code {@link #touchPanels}}
+     * Retrieves {@link #touchPanels}
      *
      * @return value of {@link #touchPanels}
      */

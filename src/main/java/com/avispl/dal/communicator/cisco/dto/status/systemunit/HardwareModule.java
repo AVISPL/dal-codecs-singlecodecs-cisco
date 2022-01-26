@@ -21,7 +21,7 @@ public class HardwareModule {
     private String serialNumber;
 
     /**
-     * Retrieves {@code {@link #compatibilityLevel}}
+     * Retrieves {@link #compatibilityLevel}
      *
      * @return value of {@link #compatibilityLevel}
      */
@@ -39,7 +39,7 @@ public class HardwareModule {
     }
 
     /**
-     * Retrieves {@code {@link #serialNumber}}
+     * Retrieves {@link #serialNumber}
      *
      * @return value of {@link #serialNumber}
      */

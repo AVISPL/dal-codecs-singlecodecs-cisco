@@ -23,7 +23,7 @@ public class H323ConfigurationNAT {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -41,7 +41,7 @@ public class H323ConfigurationNAT {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

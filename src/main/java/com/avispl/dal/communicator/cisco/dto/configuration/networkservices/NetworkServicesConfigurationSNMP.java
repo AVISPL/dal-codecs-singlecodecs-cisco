@@ -34,7 +34,7 @@ public class NetworkServicesConfigurationSNMP {
     private ValueSpaceRefHolder systemLocation;
 
     /**
-     * Retrieves {@code {@link #communityName}}
+     * Retrieves {@link #communityName}
      *
      * @return value of {@link #communityName}
      */
@@ -52,7 +52,7 @@ public class NetworkServicesConfigurationSNMP {
     }
 
     /**
-     * Retrieves {@code {@link #hosts}}
+     * Retrieves {@link #hosts}
      *
      * @return value of {@link #hosts}
      */
@@ -70,7 +70,7 @@ public class NetworkServicesConfigurationSNMP {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -88,7 +88,7 @@ public class NetworkServicesConfigurationSNMP {
     }
 
     /**
-     * Retrieves {@code {@link #systemContact}}
+     * Retrieves {@link #systemContact}
      *
      * @return value of {@link #systemContact}
      */
@@ -106,7 +106,7 @@ public class NetworkServicesConfigurationSNMP {
     }
 
     /**
-     * Retrieves {@code {@link #systemLocation}}
+     * Retrieves {@link #systemLocation}
      *
      * @return value of {@link #systemLocation}
      */

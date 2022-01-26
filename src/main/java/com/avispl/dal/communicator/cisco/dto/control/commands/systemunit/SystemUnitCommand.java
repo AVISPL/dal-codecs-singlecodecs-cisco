@@ -59,7 +59,7 @@ public class SystemUnitCommand {
         }
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -68,7 +68,7 @@ public class SystemUnitCommand {
         }
 
         /**
-         * Retrieves {@code {@link #action}}
+         * Retrieves {@link #action}
          *
          * @return value of {@link #action}
          */
@@ -92,7 +92,7 @@ public class SystemUnitCommand {
     }
 
     /**
-     * Retrieves {@code {@link #boot}}
+     * Retrieves {@link #boot}
      *
      * @return value of {@link #boot}
      */

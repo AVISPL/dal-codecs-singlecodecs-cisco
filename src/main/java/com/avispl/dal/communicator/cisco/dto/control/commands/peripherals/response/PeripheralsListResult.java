@@ -21,7 +21,7 @@ public class PeripheralsListResult {
     private PeripheralsDevice[] peripheralsDevices;
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */
@@ -39,7 +39,7 @@ public class PeripheralsListResult {
     }
 
     /**
-     * Retrieves {@code {@link #peripheralsDevices}}
+     * Retrieves {@link #peripheralsDevices}
      *
      * @return value of {@link #peripheralsDevices}
      */

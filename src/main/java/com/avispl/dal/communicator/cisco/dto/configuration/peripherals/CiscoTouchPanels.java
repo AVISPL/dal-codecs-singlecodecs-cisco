@@ -39,7 +39,7 @@ public class CiscoTouchPanels {
     private ValueSpaceRefHolder remotePairing;
 
     /**
-     * Retrieves {@code {@link #remotePairing}}
+     * Retrieves {@link #remotePairing}
      *
      * @return value of {@link #remotePairing}
      */

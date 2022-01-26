@@ -19,7 +19,7 @@ public class AudioOutput {
     private AudioOutputConnectors connectors;
 
     /**
-     * Retrieves {@code {@link #connectors}}
+     * Retrieves {@link #connectors}
      *
      * @return value of {@link #connectors}
      */

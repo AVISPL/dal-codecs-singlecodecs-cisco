@@ -21,7 +21,7 @@ public class CameraCommand {
     private CameraPositionSetCommand positionSetCommand;
 
     /**
-     * Retrieves {@code {@link #positionSetCommand}}
+     * Retrieves {@link #positionSetCommand}
      *
      * @return value of {@link #positionSetCommand}
      */

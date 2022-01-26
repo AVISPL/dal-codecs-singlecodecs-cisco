@@ -23,7 +23,7 @@ public class VideoConfigurationSelfview {
     private VideoConfigurationSelfviewOnCall onCall;
 
     /**
-     * Retrieves {@code {@link #selfviewDefault}}
+     * Retrieves {@link #selfviewDefault}
      *
      * @return value of {@link #selfviewDefault}
      */
@@ -41,7 +41,7 @@ public class VideoConfigurationSelfview {
     }
 
     /**
-     * Retrieves {@code {@link #onCall}}
+     * Retrieves {@link #onCall}
      *
      * @return value of {@link #onCall}
      */

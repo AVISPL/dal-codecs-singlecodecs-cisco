@@ -1,9 +1,12 @@
 /*
- * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2022 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status.call;
 
+import com.avispl.dal.communicator.cisco.dto.status.media.Channel;
+import com.avispl.symphony.dal.util.StringUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
@@ -19,6 +22,14 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 public class Call {
     @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
+    @JacksonXmlProperty(isAttribute = true, localName="status")
+    private String attributeStatus;
+    @JacksonXmlProperty(isAttribute = true, localName="protocol")
+    private String attributeProtocol;
+    @JacksonXmlProperty(isAttribute = true, localName="direction")
+    private String attributeDirection;
+    @JacksonXmlProperty(isAttribute = true, localName="logTag")
+    private String attributeLogTag;
     @JacksonXmlProperty(localName="AnswerState")
     private String answerState;
     @JacksonXmlProperty(localName="CallType")
@@ -52,8 +63,28 @@ public class Call {
     @JacksonXmlProperty(localName="TransmitCallRate")
     private String transmitCallRate;
 
+    @JacksonXmlProperty(localName="Channels")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    private Channel[] channels;
+    @JacksonXmlProperty(localName="CallRate")
+    private Integer callRate;
+
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves callId value, based on either {@link #attributeLogTag}
+     * or {@link #item} values
+     *
+     * @return String value of the callId
+     * @since 1.1.1
+     */
+    public String getCallId() {
+       if (!StringUtils.isNullOrEmpty(attributeLogTag)) {
+           return attributeLogTag;
+       }
+       return item;
+    }
+
+    /**
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -71,7 +102,87 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #answerState}}
+     * Retrieves {@link #attributeStatus}
+     *
+     * @return value of {@link #attributeStatus}
+     * @since 1.1.1
+     */
+    public String getAttributeStatus() {
+        return attributeStatus;
+    }
+
+    /**
+     * Sets {@code attributeStatus}
+     *
+     * @param attributeStatus the {@code java.lang.String} field
+     * @since 1.1.1
+     */
+    public void setAttributeStatus(String attributeStatus) {
+        this.attributeStatus = attributeStatus;
+    }
+
+    /**
+     * Retrieves {@link #attributeProtocol}
+     *
+     * @return value of {@link #attributeProtocol}
+     * @since 1.1.1
+     */
+    public String getAttributeProtocol() {
+        return attributeProtocol;
+    }
+
+    /**
+     * Sets {@code attributeProtocol}
+     *
+     * @param attributeProtocol the {@code java.lang.String} field
+     * @since 1.1.1
+     */
+    public void setAttributeProtocol(String attributeProtocol) {
+        this.attributeProtocol = attributeProtocol;
+    }
+
+    /**
+     * Retrieves {@link #attributeDirection}
+     *
+     * @return value of {@link #attributeDirection}
+     * @since 1.1.1
+     */
+    public String getAttributeDirection() {
+        return attributeDirection;
+    }
+
+    /**
+     * Sets {@code attributeDirection}
+     *
+     * @param attributeDirection the {@code java.lang.String} field
+     * @since 1.1.1
+     */
+    public void setAttributeDirection(String attributeDirection) {
+        this.attributeDirection = attributeDirection;
+    }
+
+    /**
+     * Retrieves {@link #attributeLogTag}
+     *
+     * @return value of {@link #attributeLogTag}
+     * @since 1.1.1
+     */
+    public String getAttributeLogTag() {
+        return attributeLogTag;
+    }
+
+    /**
+     * Sets {@code attributeLogTag}
+     *
+     * @param attributeLogTag the {@code java.lang.String} field
+     * @since 1.1.1
+     */
+    public void setAttributeLogTag(String attributeLogTag) {
+        this.attributeLogTag = attributeLogTag;
+    }
+
+    /**
+     * Retrieves {@link #answerState}
      *
      * @return value of {@link #answerState}
      */
@@ -89,7 +200,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #callType}}
+     * Retrieves {@link #callType}
      *
      * @return value of {@link #callType}
      */
@@ -107,7 +218,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #callbackNumber}}
+     * Retrieves {@link #callbackNumber}
      *
      * @return value of {@link #callbackNumber}
      */
@@ -125,7 +236,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #deviceType}}
+     * Retrieves {@link #deviceType}
      *
      * @return value of {@link #deviceType}
      */
@@ -143,11 +254,15 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #direction}}
+     * Retrieves call direction based on either {@link #attributeDirection} or
+     * {@link #direction}, if former is present and latter is not - former is used
      *
      * @return value of {@link #direction}
      */
     public String getDirection() {
+        if (!StringUtils.isNullOrEmpty(attributeDirection) && StringUtils.isNullOrEmpty(direction)) {
+            return attributeDirection;
+        }
         return direction;
     }
 
@@ -161,7 +276,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #displayName}}
+     * Retrieves {@link #displayName}
      *
      * @return value of {@link #displayName}
      */
@@ -179,7 +294,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #duration}}
+     * Retrieves {@link #duration}
      *
      * @return value of {@link #duration}
      */
@@ -197,7 +312,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #encryption}}
+     * Retrieves {@link #encryption}
      *
      * @return value of {@link #encryption}
      */
@@ -215,7 +330,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #facilityServiceId}}
+     * Retrieves {@link #facilityServiceId}
      *
      * @return value of {@link #facilityServiceId}
      */
@@ -233,7 +348,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #holdReason}}
+     * Retrieves {@link #holdReason}
      *
      * @return value of {@link #holdReason}
      */
@@ -251,7 +366,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #placedOnHold}}
+     * Retrieves {@link #placedOnHold}
      *
      * @return value of {@link #placedOnHold}
      */
@@ -269,11 +384,15 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #protocol}}
+     * Retrieves protocol value, based on either {@link #attributeProtocol} or
+     * {@link #protocol} if former is present and latter is not - former is used
      *
      * @return value of {@link #protocol}
      */
     public String getProtocol() {
+        if (!StringUtils.isNullOrEmpty(attributeProtocol) && StringUtils.isNullOrEmpty(protocol)) {
+            return attributeProtocol;
+        }
         return protocol;
     }
 
@@ -287,7 +406,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #receiveCallRate}}
+     * Retrieves {@link #receiveCallRate}
      *
      * @return value of {@link #receiveCallRate}
      */
@@ -305,7 +424,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #remoteNumber}}
+     * Retrieves {@link #remoteNumber}
      *
      * @return value of {@link #remoteNumber}
      */
@@ -323,11 +442,15 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves call status value, based on either {@link #attributeStatus} or
+     * {@link #status} if former is present and latter is not - former is used
      *
      * @return value of {@link #status}
      */
     public String getStatus() {
+        if (!StringUtils.isNullOrEmpty(attributeStatus) && StringUtils.isNullOrEmpty(status)) {
+            return attributeStatus;
+        }
         return status;
     }
 
@@ -341,7 +464,7 @@ public class Call {
     }
 
     /**
-     * Retrieves {@code {@link #transmitCallRate}}
+     * Retrieves {@link #transmitCallRate}
      *
      * @return value of {@link #transmitCallRate}
      */
@@ -356,5 +479,45 @@ public class Call {
      */
     public void setTransmitCallRate(String transmitCallRate) {
         this.transmitCallRate = transmitCallRate;
+    }
+
+    /**
+     * Retrieves {@link #channels}
+     *
+     * @return value of {@link #channels}
+     * @since 1.1.1
+     */
+    public Channel[] getChannels() {
+        return channels;
+    }
+
+    /**
+     * Sets {@code channels}
+     *
+     * @param channels the {@code com.avispl.dal.communicator.cisco.dto.status.media.Channel[]} field
+     * @since 1.1.1
+     */
+    public void setChannels(Channel[] channels) {
+        this.channels = channels;
+    }
+
+    /**
+     * Retrieves {@link #callRate}
+     *
+     * @return value of {@link #callRate}
+     * @since 1.1.1
+     */
+    public Integer getCallRate() {
+        return callRate;
+    }
+
+    /**
+     * Sets {@code callRate}
+     *
+     * @param callRate the {@code java.lang.Integer} field
+     * @since 1.1.1
+     */
+    public void setCallRate(Integer callRate) {
+        this.callRate = callRate;
     }
 }

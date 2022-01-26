@@ -19,7 +19,7 @@ public class PeopleCount {
     private String current;
 
     /**
-     * Retrieves {@code {@link #current}}
+     * Retrieves {@link #current}
      *
      * @return value of {@link #current}
      */

@@ -28,7 +28,7 @@ public class AudioConfigurationInput {
     private AudioConfigurationMicrophone[] microphones;
 
     /**
-     * Retrieves {@code {@link #microphoneMode}}
+     * Retrieves {@link #microphoneMode}
      *
      * @return value of {@link #microphoneMode}
      */
@@ -46,7 +46,7 @@ public class AudioConfigurationInput {
     }
 
     /**
-     * Retrieves {@code {@link #lines}}
+     * Retrieves {@link #lines}
      *
      * @return value of {@link #lines}
      */
@@ -64,7 +64,7 @@ public class AudioConfigurationInput {
     }
 
     /**
-     * Retrieves {@code {@link #microphones}}
+     * Retrieves {@link #microphones}
      *
      * @return value of {@link #microphones}
      */

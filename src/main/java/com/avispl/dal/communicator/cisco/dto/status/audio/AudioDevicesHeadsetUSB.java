@@ -23,7 +23,7 @@ public class AudioDevicesHeadsetUSB {
     private String manufacturer;
 
     /**
-     * Retrieves {@code {@link #connectionStatus}}
+     * Retrieves {@link #connectionStatus}
      *
      * @return value of {@link #connectionStatus}
      */
@@ -41,7 +41,7 @@ public class AudioDevicesHeadsetUSB {
     }
 
     /**
-     * Retrieves {@code {@link #description}}
+     * Retrieves {@link #description}
      *
      * @return value of {@link #description}
      */
@@ -59,7 +59,7 @@ public class AudioDevicesHeadsetUSB {
     }
 
     /**
-     * Retrieves {@code {@link #manufacturer}}
+     * Retrieves {@link #manufacturer}
      *
      * @return value of {@link #manufacturer}
      */

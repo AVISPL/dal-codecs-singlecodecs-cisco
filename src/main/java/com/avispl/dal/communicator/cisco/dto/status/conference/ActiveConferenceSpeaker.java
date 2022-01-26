@@ -19,7 +19,7 @@ public class ActiveConferenceSpeaker {
     private String callId;
 
     /**
-     * Retrieves {@code {@link #callId}}
+     * Retrieves {@link #callId}
      *
      * @return value of {@link #callId}
      */

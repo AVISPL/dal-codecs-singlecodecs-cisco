@@ -26,7 +26,7 @@ public class ConferenceConfigurationAutoAnswer {
     private ValueSpaceRefHolder mute;
 
     /**
-     * Retrieves {@code {@link #delay}}
+     * Retrieves {@link #delay}
      *
      * @return value of {@link #delay}
      */
@@ -44,7 +44,7 @@ public class ConferenceConfigurationAutoAnswer {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -62,7 +62,7 @@ public class ConferenceConfigurationAutoAnswer {
     }
 
     /**
-     * Retrieves {@code {@link #mute}}
+     * Retrieves {@link #mute}
      *
      * @return value of {@link #mute}
      */

@@ -24,7 +24,7 @@ public class AudioConfigurationEchoControl {
     private ValueSpaceRefHolder noiseReduction;
 
     /**
-     * Retrieves {@code {@link #dereverberation}}
+     * Retrieves {@link #dereverberation}
      *
      * @return value of {@link #dereverberation}
      */
@@ -42,7 +42,7 @@ public class AudioConfigurationEchoControl {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -60,7 +60,7 @@ public class AudioConfigurationEchoControl {
     }
 
     /**
-     * Retrieves {@code {@link #noiseReduction}}
+     * Retrieves {@link #noiseReduction}
      *
      * @return value of {@link #noiseReduction}
      */

@@ -97,7 +97,7 @@ public class Channel {
      * Retrieves {@link #data}
      *
      * @return value of {@link #data}
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public CallChannelData[] getData() {
         return data;
@@ -107,7 +107,7 @@ public class Channel {
      * Sets {@code data}
      *
      * @param data the {@code com.avispl.dal.communicator.cisco.dto.status.media.CallChannelData} field
-     * @since 1.1.0
+     * @since 1.1.1
      */
     public void setData(CallChannelData[] data) {
         this.data = data;

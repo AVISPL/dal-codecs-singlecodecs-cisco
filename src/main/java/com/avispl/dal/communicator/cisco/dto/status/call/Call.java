@@ -505,6 +505,7 @@ public class Call {
      * Retrieves {@link #callRate}
      *
      * @return value of {@link #callRate}
+     * @since 1.1.1
      */
     public Integer getCallRate() {
         return callRate;

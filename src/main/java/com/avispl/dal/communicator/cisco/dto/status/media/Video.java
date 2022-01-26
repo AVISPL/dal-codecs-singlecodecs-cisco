@@ -25,6 +25,8 @@ public class Video extends CallChannelData{
     private String resolutionX;
     @JacksonXmlProperty(localName="ResolutionY")
     private String resolutionY;
+    @JacksonXmlProperty(localName="Resolution")
+    private String resolution;
 
     /**
      * Retrieves {@code {@link #channelRole}}
@@ -114,5 +116,23 @@ public class Video extends CallChannelData{
      */
     public void setResolutionY(String resolutionY) {
         this.resolutionY = resolutionY;
+    }
+
+    /**
+     * Retrieves {@code {@link #resolution}}
+     *
+     * @return value of {@link #resolution}
+     */
+    public String getResolution() {
+        return resolution;
+    }
+
+    /**
+     * Sets {@code resolution}
+     *
+     * @param resolution the {@code java.lang.String} field
+     */
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
     }
 }

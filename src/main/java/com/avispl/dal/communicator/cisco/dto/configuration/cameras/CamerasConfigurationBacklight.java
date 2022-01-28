@@ -4,26 +4,23 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.cameras;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
- * Device Cameras Configuration Backlings class.
+ * Device Cameras Configuration Backlights class.
  * Serves both for collecting data and changing device's config.
  *
  * @author Maksym.Rossiitsev / Symphony Dev Team<br>
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class CamerasConfigurationBacklight {
-    @XmlElement(name = "DefaultMode")
+    @JacksonXmlProperty(localName="DefaultMode")
     private ValueSpaceRefHolder defaultMode;
 
     /**
-     * Retrieves {@code {@link #defaultMode}}
+     * Retrieves {@link #defaultMode}
      *
      * @return value of {@link #defaultMode}
      */

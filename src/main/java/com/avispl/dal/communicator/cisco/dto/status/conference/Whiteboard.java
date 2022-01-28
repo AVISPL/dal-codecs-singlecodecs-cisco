@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.conference;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device conference whiteboard class
  * Represents conference whiteboard node from /status.xml information payload
@@ -15,17 +13,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Whiteboard {
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private String mode;
-    @XmlElement(name = "ReleaseFloorAvailability")
+    @JacksonXmlProperty(localName="ReleaseFloorAvailability")
     private String releaseFloorAvailability;
-    @XmlElement(name = "RequestFloorAvailability")
+    @JacksonXmlProperty(localName="RequestFloorAvailability")
     private String requestFloorAvailability;
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -43,7 +41,7 @@ public class Whiteboard {
     }
 
     /**
-     * Retrieves {@code {@link #releaseFloorAvailability}}
+     * Retrieves {@link #releaseFloorAvailability}
      *
      * @return value of {@link #releaseFloorAvailability}
      */
@@ -61,7 +59,7 @@ public class Whiteboard {
     }
 
     /**
-     * Retrieves {@code {@link #requestFloorAvailability}}
+     * Retrieves {@link #requestFloorAvailability}
      *
      * @return value of {@link #requestFloorAvailability}
      */

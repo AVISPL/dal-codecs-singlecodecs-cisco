@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.standby;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Standby Configuration class.
@@ -17,21 +15,21 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class StandbyConfiguration {
-    @XmlElement(name = "BootAction")
+    @JacksonXmlProperty(localName="BootAction")
     private ValueSpaceRefHolder bootAction;
-    @XmlElement(name = "Control")
+    @JacksonXmlProperty(localName="Control")
     private ValueSpaceRefHolder control;
-    @XmlElement(name = "Delay")
+    @JacksonXmlProperty(localName="Delay")
     private ValueSpaceRefHolder delay;
-    @XmlElement(name = "StandbyAction")
+    @JacksonXmlProperty(localName="StandbyAction")
     private ValueSpaceRefHolder standbyAction;
-    @XmlElement(name = "WakeupAction")
+    @JacksonXmlProperty(localName="WakeupAction")
     private ValueSpaceRefHolder wakeupAction;
 
     /**
-     * Retrieves {@code {@link #bootAction}}
+     * Retrieves {@link #bootAction}
      *
      * @return value of {@link #bootAction}
      */
@@ -49,7 +47,7 @@ public class StandbyConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #control}}
+     * Retrieves {@link #control}
      *
      * @return value of {@link #control}
      */
@@ -67,7 +65,7 @@ public class StandbyConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #delay}}
+     * Retrieves {@link #delay}
      *
      * @return value of {@link #delay}
      */
@@ -85,7 +83,7 @@ public class StandbyConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #standbyAction}}
+     * Retrieves {@link #standbyAction}
      *
      * @return value of {@link #standbyAction}
      */
@@ -103,7 +101,7 @@ public class StandbyConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #wakeupAction}}
+     * Retrieves {@link #wakeupAction}
      *
      * @return value of {@link #wakeupAction}
      */

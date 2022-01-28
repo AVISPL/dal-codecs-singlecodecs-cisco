@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.root;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device capabilities status class
  * Represents capabilities node from /status.xml information payload
@@ -15,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Capabilities {
-    @XmlElement(name = "Conference")
+    @JacksonXmlProperty(localName="Conference")
     private ConferenceCapabilities conferenceCapabilities;
 
     /**
-     * Retrieves {@code {@link #conferenceCapabilities}}
+     * Retrieves {@link #conferenceCapabilities}
      *
      * @return value of {@link #conferenceCapabilities}
      */

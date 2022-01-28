@@ -11,6 +11,7 @@ import com.avispl.dal.communicator.cisco.dto.status.h323.H323;
 import com.avispl.dal.communicator.cisco.dto.status.media.MediaChannels;
 import com.avispl.dal.communicator.cisco.dto.status.network.Network;
 import com.avispl.dal.communicator.cisco.dto.status.networkservices.NetworkServices;
+import com.avispl.dal.communicator.cisco.dto.status.peripherals.Peripherals;
 import com.avispl.dal.communicator.cisco.dto.status.roomanalytics.RoomAnalytics;
 import com.avispl.dal.communicator.cisco.dto.status.root.Capabilities;
 import com.avispl.dal.communicator.cisco.dto.status.root.Proximity;
@@ -21,8 +22,10 @@ import com.avispl.dal.communicator.cisco.dto.status.sip.SIP;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.SystemUnit;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.VideoStatus;
-
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * Represents root status node of /status.xml payload
@@ -31,54 +34,59 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlRootElement(name = "Status")
-@XmlAccessorType(XmlAccessType.NONE)
+@JacksonXmlRootElement(localName = "Status")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CiscoStatus {
-    @XmlAttribute(name = "product")
+    @JacksonXmlProperty(isAttribute = true, localName="product")
     private String product;
-    @XmlAttribute(name = "version")
+    @JacksonXmlProperty(isAttribute = true, localName="version")
     private String version;
-    @XmlAttribute(name = "apiVersion")
+    @JacksonXmlProperty(isAttribute = true, localName="apiVersion")
     private String apiVersion;
-    @XmlElement(name = "Call")
+    @JacksonXmlProperty(localName="Call")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Call[] calls;
-    @XmlElement(name = "Audio")
+    @JacksonXmlProperty(localName="Audio")
     private AudioStatus audio;
-    @XmlElement(name = "Cameras")
+    @JacksonXmlProperty(localName="Cameras")
     private Cameras cameras;
-    @XmlElement(name = "Capabilities")
+    @JacksonXmlProperty(localName="Capabilities")
     private Capabilities capabilities;
-    @XmlElement(name = "Conference")
+    @JacksonXmlProperty(localName="Conference")
     private ConferenceStatus conference;
-    @XmlElement(name = "H323")
+    @JacksonXmlProperty(localName="H323")
     private H323 h323;
-    @XmlElement(name = "SIP")
+    @JacksonXmlProperty(localName="SIP")
     private SIP sip;
-    @XmlElement(name = "Network")
+    @JacksonXmlProperty(localName="Network")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Network[] networks;
-    @XmlElement(name = "NetworkServices")
+    @JacksonXmlProperty(localName="NetworkServices")
     private NetworkServices networkServices;
-    @XmlElement(name = "Proximity")
+    @JacksonXmlProperty(localName="Proximity")
     private Proximity proximity;
-    @XmlElement(name = "RoomAnalytics")
+    @JacksonXmlProperty(localName="RoomAnalytics")
     private RoomAnalytics roomAnalytics;
-    @XmlElement(name = "Security")
+    @JacksonXmlProperty(localName="Security")
     private Security security;
-    @XmlElement(name = "Standby")
+    @JacksonXmlProperty(localName="Standby")
     private Standby standby;
-    @XmlElement(name = "SystemUnit")
+    @JacksonXmlProperty(localName="SystemUnit")
     private SystemUnit systemUnit;
-    @XmlElement(name = "Time")
+    @JacksonXmlProperty(localName="Time")
     private Time time;
-    @XmlElement(name = "USB")
+    @JacksonXmlProperty(localName="USB")
     private USB usb;
-    @XmlElement(name = "Video")
+    @JacksonXmlProperty(localName="Video")
     private VideoStatus video;
-    @XmlElement(name = "MediaChannels")
+    @JacksonXmlProperty(localName="MediaChannels")
     private MediaChannels mediaChannels;
+    /** @since 1.1.0 */
+    @JacksonXmlProperty(localName="Peripherals")
+    private Peripherals periherals;
 
     /**
-     * Retrieves {@code {@link #product}}
+     * Retrieves {@link #product}
      *
      * @return value of {@link #product}
      */
@@ -96,7 +104,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #version}}
+     * Retrieves {@link #version}
      *
      * @return value of {@link #version}
      */
@@ -114,7 +122,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #apiVersion}}
+     * Retrieves {@link #apiVersion}
      *
      * @return value of {@link #apiVersion}
      */
@@ -132,7 +140,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #calls}}
+     * Retrieves {@link #calls}
      *
      * @return value of {@link #calls}
      */
@@ -150,7 +158,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #audio}}
+     * Retrieves {@link #audio}
      *
      * @return value of {@link #audio}
      */
@@ -168,7 +176,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #cameras}}
+     * Retrieves {@link #cameras}
      *
      * @return value of {@link #cameras}
      */
@@ -186,7 +194,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #capabilities}}
+     * Retrieves {@link #capabilities}
      *
      * @return value of {@link #capabilities}
      */
@@ -204,7 +212,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #conference}}
+     * Retrieves {@link #conference}
      *
      * @return value of {@link #conference}
      */
@@ -222,7 +230,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #h323}}
+     * Retrieves {@link #h323}
      *
      * @return value of {@link #h323}
      */
@@ -240,7 +248,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #sip}}
+     * Retrieves {@link #sip}
      *
      * @return value of {@link #sip}
      */
@@ -258,7 +266,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #networks}}
+     * Retrieves {@link #networks}
      *
      * @return value of {@link #networks}
      */
@@ -276,7 +284,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #networkServices}}
+     * Retrieves {@link #networkServices}
      *
      * @return value of {@link #networkServices}
      */
@@ -294,7 +302,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #proximity}}
+     * Retrieves {@link #proximity}
      *
      * @return value of {@link #proximity}
      */
@@ -312,7 +320,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #roomAnalytics}}
+     * Retrieves {@link #roomAnalytics}
      *
      * @return value of {@link #roomAnalytics}
      */
@@ -330,7 +338,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #security}}
+     * Retrieves {@link #security}
      *
      * @return value of {@link #security}
      */
@@ -348,7 +356,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #standby}}
+     * Retrieves {@link #standby}
      *
      * @return value of {@link #standby}
      */
@@ -366,7 +374,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #systemUnit}}
+     * Retrieves {@link #systemUnit}
      *
      * @return value of {@link #systemUnit}
      */
@@ -384,7 +392,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #time}}
+     * Retrieves {@link #time}
      *
      * @return value of {@link #time}
      */
@@ -402,7 +410,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #usb}}
+     * Retrieves {@link #usb}
      *
      * @return value of {@link #usb}
      */
@@ -420,7 +428,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #video}}
+     * Retrieves {@link #video}
      *
      * @return value of {@link #video}
      */
@@ -438,7 +446,7 @@ public class CiscoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #mediaChannels}}
+     * Retrieves {@link #mediaChannels}
      *
      * @return value of {@link #mediaChannels}
      */
@@ -453,5 +461,25 @@ public class CiscoStatus {
      */
     public void setMediaChannels(MediaChannels mediaChannels) {
         this.mediaChannels = mediaChannels;
+    }
+
+    /**
+     * Retrieves {@link #periherals}
+     *
+     * @return value of {@link #periherals}
+     * @since 1.1.0
+     */
+    public Peripherals getPeriherals() {
+        return periherals;
+    }
+
+    /**
+     * Sets {@code periherals}
+     *
+     * @param periherals the {@code com.avispl.dal.communicator.cisco.dto.status.peripherals.Peripherals} field
+     * @since 1.1.0
+     */
+    public void setPeriherals(Peripherals periherals) {
+        this.periherals = periherals;
     }
 }

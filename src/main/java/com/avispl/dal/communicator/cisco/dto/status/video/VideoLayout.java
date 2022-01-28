@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.video;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device video layout status class
  * Represents video layout node from /status.xml information payload
@@ -15,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoLayout {
-    @XmlElement(name = "LayoutFamily")
+    @JacksonXmlProperty(localName="LayoutFamily")
     private VideoLayoutFamily layoutFamily;
 
     /**
-     * Retrieves {@code {@link #layoutFamily}}
+     * Retrieves {@link #layoutFamily}
      *
      * @return value of {@link #layoutFamily}
      */

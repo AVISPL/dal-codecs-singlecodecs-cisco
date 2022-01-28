@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.systemunit;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device Fan status class
  * Represents fan node from /status.xml information payload
@@ -15,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Fan {
-    @XmlElement(name = "Status")
+    @JacksonXmlProperty(localName="Status")
     private String status;
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */

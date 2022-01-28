@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.sip;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device mailbox sip status class
  * Represents mailbox sip node from /status.xml information payload
@@ -14,15 +13,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Mailbox {
-    @XmlElement(name = "MessagesWaiting")
+    @JacksonXmlProperty(localName="MessagesWaiting")
     private String messagesWaiting;
-    @XmlElement(name = "URI")
+    @JacksonXmlProperty(localName="URI")
     private String uri;
 
     /**
-     * Retrieves {@code {@link #messagesWaiting}}
+     * Retrieves {@link #messagesWaiting}
      *
      * @return value of {@link #messagesWaiting}
      */
@@ -40,7 +39,7 @@ public class Mailbox {
     }
 
     /**
-     * Retrieves {@code {@link #uri}}
+     * Retrieves {@link #uri}
      *
      * @return value of {@link #uri}
      */

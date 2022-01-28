@@ -4,11 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.cameras;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Cameras Configuration Camera class.
@@ -18,29 +15,29 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CamerasConfigurationCamera {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "Backlight")
+    @JacksonXmlProperty(localName="Backlight")
     private CamerasConfigurationBacklight backlight;
-    @XmlElement(name = "Brightness")
+    @JacksonXmlProperty(localName="Brightness")
     private CamerasConfigurationBrightness brightness;
-    @XmlElement(name = "Focus")
+    @JacksonXmlProperty(localName="Focus")
     private CamerasConfigurationFocus focus;
-    @XmlElement(name = "Gamma")
+    @JacksonXmlProperty(localName="Gamma")
     private CamerasConfigurationGamma gamma;
-    @XmlElement(name = "Whitebalance")
+    @JacksonXmlProperty(localName="Whitebalance")
     private CamerasConfigurationWhitebalance whitebalance;
-    @XmlElement(name = "Flip")
+    @JacksonXmlProperty(localName="Flip")
     private ValueSpaceRefHolder flip;
-    @XmlElement(name = "IrSensor")
+    @JacksonXmlProperty(localName="IrSensor")
     private ValueSpaceRefHolder irSensor;
-    @XmlElement(name = "Mirror")
+    @JacksonXmlProperty(localName="Mirror")
     private ValueSpaceRefHolder mirror;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -58,7 +55,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #backlight}}
+     * Retrieves {@link #backlight}
      *
      * @return value of {@link #backlight}
      */
@@ -76,7 +73,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #brightness}}
+     * Retrieves {@link #brightness}
      *
      * @return value of {@link #brightness}
      */
@@ -94,7 +91,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #focus}}
+     * Retrieves {@link #focus}
      *
      * @return value of {@link #focus}
      */
@@ -112,7 +109,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #gamma}}
+     * Retrieves {@link #gamma}
      *
      * @return value of {@link #gamma}
      */
@@ -130,7 +127,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #whitebalance}}
+     * Retrieves {@link #whitebalance}
      *
      * @return value of {@link #whitebalance}
      */
@@ -148,7 +145,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #flip}}
+     * Retrieves {@link #flip}
      *
      * @return value of {@link #flip}
      */
@@ -166,7 +163,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #irSensor}}
+     * Retrieves {@link #irSensor}
      *
      * @return value of {@link #irSensor}
      */
@@ -184,7 +181,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #mirror}}
+     * Retrieves {@link #mirror}
      *
      * @return value of {@link #mirror}
      */

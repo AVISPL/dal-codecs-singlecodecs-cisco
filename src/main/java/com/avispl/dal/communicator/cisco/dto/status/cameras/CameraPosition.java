@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.cameras;
 
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device camera position status class.
@@ -16,19 +13,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class CameraPosition {
-    @XmlElement(name = "Focus")
+    @JacksonXmlProperty(localName="Focus")
     private String focus;
-    @XmlElement(name = "Pan")
+    @JacksonXmlProperty(localName="Pan")
     private String pan;
-    @XmlElement(name = "Tilt")
+    @JacksonXmlProperty(localName="Tilt")
     private String tilt;
-    @XmlElement(name = "Zoom")
+    @JacksonXmlProperty(localName="Zoom")
     private String zoom;
 
     /**
-     * Retrieves {@code {@link #focus}}
+     * Retrieves {@link #focus}
      *
      * @return value of {@link #focus}
      */
@@ -46,7 +43,7 @@ public class CameraPosition {
     }
 
     /**
-     * Retrieves {@code {@link #pan}}
+     * Retrieves {@link #pan}
      *
      * @return value of {@link #pan}
      */
@@ -64,7 +61,7 @@ public class CameraPosition {
     }
 
     /**
-     * Retrieves {@code {@link #tilt}}
+     * Retrieves {@link #tilt}
      *
      * @return value of {@link #tilt}
      */
@@ -82,7 +79,7 @@ public class CameraPosition {
     }
 
     /**
-     * Retrieves {@code {@link #zoom}}
+     * Retrieves {@link #zoom}
      *
      * @return value of {@link #zoom}
      */

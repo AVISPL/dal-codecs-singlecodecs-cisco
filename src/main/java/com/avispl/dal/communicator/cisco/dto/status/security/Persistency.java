@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.security;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device persistency status class
  * Represents persistency node from /status.xml information payload
@@ -14,19 +13,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Persistency {
-    @XmlElement(name = "CallHistory")
+    @JacksonXmlProperty(localName="CallHistory")
     private String callHistory;
-    @XmlElement(name = "Configurations")
+    @JacksonXmlProperty(localName="Configurations")
     private String configurations;
-    @XmlElement(name = "DHCP")
+    @JacksonXmlProperty(localName="DHCP")
     private String dhcp;
-    @XmlElement(name = "LocalPhonebook")
+    @JacksonXmlProperty(localName="LocalPhonebook")
     private String localPhonebook;
 
     /**
-     * Retrieves {@code {@link #callHistory}}
+     * Retrieves {@link #callHistory}
      *
      * @return value of {@link #callHistory}
      */
@@ -44,7 +43,7 @@ public class Persistency {
     }
 
     /**
-     * Retrieves {@code {@link #configurations}}
+     * Retrieves {@link #configurations}
      *
      * @return value of {@link #configurations}
      */
@@ -62,7 +61,7 @@ public class Persistency {
     }
 
     /**
-     * Retrieves {@code {@link #dhcp}}
+     * Retrieves {@link #dhcp}
      *
      * @return value of {@link #dhcp}
      */
@@ -80,7 +79,7 @@ public class Persistency {
     }
 
     /**
-     * Retrieves {@code {@link #localPhonebook}}
+     * Retrieves {@link #localPhonebook}
      *
      * @return value of {@link #localPhonebook}
      */

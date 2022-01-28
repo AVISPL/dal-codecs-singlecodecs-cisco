@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.audio;
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Audio Configuration class.
@@ -15,23 +14,24 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AudioConfiguration {
-    @XmlElement(name = "DefaultVolume")
+    @JacksonXmlProperty(localName="DefaultVolume")
     private ValueSpaceRefHolder defaultVolume;
-    @XmlElement(name = "Input")
+    @JacksonXmlProperty(localName="Input")
     private AudioConfigurationInput input;
-    @XmlElement(name = "Output")
+    @JacksonXmlProperty(localName="Output")
     private AudioConfigurationOutput output;
-    @XmlElement(name = "Microphones")
+    @JacksonXmlProperty(localName="Microphones")
     private AudioConfigurationMicrophones microphones;
-    @XmlElement(name = "SoundsAndAlerts")
+    @JacksonXmlProperty(localName="SoundsAndAlerts")
     private AudioConfigurationSoundsAndAlerts soundsAndAlerts;
-    @XmlElement(name = "Ultrasound")
+    @JacksonXmlProperty(localName="Ultrasound")
     private AudioConfigurationUltrasound ultrasound;
 
     /**
-     * Retrieves {@code {@link #defaultVolume}}
+     * Retrieves {@link #defaultVolume}
      *
      * @return value of {@link #defaultVolume}
      */
@@ -49,7 +49,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #input}}
+     * Retrieves {@link #input}
      *
      * @return value of {@link #input}
      */
@@ -67,7 +67,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #output}}
+     * Retrieves {@link #output}
      *
      * @return value of {@link #output}
      */
@@ -85,7 +85,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #microphones}}
+     * Retrieves {@link #microphones}
      *
      * @return value of {@link #microphones}
      */
@@ -103,7 +103,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #soundsAndAlerts}}
+     * Retrieves {@link #soundsAndAlerts}
      *
      * @return value of {@link #soundsAndAlerts}
      */
@@ -121,7 +121,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #ultrasound}}
+     * Retrieves {@link #ultrasound}
      *
      * @return value of {@link #ultrasound}
      */

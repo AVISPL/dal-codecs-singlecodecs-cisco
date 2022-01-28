@@ -3,9 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.roomanalytics;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device room analytics status class
@@ -15,21 +13,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class RoomAnalytics {
-    @XmlElement(name = "PeoplePresence")
+    @JacksonXmlProperty(localName="PeoplePresence")
     private String peoplePresence;
-    @XmlElement(name = "AmbientNoise")
+    @JacksonXmlProperty(localName="AmbientNoise")
     private AmbientNoise ambientNoise;
-    @XmlElement(name = "Engagement")
+    @JacksonXmlProperty(localName="Engagement")
     private Engagement engagement;
-    @XmlElement(name = "PeopleCount")
+    @JacksonXmlProperty(localName="PeopleCount")
     private PeopleCount peopleCount;
-    @XmlElement(name = "Sound")
+    @JacksonXmlProperty(localName="Sound")
     private Sound sound;
 
     /**
-     * Retrieves {@code {@link #peoplePresence}}
+     * Retrieves {@link #peoplePresence}
      *
      * @return value of {@link #peoplePresence}
      */
@@ -47,7 +45,7 @@ public class RoomAnalytics {
     }
 
     /**
-     * Retrieves {@code {@link #ambientNoise}}
+     * Retrieves {@link #ambientNoise}
      *
      * @return value of {@link #ambientNoise}
      */
@@ -65,7 +63,7 @@ public class RoomAnalytics {
     }
 
     /**
-     * Retrieves {@code {@link #engagement}}
+     * Retrieves {@link #engagement}
      *
      * @return value of {@link #engagement}
      */
@@ -83,7 +81,7 @@ public class RoomAnalytics {
     }
 
     /**
-     * Retrieves {@code {@link #peopleCount}}
+     * Retrieves {@link #peopleCount}
      *
      * @return value of {@link #peopleCount}
      */
@@ -101,7 +99,7 @@ public class RoomAnalytics {
     }
 
     /**
-     * Retrieves {@code {@link #sound}}
+     * Retrieves {@link #sound}
      *
      * @return value of {@link #sound}
      */

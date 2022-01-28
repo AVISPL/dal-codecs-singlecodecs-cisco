@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.audio;
 
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device microphones status class.
@@ -16,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Microphones {
-    @XmlElement(name = "Mute")
+    @JacksonXmlProperty(localName="Mute")
     private String mute;
 
     /**
-     * Retrieves {@code {@link #mute}}
+     * Retrieves {@link #mute}
      *
      * @return value of {@link #mute}
      */

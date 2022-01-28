@@ -4,13 +4,9 @@
 package com.avispl.dal.communicator.cisco.dto.control.commands.userinterface;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /***
  * User interface command is a template for any command that can be performed for user interface
  *
@@ -18,7 +14,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserInterfaceCommand {
     /***
      * Message is one of the entities that user interface actions can be performed towards
@@ -27,7 +23,7 @@ public class UserInterfaceCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    @XmlAccessorType(XmlAccessType.NONE)
+
     public static class Message {
         /***
          * Text line is one of the message actions that can be performed
@@ -36,7 +32,7 @@ public class UserInterfaceCommand {
          * Created on Apr 26, 2021
          * @since 1.0
          */
-        @XmlAccessorType(XmlAccessType.NONE)
+
         public static class TextLine {
             /***
              * Display is the specific action that can be performed towards the Message
@@ -45,13 +41,13 @@ public class UserInterfaceCommand {
              * Created on Apr 26, 2021
              * @since 1.0
              */
-            @XmlAccessorType(XmlAccessType.NONE)
+
             public static class Display {
-                @XmlAttribute
+                @JacksonXmlProperty(isAttribute = true)
                 private final String command = "True";
-                @XmlElement(name = "Text")
+                @JacksonXmlProperty(localName="Text")
                 private ValueSpaceRefHolder text;
-                @XmlElement(name = "Duration")
+                @JacksonXmlProperty(localName="Duration")
                 private ValueSpaceRefHolder duration;
 
                 /**
@@ -70,7 +66,7 @@ public class UserInterfaceCommand {
                 }
 
                 /**
-                 * Retrieves {@code {@link #text}}
+                 * Retrieves {@link #text}
                  *
                  * @return value of {@link #text}
                  */
@@ -88,7 +84,7 @@ public class UserInterfaceCommand {
                 }
 
                 /**
-                 * Retrieves {@code {@link #duration}}
+                 * Retrieves {@link #duration}
                  *
                  * @return value of {@link #duration}
                  */
@@ -106,7 +102,7 @@ public class UserInterfaceCommand {
                 }
 
                 /**
-                 * Retrieves {@code {@link #command}}
+                 * Retrieves {@link #command}
                  *
                  * @return value of {@link #command}
                  */
@@ -114,11 +110,11 @@ public class UserInterfaceCommand {
                     return command;
                 }
             }
-            @XmlElement(name = "Display")
+            @JacksonXmlProperty(localName="Display")
             private Display display;
 
             /**
-             * Retrieves {@code {@link #display}}
+             * Retrieves {@link #display}
              *
              * @return value of {@link #display}
              */
@@ -135,7 +131,7 @@ public class UserInterfaceCommand {
                 this.display = display;
             }
         }
-        @XmlElement(name = "TextLine")
+        @JacksonXmlProperty(localName="TextLine")
         private TextLine textLine;
 
         /**
@@ -154,7 +150,7 @@ public class UserInterfaceCommand {
         }
 
         /**
-         * Retrieves {@code {@link #textLine}}
+         * Retrieves {@link #textLine}
          *
          * @return value of {@link #textLine}
          */
@@ -172,11 +168,11 @@ public class UserInterfaceCommand {
         }
     }
 
-    @XmlElement(name = "Message")
+    @JacksonXmlProperty(localName="Message")
     private Message message;
 
     /**
-     * Retrieves {@code {@link #message}}
+     * Retrieves {@link #message}
      *
      * @return value of {@link #message}
      */

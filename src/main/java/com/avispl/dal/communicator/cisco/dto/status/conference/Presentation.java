@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.conference;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device conference presentation class
  * Represents conference presentation node from /status.xml information payload
@@ -15,17 +13,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Presentation {
-    @XmlElement(name = "CallId")
+    @JacksonXmlProperty(localName="CallId")
     private String callId;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private String mode;
-    @XmlElement(name = "Whiteboard")
+    @JacksonXmlProperty(localName="Whiteboard")
     private Whiteboard whiteboard;
 
     /**
-     * Retrieves {@code {@link #callId}}
+     * Retrieves {@link #callId}
      *
      * @return value of {@link #callId}
      */
@@ -43,7 +41,7 @@ public class Presentation {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -61,7 +59,7 @@ public class Presentation {
     }
 
     /**
-     * Retrieves {@code {@link #whiteboard}}
+     * Retrieves {@link #whiteboard}
      *
      * @return value of {@link #whiteboard}
      */

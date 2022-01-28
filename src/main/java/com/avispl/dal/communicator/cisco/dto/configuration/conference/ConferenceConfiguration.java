@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.conference;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Conference Configuration class.
@@ -17,29 +15,30 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ConferenceConfiguration {
-    @XmlElement(name = "AutoAnswer")
+    @JacksonXmlProperty(localName="AutoAnswer")
     private ConferenceConfigurationAutoAnswer autoAnswer;
-    @XmlElement(name = "DefaultCall")
+    @JacksonXmlProperty(localName="DefaultCall")
     private ConferenceConfigurationDefaultCall defaultCall;
-    @XmlElement(name = "DoNotDisturb")
+    @JacksonXmlProperty(localName="DoNotDisturb")
     private ConferenceConfigurationDoNotDisturb doNotDisturb;
-    @XmlElement(name = "Encryption")
+    @JacksonXmlProperty(localName="Encryption")
     private ConferenceConfigurationEncryption encryption;
-    @XmlElement(name = "FarEndControl")
+    @JacksonXmlProperty(localName="FarEndControl")
     private ConferenceConfigurationFarEndControl farEndControl;
-    @XmlElement(name = "MaxReceiveCallRate")
+    @JacksonXmlProperty(localName="MaxReceiveCallRate")
     private ValueSpaceRefHolder maxReceiveCallRate;
-    @XmlElement(name = "MaxTotalReceiveCallRate")
+    @JacksonXmlProperty(localName="MaxTotalReceiveCallRate")
     private ValueSpaceRefHolder maxTotalReceiveCallRate;
-    @XmlElement(name = "MaxTotalTransmitCallRate")
+    @JacksonXmlProperty(localName="MaxTotalTransmitCallRate")
     private ValueSpaceRefHolder maxTotalTransmitCallRate;
-    @XmlElement(name = "MaxTransmitCallRate")
+    @JacksonXmlProperty(localName="MaxTransmitCallRate")
     private ValueSpaceRefHolder maxTransmitCallRate;
 
     /**
-     * Retrieves {@code {@link #autoAnswer}}
+     * Retrieves {@link #autoAnswer}
      *
      * @return value of {@link #autoAnswer}
      */
@@ -57,7 +56,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #defaultCall}}
+     * Retrieves {@link #defaultCall}
      *
      * @return value of {@link #defaultCall}
      */
@@ -75,7 +74,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #doNotDisturb}}
+     * Retrieves {@link #doNotDisturb}
      *
      * @return value of {@link #doNotDisturb}
      */
@@ -93,7 +92,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #encryption}}
+     * Retrieves {@link #encryption}
      *
      * @return value of {@link #encryption}
      */
@@ -111,7 +110,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #farEndControl}}
+     * Retrieves {@link #farEndControl}
      *
      * @return value of {@link #farEndControl}
      */
@@ -129,7 +128,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #maxReceiveCallRate}}
+     * Retrieves {@link #maxReceiveCallRate}
      *
      * @return value of {@link #maxReceiveCallRate}
      */
@@ -147,7 +146,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #maxTotalReceiveCallRate}}
+     * Retrieves {@link #maxTotalReceiveCallRate}
      *
      * @return value of {@link #maxTotalReceiveCallRate}
      */
@@ -165,7 +164,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #maxTotalTransmitCallRate}}
+     * Retrieves {@link #maxTotalTransmitCallRate}
      *
      * @return value of {@link #maxTotalTransmitCallRate}
      */
@@ -183,7 +182,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #maxTransmitCallRate}}
+     * Retrieves {@link #maxTransmitCallRate}
      *
      * @return value of {@link #maxTransmitCallRate}
      */

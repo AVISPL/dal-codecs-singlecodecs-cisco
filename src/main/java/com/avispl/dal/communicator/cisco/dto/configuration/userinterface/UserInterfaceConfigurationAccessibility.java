@@ -4,12 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.userinterface;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlElement;
-
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Device User Interface Configuration Accessibility class.
@@ -19,13 +15,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class UserInterfaceConfigurationAccessibility {
-    @XmlElement(name = "IncomingCallNotification")
+    @JacksonXmlProperty(localName="IncomingCallNotification")
     private ValueSpaceRefHolder incomingCallNotification;
 
     /**
-     * Retrieves {@code {@link #incomingCallNotification}}
+     * Retrieves {@link #incomingCallNotification}
      *
      * @return value of {@link #incomingCallNotification}
      */

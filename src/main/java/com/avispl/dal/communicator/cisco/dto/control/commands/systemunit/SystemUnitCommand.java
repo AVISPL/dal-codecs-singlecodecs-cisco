@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.control.commands.systemunit;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /***
  * Class for SystemUnit command representation
@@ -15,7 +13,8 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SystemUnitCommand {
 
     /***
@@ -38,11 +37,11 @@ public class SystemUnitCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    @XmlAccessorType(XmlAccessType.NONE)
+
     public static class Boot {
-        @XmlAttribute
+        @JacksonXmlProperty(isAttribute = true)
         private String command = "True";
-        @XmlElement(name = "Action")
+        @JacksonXmlProperty(localName="Action")
         private String action;
 
         /**
@@ -60,7 +59,7 @@ public class SystemUnitCommand {
         }
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -69,7 +68,7 @@ public class SystemUnitCommand {
         }
 
         /**
-         * Retrieves {@code {@link #action}}
+         * Retrieves {@link #action}
          *
          * @return value of {@link #action}
          */
@@ -77,7 +76,7 @@ public class SystemUnitCommand {
             return action;
         }
     }
-    @XmlElement(name = "Boot")
+    @JacksonXmlProperty(localName="Boot")
     private Boot boot;
     /**
      * Default constructor
@@ -93,7 +92,7 @@ public class SystemUnitCommand {
     }
 
     /**
-     * Retrieves {@code {@link #boot}}
+     * Retrieves {@link #boot}
      *
      * @return value of {@link #boot}
      */

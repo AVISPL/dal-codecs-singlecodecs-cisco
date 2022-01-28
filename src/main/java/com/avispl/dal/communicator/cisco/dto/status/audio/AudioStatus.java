@@ -11,35 +11,32 @@ package com.avispl.dal.communicator.cisco.dto.status.audio;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-@XmlAccessorType(XmlAccessType.NONE)
 public class AudioStatus {
-    @XmlElement(name = "Devices")
+    @JacksonXmlProperty(localName="Devices")
     private AudioDevices devices;
-    @XmlElement(name = "Input")
+    @JacksonXmlProperty(localName="Input")
     private AudioInput input;
-    @XmlElement(name = "Microphones")
+    @JacksonXmlProperty(localName="Microphones")
     private Microphones microphones;
-    @XmlElement(name = "Output")
+    @JacksonXmlProperty(localName="Output")
     private AudioOutput output;
-    @XmlElement(name = "Volume")
+    @JacksonXmlProperty(localName="Volume")
     private String volume;
-    @XmlElement(name = "SelectedDevice")
+    @JacksonXmlProperty(localName="SelectedDevice")
     private String selectedDevice;
-    @XmlElement(name = "VolumeHeadsetUsb")
+    @JacksonXmlProperty(localName="VolumeHeadsetUsb")
     private String volumeHeadsetUsb;
-    @XmlElement(name = "VolumeHeadsetBluetooth")
+    @JacksonXmlProperty(localName="VolumeHeadsetBluetooth")
     private String volumeHeadsetBluetooth;
-    @XmlElement(name = "VolumeHandsetUsb")
+    @JacksonXmlProperty(localName="VolumeHandsetUsb")
     private String volumeHandsetUsb;
-    @XmlElement(name = "VolumeMute")
+    @JacksonXmlProperty(localName="VolumeMute")
     private String volumeMute;
 
     /**
-     * Retrieves {@code {@link #devices}}
+     * Retrieves {@link #devices}
      *
      * @return value of {@link #devices}
      */
@@ -57,7 +54,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #input}}
+     * Retrieves {@link #input}
      *
      * @return value of {@link #input}
      */
@@ -75,7 +72,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #microphones}}
+     * Retrieves {@link #microphones}
      *
      * @return value of {@link #microphones}
      */
@@ -93,7 +90,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #output}}
+     * Retrieves {@link #output}
      *
      * @return value of {@link #output}
      */
@@ -111,7 +108,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #volume}}
+     * Retrieves {@link #volume}
      *
      * @return value of {@link #volume}
      */
@@ -129,7 +126,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #selectedDevice}}
+     * Retrieves {@link #selectedDevice}
      *
      * @return value of {@link #selectedDevice}
      */
@@ -147,7 +144,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #volumeHeadsetUsb}}
+     * Retrieves {@link #volumeHeadsetUsb}
      *
      * @return value of {@link #volumeHeadsetUsb}
      */
@@ -165,7 +162,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #volumeHeadsetBluetooth}}
+     * Retrieves {@link #volumeHeadsetBluetooth}
      *
      * @return value of {@link #volumeHeadsetBluetooth}
      */
@@ -183,7 +180,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #volumeHandsetUsb}}
+     * Retrieves {@link #volumeHandsetUsb}
      *
      * @return value of {@link #volumeHandsetUsb}
      */
@@ -201,7 +198,7 @@ public class AudioStatus {
     }
 
     /**
-     * Retrieves {@code {@link #volumeMute}}
+     * Retrieves {@link #volumeMute}
      *
      * @return value of {@link #volumeMute}
      */

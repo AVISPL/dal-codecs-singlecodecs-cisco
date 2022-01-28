@@ -3,11 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.video;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device video output connector status class
  * Represents video output connector node from /status.xml information payload
@@ -16,21 +13,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoOutputConnector {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "Connected")
+    @JacksonXmlProperty(localName="Connected")
     private String connected;
-    @XmlElement(name = "Type")
+    @JacksonXmlProperty(localName="Type")
     private String type;
-    @XmlElement(name = "ConnectedDevice")
+    @JacksonXmlProperty(localName="ConnectedDevice")
     private VideoOutputDevice connectedDevice;
-    @XmlElement(name = "Resolution")
+    @JacksonXmlProperty(localName="Resolution")
     private SourceResolution resolution;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -48,7 +45,7 @@ public class VideoOutputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #connected}}
+     * Retrieves {@link #connected}
      *
      * @return value of {@link #connected}
      */
@@ -66,7 +63,7 @@ public class VideoOutputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -84,7 +81,7 @@ public class VideoOutputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #connectedDevice}}
+     * Retrieves {@link #connectedDevice}
      *
      * @return value of {@link #connectedDevice}
      */
@@ -102,7 +99,7 @@ public class VideoOutputConnector {
     }
 
     /**
-     * Retrieves {@code {@link #resolution}}
+     * Retrieves {@link #resolution}
      *
      * @return value of {@link #resolution}
      */

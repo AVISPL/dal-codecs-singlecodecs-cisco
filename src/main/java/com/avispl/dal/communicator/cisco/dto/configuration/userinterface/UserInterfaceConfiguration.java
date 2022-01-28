@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.userinterface;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device User Interface Configuration class.
@@ -17,27 +15,27 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class UserInterfaceConfiguration {
-    @XmlElement(name = "ContactInfo")
+    @JacksonXmlProperty(localName="ContactInfo")
     private UserInterfaceConfigurationContactInfo contactInfo;
-    @XmlElement(name = "KeyTones")
+    @JacksonXmlProperty(localName="KeyTones")
     private UserInterfaceConfigurationKeyTones keyTones;
-    @XmlElement(name = "Language")
+    @JacksonXmlProperty(localName="Language")
     private ValueSpaceRefHolder language;
-    @XmlElement(name = "WelcomeText")
+    @JacksonXmlProperty(localName="WelcomeText")
     private ValueSpaceRefHolder welcomeText;
-    @XmlElement(name = "OSD")
+    @JacksonXmlProperty(localName="OSD")
     private UserInterfaceConfigurationOSD osd;
-    @XmlElement(name = "Features")
+    @JacksonXmlProperty(localName="Features")
     private UserInterfaceConfigurationFeatures features;
-    @XmlElement(name = "Branding")
+    @JacksonXmlProperty(localName="Branding")
     private UserInterfaceConfigurationBranding branding;
-    @XmlElement(name = "Accessibility")
+    @JacksonXmlProperty(localName="Accessibility")
     private UserInterfaceConfigurationAccessibility accessibility;
 
     /**
-     * Retrieves {@code {@link #contactInfo}}
+     * Retrieves {@link #contactInfo}
      *
      * @return value of {@link #contactInfo}
      */
@@ -55,7 +53,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #keyTones}}
+     * Retrieves {@link #keyTones}
      *
      * @return value of {@link #keyTones}
      */
@@ -73,7 +71,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #language}}
+     * Retrieves {@link #language}
      *
      * @return value of {@link #language}
      */
@@ -91,7 +89,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #welcomeText}}
+     * Retrieves {@link #welcomeText}
      *
      * @return value of {@link #welcomeText}
      */
@@ -109,7 +107,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #osd}}
+     * Retrieves {@link #osd}
      *
      * @return value of {@link #osd}
      */
@@ -127,7 +125,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #features}}
+     * Retrieves {@link #features}
      *
      * @return value of {@link #features}
      */
@@ -145,7 +143,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #branding}}
+     * Retrieves {@link #branding}
      *
      * @return value of {@link #branding}
      */
@@ -163,7 +161,7 @@ public class UserInterfaceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #accessibility}}
+     * Retrieves {@link #accessibility}
      *
      * @return value of {@link #accessibility}
      */

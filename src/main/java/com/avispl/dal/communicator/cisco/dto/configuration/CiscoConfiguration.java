@@ -22,7 +22,10 @@ import com.avispl.dal.communicator.cisco.dto.configuration.systemunit.SystemUnit
 import com.avispl.dal.communicator.cisco.dto.configuration.time.TimeConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.userinterface.UserInterfaceConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.video.VideoConfiguration;
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * Device Configuration class. This is a root class for all the device configuration.
@@ -32,56 +35,58 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlRootElement(name = "Configuration")
-@XmlAccessorType(XmlAccessType.NONE)
+@JacksonXmlRootElement(localName = "Configuration")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class CiscoConfiguration {
-    @XmlAttribute(name = "product")
+    @JacksonXmlProperty(isAttribute = true, localName = "product")
     private String product;
-    @XmlAttribute(name = "version")
+    @JacksonXmlProperty(isAttribute = true, localName="version")
     private String version;
-    @XmlAttribute(name = "apiVersion")
+    @JacksonXmlProperty(isAttribute = true, localName="apiVersion")
     private String apiVersion;
-    @XmlElement(name = "Audio")
+    @JacksonXmlProperty(localName="Audio")
     private AudioConfiguration audio;
-    @XmlElement(name = "Conference")
+    @JacksonXmlProperty(localName="Conference")
     private ConferenceConfiguration conference;
-    @XmlElement(name = "Cameras")
+    @JacksonXmlProperty(localName="Cameras")
     private CamerasConfiguration cameras;
-    @XmlElement(name = "H323")
+    @JacksonXmlProperty(localName="H323")
     private H323Configuration h323;
-    @XmlElement(name = "Network")
+    @JacksonXmlProperty(localName="Network")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private NetworkConfiguration[] network;
-    @XmlElement(name = "NetworkServices")
+    @JacksonXmlProperty(localName="NetworkServices")
     private NetworkServicesConfiguration networkServices;
-    @XmlElement(name = "Peripherals")
+    @JacksonXmlProperty(localName="Peripherals")
     private PeripheralsConfiguration peripherals;
-    @XmlElement(name = "Phonebook")
+    @JacksonXmlProperty(localName="Phonebook")
     private PhonebookConfiguration phonebook;
-    @XmlElement(name = "Provisioning")
+    @JacksonXmlProperty(localName="Provisioning")
     private ProvisioningConfiguration provisioning;
-    @XmlElement(name = "Proximity")
+    @JacksonXmlProperty(localName="Proximity")
     private ProximityConfiguration proximity;
-    @XmlElement(name = "RoomAnalytics")
+    @JacksonXmlProperty(localName="RoomAnalytics")
     private RoomAnalyticsConfiguration roomAnalytics;
-    @XmlElement(name = "SIP")
+    @JacksonXmlProperty(localName="SIP")
     private SIPConfiguration sip;
-    @XmlElement(name = "SerialPort")
+    @JacksonXmlProperty(localName="SerialPort")
     private SerialPortConfiguration serialPort;
-    @XmlElement(name = "Standby")
+    @JacksonXmlProperty(localName="Standby")
     private StandbyConfiguration standby;
-    @XmlElement(name = "SystemUnit")
+    @JacksonXmlProperty(localName="SystemUnit")
     private SystemUnitConfiguration systemUnit;
-    @XmlElement(name = "Time")
+    @JacksonXmlProperty(localName="Time")
     private TimeConfiguration time;
-    @XmlElement(name = "UserInterface")
+    @JacksonXmlProperty(localName="UserInterface")
     private UserInterfaceConfiguration userInterface;
-    @XmlElement(name = "Video")
+    @JacksonXmlProperty(localName="Video")
     private VideoConfiguration video;
-    @XmlElement(name = "NetworkPort")
+    @JacksonXmlProperty(localName="NetworkPort")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private NetworkPortConfiguration[] networkPorts;
 
     /**
-     * Retrieves {@code {@link #product}}
+     * Retrieves {@link #product}
      *
      * @return value of {@link #product}
      */
@@ -99,7 +104,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #version}}
+     * Retrieves {@link #version}
      *
      * @return value of {@link #version}
      */
@@ -117,7 +122,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #apiVersion}}
+     * Retrieves {@link #apiVersion}
      *
      * @return value of {@link #apiVersion}
      */
@@ -135,7 +140,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #audio}}
+     * Retrieves {@link #audio}
      *
      * @return value of {@link #audio}
      */
@@ -153,7 +158,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #conference}}
+     * Retrieves {@link #conference}
      *
      * @return value of {@link #conference}
      */
@@ -171,7 +176,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #cameras}}
+     * Retrieves {@link #cameras}
      *
      * @return value of {@link #cameras}
      */
@@ -189,7 +194,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #h323}}
+     * Retrieves {@link #h323}
      *
      * @return value of {@link #h323}
      */
@@ -207,7 +212,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #network}}
+     * Retrieves {@link #network}
      *
      * @return value of {@link #network}
      */
@@ -225,7 +230,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkServices}}
+     * Retrieves {@link #networkServices}
      *
      * @return value of {@link #networkServices}
      */
@@ -243,7 +248,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #peripherals}}
+     * Retrieves {@link #peripherals}
      *
      * @return value of {@link #peripherals}
      */
@@ -261,7 +266,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #phonebook}}
+     * Retrieves {@link #phonebook}
      *
      * @return value of {@link #phonebook}
      */
@@ -279,7 +284,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #provisioning}}
+     * Retrieves {@link #provisioning}
      *
      * @return value of {@link #provisioning}
      */
@@ -297,7 +302,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #proximity}}
+     * Retrieves {@link #proximity}
      *
      * @return value of {@link #proximity}
      */
@@ -315,7 +320,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #roomAnalytics}}
+     * Retrieves {@link #roomAnalytics}
      *
      * @return value of {@link #roomAnalytics}
      */
@@ -333,7 +338,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #sip}}
+     * Retrieves {@link #sip}
      *
      * @return value of {@link #sip}
      */
@@ -351,7 +356,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #serialPort}}
+     * Retrieves {@link #serialPort}
      *
      * @return value of {@link #serialPort}
      */
@@ -369,7 +374,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #standby}}
+     * Retrieves {@link #standby}
      *
      * @return value of {@link #standby}
      */
@@ -387,7 +392,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #systemUnit}}
+     * Retrieves {@link #systemUnit}
      *
      * @return value of {@link #systemUnit}
      */
@@ -405,7 +410,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #time}}
+     * Retrieves {@link #time}
      *
      * @return value of {@link #time}
      */
@@ -423,7 +428,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #userInterface}}
+     * Retrieves {@link #userInterface}
      *
      * @return value of {@link #userInterface}
      */
@@ -441,7 +446,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #video}}
+     * Retrieves {@link #video}
      *
      * @return value of {@link #video}
      */
@@ -459,7 +464,7 @@ public class CiscoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #networkPorts}}
+     * Retrieves {@link #networkPorts}
      *
      * @return value of {@link #networkPorts}
      */

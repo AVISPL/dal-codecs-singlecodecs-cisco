@@ -4,12 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.video;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Video Configuration Connector class.
@@ -19,33 +15,34 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class VideoConfigurationConnector {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "CameraControl")
+    @JacksonXmlProperty(localName="CameraControl")
     private VideoConfigurationCameraControl cameraControl;
-    @XmlElement(name = "InputSourceType")
+    @JacksonXmlProperty(localName="InputSourceType")
     private ValueSpaceRefHolder inputSourceType;
-    @XmlElement(name = "Name")
+    @JacksonXmlProperty(localName="Name")
     private ValueSpaceRefHolder name;
-    @XmlElement(name = "PresentationSelection")
+    @JacksonXmlProperty(localName="PresentationSelection")
     private ValueSpaceRefHolder presentationSelection;
-    @XmlElement(name = "Quality")
+    @JacksonXmlProperty(localName="Quality")
     private ValueSpaceRefHolder quality;
-    @XmlElement(name = "Visibility")
+    @JacksonXmlProperty(localName="Visibility")
     private ValueSpaceRefHolder visibility;
-    @XmlElement(name = "MonitorRole")
+    @JacksonXmlProperty(localName="MonitorRole")
     private ValueSpaceRefHolder monitorRole;
-    @XmlElement(name = "OverscanLevel")
+    @JacksonXmlProperty(localName="OverscanLevel")
     private ValueSpaceRefHolder overscanLevel;
-    @XmlElement(name = "Resolution")
+    @JacksonXmlProperty(localName="Resolution")
     private ValueSpaceRefHolder resolution;
-    @XmlElement(name = "CEC")
+    @JacksonXmlProperty(localName="CEC")
     private VideoConfigurationCEC cec;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -63,7 +60,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #cameraControl}}
+     * Retrieves {@link #cameraControl}
      *
      * @return value of {@link #cameraControl}
      */
@@ -81,7 +78,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #inputSourceType}}
+     * Retrieves {@link #inputSourceType}
      *
      * @return value of {@link #inputSourceType}
      */
@@ -99,7 +96,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */
@@ -117,7 +114,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #presentationSelection}}
+     * Retrieves {@link #presentationSelection}
      *
      * @return value of {@link #presentationSelection}
      */
@@ -135,7 +132,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #quality}}
+     * Retrieves {@link #quality}
      *
      * @return value of {@link #quality}
      */
@@ -153,7 +150,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #visibility}}
+     * Retrieves {@link #visibility}
      *
      * @return value of {@link #visibility}
      */
@@ -171,7 +168,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #monitorRole}}
+     * Retrieves {@link #monitorRole}
      *
      * @return value of {@link #monitorRole}
      */
@@ -189,7 +186,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #overscanLevel}}
+     * Retrieves {@link #overscanLevel}
      *
      * @return value of {@link #overscanLevel}
      */
@@ -207,7 +204,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #resolution}}
+     * Retrieves {@link #resolution}
      *
      * @return value of {@link #resolution}
      */
@@ -225,7 +222,7 @@ public class VideoConfigurationConnector {
     }
 
     /**
-     * Retrieves {@code {@link #cec}}
+     * Retrieves {@link #cec}
      *
      * @return value of {@link #cec}
      */

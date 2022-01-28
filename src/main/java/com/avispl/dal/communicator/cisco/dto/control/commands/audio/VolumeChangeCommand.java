@@ -3,7 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.control.commands.audio;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /***
  * Volume change command template
@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VolumeChangeCommand extends AudioCommand {
 
     /***
@@ -22,9 +22,9 @@ public class VolumeChangeCommand extends AudioCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    @XmlAccessorType(XmlAccessType.NONE)
+
     private static class Volume {
-        @XmlElement(name = "Set")
+        @JacksonXmlProperty(localName="Set")
         private SetCommand setCommand;
 
         /**
@@ -44,11 +44,11 @@ public class VolumeChangeCommand extends AudioCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    @XmlAccessorType(XmlAccessType.NONE)
+
     private static class SetCommand {
-        @XmlAttribute
+        @JacksonXmlProperty(isAttribute = true)
         private final String command = "True";
-        @XmlElement(name = "Level")
+        @JacksonXmlProperty(localName="Level")
         private final Integer level;
 
         /**
@@ -61,7 +61,7 @@ public class VolumeChangeCommand extends AudioCommand {
         }
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -70,7 +70,7 @@ public class VolumeChangeCommand extends AudioCommand {
         }
 
         /**
-         * Retrieves {@code {@link #level}}
+         * Retrieves {@link #level}
          *
          * @return value of {@link #level}
          */
@@ -79,7 +79,7 @@ public class VolumeChangeCommand extends AudioCommand {
         }
     }
 
-    @XmlElement(name = "Volume")
+    @JacksonXmlProperty(localName="Volume")
     private final Volume volume;
 
     /**
@@ -92,7 +92,7 @@ public class VolumeChangeCommand extends AudioCommand {
     }
 
     /**
-     * Retrieves {@code {@link #volume}}
+     * Retrieves {@link #volume}
      *
      * @return value of {@link #volume}
      */

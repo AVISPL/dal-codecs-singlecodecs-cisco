@@ -3,9 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.network;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Ethernet status class
@@ -15,15 +13,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Ethernet {
-    @XmlElement(name = "MacAddress")
+    @JacksonXmlProperty(localName="MacAddress")
     private String macAddress;
-    @XmlElement(name = "Speed")
+    @JacksonXmlProperty(localName="Speed")
     private String speed;
 
     /**
-     * Retrieves {@code {@link #macAddress}}
+     * Retrieves {@link #macAddress}
      *
      * @return value of {@link #macAddress}
      */
@@ -41,7 +39,7 @@ public class Ethernet {
     }
 
     /**
-     * Retrieves {@code {@link #speed}}
+     * Retrieves {@link #speed}
      *
      * @return value of {@link #speed}
      */

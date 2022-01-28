@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.video;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device source resolution status class
  * Represents source resolution node from /status.xml information payload
@@ -15,17 +13,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class SourceResolution {
-    @XmlElement(name = "Height")
+    @JacksonXmlProperty(localName="Height")
     private String height;
-    @XmlElement(name = "RefreshRate")
+    @JacksonXmlProperty(localName="RefreshRate")
     private String refreshRate;
-    @XmlElement(name = "Width")
+    @JacksonXmlProperty(localName="Width")
     private String width;
 
     /**
-     * Retrieves {@code {@link #height}}
+     * Retrieves {@link #height}
      *
      * @return value of {@link #height}
      */
@@ -43,7 +41,7 @@ public class SourceResolution {
     }
 
     /**
-     * Retrieves {@code {@link #refreshRate}}
+     * Retrieves {@link #refreshRate}
      *
      * @return value of {@link #refreshRate}
      */
@@ -61,7 +59,7 @@ public class SourceResolution {
     }
 
     /**
-     * Retrieves {@code {@link #width}}
+     * Retrieves {@link #width}
      *
      * @return value of {@link #width}
      */

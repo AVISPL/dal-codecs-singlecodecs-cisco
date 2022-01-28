@@ -5,13 +5,11 @@ package com.avispl.dal.communicator.cisco.dto.configuration.networkservices;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
 import com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationServer;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlElement;
 
-
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Device Network Services Configuration SNMP class.
@@ -21,22 +19,22 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class NetworkServicesConfigurationSNMP {
-    @XmlElement(name = "CommunityName")
+    @JacksonXmlProperty(localName="CommunityName")
     private ValueSpaceRefHolder communityName;
-    @XmlElement(name = "Host")
-
+    @JacksonXmlProperty(localName="Host")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private NetworkConfigurationServer[] hosts;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private ValueSpaceRefHolder mode;
-    @XmlElement(name = "SystemContact")
+    @JacksonXmlProperty(localName="SystemContact")
     private ValueSpaceRefHolder systemContact;
-    @XmlElement(name = "SystemLocation")
+    @JacksonXmlProperty(localName="SystemLocation")
     private ValueSpaceRefHolder systemLocation;
 
     /**
-     * Retrieves {@code {@link #communityName}}
+     * Retrieves {@link #communityName}
      *
      * @return value of {@link #communityName}
      */
@@ -54,7 +52,7 @@ public class NetworkServicesConfigurationSNMP {
     }
 
     /**
-     * Retrieves {@code {@link #hosts}}
+     * Retrieves {@link #hosts}
      *
      * @return value of {@link #hosts}
      */
@@ -72,7 +70,7 @@ public class NetworkServicesConfigurationSNMP {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -90,7 +88,7 @@ public class NetworkServicesConfigurationSNMP {
     }
 
     /**
-     * Retrieves {@code {@link #systemContact}}
+     * Retrieves {@link #systemContact}
      *
      * @return value of {@link #systemContact}
      */
@@ -108,7 +106,7 @@ public class NetworkServicesConfigurationSNMP {
     }
 
     /**
-     * Retrieves {@code {@link #systemLocation}}
+     * Retrieves {@link #systemLocation}
      *
      * @return value of {@link #systemLocation}
      */

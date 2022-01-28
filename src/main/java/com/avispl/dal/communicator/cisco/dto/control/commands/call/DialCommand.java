@@ -3,7 +3,9 @@
  */
 package com.avispl.dal.communicator.cisco.dto.control.commands.call;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /***
  * Dial command root template
@@ -12,15 +14,15 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlRootElement(name = "Dial")
-@XmlAccessorType(XmlAccessType.NONE)
+@JacksonXmlRootElement(localName = "Dial")
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class DialCommand {
-    @XmlAttribute
+    @JacksonXmlProperty(isAttribute = true)
     private String command;
 
-    @XmlElement(name = "Number")
+    @JacksonXmlProperty(localName="Number")
     private String number;
-    @XmlElement(name = "Protocol")
+    @JacksonXmlProperty(localName="Protocol")
     private String protocol;
 
     /**
@@ -41,7 +43,7 @@ public class DialCommand {
     public DialCommand(){}
 
     /**
-     * Retrieves {@code {@link #command}}
+     * Retrieves {@link #command}
      *
      * @return value of {@link #command}
      */
@@ -59,7 +61,7 @@ public class DialCommand {
     }
 
     /**
-     * Retrieves {@code {@link #number}}
+     * Retrieves {@link #number}
      *
      * @return value of {@link #number}
      */
@@ -77,7 +79,7 @@ public class DialCommand {
     }
 
     /**
-     * Retrieves {@code {@link #protocol}}
+     * Retrieves {@link #protocol}
      *
      * @return value of {@link #protocol}
      */

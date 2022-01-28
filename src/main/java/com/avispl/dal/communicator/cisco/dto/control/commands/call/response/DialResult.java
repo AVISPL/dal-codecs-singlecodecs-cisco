@@ -5,11 +5,8 @@ package com.avispl.dal.communicator.cisco.dto.control.commands.call.response;
 
 
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /***
  * Dial command response template
@@ -18,17 +15,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class DialResult {
-    @XmlAttribute(name = "status")
+    @JacksonXmlProperty(isAttribute = true, localName="status")
     private String status;
-    @XmlElement(name = "CallId")
+    @JacksonXmlProperty(localName="CallId")
     private String callId;
-    @XmlElement(name = "ConferenceId")
+    @JacksonXmlProperty(localName="ConferenceId")
     private String conferenceId;
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */
@@ -46,7 +43,7 @@ public class DialResult {
     }
 
     /**
-     * Retrieves {@code {@link #callId}}
+     * Retrieves {@link #callId}
      *
      * @return value of {@link #callId}
      */
@@ -64,7 +61,7 @@ public class DialResult {
     }
 
     /**
-     * Retrieves {@code {@link #conferenceId}}
+     * Retrieves {@link #conferenceId}
      *
      * @return value of {@link #conferenceId}
      */

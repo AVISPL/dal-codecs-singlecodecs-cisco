@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.video;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device video selfview status class
  * Represents video selfview node from /status.xml information payload
@@ -14,19 +13,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoSelfview {
-    @XmlElement(name = "FullscreenMode")
+    @JacksonXmlProperty(localName="FullscreenMode")
     private String fullscreenMode;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private String mode;
-    @XmlElement(name = "OnMonitorRole")
+    @JacksonXmlProperty(localName="OnMonitorRole")
     private String onMonitorRole;
-    @XmlElement(name = "PIPPosition")
+    @JacksonXmlProperty(localName="PIPPosition")
     private String pipPosition;
 
     /**
-     * Retrieves {@code {@link #fullscreenMode}}
+     * Retrieves {@link #fullscreenMode}
      *
      * @return value of {@link #fullscreenMode}
      */
@@ -44,7 +43,7 @@ public class VideoSelfview {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -62,7 +61,7 @@ public class VideoSelfview {
     }
 
     /**
-     * Retrieves {@code {@link #onMonitorRole}}
+     * Retrieves {@link #onMonitorRole}
      *
      * @return value of {@link #onMonitorRole}
      */
@@ -80,7 +79,7 @@ public class VideoSelfview {
     }
 
     /**
-     * Retrieves {@code {@link #pipPosition}}
+     * Retrieves {@link #pipPosition}
      *
      * @return value of {@link #pipPosition}
      */

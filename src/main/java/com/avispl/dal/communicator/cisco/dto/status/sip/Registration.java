@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.sip;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device sip registration status class
  * Represents sip registration node from /status.xml information payload
@@ -15,19 +13,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Registration {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "Reason")
+    @JacksonXmlProperty(localName="Reason")
     private String reason;
-    @XmlElement(name = "Status")
+    @JacksonXmlProperty(localName="Status")
     private String status;
-    @XmlElement(name = "URI")
+    @JacksonXmlProperty(localName="URI")
     private String uri;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -45,7 +43,7 @@ public class Registration {
     }
 
     /**
-     * Retrieves {@code {@link #reason}}
+     * Retrieves {@link #reason}
      *
      * @return value of {@link #reason}
      */
@@ -63,7 +61,7 @@ public class Registration {
     }
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */
@@ -81,7 +79,7 @@ public class Registration {
     }
 
     /**
-     * Retrieves {@code {@link #uri}}
+     * Retrieves {@link #uri}
      *
      * @return value of {@link #uri}
      */

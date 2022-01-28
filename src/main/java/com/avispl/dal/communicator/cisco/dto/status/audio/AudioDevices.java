@@ -3,10 +3,7 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.audio;
 
-import javax.xml.bind.annotation.XmlElement;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Audio devices status class.
@@ -16,17 +13,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class AudioDevices {
-    @XmlElement(name = "Bluetooth")
+    @JacksonXmlProperty(localName="Bluetooth")
     private AudioDevicesBluetooth bluetooth;
-    @XmlElement(name = "HandsetUSB")
+    @JacksonXmlProperty(localName="HandsetUSB")
     private AudioDevicesHandsetUSB handsetUSB;
-    @XmlElement(name = "HeadsetUSB")
+    @JacksonXmlProperty(localName="HeadsetUSB")
     private AudioDevicesHeadsetUSB headsetUSB;
 
     /**
-     * Retrieves {@code {@link #bluetooth}}
+     * Retrieves {@link #bluetooth}
      *
      * @return value of {@link #bluetooth}
      */
@@ -44,7 +41,7 @@ public class AudioDevices {
     }
 
     /**
-     * Retrieves {@code {@link #handsetUSB}}
+     * Retrieves {@link #handsetUSB}
      *
      * @return value of {@link #handsetUSB}
      */
@@ -62,7 +59,7 @@ public class AudioDevices {
     }
 
     /**
-     * Retrieves {@code {@link #headsetUSB}}
+     * Retrieves {@link #headsetUSB}
      *
      * @return value of {@link #headsetUSB}
      */

@@ -3,10 +3,9 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.video;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device video input status class
  * Represents video input node from /status.xml information payload
@@ -15,17 +14,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoInput {
-    @XmlElement(name = "Connector")
+    @JacksonXmlProperty(localName="Connector")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private VideoInputConnector[] connectors;
-    @XmlElement(name = "MainVideoSource")
+    @JacksonXmlProperty(localName="MainVideoSource")
     private String mainVideoSource;
-    @XmlElement(name = "Source")
+    @JacksonXmlProperty(localName="Source")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private VideoInputSource[] sources;
 
     /**
-     * Retrieves {@code {@link #connectors}}
+     * Retrieves {@link #connectors}
      *
      * @return value of {@link #connectors}
      */
@@ -43,7 +44,7 @@ public class VideoInput {
     }
 
     /**
-     * Retrieves {@code {@link #mainVideoSource}}
+     * Retrieves {@link #mainVideoSource}
      *
      * @return value of {@link #mainVideoSource}
      */
@@ -61,7 +62,7 @@ public class VideoInput {
     }
 
     /**
-     * Retrieves {@code {@link #sources}}
+     * Retrieves {@link #sources}
      *
      * @return value of {@link #sources}
      */

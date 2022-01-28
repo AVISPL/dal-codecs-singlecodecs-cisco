@@ -3,9 +3,9 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.phonebook;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Phonebook Configuration class.
@@ -15,13 +15,14 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PhonebookConfiguration {
-    @XmlElement(name = "Server")
+    @JacksonXmlProperty(localName="Server")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private PhonebookConfigurationServer[] servers;
 
     /**
-     * Retrieves {@code {@link #servers}}
+     * Retrieves {@link #servers}
      *
      * @return value of {@link #servers}
      */

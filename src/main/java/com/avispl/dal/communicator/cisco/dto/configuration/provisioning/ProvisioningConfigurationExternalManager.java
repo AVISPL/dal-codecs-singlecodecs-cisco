@@ -4,12 +4,10 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.provisioning;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlElement;
 
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device Provisioning Configuration External Manager class.
  * Serves both for collecting data and changing device's config.
@@ -18,21 +16,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ProvisioningConfigurationExternalManager {
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private ValueSpaceRefHolder address;
-    @XmlElement(name = "AlternateAddress")
+    @JacksonXmlProperty(localName="AlternateAddress")
     private ValueSpaceRefHolder alternateAddress;
-    @XmlElement(name = "Domain")
+    @JacksonXmlProperty(localName="Domain")
     private ValueSpaceRefHolder domain;
-    @XmlElement(name = "Path")
+    @JacksonXmlProperty(localName="Path")
     private ValueSpaceRefHolder path;
-    @XmlElement(name = "Protocol")
+    @JacksonXmlProperty(localName="Protocol")
     private ValueSpaceRefHolder protocol;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -50,7 +48,7 @@ public class ProvisioningConfigurationExternalManager {
     }
 
     /**
-     * Retrieves {@code {@link #alternateAddress}}
+     * Retrieves {@link #alternateAddress}
      *
      * @return value of {@link #alternateAddress}
      */
@@ -68,7 +66,7 @@ public class ProvisioningConfigurationExternalManager {
     }
 
     /**
-     * Retrieves {@code {@link #domain}}
+     * Retrieves {@link #domain}
      *
      * @return value of {@link #domain}
      */
@@ -86,7 +84,7 @@ public class ProvisioningConfigurationExternalManager {
     }
 
     /**
-     * Retrieves {@code {@link #path}}
+     * Retrieves {@link #path}
      *
      * @return value of {@link #path}
      */
@@ -104,7 +102,7 @@ public class ProvisioningConfigurationExternalManager {
     }
 
     /**
-     * Retrieves {@code {@link #protocol}}
+     * Retrieves {@link #protocol}
      *
      * @return value of {@link #protocol}
      */

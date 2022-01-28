@@ -3,7 +3,11 @@
  */
 package com.avispl.dal.communicator.cisco.dto.valuespace;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 /***
  * This class represents final values that contain specific attributes, needed for the proper data processing.
@@ -26,8 +30,8 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlRootElement(name = "ValueSpace")
-@XmlAccessorType(XmlAccessType.NONE)
+@JacksonXmlRootElement(localName = "ValueSpace")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ValueSpace {
 
     /***
@@ -44,15 +48,15 @@ public class ValueSpace {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-    @XmlAccessorType(XmlAccessType.NONE)
+
     public static class TTPARValue {
-        @XmlAttribute(name = "item")
+        @JacksonXmlProperty(isAttribute = true, localName="item")
         private String item;
-        @XmlValue
+        @JacksonXmlText
         private String value;
 
         /**
-         * Retrieves {@code {@link #item}}
+         * Retrieves {@link #item}
          *
          * @return value of {@link #item}
          */
@@ -70,7 +74,7 @@ public class ValueSpace {
         }
 
         /**
-         * Retrieves {@code {@link #value}}
+         * Retrieves {@link #value}
          *
          * @return value of {@link #value}
          */
@@ -88,14 +92,15 @@ public class ValueSpace {
         }
     }
 
-    @XmlAttribute(name = "type")
+    @JacksonXmlProperty(isAttribute = true, localName="type")
     private String type;
 
-    @XmlElement(name = "Value")
+    @JacksonXmlProperty(localName="Value")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private TTPARValue[] values;
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -113,7 +118,7 @@ public class ValueSpace {
     }
 
     /**
-     * Retrieves {@code {@link #values}}
+     * Retrieves {@link #values}
      *
      * @return value of {@link #values}
      */

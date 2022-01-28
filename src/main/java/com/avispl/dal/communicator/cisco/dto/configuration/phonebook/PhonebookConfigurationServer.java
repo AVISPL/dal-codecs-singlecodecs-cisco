@@ -4,12 +4,9 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.phonebook;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlElement;
-
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Device Phonebook Configuration Server class.
@@ -19,17 +16,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class PhonebookConfigurationServer {
-    @XmlElement(name = "ID")
+    @JacksonXmlProperty(localName="ID")
     private ValueSpaceRefHolder id;
-    @XmlElement(name = "Type")
+    @JacksonXmlProperty(localName="Type")
     private ValueSpaceRefHolder type;
-    @XmlElement(name = "URL")
+    @JacksonXmlProperty(localName="URL")
     private ValueSpaceRefHolder url;
 
     /**
-     * Retrieves {@code {@link #id}}
+     * Retrieves {@link #id}
      *
      * @return value of {@link #id}
      */
@@ -47,7 +44,7 @@ public class PhonebookConfigurationServer {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -65,7 +62,7 @@ public class PhonebookConfigurationServer {
     }
 
     /**
-     * Retrieves {@code {@link #url}}
+     * Retrieves {@link #url}
      *
      * @return value of {@link #url}
      */

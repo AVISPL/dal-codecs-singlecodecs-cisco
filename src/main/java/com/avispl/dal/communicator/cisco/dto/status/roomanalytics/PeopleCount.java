@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.roomanalytics;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device people count status class
  * Represents people count node from /status.xml information payload
@@ -14,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class PeopleCount {
-    @XmlElement(name = "Current")
+    @JacksonXmlProperty(localName="Current")
     private String current;
 
     /**
-     * Retrieves {@code {@link #current}}
+     * Retrieves {@link #current}
      *
      * @return value of {@link #current}
      */

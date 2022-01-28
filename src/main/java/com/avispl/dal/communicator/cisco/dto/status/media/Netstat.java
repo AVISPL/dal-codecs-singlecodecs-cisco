@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.media;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device media netstat status class
  * Represents media netstat node from /status.xml information payload
@@ -15,29 +13,29 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class Netstat {
-    @XmlElement(name = "Bytes")
+    @JacksonXmlProperty(localName="Bytes")
     private String bytes;
-    @XmlElement(name = "ChannelRate")
+    @JacksonXmlProperty(localName="ChannelRate")
     private String channelRate;
-    @XmlElement(name = "Drop")
+    @JacksonXmlProperty(localName="Drop")
     private String drop;
-    @XmlElement(name = "Jitter")
+    @JacksonXmlProperty(localName="Jitter")
     private String jitter;
-    @XmlElement(name = "LastIntervalLost")
+    @JacksonXmlProperty(localName="LastIntervalLost")
     private String lastIntervalLost;
-    @XmlElement(name = "LastIntervalReceived")
+    @JacksonXmlProperty(localName="LastIntervalReceived")
     private String lastIntervalReceived;
-    @XmlElement(name = "Loss")
+    @JacksonXmlProperty(localName="Loss")
     private String loss;
-    @XmlElement(name = "MaxJitter")
+    @JacksonXmlProperty(localName="MaxJitter")
     private String maxJitter;
-    @XmlElement(name = "Packets")
+    @JacksonXmlProperty(localName="Packets")
     private String packets;
 
     /**
-     * Retrieves {@code {@link #bytes}}
+     * Retrieves {@link #bytes}
      *
      * @return value of {@link #bytes}
      */
@@ -55,7 +53,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #channelRate}}
+     * Retrieves {@link #channelRate}
      *
      * @return value of {@link #channelRate}
      */
@@ -73,7 +71,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #drop}}
+     * Retrieves {@link #drop}
      *
      * @return value of {@link #drop}
      */
@@ -91,7 +89,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #jitter}}
+     * Retrieves {@link #jitter}
      *
      * @return value of {@link #jitter}
      */
@@ -109,7 +107,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #lastIntervalLost}}
+     * Retrieves {@link #lastIntervalLost}
      *
      * @return value of {@link #lastIntervalLost}
      */
@@ -127,7 +125,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #lastIntervalReceived}}
+     * Retrieves {@link #lastIntervalReceived}
      *
      * @return value of {@link #lastIntervalReceived}
      */
@@ -145,7 +143,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #loss}}
+     * Retrieves {@link #loss}
      *
      * @return value of {@link #loss}
      */
@@ -163,7 +161,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #maxJitter}}
+     * Retrieves {@link #maxJitter}
      *
      * @return value of {@link #maxJitter}
      */
@@ -181,7 +179,7 @@ public class Netstat {
     }
 
     /**
-     * Retrieves {@code {@link #packets}}
+     * Retrieves {@link #packets}
      *
      * @return value of {@link #packets}
      */

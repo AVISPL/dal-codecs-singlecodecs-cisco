@@ -4,8 +4,10 @@
 package com.avispl.dal.communicator.cisco.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +24,14 @@ import java.util.List;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ValueSpaceRefHolder {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
 
     protected String valueSpaceRef;
 
-    @XmlValue
+    @JacksonXmlText
     private String value;
 
     @JsonIgnore
@@ -58,7 +60,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #value}}
+     * Retrieves {@link #value}
      *
      * @return value of {@link #value}
      */
@@ -67,7 +69,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -85,7 +87,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #valueSpaceRef}}
+     * Retrieves {@link #valueSpaceRef}
      *
      * @return value of {@link #valueSpaceRef}
      */
@@ -109,7 +111,7 @@ public class ValueSpaceRefHolder {
      *
      * @param valueSpaceRef schema name value
      */
-    @XmlAttribute(name = "valueSpaceRef")
+    @JacksonXmlProperty(isAttribute = true, localName="valueSpaceRef")
     public void setValueSpaceRef(String valueSpaceRef) {
         this.valueSpaceRef = valueSpaceRef.replaceAll("/Valuespace/", "");
 
@@ -130,7 +132,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -148,7 +150,7 @@ public class ValueSpaceRefHolder {
     }
 
     /**
-     * Retrieves {@code {@link #values}}
+     * Retrieves {@link #values}
      *
      * @return value of {@link #values}
      */

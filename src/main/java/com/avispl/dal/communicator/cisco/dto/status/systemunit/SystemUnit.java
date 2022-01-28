@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.systemunit;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device system unit status class
  * Represents system unit node from /status.xml information payload
@@ -14,25 +13,25 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class SystemUnit {
-    @XmlElement(name = "Hardware")
+    @JacksonXmlProperty(localName="Hardware")
     private Hardware hardware;
-    @XmlElement(name = "Software")
+    @JacksonXmlProperty(localName="Software")
     private Software software;
-    @XmlElement(name = "State")
+    @JacksonXmlProperty(localName="State")
     private State state;
-    @XmlElement(name = "ProductId")
+    @JacksonXmlProperty(localName="ProductId")
     private String productId;
-    @XmlElement(name = "ProductPlatform")
+    @JacksonXmlProperty(localName="ProductPlatform")
     private String productPlatform;
-    @XmlElement(name = "ProductType")
+    @JacksonXmlProperty(localName="ProductType")
     private String productType;
-    @XmlElement(name = "Uptime")
+    @JacksonXmlProperty(localName="Uptime")
     private String uptime;
 
     /**
-     * Retrieves {@code {@link #hardware}}
+     * Retrieves {@link #hardware}
      *
      * @return value of {@link #hardware}
      */
@@ -50,7 +49,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #software}}
+     * Retrieves {@link #software}
      *
      * @return value of {@link #software}
      */
@@ -68,7 +67,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #state}}
+     * Retrieves {@link #state}
      *
      * @return value of {@link #state}
      */
@@ -86,7 +85,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #productId}}
+     * Retrieves {@link #productId}
      *
      * @return value of {@link #productId}
      */
@@ -104,7 +103,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #productPlatform}}
+     * Retrieves {@link #productPlatform}
      *
      * @return value of {@link #productPlatform}
      */
@@ -122,7 +121,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #productType}}
+     * Retrieves {@link #productType}
      *
      * @return value of {@link #productType}
      */
@@ -140,7 +139,7 @@ public class SystemUnit {
     }
 
     /**
-     * Retrieves {@code {@link #uptime}}
+     * Retrieves {@link #uptime}
      *
      * @return value of {@link #uptime}
      */

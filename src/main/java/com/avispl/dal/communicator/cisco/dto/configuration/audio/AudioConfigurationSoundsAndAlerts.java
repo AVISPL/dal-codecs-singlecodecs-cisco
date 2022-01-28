@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.audio;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Audio Configuration Sounds And Alerts class.
@@ -17,15 +15,15 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class AudioConfigurationSoundsAndAlerts {
-    @XmlElement(name = "RingTone")
+    @JacksonXmlProperty(localName="RingTone")
     private ValueSpaceRefHolder ringTone;
-    @XmlElement(name = "RingVolume")
+    @JacksonXmlProperty(localName="RingVolume")
     private ValueSpaceRefHolder ringVolume;
 
     /**
-     * Retrieves {@code {@link #ringTone}}
+     * Retrieves {@link #ringTone}
      *
      * @return value of {@link #ringTone}
      */
@@ -43,7 +41,7 @@ public class AudioConfigurationSoundsAndAlerts {
     }
 
     /**
-     * Retrieves {@code {@link #ringVolume}}
+     * Retrieves {@link #ringVolume}
      *
      * @return value of {@link #ringVolume}
      */

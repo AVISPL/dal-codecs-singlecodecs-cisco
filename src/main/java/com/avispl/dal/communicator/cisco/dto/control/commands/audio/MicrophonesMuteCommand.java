@@ -3,7 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.control.commands.audio;
 
-import javax.xml.bind.annotation.*;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Microphone Mute command template.
@@ -13,13 +14,13 @@ import javax.xml.bind.annotation.*;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
-@XmlRootElement(name = "Audio")
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MicrophonesMuteCommand extends AudioCommand {
     private static class Microphones {
-        @XmlElement(name = "Mute")
+        @JacksonXmlProperty(localName="Mute")
         private MicrophonesMute mute;
-        @XmlElement(name = "Unmute")
+        @JacksonXmlProperty(localName="Unmute")
         private MicrophonesUnmute unmute;
 
         /**
@@ -44,11 +45,11 @@ public class MicrophonesMuteCommand extends AudioCommand {
      * @since 1.0
      */
     private static class MuteCommand {
-        @XmlAttribute(name = "command")
+        @JacksonXmlProperty(isAttribute = true, localName="command")
         protected String command = "True";
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -78,7 +79,7 @@ public class MicrophonesMuteCommand extends AudioCommand {
      */
     public static class MicrophonesUnmute extends MuteCommand { }
 
-    @XmlElement(name = "Microphones")
+    @JacksonXmlProperty(localName="Microphones")
     private Microphones microphones;
 
     /**
@@ -95,7 +96,7 @@ public class MicrophonesMuteCommand extends AudioCommand {
     }
 
     /**
-     * Retrieves {@code {@link #microphones}}
+     * Retrieves {@link #microphones}
      *
      * @return value of {@link #microphones}
      */

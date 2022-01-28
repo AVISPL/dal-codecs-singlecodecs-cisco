@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.network;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Configuration IEEE8021X class.
@@ -17,19 +15,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class NetworkConfigurationIEEE8021X {
-    @XmlElement(name = "Identity")
+    @JacksonXmlProperty(localName="Identity")
     private ValueSpaceRefHolder identity;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private ValueSpaceRefHolder mode;
-    @XmlElement(name = "TlsVerify")
+    @JacksonXmlProperty(localName="TlsVerify")
     private ValueSpaceRefHolder tlsVerify;
-    @XmlElement(name = "UseClientCertificate")
+    @JacksonXmlProperty(localName="UseClientCertificate")
     private ValueSpaceRefHolder useClientCertificate;
 
     /**
-     * Retrieves {@code {@link #identity}}
+     * Retrieves {@link #identity}
      *
      * @return value of {@link #identity}
      */
@@ -47,7 +45,7 @@ public class NetworkConfigurationIEEE8021X {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -65,7 +63,7 @@ public class NetworkConfigurationIEEE8021X {
     }
 
     /**
-     * Retrieves {@code {@link #tlsVerify}}
+     * Retrieves {@link #tlsVerify}
      *
      * @return value of {@link #tlsVerify}
      */
@@ -83,7 +81,7 @@ public class NetworkConfigurationIEEE8021X {
     }
 
     /**
-     * Retrieves {@code {@link #useClientCertificate}}
+     * Retrieves {@link #useClientCertificate}
      *
      * @return value of {@link #useClientCertificate}
      */

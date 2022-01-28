@@ -34,14 +34,13 @@ public class CiscoCommunicatorTest {
     public void setUp() throws Exception {
 //        wireMockRule.start();
         ciscoCommunicator = new CiscoCommunicator();
-        ciscoCommunicator.setHost("172.31.254.109");
-        ciscoCommunicator.setPort(443);
-        ciscoCommunicator.setProtocol("https");
+        ciscoCommunicator.setHost("***REMOVED***");
+        ciscoCommunicator.setPort(80);
+        ciscoCommunicator.setProtocol("http");
         ciscoCommunicator.setPassword("1234");
         ciscoCommunicator.setLogin("admin");
         ciscoCommunicator.init();
     }
-
 
     private static String resource(String s) throws IOException {
         return Resources.toString(getResource(s), UTF_8);
@@ -72,7 +71,7 @@ public class CiscoCommunicatorTest {
 
     @Test
     public void testSerializeProperties() throws Exception {
-        ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
+        ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Peripherals,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
         ciscoCommunicator.setDisplayPropertyGroups("All");
         List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();
         Assert.assertEquals(2, statistics.size());
@@ -447,7 +446,7 @@ public class CiscoCommunicatorTest {
     @Test
     public void testDial() throws Exception {
         DialDevice dialDevice = new DialDevice();
-        dialDevice.setDialString("172.31.254.144");
+        dialDevice.setDialString("nh-webex-board@avispl.room.ciscospark.com");
         dialDevice.setProtocol(Protocol.SIP);
         String response = ciscoCommunicator.dial(dialDevice);
         Assert.assertNotNull(response, "CallId should not be null");

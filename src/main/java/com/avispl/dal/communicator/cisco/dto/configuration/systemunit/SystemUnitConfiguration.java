@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.systemunit;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device System Unit Configuration class.
@@ -17,15 +15,15 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SystemUnitConfiguration {
-    @XmlElement(name = "IrSensor")
+    @JacksonXmlProperty(localName="IrSensor")
     private ValueSpaceRefHolder irSensor;
-    @XmlElement(name = "Name")
+    @JacksonXmlProperty(localName="Name")
     private ValueSpaceRefHolder name;
 
     /**
-     * Retrieves {@code {@link #irSensor}}
+     * Retrieves {@link #irSensor}
      *
      * @return value of {@link #irSensor}
      */
@@ -43,7 +41,7 @@ public class SystemUnitConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */

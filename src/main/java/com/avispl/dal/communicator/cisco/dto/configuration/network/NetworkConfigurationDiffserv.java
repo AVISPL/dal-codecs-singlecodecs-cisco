@@ -4,36 +4,38 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.network;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Configuration Diffserv class.
+ * DiffServ is a set of end-to-end quality of service (QoS) capabilities.
+ * End-to-end QoS is the ability of the
+ * network to deliver service required by specific network traffic from one end of the network to another.
+ *
  * Serves both for collecting data and changing device's config.
  *
  * @author Maksym.Rossiitsev / Symphony Dev Team<br>
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class NetworkConfigurationDiffserv {
-    @XmlElement(name = "Audio")
+    @JacksonXmlProperty(localName="Audio")
     private ValueSpaceRefHolder audio;
-    @XmlElement(name = "Data")
+    @JacksonXmlProperty(localName="Data")
     private ValueSpaceRefHolder data;
-    @XmlElement(name = "ICMPv6")
+    @JacksonXmlProperty(localName="ICMPv6")
     private ValueSpaceRefHolder icmpv6;
-    @XmlElement(name = "NTP")
+    @JacksonXmlProperty(localName="NTP")
     private ValueSpaceRefHolder ntp;
-    @XmlElement(name = "Signalling")
+    @JacksonXmlProperty(localName="Signalling")
     private ValueSpaceRefHolder signalling;
-    @XmlElement(name = "Video")
+    @JacksonXmlProperty(localName="Video")
     private ValueSpaceRefHolder video;
 
     /**
-     * Retrieves {@code {@link #audio}}
+     * Retrieves {@link #audio}
      *
      * @return value of {@link #audio}
      */
@@ -51,7 +53,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #data}}
+     * Retrieves {@link #data}
      *
      * @return value of {@link #data}
      */
@@ -69,7 +71,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #icmpv6}}
+     * Retrieves {@link #icmpv6}
      *
      * @return value of {@link #icmpv6}
      */
@@ -87,7 +89,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #ntp}}
+     * Retrieves {@link #ntp}
      *
      * @return value of {@link #ntp}
      */
@@ -105,7 +107,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #signalling}}
+     * Retrieves {@link #signalling}
      *
      * @return value of {@link #signalling}
      */
@@ -123,7 +125,7 @@ public class NetworkConfigurationDiffserv {
     }
 
     /**
-     * Retrieves {@code {@link #video}}
+     * Retrieves {@link #video}
      *
      * @return value of {@link #video}
      */

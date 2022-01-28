@@ -4,12 +4,9 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.video;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlElement;
-
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * Device Video Configuration Selfview - Default class.
@@ -19,19 +16,20 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class VideoConfigurationSelfviewDefault {
-    @XmlElement(name = "FullscreenMode")
+    @JacksonXmlProperty(localName="FullscreenMode")
     private ValueSpaceRefHolder fullscreenMode;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private ValueSpaceRefHolder mode;
-    @XmlElement(name = "OnMonitorRole")
+    @JacksonXmlProperty(localName="OnMonitorRole")
     private ValueSpaceRefHolder onMonitorRole;
-    @XmlElement(name = "PIPPosition")
+    @JacksonXmlProperty(localName="PIPPosition")
     private ValueSpaceRefHolder pipPosition;
 
     /**
-     * Retrieves {@code {@link #fullscreenMode}}
+     * Retrieves {@link #fullscreenMode}
      *
      * @return value of {@link #fullscreenMode}
      */
@@ -49,7 +47,7 @@ public class VideoConfigurationSelfviewDefault {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -67,7 +65,7 @@ public class VideoConfigurationSelfviewDefault {
     }
 
     /**
-     * Retrieves {@code {@link #onMonitorRole}}
+     * Retrieves {@link #onMonitorRole}
      *
      * @return value of {@link #onMonitorRole}
      */
@@ -85,7 +83,7 @@ public class VideoConfigurationSelfviewDefault {
     }
 
     /**
-     * Retrieves {@code {@link #pipPosition}}
+     * Retrieves {@link #pipPosition}
      *
      * @return value of {@link #pipPosition}
      */

@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.video;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Video Configuration class.
@@ -17,23 +15,23 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class VideoConfiguration {
-    @XmlElement(name = "DefaultMainSource")
+    @JacksonXmlProperty(localName="DefaultMainSource")
     private ValueSpaceRefHolder defaultMainSource;
-    @XmlElement(name = "Input")
+    @JacksonXmlProperty(localName="Input")
     private VideoConfigurationInput input;
-    @XmlElement(name = "Output")
+    @JacksonXmlProperty(localName="Output")
     private VideoConfigurationOutput output;
-    @XmlElement(name = "Presentation")
+    @JacksonXmlProperty(localName="Presentation")
     private VideoConfigurationPresentation presentation;
-    @XmlElement(name = "Selfview")
+    @JacksonXmlProperty(localName="Selfview")
     private VideoConfigurationSelfview selfview;
-    @XmlElement(name = "Monitors")
+    @JacksonXmlProperty(localName="Monitors")
     private ValueSpaceRefHolder monitors;
 
     /**
-     * Retrieves {@code {@link #defaultMainSource}}
+     * Retrieves {@link #defaultMainSource}
      *
      * @return value of {@link #defaultMainSource}
      */
@@ -51,7 +49,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #input}}
+     * Retrieves {@link #input}
      *
      * @return value of {@link #input}
      */
@@ -69,7 +67,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #output}}
+     * Retrieves {@link #output}
      *
      * @return value of {@link #output}
      */
@@ -87,7 +85,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #presentation}}
+     * Retrieves {@link #presentation}
      *
      * @return value of {@link #presentation}
      */
@@ -105,7 +103,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #selfview}}
+     * Retrieves {@link #selfview}
      *
      * @return value of {@link #selfview}
      */
@@ -123,7 +121,7 @@ public class VideoConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #monitors}}
+     * Retrieves {@link #monitors}
      *
      * @return value of {@link #monitors}
      */

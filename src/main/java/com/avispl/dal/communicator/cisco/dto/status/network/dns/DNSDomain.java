@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.network.dns;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device dns domain status class
  * Represents dns domain node from /status.xml information payload
@@ -14,13 +13,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class DNSDomain {
-    @XmlElement(name = "Name")
+    @JacksonXmlProperty(localName="Name")
     private String name;
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */

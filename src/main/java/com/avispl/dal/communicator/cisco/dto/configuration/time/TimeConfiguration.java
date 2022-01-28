@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.time;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Time Configuration class.
@@ -17,17 +15,17 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class TimeConfiguration {
-    @XmlElement(name = "DateFormat")
+    @JacksonXmlProperty(localName="DateFormat")
     private ValueSpaceRefHolder dateFormat;
-    @XmlElement(name = "TimeFormat")
+    @JacksonXmlProperty(localName="TimeFormat")
     private ValueSpaceRefHolder timeFormat;
-    @XmlElement(name = "Zone")
+    @JacksonXmlProperty(localName="Zone")
     private ValueSpaceRefHolder zone;
 
     /**
-     * Retrieves {@code {@link #dateFormat}}
+     * Retrieves {@link #dateFormat}
      *
      * @return value of {@link #dateFormat}
      */
@@ -45,7 +43,7 @@ public class TimeConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #timeFormat}}
+     * Retrieves {@link #timeFormat}
      *
      * @return value of {@link #timeFormat}
      */
@@ -63,7 +61,7 @@ public class TimeConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #zone}}
+     * Retrieves {@link #zone}
      *
      * @return value of {@link #zone}
      */

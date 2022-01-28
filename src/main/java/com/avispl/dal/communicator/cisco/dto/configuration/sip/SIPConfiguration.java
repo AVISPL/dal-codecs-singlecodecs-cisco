@@ -5,10 +5,9 @@ package com.avispl.dal.communicator.cisco.dto.configuration.sip;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
 import com.avispl.dal.communicator.cisco.dto.configuration.network.NetworkConfigurationServer;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device SIP Configuration class.
@@ -18,17 +17,18 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SIPConfiguration {
-    @XmlElement(name = "Ice")
+    @JacksonXmlProperty(localName="Ice")
     private SIPConfigurationIce ice;
-    @XmlElement(name = "Proxy")
+    @JacksonXmlProperty(localName="Proxy")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private NetworkConfigurationServer[] proxies;
-    @XmlElement(name = "URI")
+    @JacksonXmlProperty(localName="URI")
     private ValueSpaceRefHolder uri;
 
     /**
-     * Retrieves {@code {@link #ice}}
+     * Retrieves {@link #ice}
      *
      * @return value of {@link #ice}
      */
@@ -46,7 +46,7 @@ public class SIPConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #proxies}}
+     * Retrieves {@link #proxies}
      *
      * @return value of {@link #proxies}
      */
@@ -64,7 +64,7 @@ public class SIPConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #uri}}
+     * Retrieves {@link #uri}
      *
      * @return value of {@link #uri}
      */

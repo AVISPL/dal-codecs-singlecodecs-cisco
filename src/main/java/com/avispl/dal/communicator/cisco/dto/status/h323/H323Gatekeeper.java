@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.h323;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device h323 gatekeeper class
  * Represents H323 gatekeeper node from /status.xml information payload
@@ -15,19 +13,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class H323Gatekeeper {
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private String address;
-    @XmlElement(name = "Port")
+    @JacksonXmlProperty(localName="Port")
     private String port;
-    @XmlElement(name = "Reason")
+    @JacksonXmlProperty(localName="Reason")
     private String reason;
-    @XmlElement(name = "Status")
+    @JacksonXmlProperty(localName="Status")
     private String status;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -45,7 +43,7 @@ public class H323Gatekeeper {
     }
 
     /**
-     * Retrieves {@code {@link #port}}
+     * Retrieves {@link #port}
      *
      * @return value of {@link #port}
      */
@@ -63,7 +61,7 @@ public class H323Gatekeeper {
     }
 
     /**
-     * Retrieves {@code {@link #reason}}
+     * Retrieves {@link #reason}
      *
      * @return value of {@link #reason}
      */
@@ -81,7 +79,7 @@ public class H323Gatekeeper {
     }
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */

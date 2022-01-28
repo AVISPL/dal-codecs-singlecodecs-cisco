@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.configuration.video;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Video Configuration Output class.
@@ -15,13 +14,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoConfigurationOutput {
-    @XmlElement(name = "Connector")
+    @JacksonXmlProperty(localName="Connector")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private VideoConfigurationConnector[] connectors;
 
     /**
-     * Retrieves {@code {@link #connectors}}
+     * Retrieves {@link #connectors}
      *
      * @return value of {@link #connectors}
      */

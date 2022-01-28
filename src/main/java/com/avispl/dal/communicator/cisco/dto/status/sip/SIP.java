@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.sip;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device SIP status class
@@ -15,25 +14,27 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class SIP {
-    @XmlElement(name = "Authentication")
+    @JacksonXmlProperty(localName="Authentication")
     private String authentication;
-    @XmlElement(name = "CallForward")
+    @JacksonXmlProperty(localName="CallForward")
     private CallForward callForward;
-    @XmlElement(name = "Mailbox")
+    @JacksonXmlProperty(localName="Mailbox")
     private Mailbox mailbox;
-    @XmlElement(name = "Registration")
+    @JacksonXmlProperty(localName="Registration")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Registration[] registrations;
-    @XmlElement(name = "Proxy")
+    @JacksonXmlProperty(localName="Proxy")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private Proxy[] proxies;
-    @XmlElement(name = "Secure")
+    @JacksonXmlProperty(localName="Secure")
     private String secure;
-    @XmlElement(name = "Verified")
+    @JacksonXmlProperty(localName="Verified")
     private String verified;
 
     /**
-     * Retrieves {@code {@link #authentication}}
+     * Retrieves {@link #authentication}
      *
      * @return value of {@link #authentication}
      */
@@ -51,7 +52,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #callForward}}
+     * Retrieves {@link #callForward}
      *
      * @return value of {@link #callForward}
      */
@@ -69,7 +70,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #mailbox}}
+     * Retrieves {@link #mailbox}
      *
      * @return value of {@link #mailbox}
      */
@@ -87,7 +88,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #registrations}}
+     * Retrieves {@link #registrations}
      *
      * @return value of {@link #registrations}
      */
@@ -105,7 +106,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #proxies}}
+     * Retrieves {@link #proxies}
      *
      * @return value of {@link #proxies}
      */
@@ -123,7 +124,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #secure}}
+     * Retrieves {@link #secure}
      *
      * @return value of {@link #secure}
      */
@@ -141,7 +142,7 @@ public class SIP {
     }
 
     /**
-     * Retrieves {@code {@link #verified}}
+     * Retrieves {@link #verified}
      *
      * @return value of {@link #verified}
      */

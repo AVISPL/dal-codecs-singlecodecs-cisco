@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.h323;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device h323 status class
  * Represents H323 node from /status.xml information payload
@@ -15,15 +13,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class H323 {
-    @XmlElement(name = "Gatekeeper")
+    @JacksonXmlProperty(localName="Gatekeeper")
     private H323Gatekeeper gatekeeper;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private H323Mode mode;
 
     /**
-     * Retrieves {@code {@link #gatekeeper}}
+     * Retrieves {@link #gatekeeper}
      *
      * @return value of {@link #gatekeeper}
      */
@@ -41,7 +39,7 @@ public class H323 {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

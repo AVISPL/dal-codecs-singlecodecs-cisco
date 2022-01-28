@@ -3,9 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.network;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 /**
  * Device ipv4 status class
  * Represents ipv4 node from /status.xml information payload
@@ -14,17 +13,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class IPv4 {
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private String address;
-    @XmlElement(name = "Gateway")
+    @JacksonXmlProperty(localName="Gateway")
     private String gateway;
-    @XmlElement(name = "SubnetMask")
+    @JacksonXmlProperty(localName="SubnetMask")
     private String subnetMask;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -42,7 +41,7 @@ public class IPv4 {
     }
 
     /**
-     * Retrieves {@code {@link #gateway}}
+     * Retrieves {@link #gateway}
      *
      * @return value of {@link #gateway}
      */
@@ -60,7 +59,7 @@ public class IPv4 {
     }
 
     /**
-     * Retrieves {@code {@link #subnetMask}}
+     * Retrieves {@link #subnetMask}
      *
      * @return value of {@link #subnetMask}
      */

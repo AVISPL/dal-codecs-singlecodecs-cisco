@@ -1,12 +1,10 @@
 /*
- * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2022 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status.media;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device Audio status class
  * Represents Audio node from /status.xml information payload
@@ -15,17 +13,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
-public class Audio {
-    @XmlElement(name = "Channels")
+
+public class Audio extends CallChannelData {
+    @JacksonXmlProperty(localName="Channels")
     private String channels;
-    @XmlElement(name = "Mute")
+    @JacksonXmlProperty(localName="Mute")
     private String mute;
-    @XmlElement(name = "Protocol")
-    private String protocol;
 
     /**
-     * Retrieves {@code {@link #channels}}
+     * Retrieves {@link #channels}
      *
      * @return value of {@link #channels}
      */
@@ -43,7 +39,7 @@ public class Audio {
     }
 
     /**
-     * Retrieves {@code {@link #mute}}
+     * Retrieves {@link #mute}
      *
      * @return value of {@link #mute}
      */
@@ -58,23 +54,5 @@ public class Audio {
      */
     public void setMute(String mute) {
         this.mute = mute;
-    }
-
-    /**
-     * Retrieves {@code {@link #protocol}}
-     *
-     * @return value of {@link #protocol}
-     */
-    public String getProtocol() {
-        return protocol;
-    }
-
-    /**
-     * Sets {@code protocol}
-     *
-     * @param protocol the {@code java.lang.String} field
-     */
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
     }
 }

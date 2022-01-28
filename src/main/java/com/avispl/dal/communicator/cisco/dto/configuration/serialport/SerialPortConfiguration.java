@@ -4,10 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.serialport;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Serial Port Configuration class.
@@ -17,17 +15,17 @@ import javax.xml.bind.annotation.XmlElement;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class SerialPortConfiguration {
-    @XmlElement(name = "BaudRate")
+    @JacksonXmlProperty(localName="BaudRate")
     private ValueSpaceRefHolder baudRate;
-    @XmlElement(name = "LoginRequired")
+    @JacksonXmlProperty(localName="LoginRequired")
     private ValueSpaceRefHolder loginRequired;
-    @XmlElement(name = "Mode")
+    @JacksonXmlProperty(localName="Mode")
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #baudRate}}
+     * Retrieves {@link #baudRate}
      *
      * @return value of {@link #baudRate}
      */
@@ -45,7 +43,7 @@ public class SerialPortConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #loginRequired}}
+     * Retrieves {@link #loginRequired}
      *
      * @return value of {@link #loginRequired}
      */
@@ -63,7 +61,7 @@ public class SerialPortConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

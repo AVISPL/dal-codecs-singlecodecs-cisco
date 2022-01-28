@@ -3,10 +3,8 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.video;
 
-import javax.xml.bind.annotation.XmlElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 /**
  * Device video input source status class
  * Represents video input source node from /status.xml information payload
@@ -15,21 +13,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+
 public class VideoInputSource {
-    @XmlElement(name = "ConnectorId")
+    @JacksonXmlProperty(localName="ConnectorId")
     private String connectorId;
-    @XmlElement(name = "FormatStatus")
+    @JacksonXmlProperty(localName="FormatStatus")
     private String formatStatus;
-    @XmlElement(name = "FormatType")
+    @JacksonXmlProperty(localName="FormatType")
     private String formatType;
-    @XmlElement(name = "MediaChannelId")
+    @JacksonXmlProperty(localName="MediaChannelId")
     private String mediaChannelId;
-    @XmlElement(name = "Resolution")
+    @JacksonXmlProperty(localName="Resolution")
     private SourceResolution resolution;
 
     /**
-     * Retrieves {@code {@link #connectorId}}
+     * Retrieves {@link #connectorId}
      *
      * @return value of {@link #connectorId}
      */
@@ -47,7 +45,7 @@ public class VideoInputSource {
     }
 
     /**
-     * Retrieves {@code {@link #formatStatus}}
+     * Retrieves {@link #formatStatus}
      *
      * @return value of {@link #formatStatus}
      */
@@ -65,7 +63,7 @@ public class VideoInputSource {
     }
 
     /**
-     * Retrieves {@code {@link #formatType}}
+     * Retrieves {@link #formatType}
      *
      * @return value of {@link #formatType}
      */
@@ -83,7 +81,7 @@ public class VideoInputSource {
     }
 
     /**
-     * Retrieves {@code {@link #mediaChannelId}}
+     * Retrieves {@link #mediaChannelId}
      *
      * @return value of {@link #mediaChannelId}
      */
@@ -101,7 +99,7 @@ public class VideoInputSource {
     }
 
     /**
-     * Retrieves {@code {@link #resolution}}
+     * Retrieves {@link #resolution}
      *
      * @return value of {@link #resolution}
      */

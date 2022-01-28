@@ -4,11 +4,8 @@
 package com.avispl.dal.communicator.cisco.dto.configuration.network;
 
 import com.avispl.dal.communicator.cisco.dto.ValueSpaceRefHolder;
-
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Device Network Configuration Server class.
@@ -18,17 +15,17 @@ import javax.xml.bind.annotation.XmlAccessorType;
  * Created on Apr 26, 2021
  * @since 1.0
  */
-@XmlAccessorType(XmlAccessType.NONE)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class NetworkConfigurationServer {
-    @XmlAttribute(name = "item")
+    @JacksonXmlProperty(isAttribute = true, localName="item")
     private String item;
-    @XmlElement(name = "MinimumTLSVersion")
+    @JacksonXmlProperty(localName="MinimumTLSVersion")
     private ValueSpaceRefHolder minimumTLSVersion;
-    @XmlElement(name = "Address")
+    @JacksonXmlProperty(localName="Address")
     private ValueSpaceRefHolder address;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -46,7 +43,7 @@ public class NetworkConfigurationServer {
     }
 
     /**
-     * Retrieves {@code {@link #minimumTLSVersion}}
+     * Retrieves {@link #minimumTLSVersion}
      *
      * @return value of {@link #minimumTLSVersion}
      */
@@ -64,7 +61,7 @@ public class NetworkConfigurationServer {
     }
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */

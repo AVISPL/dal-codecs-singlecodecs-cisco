@@ -6,7 +6,7 @@
 
     <groupId>com.avispl.symphony.dal.device.cisco</groupId>
     <artifactId>symphony-dal-communicator-cisco</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <properties>
         <symphonyApiVersion>RELEASE</symphonyApiVersion>
     </properties>
@@ -261,12 +261,6 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>5.1.9.RELEASE</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.sshd</groupId>
-            <artifactId>sshd-core</artifactId>
-            <version>2.2.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

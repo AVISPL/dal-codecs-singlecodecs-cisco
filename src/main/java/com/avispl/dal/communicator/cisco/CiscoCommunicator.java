@@ -831,28 +831,30 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private RegistrationStatus createRegistrationStatus(CiscoStatus ciscoStatus) {
         RegistrationStatus registrationStatus = new RegistrationStatus();
 
-        H323 h323 = ciscoStatus.getH323();
-        if (h323 != null) {
-            H323Gatekeeper gatekeeper = h323.getGatekeeper();
-            if (gatekeeper != null) {
-                registrationStatus.setH323Details(String.format("Port: %s", gatekeeper.getPort()));
-                registrationStatus.setH323Registered("Registered".equalsIgnoreCase(gatekeeper.getStatus()));
-                registrationStatus.setH323Gatekeeper(gatekeeper.getAddress());
+            H323 h323 = ciscoStatus.getH323();
+            registrationStatus.setH323Registered(false);
+            if (h323 != null) {
+                H323Gatekeeper gatekeeper = h323.getGatekeeper();
+                if (gatekeeper != null) {
+                    registrationStatus.setH323Details(String.format("Port: %s", gatekeeper.getPort()));
+                    registrationStatus.setH323Registered("Registered".equalsIgnoreCase(gatekeeper.getStatus()));
+                    registrationStatus.setH323Gatekeeper(gatekeeper.getAddress());
+                }
             }
-        }
 
-        SIP sip = ciscoStatus.getSip();
-        if (sip != null) {
-            Registration[] registrations = sip.getRegistrations();
-            if (registrations != null && registrations.length > 0) {
-                registrationStatus.setSipDetails(String.format("URI: %s", registrations[0].getUri()));
-                registrationStatus.setSipRegistered("Registered".equalsIgnoreCase(registrations[0].getStatus()));
+            SIP sip = ciscoStatus.getSip();
+            registrationStatus.setSipRegistered(false);
+            if (sip != null) {
+                Registration[] registrations = sip.getRegistrations();
+                if (registrations != null && registrations.length > 0) {
+                    registrationStatus.setSipDetails(String.format("URI: %s", registrations[0].getUri()));
+                    registrationStatus.setSipRegistered("Registered".equalsIgnoreCase(registrations[0].getStatus()));
+                }
+                Proxy[] proxies = sip.getProxies();
+                if (proxies != null && proxies.length > 0) {
+                    registrationStatus.setSipRegistrar(proxies[0].getAddress());
+                }
             }
-            Proxy[] proxies = sip.getProxies();
-            if (proxies != null && proxies.length > 0) {
-                registrationStatus.setSipRegistrar(proxies[0].getAddress());
-            }
-        }
 
         return registrationStatus;
     }

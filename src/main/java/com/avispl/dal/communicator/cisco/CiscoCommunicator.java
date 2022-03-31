@@ -33,6 +33,7 @@ import com.avispl.dal.communicator.cisco.dto.control.commands.call.DialCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.camera.CameraPositionSetCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.ListCommand;
 import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.PeripheralsCommand;
+import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.response.PeripheralsDevice;
 import com.avispl.dal.communicator.cisco.dto.control.commands.peripherals.response.PeripheralsListResult;
 import com.avispl.dal.communicator.cisco.dto.control.commands.userinterface.UserInterfaceCommand;
 import com.avispl.dal.communicator.cisco.dto.status.CiscoStatus;
@@ -513,10 +514,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private List<Call> getConnectedCalls() throws Exception {
             CiscoStatus status = doGet(String.format(getXmlPath, callStatusUri), CiscoStatus.class);
-            if (status.getCalls() == null) {
+            Call[] calls = status.getCalls();
+            if (calls == null) {
                 return Collections.emptyList();
             }
-            return Arrays.stream(status.getCalls()).filter(call -> "Connected".equals(call.getStatus()))
+            return Arrays.stream(calls).filter(call -> "Connected".equals(call.getStatus()))
                     .collect(Collectors.toList());
         }
 
@@ -618,8 +620,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
                 return;
             }
+            Call[] ciscoCallsStatus = ciscoStatus.getCalls();
+            if (ciscoCallsStatus == null) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to populate cisco status data: no calls information is available");
+                }
+                return;
+            }
 
-            List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> "Connected".equals(call.getStatus()))
+            List<Call> connectedCalls = Arrays.stream(ciscoCallsStatus).filter(call -> "Connected".equals(call.getStatus()))
                     .collect(Collectors.toList());
             long callsCount = connectedCalls.size();
             if (callsCount > 1) {
@@ -1616,86 +1625,89 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (peripheralsListCommandResponse != null) {
                 PeripheralsListResult peripheralsListResult = peripheralsListCommandResponse.getPeripheralsListResult();
                 if (peripheralsListResult != null && "OK".equalsIgnoreCase(peripheralsListResult.getStatus())) {
-                    Map<String, Map<String, String>> connectedTypedStats = new HashMap<>();
-                    Map<String, Map<String, String>> disconnectedTypedStats = new HashMap<>();
+                    PeripheralsDevice[] devices = peripheralsListResult.getPeripheralsDevices();
+                    if(devices != null) {
+                        Map<String, Map<String, String>> connectedTypedStats = new HashMap<>();
+                        Map<String, Map<String, String>> disconnectedTypedStats = new HashMap<>();
 
-                    Arrays.stream(peripheralsListResult.getPeripheralsDevices()).forEach(connectedDevice -> {
-                        int totalDevicesOfStateAndType = 0;
-                        String connectedDeviceType = connectedDevice.getType();
-                        // %ss is intentional here - in order to make Type plural
-                        String disconnectedKey = String.format(PERIPHERALS_DISCONNECTED_TEMPLATE, connectedDeviceType);
-                        String connectedKey = String.format(PERIPHERALS_CONNECTED_TEMPLATE, connectedDeviceType);
-                        String key = disconnectedKey;
+                        Arrays.stream(devices).forEach(connectedDevice -> {
+                            int totalDevicesOfStateAndType = 0;
+                            String connectedDeviceType = connectedDevice.getType();
+                            // %ss is intentional here - in order to make Type plural
+                            String disconnectedKey = String.format(PERIPHERALS_DISCONNECTED_TEMPLATE, connectedDeviceType);
+                            String connectedKey = String.format(PERIPHERALS_CONNECTED_TEMPLATE, connectedDeviceType);
+                            String key = disconnectedKey;
 
-                        Optional<ConnectedDevice> connectedDeviceStatus = Optional.empty();
-                        if (!connectedDevices.isEmpty()) {
-                            connectedDeviceStatus = connectedDevices.stream().filter(cd -> cd.getSerialNumber().equals(connectedDevice.getSerialNumber())).findFirst();
-                        }
+                            Optional<ConnectedDevice> connectedDeviceStatus = Optional.empty();
+                            if (!connectedDevices.isEmpty()) {
+                                connectedDeviceStatus = connectedDevices.stream().filter(cd -> cd.getSerialNumber().equals(connectedDevice.getSerialNumber())).findFirst();
+                            }
 
-                        Map<String, String> typedStats;
+                            Map<String, String> typedStats;
 
-                        if (connectedDeviceStatus.isPresent()) {
-                            ConnectedDevice cd = connectedDeviceStatus.get();
-                            String deviceStatus = cd.getStatus();
+                            if (connectedDeviceStatus.isPresent()) {
+                                ConnectedDevice cd = connectedDeviceStatus.get();
+                                String deviceStatus = cd.getStatus();
 
-                            if ("connected".equalsIgnoreCase(deviceStatus)) {
-                                if (connectedTypedStats.containsKey(connectedDeviceType)) {
-                                    typedStats = connectedTypedStats.get(connectedDeviceType);
+                                if ("connected".equalsIgnoreCase(deviceStatus)) {
+                                    if (connectedTypedStats.containsKey(connectedDeviceType)) {
+                                        typedStats = connectedTypedStats.get(connectedDeviceType);
+                                    } else {
+                                        typedStats = new HashMap<>();
+                                        connectedTypedStats.put(connectedDeviceType, typedStats);
+                                    }
+
+                                    key = connectedKey;
                                 } else {
-                                    typedStats = new HashMap<>();
-                                    connectedTypedStats.put(connectedDeviceType, typedStats);
+                                    if (disconnectedTypedStats.containsKey(connectedDeviceType)) {
+                                        typedStats = disconnectedTypedStats.get(connectedDeviceType);
+                                    } else {
+                                        typedStats = new HashMap<>();
+                                        disconnectedTypedStats.put(connectedDeviceType, typedStats);
+                                    }
                                 }
 
-                                key = connectedKey;
+                                String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
+                                addStatisticsParameter(typedStats, key + PROPERTY_STATUS, cd.getStatus());
+                                addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), cd.getUpgradeStatus(), "; "));
                             } else {
+                                key = disconnectedKey;
                                 if (disconnectedTypedStats.containsKey(connectedDeviceType)) {
                                     typedStats = disconnectedTypedStats.get(connectedDeviceType);
                                 } else {
                                     typedStats = new HashMap<>();
                                     disconnectedTypedStats.put(connectedDeviceType, typedStats);
                                 }
+                                String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
+                                addStatisticsParameter(typedStats, key + PROPERTY_STATUS, "Disconnected");
+                                addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), "-", "; "));
                             }
 
-                            String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
-                            addStatisticsParameter(typedStats, key + PROPERTY_STATUS, cd.getStatus());
-                            addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), cd.getUpgradeStatus(), "; "));
-                        } else {
-                            key = disconnectedKey;
-                            if (disconnectedTypedStats.containsKey(connectedDeviceType)) {
-                                typedStats = disconnectedTypedStats.get(connectedDeviceType);
-                            } else {
-                                typedStats = new HashMap<>();
-                                disconnectedTypedStats.put(connectedDeviceType, typedStats);
-                            }
-                            String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
-                            addStatisticsParameter(typedStats, key + PROPERTY_STATUS, "Disconnected");
-                            addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), "-", "; "));
-                        }
+                            String hardwareInfoKey = key + PROPERTY_HARDWARE_INFO;
+                            String connectionMethodKey = key + PROPERTY_CONNECTION_METHOD;
+                            String networkAddressKey = key + PROPERTY_NETWORK_ADDRESS;
+                            String lastSeenKey = key + PROPERTY_LAST_SEEN;
+                            String idKey = key + PROPERTY_ID;
+                            String nameKey = key + PROPERTY_NAME;
+                            String serialNumberKey = key + PROPERTY_SERIAL_NUMBER;
+                            String softwareInfoKey = key + PROPERTY_SOFTWARE_INFO;
+                            String typeKey = key + PROPERTY_TYPE;
 
-                        String hardwareInfoKey = key + PROPERTY_HARDWARE_INFO;
-                        String connectionMethodKey = key + PROPERTY_CONNECTION_METHOD;
-                        String networkAddressKey = key + PROPERTY_NETWORK_ADDRESS;
-                        String lastSeenKey = key + PROPERTY_LAST_SEEN;
-                        String idKey = key + PROPERTY_ID;
-                        String nameKey = key + PROPERTY_NAME;
-                        String serialNumberKey = key + PROPERTY_SERIAL_NUMBER;
-                        String softwareInfoKey = key + PROPERTY_SOFTWARE_INFO;
-                        String typeKey = key + PROPERTY_TYPE;
+                            addStatisticsParameter(typedStats, hardwareInfoKey, mergeAndNormalizeStrings(typedStats.get(hardwareInfoKey), connectedDevice.getHardwareInfo(), "; "));
+                            addStatisticsParameter(typedStats, connectionMethodKey, mergeAndNormalizeStrings(typedStats.get(connectionMethodKey), connectedDevice.getConnectionMethod(), "; "));
+                            addStatisticsParameter(typedStats, networkAddressKey, mergeAndNormalizeStrings(typedStats.get(networkAddressKey), connectedDevice.getNetworkAddress(), "; "));
+                            addStatisticsParameter(typedStats, lastSeenKey, mergeAndNormalizeStrings(typedStats.get(lastSeenKey), connectedDevice.getLastSeen(), "; "));
+                            addStatisticsParameter(typedStats, idKey, mergeAndNormalizeStrings(typedStats.get(idKey), connectedDevice.getId(), "; "));
+                            addStatisticsParameter(typedStats, nameKey, mergeAndNormalizeStrings(typedStats.get(nameKey), connectedDevice.getName(), "; "));
+                            addStatisticsParameter(typedStats, serialNumberKey, mergeAndNormalizeStrings(typedStats.get(serialNumberKey), connectedDevice.getSerialNumber(), "; "));
+                            addStatisticsParameter(typedStats, softwareInfoKey, mergeAndNormalizeStrings(typedStats.get(softwareInfoKey), connectedDevice.getSoftwareInfo(), "; "));
+                            addStatisticsParameter(typedStats, typeKey, mergeAndNormalizeStrings(typedStats.get(typeKey), connectedDeviceType, "; "));
+                            addStatisticsParameter(typedStats, key + PROPERTY_TOTAL_DEVICES_COUNT, String.valueOf(++totalDevicesOfStateAndType));
+                        });
 
-                        addStatisticsParameter(typedStats, hardwareInfoKey, mergeAndNormalizeStrings(typedStats.get(hardwareInfoKey), connectedDevice.getHardwareInfo(), "; "));
-                        addStatisticsParameter(typedStats, connectionMethodKey, mergeAndNormalizeStrings(typedStats.get(connectionMethodKey), connectedDevice.getConnectionMethod(), "; "));
-                        addStatisticsParameter(typedStats, networkAddressKey, mergeAndNormalizeStrings(typedStats.get(networkAddressKey), connectedDevice.getNetworkAddress(), "; "));
-                        addStatisticsParameter(typedStats, lastSeenKey, mergeAndNormalizeStrings(typedStats.get(lastSeenKey), connectedDevice.getLastSeen(), "; "));
-                        addStatisticsParameter(typedStats, idKey, mergeAndNormalizeStrings(typedStats.get(idKey), connectedDevice.getId(), "; "));
-                        addStatisticsParameter(typedStats, nameKey, mergeAndNormalizeStrings(typedStats.get(nameKey), connectedDevice.getName(), "; "));
-                        addStatisticsParameter(typedStats, serialNumberKey, mergeAndNormalizeStrings(typedStats.get(serialNumberKey), connectedDevice.getSerialNumber(), "; "));
-                        addStatisticsParameter(typedStats, softwareInfoKey, mergeAndNormalizeStrings(typedStats.get(softwareInfoKey), connectedDevice.getSoftwareInfo(), "; "));
-                        addStatisticsParameter(typedStats, typeKey, mergeAndNormalizeStrings(typedStats.get(typeKey), connectedDeviceType, "; "));
-                        addStatisticsParameter(typedStats, key + PROPERTY_TOTAL_DEVICES_COUNT, String.valueOf(++totalDevicesOfStateAndType));
-                    });
-
-                    disconnectedTypedStats.values().forEach(statistics::putAll);
-                    connectedTypedStats.values().forEach(statistics::putAll);
+                        disconnectedTypedStats.values().forEach(statistics::putAll);
+                        connectedTypedStats.values().forEach(statistics::putAll);
+                    }
                 }
             }
 

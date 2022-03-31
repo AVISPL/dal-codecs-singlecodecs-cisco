@@ -1870,7 +1870,19 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
                     disconnectedTypedStats.values().forEach(statistics::putAll);
                     connectedTypedStats.values().forEach(statistics::putAll);
+                } else {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Unable to get connected devices information: no connected devices available");
+                    }
                 }
+            } else {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to get peripheral devices information: no peripheral devices available or the response status is invalid");
+                }
+            }
+        } else {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Unable to get peripheral devices information: no devices available in the list");
             }
         }
 
@@ -1888,6 +1900,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 if (ciscoTouchPanels != null) {
                     addStatisticsParameterWithDropdown(statistics, controllableProperties, PERIPHERALS_TOUCH_PANEL_REMOTE_PAIRING, ciscoTouchPanels.getRemotePairing(), valuespace);
                 }
+            }
+        } else {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Unable to get peripheral devices configuration.");
             }
         }
     }

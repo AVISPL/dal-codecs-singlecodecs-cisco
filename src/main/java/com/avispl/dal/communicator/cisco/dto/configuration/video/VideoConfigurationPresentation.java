@@ -21,7 +21,7 @@ public class VideoConfigurationPresentation {
     private ValueSpaceRefHolder defaultSource;
 
     /**
-     * Retrieves {@code {@link #defaultSource}}
+     * Retrieves {@link #defaultSource}
      *
      * @return value of {@link #defaultSource}
      */

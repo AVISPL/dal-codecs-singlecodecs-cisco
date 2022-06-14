@@ -25,7 +25,7 @@ public class TimeConfiguration {
     private ValueSpaceRefHolder zone;
 
     /**
-     * Retrieves {@code {@link #dateFormat}}
+     * Retrieves {@link #dateFormat}
      *
      * @return value of {@link #dateFormat}
      */
@@ -43,7 +43,7 @@ public class TimeConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #timeFormat}}
+     * Retrieves {@link #timeFormat}
      *
      * @return value of {@link #timeFormat}
      */
@@ -61,7 +61,7 @@ public class TimeConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #zone}}
+     * Retrieves {@link #zone}
      *
      * @return value of {@link #zone}
      */

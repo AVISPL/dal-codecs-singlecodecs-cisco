@@ -20,7 +20,7 @@ public class H323ConfigurationEncryption {
     private ValueSpaceRefHolder keySize;
 
     /**
-     * Retrieves {@code {@link #keySize}}
+     * Retrieves {@link #keySize}
      *
      * @return value of {@link #keySize}
      */

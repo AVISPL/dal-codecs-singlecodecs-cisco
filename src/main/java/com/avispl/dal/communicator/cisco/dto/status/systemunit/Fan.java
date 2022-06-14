@@ -19,7 +19,7 @@ public class Fan {
     private String status;
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */

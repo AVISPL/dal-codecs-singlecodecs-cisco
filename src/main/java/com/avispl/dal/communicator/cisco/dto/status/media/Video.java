@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2022 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status.media;
 
@@ -14,20 +14,21 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * @since 1.0
  */
 
-public class Video {
+public class Video extends CallChannelData{
     @JacksonXmlProperty(localName="ChannelRole")
     private String channelRole;
     @JacksonXmlProperty(localName="FrameRate")
     private String frameRate;
-    @JacksonXmlProperty(localName="Protocol")
-    private String protocol;
     @JacksonXmlProperty(localName="ResolutionX")
     private String resolutionX;
     @JacksonXmlProperty(localName="ResolutionY")
     private String resolutionY;
+    /**@since 1.1.1*/
+    @JacksonXmlProperty(localName="Resolution")
+    private String resolution;
 
     /**
-     * Retrieves {@code {@link #channelRole}}
+     * Retrieves {@link #channelRole}
      *
      * @return value of {@link #channelRole}
      */
@@ -45,7 +46,7 @@ public class Video {
     }
 
     /**
-     * Retrieves {@code {@link #frameRate}}
+     * Retrieves {@link #frameRate}
      *
      * @return value of {@link #frameRate}
      */
@@ -63,25 +64,7 @@ public class Video {
     }
 
     /**
-     * Retrieves {@code {@link #protocol}}
-     *
-     * @return value of {@link #protocol}
-     */
-    public String getProtocol() {
-        return protocol;
-    }
-
-    /**
-     * Sets {@code protocol}
-     *
-     * @param protocol the {@code java.lang.String} field
-     */
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
-    }
-
-    /**
-     * Retrieves {@code {@link #resolutionX}}
+     * Retrieves {@link #resolutionX}
      *
      * @return value of {@link #resolutionX}
      */
@@ -99,7 +82,7 @@ public class Video {
     }
 
     /**
-     * Retrieves {@code {@link #resolutionY}}
+     * Retrieves {@link #resolutionY}
      *
      * @return value of {@link #resolutionY}
      */
@@ -114,5 +97,25 @@ public class Video {
      */
     public void setResolutionY(String resolutionY) {
         this.resolutionY = resolutionY;
+    }
+
+    /**
+     * Retrieves {@link #resolution}
+     *
+     * @return value of {@link #resolution}
+     * @since 1.1.1
+     */
+    public String getResolution() {
+        return resolution;
+    }
+
+    /**
+     * Sets {@code resolution}
+     *
+     * @param resolution the {@code java.lang.String} field
+     * @since 1.1.1
+     */
+    public void setResolution(String resolution) {
+        this.resolution = resolution;
     }
 }

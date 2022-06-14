@@ -29,7 +29,7 @@ public class StandbyConfiguration {
     private ValueSpaceRefHolder wakeupAction;
 
     /**
-     * Retrieves {@code {@link #bootAction}}
+     * Retrieves {@link #bootAction}
      *
      * @return value of {@link #bootAction}
      */
@@ -47,7 +47,7 @@ public class StandbyConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #control}}
+     * Retrieves {@link #control}
      *
      * @return value of {@link #control}
      */
@@ -65,7 +65,7 @@ public class StandbyConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #delay}}
+     * Retrieves {@link #delay}
      *
      * @return value of {@link #delay}
      */
@@ -83,7 +83,7 @@ public class StandbyConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #standbyAction}}
+     * Retrieves {@link #standbyAction}
      *
      * @return value of {@link #standbyAction}
      */
@@ -101,7 +101,7 @@ public class StandbyConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #wakeupAction}}
+     * Retrieves {@link #wakeupAction}
      *
      * @return value of {@link #wakeupAction}
      */

@@ -61,7 +61,7 @@ public class VolumeChangeCommand extends AudioCommand {
         }
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -70,7 +70,7 @@ public class VolumeChangeCommand extends AudioCommand {
         }
 
         /**
-         * Retrieves {@code {@link #level}}
+         * Retrieves {@link #level}
          *
          * @return value of {@link #level}
          */
@@ -92,7 +92,7 @@ public class VolumeChangeCommand extends AudioCommand {
     }
 
     /**
-     * Retrieves {@code {@link #volume}}
+     * Retrieves {@link #volume}
      *
      * @return value of {@link #volume}
      */

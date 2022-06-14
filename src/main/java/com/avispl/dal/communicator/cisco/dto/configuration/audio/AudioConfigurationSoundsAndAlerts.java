@@ -23,7 +23,7 @@ public class AudioConfigurationSoundsAndAlerts {
     private ValueSpaceRefHolder ringVolume;
 
     /**
-     * Retrieves {@code {@link #ringTone}}
+     * Retrieves {@link #ringTone}
      *
      * @return value of {@link #ringTone}
      */
@@ -41,7 +41,7 @@ public class AudioConfigurationSoundsAndAlerts {
     }
 
     /**
-     * Retrieves {@code {@link #ringVolume}}
+     * Retrieves {@link #ringVolume}
      *
      * @return value of {@link #ringVolume}
      */

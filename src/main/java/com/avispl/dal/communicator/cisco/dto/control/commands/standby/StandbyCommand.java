@@ -26,7 +26,7 @@ public class StandbyCommand {
         private final String command = "True";
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -47,7 +47,7 @@ public class StandbyCommand {
         private final String command = "True";
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -79,7 +79,7 @@ public class StandbyCommand {
     }
 
     /**
-     * Retrieves {@code {@link #activate}}
+     * Retrieves {@link #activate}
      *
      * @return value of {@link #activate}
      */
@@ -97,7 +97,7 @@ public class StandbyCommand {
     }
 
     /**
-     * Retrieves {@code {@link #deactivate}}
+     * Retrieves {@link #deactivate}
      *
      * @return value of {@link #deactivate}
      */

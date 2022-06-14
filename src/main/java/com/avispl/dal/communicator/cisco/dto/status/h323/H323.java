@@ -21,7 +21,7 @@ public class H323 {
     private H323Mode mode;
 
     /**
-     * Retrieves {@code {@link #gatekeeper}}
+     * Retrieves {@link #gatekeeper}
      *
      * @return value of {@link #gatekeeper}
      */
@@ -39,7 +39,7 @@ public class H323 {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

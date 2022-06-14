@@ -37,7 +37,7 @@ public class CamerasConfigurationCamera {
     private ValueSpaceRefHolder mirror;
 
     /**
-     * Retrieves {@code {@link #item}}
+     * Retrieves {@link #item}
      *
      * @return value of {@link #item}
      */
@@ -55,7 +55,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #backlight}}
+     * Retrieves {@link #backlight}
      *
      * @return value of {@link #backlight}
      */
@@ -73,7 +73,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #brightness}}
+     * Retrieves {@link #brightness}
      *
      * @return value of {@link #brightness}
      */
@@ -91,7 +91,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #focus}}
+     * Retrieves {@link #focus}
      *
      * @return value of {@link #focus}
      */
@@ -109,7 +109,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #gamma}}
+     * Retrieves {@link #gamma}
      *
      * @return value of {@link #gamma}
      */
@@ -127,7 +127,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #whitebalance}}
+     * Retrieves {@link #whitebalance}
      *
      * @return value of {@link #whitebalance}
      */
@@ -145,7 +145,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #flip}}
+     * Retrieves {@link #flip}
      *
      * @return value of {@link #flip}
      */
@@ -163,7 +163,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #irSensor}}
+     * Retrieves {@link #irSensor}
      *
      * @return value of {@link #irSensor}
      */
@@ -181,7 +181,7 @@ public class CamerasConfigurationCamera {
     }
 
     /**
-     * Retrieves {@code {@link #mirror}}
+     * Retrieves {@link #mirror}
      *
      * @return value of {@link #mirror}
      */

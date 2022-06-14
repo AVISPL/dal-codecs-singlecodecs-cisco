@@ -21,7 +21,7 @@ public class HardwareMonitoring {
     private Fan[] fans;
 
     /**
-     * Retrieves {@code {@link #fans}}
+     * Retrieves {@link #fans}
      *
      * @return value of {@link #fans}
      */

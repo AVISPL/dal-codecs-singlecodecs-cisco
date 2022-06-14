@@ -43,7 +43,7 @@ public class DialCommand {
     public DialCommand(){}
 
     /**
-     * Retrieves {@code {@link #command}}
+     * Retrieves {@link #command}
      *
      * @return value of {@link #command}
      */
@@ -61,7 +61,7 @@ public class DialCommand {
     }
 
     /**
-     * Retrieves {@code {@link #number}}
+     * Retrieves {@link #number}
      *
      * @return value of {@link #number}
      */
@@ -79,7 +79,7 @@ public class DialCommand {
     }
 
     /**
-     * Retrieves {@code {@link #protocol}}
+     * Retrieves {@link #protocol}
      *
      * @return value of {@link #protocol}
      */

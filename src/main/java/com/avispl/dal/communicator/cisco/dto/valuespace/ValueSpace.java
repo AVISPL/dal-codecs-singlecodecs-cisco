@@ -56,7 +56,7 @@ public class ValueSpace {
         private String value;
 
         /**
-         * Retrieves {@code {@link #item}}
+         * Retrieves {@link #item}
          *
          * @return value of {@link #item}
          */
@@ -74,7 +74,7 @@ public class ValueSpace {
         }
 
         /**
-         * Retrieves {@code {@link #value}}
+         * Retrieves {@link #value}
          *
          * @return value of {@link #value}
          */
@@ -100,7 +100,7 @@ public class ValueSpace {
     private TTPARValue[] values;
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */
@@ -118,7 +118,7 @@ public class ValueSpace {
     }
 
     /**
-     * Retrieves {@code {@link #values}}
+     * Retrieves {@link #values}
      *
      * @return value of {@link #values}
      */

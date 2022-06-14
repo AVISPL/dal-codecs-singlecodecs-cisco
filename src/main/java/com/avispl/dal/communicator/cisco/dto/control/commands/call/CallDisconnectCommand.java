@@ -21,7 +21,7 @@ public class CallDisconnectCommand {
         private final String command = "True";
 
         /**
-         * Retrieves {@code {@link #command}}
+         * Retrieves {@link #command}
          *
          * @return value of {@link #command}
          */
@@ -34,7 +34,7 @@ public class CallDisconnectCommand {
     private final Disconnect disconnectCommand;
 
     /**
-     * Retrieves {@code {@link #disconnectCommand}}
+     * Retrieves {@link #disconnectCommand}
      *
      * @return value of {@link #disconnectCommand}
      */

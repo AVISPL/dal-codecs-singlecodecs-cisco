@@ -19,7 +19,7 @@ public class CallEncryption {
     private String type;
 
     /**
-     * Retrieves {@code {@link #type}}
+     * Retrieves {@link #type}
      *
      * @return value of {@link #type}
      */

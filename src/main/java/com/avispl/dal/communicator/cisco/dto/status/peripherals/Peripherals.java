@@ -19,7 +19,7 @@ public class Peripherals {
     private ConnectedDevice[] connectedDevice;
 
     /**
-     * Retrieves {@code {@link #connectedDevice}}
+     * Retrieves {@link #connectedDevice}
      *
      * @return value of {@link #connectedDevice}
      */

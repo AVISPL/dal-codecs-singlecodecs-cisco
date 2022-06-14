@@ -41,7 +41,7 @@ public class NetworkServicesConfiguration {
     private ValueSpaceRefHolder welcomeText;
 
     /**
-     * Retrieves {@code {@link #cdp}}
+     * Retrieves {@link #cdp}
      *
      * @return value of {@link #cdp}
      */
@@ -59,7 +59,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #h323}}
+     * Retrieves {@link #h323}
      *
      * @return value of {@link #h323}
      */
@@ -77,7 +77,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #http}}
+     * Retrieves {@link #http}
      *
      * @return value of {@link #http}
      */
@@ -95,7 +95,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #https}}
+     * Retrieves {@link #https}
      *
      * @return value of {@link #https}
      */
@@ -113,7 +113,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #ntp}}
+     * Retrieves {@link #ntp}
      *
      * @return value of {@link #ntp}
      */
@@ -131,7 +131,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #sip}}
+     * Retrieves {@link #sip}
      *
      * @return value of {@link #sip}
      */
@@ -149,7 +149,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #snmp}}
+     * Retrieves {@link #snmp}
      *
      * @return value of {@link #snmp}
      */
@@ -167,7 +167,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #ssh}}
+     * Retrieves {@link #ssh}
      *
      * @return value of {@link #ssh}
      */
@@ -185,7 +185,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #telnet}}
+     * Retrieves {@link #telnet}
      *
      * @return value of {@link #telnet}
      */
@@ -203,7 +203,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #uPnP}}
+     * Retrieves {@link #uPnP}
      *
      * @return value of {@link #uPnP}
      */
@@ -221,7 +221,7 @@ public class NetworkServicesConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #welcomeText}}
+     * Retrieves {@link #welcomeText}
      *
      * @return value of {@link #welcomeText}
      */

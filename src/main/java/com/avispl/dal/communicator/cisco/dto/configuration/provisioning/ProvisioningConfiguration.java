@@ -29,7 +29,7 @@ public class ProvisioningConfiguration {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #connectivity}}
+     * Retrieves {@link #connectivity}
      *
      * @return value of {@link #connectivity}
      */
@@ -47,7 +47,7 @@ public class ProvisioningConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #externalManager}}
+     * Retrieves {@link #externalManager}
      *
      * @return value of {@link #externalManager}
      */
@@ -65,7 +65,7 @@ public class ProvisioningConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #httpMethod}}
+     * Retrieves {@link #httpMethod}
      *
      * @return value of {@link #httpMethod}
      */
@@ -83,7 +83,7 @@ public class ProvisioningConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #loginName}}
+     * Retrieves {@link #loginName}
      *
      * @return value of {@link #loginName}
      */
@@ -101,7 +101,7 @@ public class ProvisioningConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

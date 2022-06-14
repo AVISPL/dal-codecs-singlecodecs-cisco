@@ -21,7 +21,7 @@ public class USB {
     private Device[] devices;
 
     /**
-     * Retrieves {@code {@link #devices}}
+     * Retrieves {@link #devices}
      *
      * @return value of {@link #devices}
      */

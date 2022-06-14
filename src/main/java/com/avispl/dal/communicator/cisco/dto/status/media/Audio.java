@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2022 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status.media;
 
@@ -14,16 +14,14 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * @since 1.0
  */
 
-public class Audio {
+public class Audio extends CallChannelData {
     @JacksonXmlProperty(localName="Channels")
     private String channels;
     @JacksonXmlProperty(localName="Mute")
     private String mute;
-    @JacksonXmlProperty(localName="Protocol")
-    private String protocol;
 
     /**
-     * Retrieves {@code {@link #channels}}
+     * Retrieves {@link #channels}
      *
      * @return value of {@link #channels}
      */
@@ -41,7 +39,7 @@ public class Audio {
     }
 
     /**
-     * Retrieves {@code {@link #mute}}
+     * Retrieves {@link #mute}
      *
      * @return value of {@link #mute}
      */
@@ -56,23 +54,5 @@ public class Audio {
      */
     public void setMute(String mute) {
         this.mute = mute;
-    }
-
-    /**
-     * Retrieves {@code {@link #protocol}}
-     *
-     * @return value of {@link #protocol}
-     */
-    public String getProtocol() {
-        return protocol;
-    }
-
-    /**
-     * Sets {@code protocol}
-     *
-     * @param protocol the {@code java.lang.String} field
-     */
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
     }
 }

@@ -20,7 +20,7 @@ public class AudioConfigurationMute {
     private ValueSpaceRefHolder enabled;
 
     /**
-     * Retrieves {@code {@link #enabled}}
+     * Retrieves {@link #enabled}
      *
      * @return value of {@link #enabled}
      */

@@ -25,7 +25,7 @@ public class SIPConfigurationIce {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #defaultCandidate}}
+     * Retrieves {@link #defaultCandidate}
      *
      * @return value of {@link #defaultCandidate}
      */
@@ -43,7 +43,7 @@ public class SIPConfigurationIce {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

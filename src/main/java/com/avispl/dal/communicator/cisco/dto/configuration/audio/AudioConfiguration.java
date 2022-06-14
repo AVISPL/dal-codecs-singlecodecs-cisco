@@ -31,7 +31,7 @@ public class AudioConfiguration {
     private AudioConfigurationUltrasound ultrasound;
 
     /**
-     * Retrieves {@code {@link #defaultVolume}}
+     * Retrieves {@link #defaultVolume}
      *
      * @return value of {@link #defaultVolume}
      */
@@ -49,7 +49,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #input}}
+     * Retrieves {@link #input}
      *
      * @return value of {@link #input}
      */
@@ -67,7 +67,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #output}}
+     * Retrieves {@link #output}
      *
      * @return value of {@link #output}
      */
@@ -85,7 +85,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #microphones}}
+     * Retrieves {@link #microphones}
      *
      * @return value of {@link #microphones}
      */
@@ -103,7 +103,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #soundsAndAlerts}}
+     * Retrieves {@link #soundsAndAlerts}
      *
      * @return value of {@link #soundsAndAlerts}
      */
@@ -121,7 +121,7 @@ public class AudioConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #ultrasound}}
+     * Retrieves {@link #ultrasound}
      *
      * @return value of {@link #ultrasound}
      */

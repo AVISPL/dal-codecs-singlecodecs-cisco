@@ -19,7 +19,7 @@ public class ProximityServices {
     private String availability;
 
     /**
-     * Retrieves {@code {@link #availability}}
+     * Retrieves {@link #availability}
      *
      * @return value of {@link #availability}
      */

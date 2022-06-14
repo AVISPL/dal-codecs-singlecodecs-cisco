@@ -19,7 +19,7 @@ public class NetworkServices {
     private NTP ntp;
 
     /**
-     * Retrieves {@code {@link #ntp}}
+     * Retrieves {@link #ntp}
      *
      * @return value of {@link #ntp}
      */

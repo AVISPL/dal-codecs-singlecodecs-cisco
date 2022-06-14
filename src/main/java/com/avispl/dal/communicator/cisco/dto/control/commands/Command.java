@@ -54,7 +54,7 @@ public class Command {
     private SystemUnitCommand systemUnitCommand;
 
     /**
-     * Retrieves {@code {@link #dialCommand}}
+     * Retrieves {@link #dialCommand}
      *
      * @return value of {@link #dialCommand}
      */
@@ -72,7 +72,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #audioCommand}}
+     * Retrieves {@link #audioCommand}
      *
      * @return value of {@link #audioCommand}
      */
@@ -90,7 +90,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #callDisconnectCommand}}
+     * Retrieves {@link #callDisconnectCommand}
      *
      * @return value of {@link #callDisconnectCommand}
      */
@@ -108,7 +108,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #cameraCommand}}
+     * Retrieves {@link #cameraCommand}
      *
      * @return value of {@link #cameraCommand}
      */
@@ -126,7 +126,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #peripheralsCommand}}
+     * Retrieves {@link #peripheralsCommand}
      *
      * @return value of {@link #peripheralsCommand}
      * @since 1.1.0
@@ -146,7 +146,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #peripheralsListResult}}
+     * Retrieves {@link #peripheralsListResult}
      *
      * @return value of {@link #peripheralsListResult}
      * @since 1.1.0
@@ -166,7 +166,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #dialResult}}
+     * Retrieves {@link #dialResult}
      *
      * @return value of {@link #dialResult}
      */
@@ -184,7 +184,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #disconnectResult}}
+     * Retrieves {@link #disconnectResult}
      *
      * @return value of {@link #disconnectResult}
      */
@@ -202,7 +202,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #userInterface}}
+     * Retrieves {@link #userInterface}
      *
      * @return value of {@link #userInterface}
      */
@@ -220,7 +220,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #standbyCommand}}
+     * Retrieves {@link #standbyCommand}
      *
      * @return value of {@link #standbyCommand}
      */
@@ -238,7 +238,7 @@ public class Command {
     }
 
     /**
-     * Retrieves {@code {@link #systemUnitCommand}}
+     * Retrieves {@link #systemUnitCommand}
      *
      * @return value of {@link #systemUnitCommand}
      */

@@ -31,7 +31,7 @@ public class VideoStatus {
     private VideoSelfview selfView;
 
     /**
-     * Retrieves {@code {@link #activeSpeaker}}
+     * Retrieves {@link #activeSpeaker}
      *
      * @return value of {@link #activeSpeaker}
      */
@@ -49,7 +49,7 @@ public class VideoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #input}}
+     * Retrieves {@link #input}
      *
      * @return value of {@link #input}
      */
@@ -67,7 +67,7 @@ public class VideoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #output}}
+     * Retrieves {@link #output}
      *
      * @return value of {@link #output}
      */
@@ -85,7 +85,7 @@ public class VideoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #layout}}
+     * Retrieves {@link #layout}
      *
      * @return value of {@link #layout}
      */
@@ -103,7 +103,7 @@ public class VideoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #monitors}}
+     * Retrieves {@link #monitors}
      *
      * @return value of {@link #monitors}
      */
@@ -121,7 +121,7 @@ public class VideoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #presentation}}
+     * Retrieves {@link #presentation}
      *
      * @return value of {@link #presentation}
      */
@@ -139,7 +139,7 @@ public class VideoStatus {
     }
 
     /**
-     * Retrieves {@code {@link #selfView}}
+     * Retrieves {@link #selfView}
      *
      * @return value of {@link #selfView}
      */

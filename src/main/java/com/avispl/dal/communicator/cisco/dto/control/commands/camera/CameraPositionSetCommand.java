@@ -36,7 +36,7 @@ public class CameraPositionSetCommand {
     private ValueSpaceRefHolder[] focus;
 
     /**
-     * Retrieves {@code {@link #command}}
+     * Retrieves {@link #command}
      *
      * @return value of {@link #command}
      */
@@ -45,7 +45,7 @@ public class CameraPositionSetCommand {
     }
 
     /**
-     * Retrieves {@code {@link #cameraId}}
+     * Retrieves {@link #cameraId}
      *
      * @return value of {@link #cameraId}
      */
@@ -63,7 +63,7 @@ public class CameraPositionSetCommand {
     }
 
     /**
-     * Retrieves {@code {@link #pan}}
+     * Retrieves {@link #pan}
      *
      * @return value of {@link #pan}
      */
@@ -81,7 +81,7 @@ public class CameraPositionSetCommand {
     }
 
     /**
-     * Retrieves {@code {@link #tilt}}
+     * Retrieves {@link #tilt}
      *
      * @return value of {@link #tilt}
      */
@@ -99,7 +99,7 @@ public class CameraPositionSetCommand {
     }
 
     /**
-     * Retrieves {@code {@link #zoom}}
+     * Retrieves {@link #zoom}
      *
      * @return value of {@link #zoom}
      */
@@ -117,7 +117,7 @@ public class CameraPositionSetCommand {
     }
 
     /**
-     * Retrieves {@code {@link #focus}}
+     * Retrieves {@link #focus}
      *
      * @return value of {@link #focus}
      */

@@ -22,7 +22,7 @@ public class PhonebookConfiguration {
     private PhonebookConfigurationServer[] servers;
 
     /**
-     * Retrieves {@code {@link #servers}}
+     * Retrieves {@link #servers}
      *
      * @return value of {@link #servers}
      */

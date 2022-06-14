@@ -23,7 +23,7 @@ public class AudioConfigurationVideoAssociation {
     private ValueSpaceRefHolder videoInputSource;
 
     /**
-     * Retrieves {@code {@link #muteOnInactiveVideo}}
+     * Retrieves {@link #muteOnInactiveVideo}
      *
      * @return value of {@link #muteOnInactiveVideo}
      */
@@ -41,7 +41,7 @@ public class AudioConfigurationVideoAssociation {
     }
 
     /**
-     * Retrieves {@code {@link #videoInputSource}}
+     * Retrieves {@link #videoInputSource}
      *
      * @return value of {@link #videoInputSource}
      */

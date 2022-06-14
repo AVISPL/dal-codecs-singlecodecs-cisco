@@ -19,7 +19,7 @@ public class AudioDevicesBluetooth {
     private String activeProfile;
 
     /**
-     * Retrieves {@code {@link #activeProfile}}
+     * Retrieves {@link #activeProfile}
      *
      * @return value of {@link #activeProfile}
      */

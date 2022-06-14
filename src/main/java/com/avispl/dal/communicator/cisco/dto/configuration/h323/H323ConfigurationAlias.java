@@ -23,7 +23,7 @@ public class H323ConfigurationAlias {
     private ValueSpaceRefHolder id;
 
     /**
-     * Retrieves {@code {@link #e164}}
+     * Retrieves {@link #e164}
      *
      * @return value of {@link #e164}
      */
@@ -41,7 +41,7 @@ public class H323ConfigurationAlias {
     }
 
     /**
-     * Retrieves {@code {@link #id}}
+     * Retrieves {@link #id}
      *
      * @return value of {@link #id}
      */

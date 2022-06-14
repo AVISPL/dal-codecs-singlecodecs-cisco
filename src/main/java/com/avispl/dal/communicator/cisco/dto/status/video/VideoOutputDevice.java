@@ -21,7 +21,7 @@ public class VideoOutputDevice {
     private String preferredFormat;
 
     /**
-     * Retrieves {@code {@link #name}}
+     * Retrieves {@link #name}
      *
      * @return value of {@link #name}
      */
@@ -39,7 +39,7 @@ public class VideoOutputDevice {
     }
 
     /**
-     * Retrieves {@code {@link #preferredFormat}}
+     * Retrieves {@link #preferredFormat}
      *
      * @return value of {@link #preferredFormat}
      */

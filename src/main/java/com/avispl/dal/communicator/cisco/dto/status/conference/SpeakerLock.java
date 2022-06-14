@@ -21,7 +21,7 @@ public class SpeakerLock {
     private String mode;
 
     /**
-     * Retrieves {@code {@link #callId}}
+     * Retrieves {@link #callId}
      *
      * @return value of {@link #callId}
      */
@@ -39,7 +39,7 @@ public class SpeakerLock {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

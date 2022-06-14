@@ -28,7 +28,7 @@ public class H323Configuration {
     private H323ConfigurationNAT nat;
 
     /**
-     * Retrieves {@code {@link #callSetup}}
+     * Retrieves {@link #callSetup}
      *
      * @return value of {@link #callSetup}
      */
@@ -46,7 +46,7 @@ public class H323Configuration {
     }
 
     /**
-     * Retrieves {@code {@link #encryption}}
+     * Retrieves {@link #encryption}
      *
      * @return value of {@link #encryption}
      */
@@ -64,7 +64,7 @@ public class H323Configuration {
     }
 
     /**
-     * Retrieves {@code {@link #gatekeeper}}
+     * Retrieves {@link #gatekeeper}
      *
      * @return value of {@link #gatekeeper}
      */
@@ -82,7 +82,7 @@ public class H323Configuration {
     }
 
     /**
-     * Retrieves {@code {@link #alias}}
+     * Retrieves {@link #alias}
      *
      * @return value of {@link #alias}
      */
@@ -100,7 +100,7 @@ public class H323Configuration {
     }
 
     /**
-     * Retrieves {@code {@link #nat}}
+     * Retrieves {@link #nat}
      *
      * @return value of {@link #nat}
      */

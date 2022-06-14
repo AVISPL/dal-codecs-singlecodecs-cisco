@@ -38,7 +38,7 @@ public class ConferenceConfiguration {
     private ValueSpaceRefHolder maxTransmitCallRate;
 
     /**
-     * Retrieves {@code {@link #autoAnswer}}
+     * Retrieves {@link #autoAnswer}
      *
      * @return value of {@link #autoAnswer}
      */
@@ -56,7 +56,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #defaultCall}}
+     * Retrieves {@link #defaultCall}
      *
      * @return value of {@link #defaultCall}
      */
@@ -74,7 +74,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #doNotDisturb}}
+     * Retrieves {@link #doNotDisturb}
      *
      * @return value of {@link #doNotDisturb}
      */
@@ -92,7 +92,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #encryption}}
+     * Retrieves {@link #encryption}
      *
      * @return value of {@link #encryption}
      */
@@ -110,7 +110,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #farEndControl}}
+     * Retrieves {@link #farEndControl}
      *
      * @return value of {@link #farEndControl}
      */
@@ -128,7 +128,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #maxReceiveCallRate}}
+     * Retrieves {@link #maxReceiveCallRate}
      *
      * @return value of {@link #maxReceiveCallRate}
      */
@@ -146,7 +146,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #maxTotalReceiveCallRate}}
+     * Retrieves {@link #maxTotalReceiveCallRate}
      *
      * @return value of {@link #maxTotalReceiveCallRate}
      */
@@ -164,7 +164,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #maxTotalTransmitCallRate}}
+     * Retrieves {@link #maxTotalTransmitCallRate}
      *
      * @return value of {@link #maxTotalTransmitCallRate}
      */
@@ -182,7 +182,7 @@ public class ConferenceConfiguration {
     }
 
     /**
-     * Retrieves {@code {@link #maxTransmitCallRate}}
+     * Retrieves {@link #maxTransmitCallRate}
      *
      * @return value of {@link #maxTransmitCallRate}
      */

@@ -25,7 +25,7 @@ public class H323Gatekeeper {
     private String status;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -43,7 +43,7 @@ public class H323Gatekeeper {
     }
 
     /**
-     * Retrieves {@code {@link #port}}
+     * Retrieves {@link #port}
      *
      * @return value of {@link #port}
      */
@@ -61,7 +61,7 @@ public class H323Gatekeeper {
     }
 
     /**
-     * Retrieves {@code {@link #reason}}
+     * Retrieves {@link #reason}
      *
      * @return value of {@link #reason}
      */
@@ -79,7 +79,7 @@ public class H323Gatekeeper {
     }
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */

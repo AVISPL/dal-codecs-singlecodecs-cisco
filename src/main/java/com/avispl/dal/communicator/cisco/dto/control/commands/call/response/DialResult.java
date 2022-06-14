@@ -25,7 +25,7 @@ public class DialResult {
     private String conferenceId;
 
     /**
-     * Retrieves {@code {@link #status}}
+     * Retrieves {@link #status}
      *
      * @return value of {@link #status}
      */
@@ -43,7 +43,7 @@ public class DialResult {
     }
 
     /**
-     * Retrieves {@code {@link #callId}}
+     * Retrieves {@link #callId}
      *
      * @return value of {@link #callId}
      */
@@ -61,7 +61,7 @@ public class DialResult {
     }
 
     /**
-     * Retrieves {@code {@link #conferenceId}}
+     * Retrieves {@link #conferenceId}
      *
      * @return value of {@link #conferenceId}
      */

@@ -27,7 +27,7 @@ public class RoomAnalytics {
     private Sound sound;
 
     /**
-     * Retrieves {@code {@link #peoplePresence}}
+     * Retrieves {@link #peoplePresence}
      *
      * @return value of {@link #peoplePresence}
      */
@@ -45,7 +45,7 @@ public class RoomAnalytics {
     }
 
     /**
-     * Retrieves {@code {@link #ambientNoise}}
+     * Retrieves {@link #ambientNoise}
      *
      * @return value of {@link #ambientNoise}
      */
@@ -63,7 +63,7 @@ public class RoomAnalytics {
     }
 
     /**
-     * Retrieves {@code {@link #engagement}}
+     * Retrieves {@link #engagement}
      *
      * @return value of {@link #engagement}
      */
@@ -81,7 +81,7 @@ public class RoomAnalytics {
     }
 
     /**
-     * Retrieves {@code {@link #peopleCount}}
+     * Retrieves {@link #peopleCount}
      *
      * @return value of {@link #peopleCount}
      */
@@ -99,7 +99,7 @@ public class RoomAnalytics {
     }
 
     /**
-     * Retrieves {@code {@link #sound}}
+     * Retrieves {@link #sound}
      *
      * @return value of {@link #sound}
      */

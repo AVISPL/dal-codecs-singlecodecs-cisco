@@ -23,7 +23,7 @@ public class CamerasConfigurationWhitebalance {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #level}}
+     * Retrieves {@link #level}
      *
      * @return value of {@link #level}
      */
@@ -41,7 +41,7 @@ public class CamerasConfigurationWhitebalance {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

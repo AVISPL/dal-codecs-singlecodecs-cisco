@@ -41,7 +41,7 @@ public class CDP {
     private String voipApplianceVlanId;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -59,7 +59,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #capabilities}}
+     * Retrieves {@link #capabilities}
      *
      * @return value of {@link #capabilities}
      */
@@ -77,7 +77,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #deviceId}}
+     * Retrieves {@link #deviceId}
      *
      * @return value of {@link #deviceId}
      */
@@ -95,7 +95,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #duplex}}
+     * Retrieves {@link #duplex}
      *
      * @return value of {@link #duplex}
      */
@@ -113,7 +113,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #platform}}
+     * Retrieves {@link #platform}
      *
      * @return value of {@link #platform}
      */
@@ -131,7 +131,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #portId}}
+     * Retrieves {@link #portId}
      *
      * @return value of {@link #portId}
      */
@@ -149,7 +149,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #primaryMgmtAddress}}
+     * Retrieves {@link #primaryMgmtAddress}
      *
      * @return value of {@link #primaryMgmtAddress}
      */
@@ -167,7 +167,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #sysName}}
+     * Retrieves {@link #sysName}
      *
      * @return value of {@link #sysName}
      */
@@ -185,7 +185,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #sysObjectId}}
+     * Retrieves {@link #sysObjectId}
      *
      * @return value of {@link #sysObjectId}
      */
@@ -203,7 +203,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #vtpMgmtDomain}}
+     * Retrieves {@link #vtpMgmtDomain}
      *
      * @return value of {@link #vtpMgmtDomain}
      */
@@ -221,7 +221,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #version}}
+     * Retrieves {@link #version}
      *
      * @return value of {@link #version}
      */
@@ -239,7 +239,7 @@ public class CDP {
     }
 
     /**
-     * Retrieves {@code {@link #voipApplianceVlanId}}
+     * Retrieves {@link #voipApplianceVlanId}
      *
      * @return value of {@link #voipApplianceVlanId}
      */

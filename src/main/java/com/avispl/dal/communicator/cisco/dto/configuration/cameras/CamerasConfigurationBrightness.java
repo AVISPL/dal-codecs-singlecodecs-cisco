@@ -23,7 +23,7 @@ public class CamerasConfigurationBrightness {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #defaultLevel}}
+     * Retrieves {@link #defaultLevel}
      *
      * @return value of {@link #defaultLevel}
      */
@@ -41,7 +41,7 @@ public class CamerasConfigurationBrightness {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

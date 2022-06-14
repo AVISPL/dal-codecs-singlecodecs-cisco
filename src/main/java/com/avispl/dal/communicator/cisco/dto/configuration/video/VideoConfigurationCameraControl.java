@@ -25,7 +25,7 @@ public class VideoConfigurationCameraControl {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #cameraId}}
+     * Retrieves {@link #cameraId}
      *
      * @return value of {@link #cameraId}
      */
@@ -43,7 +43,7 @@ public class VideoConfigurationCameraControl {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

@@ -23,7 +23,7 @@ public class Whiteboard {
     private String requestFloorAvailability;
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -41,7 +41,7 @@ public class Whiteboard {
     }
 
     /**
-     * Retrieves {@code {@link #releaseFloorAvailability}}
+     * Retrieves {@link #releaseFloorAvailability}
      *
      * @return value of {@link #releaseFloorAvailability}
      */
@@ -59,7 +59,7 @@ public class Whiteboard {
     }
 
     /**
-     * Retrieves {@code {@link #requestFloorAvailability}}
+     * Retrieves {@link #requestFloorAvailability}
      *
      * @return value of {@link #requestFloorAvailability}
      */

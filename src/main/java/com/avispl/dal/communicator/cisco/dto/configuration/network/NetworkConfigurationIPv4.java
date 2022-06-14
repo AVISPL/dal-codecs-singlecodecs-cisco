@@ -27,7 +27,7 @@ public class NetworkConfigurationIPv4 {
     private ValueSpaceRefHolder subnetMask;
 
     /**
-     * Retrieves {@code {@link #address}}
+     * Retrieves {@link #address}
      *
      * @return value of {@link #address}
      */
@@ -45,7 +45,7 @@ public class NetworkConfigurationIPv4 {
     }
 
     /**
-     * Retrieves {@code {@link #assignment}}
+     * Retrieves {@link #assignment}
      *
      * @return value of {@link #assignment}
      */
@@ -63,7 +63,7 @@ public class NetworkConfigurationIPv4 {
     }
 
     /**
-     * Retrieves {@code {@link #gateway}}
+     * Retrieves {@link #gateway}
      *
      * @return value of {@link #gateway}
      */
@@ -81,7 +81,7 @@ public class NetworkConfigurationIPv4 {
     }
 
     /**
-     * Retrieves {@code {@link #subnetMask}}
+     * Retrieves {@link #subnetMask}
      *
      * @return value of {@link #subnetMask}
      */

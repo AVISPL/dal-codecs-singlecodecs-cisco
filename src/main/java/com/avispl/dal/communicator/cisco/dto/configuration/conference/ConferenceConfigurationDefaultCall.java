@@ -23,7 +23,7 @@ public class ConferenceConfigurationDefaultCall {
     private ValueSpaceRefHolder rate;
 
     /**
-     * Retrieves {@code {@link #protocol}}
+     * Retrieves {@link #protocol}
      *
      * @return value of {@link #protocol}
      */
@@ -41,7 +41,7 @@ public class ConferenceConfigurationDefaultCall {
     }
 
     /**
-     * Retrieves {@code {@link #rate}}
+     * Retrieves {@link #rate}
      *
      * @return value of {@link #rate}
      */

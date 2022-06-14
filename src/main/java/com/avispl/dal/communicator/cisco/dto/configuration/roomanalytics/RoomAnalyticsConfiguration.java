@@ -21,7 +21,7 @@ public class RoomAnalyticsConfiguration {
     private ValueSpaceRefHolder peoplePresenceDetector;
 
     /**
-     * Retrieves {@code {@link #peoplePresenceDetector}}
+     * Retrieves {@link #peoplePresenceDetector}
      *
      * @return value of {@link #peoplePresenceDetector}
      */

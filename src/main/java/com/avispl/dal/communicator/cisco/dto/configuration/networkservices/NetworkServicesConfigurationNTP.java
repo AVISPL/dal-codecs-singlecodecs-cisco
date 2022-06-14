@@ -28,7 +28,7 @@ public class NetworkServicesConfigurationNTP {
     private NetworkConfigurationServer[] servers;
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */
@@ -46,7 +46,7 @@ public class NetworkServicesConfigurationNTP {
     }
 
     /**
-     * Retrieves {@code {@link #servers}}
+     * Retrieves {@link #servers}
      *
      * @return value of {@link #servers}
      */

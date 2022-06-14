@@ -23,7 +23,7 @@ public class NetworkConfigurationQoS {
     private ValueSpaceRefHolder mode;
 
     /**
-     * Retrieves {@code {@link #diffserv}}
+     * Retrieves {@link #diffserv}
      *
      * @return value of {@link #diffserv}
      */
@@ -41,7 +41,7 @@ public class NetworkConfigurationQoS {
     }
 
     /**
-     * Retrieves {@code {@link #mode}}
+     * Retrieves {@link #mode}
      *
      * @return value of {@link #mode}
      */

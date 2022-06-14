@@ -25,7 +25,7 @@ public class NTP {
     private NTPServer[] servers;
 
     /**
-     * Retrieves {@code {@link #currentAddress}}
+     * Retrieves {@link #currentAddress}
      *
      * @return value of {@link #currentAddress}
      */
@@ -43,7 +43,7 @@ public class NTP {
     }
 
     /**
-     * Retrieves {@code {@link #discarded}}
+     * Retrieves {@link #discarded}
      *
      * @return value of {@link #discarded}
      */
@@ -61,7 +61,7 @@ public class NTP {
     }
 
     /**
-     * Retrieves {@code {@link #servers}}
+     * Retrieves {@link #servers}
      *
      * @return value of {@link #servers}
      */

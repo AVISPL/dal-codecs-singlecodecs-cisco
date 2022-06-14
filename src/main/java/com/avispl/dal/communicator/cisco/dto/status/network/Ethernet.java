@@ -21,7 +21,7 @@ public class Ethernet {
     private String speed;
 
     /**
-     * Retrieves {@code {@link #macAddress}}
+     * Retrieves {@link #macAddress}
      *
      * @return value of {@link #macAddress}
      */
@@ -39,7 +39,7 @@ public class Ethernet {
     }
 
     /**
-     * Retrieves {@code {@link #speed}}
+     * Retrieves {@link #speed}
      *
      * @return value of {@link #speed}
      */

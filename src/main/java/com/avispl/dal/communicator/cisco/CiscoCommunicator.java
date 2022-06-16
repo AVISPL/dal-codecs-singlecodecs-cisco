@@ -1089,7 +1089,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         SystemUnitConfiguration systemUnitConfiguration = ciscoConfiguration.getSystemUnit();
         if (systemUnitConfiguration != null) {
-            addStatisticsParameter(statistics, "SystemUnit#Name", systemUnitConfiguration.getName());
+            ValueSpaceRefHolder systemName = systemUnitConfiguration.getName();
+            if (systemName != null) {
+                addStatisticsParameter(statistics, "SystemUnit#Name", systemName.getValue());
+            }
         }
     }
 

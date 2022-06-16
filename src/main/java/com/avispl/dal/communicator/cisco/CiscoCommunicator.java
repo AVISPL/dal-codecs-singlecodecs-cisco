@@ -804,18 +804,30 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             CallStats callStats = new CallStats();
             callStats.setCallId(activeCall.getCallId());
             callStats.setRemoteAddress(activeCall.getRemoteNumber());
-            Arrays.stream(ciscoStatus.getCalls()).filter(fcall -> "Connected".equalsIgnoreCase(fcall.getStatus())).findFirst().ifPresent(callInfo -> {
-                for (Channel channel : call.getChannels()) {
-                    switch (channel.getType()) {
-                        case "Audio":
-                            enrichAudioChannelStatsData(audioChannelStats, callStats, channel, callInfo);
-                            break;
-                        case "Video":
-                            enrichVideoChannelStatsData(videoChannelStats, callStats, contentChannelStats, channel, callInfo);
-                            break;
-                        default:
-                            logger.info("Not supported channel type: " + channel.getType());
-                            break;
+            Call[] callsStatus = ciscoStatus.getCalls();
+            if (callsStatus == null) {
+                // logging a warning here because there's an inconsistency in data, populated by the device.
+                // Something might be wrong, but this shouldn't trigger an error.
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Call Audio/Video statistics are not available.");
+                }
+                return;
+            }
+            Arrays.stream(callsStatus).filter(fcall -> "Connected".equalsIgnoreCase(fcall.getStatus())).findFirst().ifPresent(callInfo -> {
+                Channel[] channels = call.getChannels();
+                if (channels != null) {
+                    for (Channel channel : channels) {
+                        switch (channel.getType()) {
+                            case "Audio":
+                                enrichAudioChannelStatsData(audioChannelStats, callStats, channel, callInfo);
+                                break;
+                            case "Video":
+                                enrichVideoChannelStatsData(videoChannelStats, callStats, contentChannelStats, channel, callInfo);
+                                break;
+                            default:
+                                logger.info("Not supported channel type: " + channel.getType());
+                                break;
+                        }
                     }
                 }
                 callStats.setCallId(callInfo.getItem());

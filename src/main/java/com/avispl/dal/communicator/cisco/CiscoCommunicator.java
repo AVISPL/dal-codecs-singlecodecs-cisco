@@ -23,6 +23,7 @@ import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityCo
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfigurationServices;
 import com.avispl.dal.communicator.cisco.dto.configuration.roomanalytics.RoomAnalyticsConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.standby.StandbyConfiguration;
+import com.avispl.dal.communicator.cisco.dto.configuration.systemunit.SystemUnitConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.time.TimeConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.userinterface.*;
 import com.avispl.dal.communicator.cisco.dto.configuration.video.*;
@@ -964,7 +965,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
-                populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus);
+                populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
                 populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
@@ -1037,7 +1038,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param ciscoStatus device response data
      * @param statistics  map to set data to
      */
-    private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus ciscoStatus) {
+    private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls,
+                                        CiscoStatus ciscoStatus, CiscoConfiguration ciscoConfiguration) {
         SystemUnit systemUnit = ciscoStatus.getSystemUnit();
         if (systemUnit == null) {
             if (logger.isDebugEnabled()) {
@@ -1080,9 +1082,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         Software software = systemUnit.getSoftware();
         if (software != null) {
             addStatisticsParameter(statistics, "SystemUnit#DisplayName", software.getDisplayName());
-            addStatisticsParameter(statistics, "SystemUnit#Name", software.getName());
             addStatisticsParameter(statistics, "SystemUnit#ReleaseDate", software.getReleaseDate());
             addStatisticsParameter(statistics, "SystemUnit#Version", software.getVersion());
+            addStatisticsParameter(statistics, "SystemUnit#SoftwareName", software.getName());
+        }
+
+        SystemUnitConfiguration systemUnitConfiguration = ciscoConfiguration.getSystemUnit();
+        if (systemUnitConfiguration != null) {
+            addStatisticsParameter(statistics, "SystemUnit#Name", systemUnitConfiguration.getName());
         }
     }
 

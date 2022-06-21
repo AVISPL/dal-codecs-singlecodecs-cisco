@@ -23,6 +23,7 @@ import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityCo
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfigurationServices;
 import com.avispl.dal.communicator.cisco.dto.configuration.roomanalytics.RoomAnalyticsConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.standby.StandbyConfiguration;
+import com.avispl.dal.communicator.cisco.dto.configuration.systemunit.SystemUnitConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.time.TimeConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.userinterface.*;
 import com.avispl.dal.communicator.cisco.dto.configuration.video.*;
@@ -804,18 +805,30 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             CallStats callStats = new CallStats();
             callStats.setCallId(activeCall.getCallId());
             callStats.setRemoteAddress(activeCall.getRemoteNumber());
-            Arrays.stream(ciscoStatus.getCalls()).filter(fcall -> "Connected".equalsIgnoreCase(fcall.getStatus())).findFirst().ifPresent(callInfo -> {
-                for (Channel channel : call.getChannels()) {
-                    switch (channel.getType()) {
-                        case "Audio":
-                            enrichAudioChannelStatsData(audioChannelStats, callStats, channel, callInfo);
-                            break;
-                        case "Video":
-                            enrichVideoChannelStatsData(videoChannelStats, callStats, contentChannelStats, channel, callInfo);
-                            break;
-                        default:
-                            logger.info("Not supported channel type: " + channel.getType());
-                            break;
+            Call[] callsStatus = ciscoStatus.getCalls();
+            if (callsStatus == null) {
+                // logging a warning here because there's an inconsistency in data, populated by the device.
+                // Something might be wrong, but this shouldn't trigger an error.
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Call Audio/Video statistics are not available.");
+                }
+                return;
+            }
+            Arrays.stream(callsStatus).filter(fcall -> "Connected".equalsIgnoreCase(fcall.getStatus())).findFirst().ifPresent(callInfo -> {
+                Channel[] channels = call.getChannels();
+                if (channels != null) {
+                    for (Channel channel : channels) {
+                        switch (channel.getType()) {
+                            case "Audio":
+                                enrichAudioChannelStatsData(audioChannelStats, callStats, channel, callInfo);
+                                break;
+                            case "Video":
+                                enrichVideoChannelStatsData(videoChannelStats, callStats, contentChannelStats, channel, callInfo);
+                                break;
+                            default:
+                                logger.info("Not supported channel type: " + channel.getType());
+                                break;
+                        }
                     }
                 }
                 callStats.setCallId(callInfo.getItem());
@@ -952,7 +965,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
-                populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus);
+                populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
                 populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
@@ -1025,7 +1038,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param ciscoStatus device response data
      * @param statistics  map to set data to
      */
-    private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus ciscoStatus) {
+    private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls,
+                                        CiscoStatus ciscoStatus, CiscoConfiguration ciscoConfiguration) {
         SystemUnit systemUnit = ciscoStatus.getSystemUnit();
         if (systemUnit == null) {
             if (logger.isDebugEnabled()) {
@@ -1068,9 +1082,17 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         Software software = systemUnit.getSoftware();
         if (software != null) {
             addStatisticsParameter(statistics, "SystemUnit#DisplayName", software.getDisplayName());
-            addStatisticsParameter(statistics, "SystemUnit#Name", software.getName());
             addStatisticsParameter(statistics, "SystemUnit#ReleaseDate", software.getReleaseDate());
             addStatisticsParameter(statistics, "SystemUnit#Version", software.getVersion());
+            addStatisticsParameter(statistics, "SystemUnit#SoftwareName", software.getName());
+        }
+
+        SystemUnitConfiguration systemUnitConfiguration = ciscoConfiguration.getSystemUnit();
+        if (systemUnitConfiguration != null) {
+            ValueSpaceRefHolder systemName = systemUnitConfiguration.getName();
+            if (systemName != null) {
+                addStatisticsParameter(statistics, "SystemUnit#Name", systemName.getValue());
+            }
         }
     }
 

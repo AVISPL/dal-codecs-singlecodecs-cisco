@@ -519,7 +519,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (calls == null) {
                 return Collections.emptyList();
             }
-            return Arrays.stream(calls).filter(call -> "Connected".equals(call.getStatus()))
+            return Arrays.stream(calls).filter(call -> "Connected".equalsIgnoreCase(call.getStatus()) || "Synced".equalsIgnoreCase(call.getStatus()))
                     .collect(Collectors.toList());
         }
 

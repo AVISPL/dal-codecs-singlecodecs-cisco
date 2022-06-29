@@ -446,7 +446,7 @@ public class CiscoCommunicatorTest {
     @Test
     public void testDial() throws Exception {
         DialDevice dialDevice = new DialDevice();
-        dialDevice.setDialString("nh-webex-board@avispl.room.ciscospark.com");
+        dialDevice.setDialString("639955171.1167084978@t.plcm.vc");
         dialDevice.setProtocol(Protocol.SIP);
         String response = ciscoCommunicator.dial(dialDevice);
         Assert.assertNotNull(response, "CallId should not be null");

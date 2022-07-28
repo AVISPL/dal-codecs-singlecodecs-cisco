@@ -23,6 +23,7 @@ import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityCo
 import com.avispl.dal.communicator.cisco.dto.configuration.proximity.ProximityConfigurationServices;
 import com.avispl.dal.communicator.cisco.dto.configuration.roomanalytics.RoomAnalyticsConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.standby.StandbyConfiguration;
+import com.avispl.dal.communicator.cisco.dto.configuration.systemunit.SystemUnitConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.time.TimeConfiguration;
 import com.avispl.dal.communicator.cisco.dto.configuration.userinterface.*;
 import com.avispl.dal.communicator.cisco.dto.configuration.video.*;
@@ -513,13 +514,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private List<Call> getConnectedCalls() throws Exception {
-        CiscoStatus status = doGet(String.format(getXmlPath, callStatusUri), CiscoStatus.class);
-        if (status.getCalls() == null) {
-            return Collections.emptyList();
+            CiscoStatus status = doGet(String.format(getXmlPath, callStatusUri), CiscoStatus.class);
+            Call[] calls = status.getCalls();
+            if (calls == null) {
+                return Collections.emptyList();
+            }
+            return Arrays.stream(calls).filter(call -> "Connected".equalsIgnoreCase(call.getStatus()) || "Synced".equalsIgnoreCase(call.getStatus()))
+                    .collect(Collectors.toList());
         }
-        return Arrays.stream(status.getCalls()).filter(call -> "Connected".equalsIgnoreCase(call.getStatus()) || "Synced".equalsIgnoreCase(call.getStatus()))
-                .collect(Collectors.toList());
-    }
 
     /**
      * {@inheritDoc}
@@ -623,15 +625,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @since 1.1.1
      */
     private void populateCallChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
-        Call[] calls = ciscoStatus.getCalls();
-        if (calls == null) {
+        Call[] ciscoCallsStatus = ciscoStatus.getCalls();
+        if (ciscoCallsStatus == null) {
             if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate media channels data: no calls information is available");
+                logger.debug("Unable to populate cisco status data: no calls information is available");
             }
             return;
         }
 
-        List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> {
+        List<Call> connectedCalls = Arrays.stream(ciscoCallsStatus).filter(call -> {
             String callStatus = call.getStatus();
             if ("Connected".equalsIgnoreCase(callStatus) || "Synced".equalsIgnoreCase(callStatus)) {
                 return true;
@@ -771,7 +773,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             return;
         }
 
-        List<Call> connectedCalls = Arrays.stream(ciscoStatus.getCalls()).filter(call -> "Connected".equalsIgnoreCase(call.getStatus()) || "Synced".equalsIgnoreCase(call.getStatus()))
+        Call[] ciscoCallsStatus = ciscoStatus.getCalls();
+        if (ciscoCallsStatus == null) {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Unable to populate cisco status data: no calls information is available");
+            }
+            return;
+        }
+
+        List<Call> connectedCalls = Arrays.stream(ciscoCallsStatus).filter(call -> "Connected".equalsIgnoreCase(call.getStatus()) || "Synced".equalsIgnoreCase(call.getStatus()))
                 .collect(Collectors.toList());
         long callsCount = connectedCalls.size();
         if (callsCount > 1) {
@@ -795,18 +805,30 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             CallStats callStats = new CallStats();
             callStats.setCallId(activeCall.getCallId());
             callStats.setRemoteAddress(activeCall.getRemoteNumber());
-            Arrays.stream(ciscoStatus.getCalls()).filter(fcall -> "Connected".equalsIgnoreCase(fcall.getStatus())).findFirst().ifPresent(callInfo -> {
-                for (Channel channel : call.getChannels()) {
-                    switch (channel.getType()) {
-                        case "Audio":
-                            enrichAudioChannelStatsData(audioChannelStats, callStats, channel, callInfo);
-                            break;
-                        case "Video":
-                            enrichVideoChannelStatsData(videoChannelStats, callStats, contentChannelStats, channel, callInfo);
-                            break;
-                        default:
-                            logger.info("Not supported channel type: " + channel.getType());
-                            break;
+            Call[] callsStatus = ciscoStatus.getCalls();
+            if (callsStatus == null) {
+                // logging a warning here because there's an inconsistency in data, populated by the device.
+                // Something might be wrong, but this shouldn't trigger an error.
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Call Audio/Video statistics are not available.");
+                }
+                return;
+            }
+            Arrays.stream(callsStatus).filter(fcall -> "Connected".equalsIgnoreCase(fcall.getStatus())).findFirst().ifPresent(callInfo -> {
+                Channel[] channels = call.getChannels();
+                if (channels != null) {
+                    for (Channel channel : channels) {
+                        switch (channel.getType()) {
+                            case "Audio":
+                                enrichAudioChannelStatsData(audioChannelStats, callStats, channel, callInfo);
+                                break;
+                            case "Video":
+                                enrichVideoChannelStatsData(videoChannelStats, callStats, contentChannelStats, channel, callInfo);
+                                break;
+                            default:
+                                logger.info("Not supported channel type: " + channel.getType());
+                                break;
+                        }
                     }
                 }
                 callStats.setCallId(callInfo.getItem());
@@ -831,28 +853,30 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private RegistrationStatus createRegistrationStatus(CiscoStatus ciscoStatus) {
         RegistrationStatus registrationStatus = new RegistrationStatus();
 
-        H323 h323 = ciscoStatus.getH323();
-        if (h323 != null) {
-            H323Gatekeeper gatekeeper = h323.getGatekeeper();
-            if (gatekeeper != null) {
-                registrationStatus.setH323Details(String.format("Port: %s", gatekeeper.getPort()));
-                registrationStatus.setH323Registered("Registered".equalsIgnoreCase(gatekeeper.getStatus()));
-                registrationStatus.setH323Gatekeeper(gatekeeper.getAddress());
+            H323 h323 = ciscoStatus.getH323();
+            registrationStatus.setH323Registered(false);
+            if (h323 != null) {
+                H323Gatekeeper gatekeeper = h323.getGatekeeper();
+                if (gatekeeper != null) {
+                    registrationStatus.setH323Details(String.format("Port: %s", gatekeeper.getPort()));
+                    registrationStatus.setH323Registered("Registered".equalsIgnoreCase(gatekeeper.getStatus()));
+                    registrationStatus.setH323Gatekeeper(gatekeeper.getAddress());
+                }
             }
-        }
 
-        SIP sip = ciscoStatus.getSip();
-        if (sip != null) {
-            Registration[] registrations = sip.getRegistrations();
-            if (registrations != null && registrations.length > 0) {
-                registrationStatus.setSipDetails(String.format("URI: %s", registrations[0].getUri()));
-                registrationStatus.setSipRegistered("Registered".equalsIgnoreCase(registrations[0].getStatus()));
+            SIP sip = ciscoStatus.getSip();
+            registrationStatus.setSipRegistered(false);
+            if (sip != null) {
+                Registration[] registrations = sip.getRegistrations();
+                if (registrations != null && registrations.length > 0) {
+                    registrationStatus.setSipDetails(String.format("URI: %s", registrations[0].getUri()));
+                    registrationStatus.setSipRegistered("Registered".equalsIgnoreCase(registrations[0].getStatus()));
+                }
+                Proxy[] proxies = sip.getProxies();
+                if (proxies != null && proxies.length > 0) {
+                    registrationStatus.setSipRegistrar(proxies[0].getAddress());
+                }
             }
-            Proxy[] proxies = sip.getProxies();
-            if (proxies != null && proxies.length > 0) {
-                registrationStatus.setSipRegistrar(proxies[0].getAddress());
-            }
-        }
 
         return registrationStatus;
     }
@@ -941,7 +965,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
-                populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus);
+                populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
                 populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
@@ -1014,7 +1038,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param ciscoStatus device response data
      * @param statistics  map to set data to
      */
-    private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus ciscoStatus) {
+    private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls,
+                                        CiscoStatus ciscoStatus, CiscoConfiguration ciscoConfiguration) {
         SystemUnit systemUnit = ciscoStatus.getSystemUnit();
         if (systemUnit == null) {
             if (logger.isDebugEnabled()) {
@@ -1057,9 +1082,17 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         Software software = systemUnit.getSoftware();
         if (software != null) {
             addStatisticsParameter(statistics, "SystemUnit#DisplayName", software.getDisplayName());
-            addStatisticsParameter(statistics, "SystemUnit#Name", software.getName());
             addStatisticsParameter(statistics, "SystemUnit#ReleaseDate", software.getReleaseDate());
             addStatisticsParameter(statistics, "SystemUnit#Version", software.getVersion());
+            addStatisticsParameter(statistics, "SystemUnit#SoftwareName", software.getName());
+        }
+
+        SystemUnitConfiguration systemUnitConfiguration = ciscoConfiguration.getSystemUnit();
+        if (systemUnitConfiguration != null) {
+            ValueSpaceRefHolder systemName = systemUnitConfiguration.getName();
+            if (systemName != null) {
+                addStatisticsParameter(statistics, "SystemUnit#Name", systemName.getValue());
+            }
         }
     }
 
@@ -1777,11 +1810,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (peripheralsListCommandResponse != null) {
             PeripheralsListResult peripheralsListResult = peripheralsListCommandResponse.getPeripheralsListResult();
             if (peripheralsListResult != null && "OK".equalsIgnoreCase(peripheralsListResult.getStatus())) {
-                Map<String, Map<String, String>> connectedTypedStats = new HashMap<>();
-                Map<String, Map<String, String>> disconnectedTypedStats = new HashMap<>();
-
                 PeripheralsDevice[] peripheralsDevices = peripheralsListResult.getPeripheralsDevices();
                 if (peripheralsDevices != null) {
+                    Map<String, Map<String, String>> connectedTypedStats = new HashMap<>();
+                    Map<String, Map<String, String>> disconnectedTypedStats = new HashMap<>();
+
                     Arrays.stream(peripheralsDevices).forEach(connectedDevice -> {
                         int totalDevicesOfStateAndType = 0;
                         String connectedDeviceType = connectedDevice.getType();
@@ -1856,9 +1889,22 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         addStatisticsParameter(typedStats, typeKey, mergeAndNormalizeStrings(typedStats.get(typeKey), connectedDeviceType, "; "));
                         addStatisticsParameter(typedStats, key + PROPERTY_TOTAL_DEVICES_COUNT, String.valueOf(++totalDevicesOfStateAndType));
                     });
+
+                    disconnectedTypedStats.values().forEach(statistics::putAll);
+                    connectedTypedStats.values().forEach(statistics::putAll);
+                } else {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Unable to get connected devices information: no connected devices available");
+                    }
                 }
-                disconnectedTypedStats.values().forEach(statistics::putAll);
-                connectedTypedStats.values().forEach(statistics::putAll);
+            } else {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Unable to get peripheral devices information: no peripheral devices available or the response status is invalid");
+                }
+            }
+        } else {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Unable to get peripheral devices information: no devices available in the list");
             }
         }
 
@@ -1876,6 +1922,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 if (ciscoTouchPanels != null) {
                     addStatisticsParameterWithDropdown(statistics, controllableProperties, PERIPHERALS_TOUCH_PANEL_REMOTE_PAIRING, ciscoTouchPanels.getRemotePairing(), valuespace);
                 }
+            }
+        } else {
+            if (logger.isDebugEnabled()) {
+                logger.debug("Unable to get peripheral devices configuration.");
             }
         }
     }

@@ -919,10 +919,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             CiscoConfiguration ciscoConfiguration = null;
             CiscoStatus ciscoStatus = null;
-
+            boolean configurationError = false;
+            boolean statusError = false;
             try {
                 ciscoConfiguration = retrieveConfiguration();
             } catch (ResourceNotReachableException e) {
+                configurationError = true;
                 // We don't want to produce an API error if one of the xml files is not available
                 logger.warn("/configuration.xml is not available on device " + getHost(), e);
             }
@@ -930,10 +932,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             try {
                 ciscoStatus = retrieveStatus();
             } catch (ResourceNotReachableException e) {
+                statusError = true;
                 // We don't want to produce an API error if one of the xml files is not available
                 logger.warn("/status.xml is not available on device " + getHost(), e);
             }
 
+            if (configurationError && statusError) {
+                throw new ResourceNotReachableException("Unable to retrieve device details: /configuration.xml and /status.xml endpoints are not available.");
+            }
             if (StringUtils.isNullOrEmpty(valuespace) && ciscoConfiguration == null && ciscoStatus == null) {
                 return Arrays.asList(extendedStatistics, endpointStatistics);
             }

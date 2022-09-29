@@ -1095,15 +1095,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         State state = systemUnit.getState();
         if (state != null) {
-            addTypedStatisticsParameter("SystemUnit#ActiveCallsNumber", state.getNumberOfActiveCalls(), statistics, dynamicStatistics);
-            addTypedStatisticsParameter("SystemUnit#InProgressCallsNumber", state.getNumberOfInProgressCalls(), statistics, dynamicStatistics);
-            addTypedStatisticsParameter("SystemUnit#SuspendedCallsNumber", state.getNumberOfSuspendedCalls(), statistics, dynamicStatistics);
+            addTypedStatisticsParameter(statistics, dynamicStatistics, "SystemUnit#ActiveCallsNumber", state.getNumberOfActiveCalls());
+            addTypedStatisticsParameter(statistics, dynamicStatistics, "SystemUnit#InProgressCallsNumber", state.getNumberOfInProgressCalls());
+            addTypedStatisticsParameter(statistics, dynamicStatistics, "SystemUnit#SuspendedCallsNumber", state.getNumberOfSuspendedCalls());
         }
 
 
         Hardware hardware = systemUnit.getHardware();
         if (hardware != null) {
-            addTypedStatisticsParameter("SystemUnit#HardwareTemperature(C)", hardware.getTemperature(), statistics, dynamicStatistics);
+            addTypedStatisticsParameter(statistics, dynamicStatistics, "SystemUnit#HardwareTemperature(C)", hardware.getTemperature());
 
             HardwareModule module = hardware.getModule();
             if (module != null) {
@@ -1787,7 +1787,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (ambientNoise != null) {
                 Level ambientNoiseLevel = ambientNoise.getLevel();
                 if (ambientNoiseLevel != null) {
-                    addTypedStatisticsParameter("RoomAnalytics#AmbientNoiseLevelA", ambientNoiseLevel.getA(), statistics, dynamicStatistics);
+                    addTypedStatisticsParameter(statistics, dynamicStatistics, "RoomAnalytics#AmbientNoiseLevelA", ambientNoiseLevel.getA());
                 }
             }
 
@@ -1795,7 +1795,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (sound != null) {
                 Level soundLevel = sound.getLevel();
                 if (soundLevel != null) {
-                    addTypedStatisticsParameter("RoomAnalytics#SoundLevelA", soundLevel.getA(), statistics, dynamicStatistics);
+                    addTypedStatisticsParameter(statistics, dynamicStatistics, "RoomAnalytics#SoundLevelA", soundLevel.getA());
                 }
             }
 
@@ -1808,7 +1808,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (peopleCount != null) {
                 int currentPeopleCount = Integer.parseInt(peopleCount.getCurrent());
                 // The value could be negative, so we need to make sure the value is relevant
-                addTypedStatisticsParameter("RoomAnalytics#CurrentPeopleCount", String.valueOf(Math.max(0, currentPeopleCount)), statistics, dynamicStatistics);
+                addTypedStatisticsParameter(statistics, dynamicStatistics, "RoomAnalytics#CurrentPeopleCount", String.valueOf(Math.max(0, currentPeopleCount)));
             }
         }
     }
@@ -2990,9 +2990,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     /**
+     * Add a property as a regular statistics property, or as dynamic one, based on the {@link #historicalProperties} configuration
+     * and DynamicStatisticsDefinitions static definitions.
      *
+     * @param statistics map of regular statistics
+     * @param dynamicStatistics map of dynamic (historical) statistics
+     * @param propertyName name of property to add
+     * @param propertyValue value of property to add
      * */
-    private void addTypedStatisticsParameter(String propertyName, String propertyValue, Map<String, String> statistics, Map<String, String> dynamicStatistics) {
+    private void addTypedStatisticsParameter(Map<String, String> statistics, Map<String, String> dynamicStatistics, String propertyName, String propertyValue) {
         if (!StringUtils.isNullOrEmpty(historicalProperties) && historicalProperties.contains(propertyName)
                 && DynamicStatisticsDefinitions.checkIfExists(propertyName) && propertyValue != null) {
             dynamicStatistics.put(propertyName, propertyValue);

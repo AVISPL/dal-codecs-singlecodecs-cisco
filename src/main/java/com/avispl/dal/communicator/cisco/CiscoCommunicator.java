@@ -103,6 +103,7 @@ import java.util.stream.Collectors;
 
 import static com.avispl.dal.communicator.cisco.CiscoCommunicatorProperties.*;
 import static com.avispl.dal.communicator.cisco.controller.ControlPayloadGenerator.*;
+import static com.avispl.symphony.dal.util.ControllablePropertyFactory.*;
 
 /**
  * Communicator based on Cisco XML API
@@ -2266,79 +2267,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             }
         });
-    }
-
-    /**
-     * Instantiate Text controllable property
-     *
-     * @param name         name of the property
-     * @param label        default button label
-     * @param labelPressed button label when is pressed
-     * @param gracePeriod  period to pause monitoring statistics for
-     * @return instance of AdvancedControllableProperty with AdvancedControllableProperty.Button as type
-     */
-    private AdvancedControllableProperty createButton(String name, String label, String labelPressed, long gracePeriod) {
-        AdvancedControllableProperty.Button button = new AdvancedControllableProperty.Button();
-        button.setLabel(label);
-        button.setLabelPressed(labelPressed);
-        button.setGracePeriod(gracePeriod);
-
-        return new AdvancedControllableProperty(name, new Date(), button, "");
-    }
-
-    /**
-     * Create a switch controllable property
-     *
-     * @param name   name of the switch
-     * @param status initial switch state (0|1)
-     * @return AdvancedControllableProperty button instance
-     */
-    private AdvancedControllableProperty createSwitch(String name, int status) {
-        AdvancedControllableProperty.Switch toggle = new AdvancedControllableProperty.Switch();
-        toggle.setLabelOff("Off");
-        toggle.setLabelOn("On");
-
-        AdvancedControllableProperty advancedControllableProperty = new AdvancedControllableProperty();
-        advancedControllableProperty.setName(name);
-        advancedControllableProperty.setValue(status);
-        advancedControllableProperty.setType(toggle);
-        advancedControllableProperty.setTimestamp(new Date());
-
-        return advancedControllableProperty;
-    }
-
-    /***
-     * Create AdvancedControllableProperty slider instance
-     *
-     * @param name name of the control
-     * @param initialValue initial value of the control
-     * @param rangeStart start value for the slider
-     * @param rangeEnd end value for the slider
-     *
-     * @return AdvancedControllableProperty slider instance
-     */
-    private AdvancedControllableProperty createSlider(String name, Float rangeStart, Float rangeEnd, Float initialValue) {
-        AdvancedControllableProperty.Slider slider = new AdvancedControllableProperty.Slider();
-        slider.setLabelStart(String.valueOf(rangeStart));
-        slider.setLabelEnd(String.valueOf(rangeEnd));
-        slider.setRangeStart(rangeStart);
-        slider.setRangeEnd(rangeEnd);
-
-        return new AdvancedControllableProperty(name, new Date(), slider, initialValue);
-    }
-
-    /***
-     * Create AdvancedControllableProperty preset instance
-     * @param name name of the control
-     * @param initialValue initial value of the control
-     * @return AdvancedControllableProperty preset instance
-     */
-    private AdvancedControllableProperty createDropdown(String name, List<String> values, String initialValue) {
-        AdvancedControllableProperty.DropDown dropDown = new AdvancedControllableProperty.DropDown();
-        dropDown.setOptions(values.toArray(new String[0]));
-        dropDown.setLabels(values.toArray(new String[0]));
-
-        return new AdvancedControllableProperty(name, new Date(), dropDown, initialValue);
     }
 
     /***

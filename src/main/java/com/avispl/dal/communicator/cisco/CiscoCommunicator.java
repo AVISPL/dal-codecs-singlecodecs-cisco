@@ -71,6 +71,7 @@ import com.avispl.dal.communicator.cisco.dto.status.usb.Device;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.*;
 import com.avispl.dal.communicator.cisco.dto.valuespace.ValueSpace;
+import com.avispl.dal.communicator.cisco.statistics.DynamicStatisticsDefinitions;
 import com.avispl.symphony.api.dal.control.Controller;
 import com.avispl.symphony.api.dal.control.call.CallController;
 import com.avispl.symphony.api.dal.dto.control.AdvancedControllableProperty;
@@ -102,6 +103,7 @@ import java.util.stream.Collectors;
 
 import static com.avispl.dal.communicator.cisco.CiscoCommunicatorProperties.*;
 import static com.avispl.dal.communicator.cisco.controller.ControlPayloadGenerator.*;
+import static com.avispl.symphony.dal.util.ControllablePropertyFactory.*;
 
 /**
  * Communicator based on Cisco XML API
@@ -295,6 +297,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private String displayPropertyGroups = "SystemUnit,RoomAnalytics";
 
     /**
+     * CSV string of values, defining the set of historical properties
+     * */
+    private String historicalProperties;
+
+    /**
      * Grace period for restart operation, 120s by default
      */
     private long restartGracePeriod = 120000;
@@ -343,6 +350,24 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         super.internalInit();
         setJacksonDataformatXMLSupported(true);
         xmlMapper = new XmlMapper();
+    }
+
+    /**
+     * Retrieves {@link #historicalProperties}
+     *
+     * @return value of {@link #historicalProperties}
+     */
+    public String getHistoricalProperties() {
+        return historicalProperties;
+    }
+
+    /**
+     * Sets {@link #historicalProperties} value
+     *
+     * @param historicalProperties new value of {@link #historicalProperties}
+     */
+    public void setHistoricalProperties(String historicalProperties) {
+        this.historicalProperties = historicalProperties;
     }
 
     /**
@@ -908,6 +933,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             List<AdvancedControllableProperty> advancedControllableProperties = new ArrayList<>();
             Map<String, String> statisticsMap = new HashMap<>();
+            Map<String, String> dynamicStatisticsMap = new HashMap<>();
 
             String valuespace = "";
             try {
@@ -919,10 +945,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             CiscoConfiguration ciscoConfiguration = null;
             CiscoStatus ciscoStatus = null;
-
+            boolean configurationError = false;
+            boolean statusError = false;
             try {
                 ciscoConfiguration = retrieveConfiguration();
             } catch (ResourceNotReachableException e) {
+                configurationError = true;
                 // We don't want to produce an API error if one of the xml files is not available
                 logger.warn("/configuration.xml is not available on device " + getHost(), e);
             }
@@ -930,10 +958,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             try {
                 ciscoStatus = retrieveStatus();
             } catch (ResourceNotReachableException e) {
+                statusError = true;
                 // We don't want to produce an API error if one of the xml files is not available
                 logger.warn("/status.xml is not available on device " + getHost(), e);
             }
 
+            if (configurationError && statusError) {
+                throw new ResourceNotReachableException("Unable to retrieve device details: /configuration.xml and /status.xml endpoints are not available.");
+            }
             if (StringUtils.isNullOrEmpty(valuespace) && ciscoConfiguration == null && ciscoStatus == null) {
                 return Arrays.asList(extendedStatistics, endpointStatistics);
             }
@@ -965,7 +997,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
-                populateSystemUnitData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
+                populateSystemUnitData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
                 populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
@@ -989,7 +1021,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 populateUSBData(statisticsMap, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "RoomAnalytics")) {
-                populateRoomAnalyticsData(statisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoStatus);
+                populateRoomAnalyticsData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ProximityServices")) {
                 populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
@@ -1010,6 +1042,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             extendedStatistics.setControllableProperties(advancedControllableProperties);
             extendedStatistics.setStatistics(statisticsMap);
+            extendedStatistics.setDynamicStatistics(dynamicStatisticsMap);
 
             localStatistics = extendedStatistics;
             localEndpointStatistics = endpointStatistics;
@@ -1038,7 +1071,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param ciscoStatus device response data
      * @param statistics  map to set data to
      */
-    private void populateSystemUnitData(Map<String, String> statistics, List<AdvancedControllableProperty> controls,
+    private void populateSystemUnitData(Map<String, String> statistics, Map<String, String> dynamicStatistics, List<AdvancedControllableProperty> controls,
                                         CiscoStatus ciscoStatus, CiscoConfiguration ciscoConfiguration) {
         SystemUnit systemUnit = ciscoStatus.getSystemUnit();
         if (systemUnit == null) {
@@ -1062,15 +1095,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         State state = systemUnit.getState();
         if (state != null) {
-            addStatisticsParameter(statistics, "SystemUnit#ActiveCallsNumber", state.getNumberOfActiveCalls());
-            addStatisticsParameter(statistics, "SystemUnit#InProgressCallsNumber", state.getNumberOfInProgressCalls());
-            addStatisticsParameter(statistics, "SystemUnit#SuspendedCallsNumber", state.getNumberOfSuspendedCalls());
+            addTypedStatisticsParameter(statistics, dynamicStatistics, "SystemUnit#ActiveCallsNumber", state.getNumberOfActiveCalls());
+            addTypedStatisticsParameter(statistics, dynamicStatistics, "SystemUnit#InProgressCallsNumber", state.getNumberOfInProgressCalls());
+            addTypedStatisticsParameter(statistics, dynamicStatistics, "SystemUnit#SuspendedCallsNumber", state.getNumberOfSuspendedCalls());
         }
 
 
         Hardware hardware = systemUnit.getHardware();
         if (hardware != null) {
-            addStatisticsParameter(statistics, "SystemUnit#HardwareTemperature(C)", hardware.getTemperature());
+            addTypedStatisticsParameter(statistics, dynamicStatistics, "SystemUnit#HardwareTemperature(C)", hardware.getTemperature());
 
             HardwareModule module = hardware.getModule();
             if (module != null) {
@@ -1737,9 +1770,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param status        device status data fetched from {@link #statusPath}
      * @param configuration device configuration data fetched from {@link #configurationPath}
      */
-    private void populateRoomAnalyticsData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoConfiguration configuration, CiscoStatus status) {
+    private void populateRoomAnalyticsData(Map<String, String> statistics, Map<String, String> dynamicStatistics, List<AdvancedControllableProperty> controls, CiscoConfiguration configuration, CiscoStatus status) {
         RoomAnalytics roomAnalytics = status.getRoomAnalytics();
         if (roomAnalytics != null) {
+
             addStatisticsParameter(statistics, "RoomAnalytics#PeoplePresence", roomAnalytics.getPeoplePresence());
             RoomAnalyticsConfiguration roomAnalyticsConfiguration = configuration.getRoomAnalytics();
             if (roomAnalyticsConfiguration != null) {
@@ -1753,7 +1787,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (ambientNoise != null) {
                 Level ambientNoiseLevel = ambientNoise.getLevel();
                 if (ambientNoiseLevel != null) {
-                    addStatisticsParameter(statistics, "RoomAnalytics#AmbientNoiseLevelA", ambientNoiseLevel.getA());
+                    addTypedStatisticsParameter(statistics, dynamicStatistics, "RoomAnalytics#AmbientNoiseLevelA", ambientNoiseLevel.getA());
                 }
             }
 
@@ -1761,7 +1795,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (sound != null) {
                 Level soundLevel = sound.getLevel();
                 if (soundLevel != null) {
-                    addStatisticsParameter(statistics, "RoomAnalytics#SoundLevelA", soundLevel.getA());
+                    addTypedStatisticsParameter(statistics, dynamicStatistics, "RoomAnalytics#SoundLevelA", soundLevel.getA());
                 }
             }
 
@@ -1772,10 +1806,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             PeopleCount peopleCount = roomAnalytics.getPeopleCount();
             if (peopleCount != null) {
-                addStatisticsParameter(statistics, "RoomAnalytics#CurrentPeopleCount", peopleCount.getCurrent());
+                int currentPeopleCount = Integer.parseInt(peopleCount.getCurrent());
+                // The value could be negative, so we need to make sure the value is relevant
+                addTypedStatisticsParameter(statistics, dynamicStatistics, "RoomAnalytics#CurrentPeopleCount", String.valueOf(Math.max(0, currentPeopleCount)));
             }
         }
     }
+
 
     /**
      * Retrieve Peripherals statistics/controls values. In order to do so - we need to perform a control command
@@ -2230,79 +2267,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             }
         });
-    }
-
-    /**
-     * Instantiate Text controllable property
-     *
-     * @param name         name of the property
-     * @param label        default button label
-     * @param labelPressed button label when is pressed
-     * @param gracePeriod  period to pause monitoring statistics for
-     * @return instance of AdvancedControllableProperty with AdvancedControllableProperty.Button as type
-     */
-    private AdvancedControllableProperty createButton(String name, String label, String labelPressed, long gracePeriod) {
-        AdvancedControllableProperty.Button button = new AdvancedControllableProperty.Button();
-        button.setLabel(label);
-        button.setLabelPressed(labelPressed);
-        button.setGracePeriod(gracePeriod);
-
-        return new AdvancedControllableProperty(name, new Date(), button, "");
-    }
-
-    /**
-     * Create a switch controllable property
-     *
-     * @param name   name of the switch
-     * @param status initial switch state (0|1)
-     * @return AdvancedControllableProperty button instance
-     */
-    private AdvancedControllableProperty createSwitch(String name, int status) {
-        AdvancedControllableProperty.Switch toggle = new AdvancedControllableProperty.Switch();
-        toggle.setLabelOff("Off");
-        toggle.setLabelOn("On");
-
-        AdvancedControllableProperty advancedControllableProperty = new AdvancedControllableProperty();
-        advancedControllableProperty.setName(name);
-        advancedControllableProperty.setValue(status);
-        advancedControllableProperty.setType(toggle);
-        advancedControllableProperty.setTimestamp(new Date());
-
-        return advancedControllableProperty;
-    }
-
-    /***
-     * Create AdvancedControllableProperty slider instance
-     *
-     * @param name name of the control
-     * @param initialValue initial value of the control
-     * @param rangeStart start value for the slider
-     * @param rangeEnd end value for the slider
-     *
-     * @return AdvancedControllableProperty slider instance
-     */
-    private AdvancedControllableProperty createSlider(String name, Float rangeStart, Float rangeEnd, Float initialValue) {
-        AdvancedControllableProperty.Slider slider = new AdvancedControllableProperty.Slider();
-        slider.setLabelStart(String.valueOf(rangeStart));
-        slider.setLabelEnd(String.valueOf(rangeEnd));
-        slider.setRangeStart(rangeStart);
-        slider.setRangeEnd(rangeEnd);
-
-        return new AdvancedControllableProperty(name, new Date(), slider, initialValue);
-    }
-
-    /***
-     * Create AdvancedControllableProperty preset instance
-     * @param name name of the control
-     * @param initialValue initial value of the control
-     * @return AdvancedControllableProperty preset instance
-     */
-    private AdvancedControllableProperty createDropdown(String name, List<String> values, String initialValue) {
-        AdvancedControllableProperty.DropDown dropDown = new AdvancedControllableProperty.DropDown();
-        dropDown.setOptions(values.toArray(new String[0]));
-        dropDown.setLabels(values.toArray(new String[0]));
-
-        return new AdvancedControllableProperty(name, new Date(), dropDown, initialValue);
     }
 
     /***
@@ -3023,6 +2987,24 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             cp.setValue(value);
             cp.setTimestamp(new Date());
         });
+    }
+
+    /**
+     * Add a property as a regular statistics property, or as dynamic one, based on the {@link #historicalProperties} configuration
+     * and DynamicStatisticsDefinitions static definitions.
+     *
+     * @param statistics map of regular statistics
+     * @param dynamicStatistics map of dynamic (historical) statistics
+     * @param propertyName name of property to add
+     * @param propertyValue value of property to add
+     * */
+    private void addTypedStatisticsParameter(Map<String, String> statistics, Map<String, String> dynamicStatistics, String propertyName, String propertyValue) {
+        if (!StringUtils.isNullOrEmpty(historicalProperties) && historicalProperties.contains(propertyName)
+                && DynamicStatisticsDefinitions.checkIfExists(propertyName) && propertyValue != null) {
+            dynamicStatistics.put(propertyName, propertyValue);
+        } else {
+            statistics.put(propertyName, propertyValue);
+        }
     }
 
     /**

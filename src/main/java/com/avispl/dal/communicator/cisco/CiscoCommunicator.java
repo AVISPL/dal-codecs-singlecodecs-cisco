@@ -2999,8 +2999,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param propertyValue value of property to add
      * */
     private void addTypedStatisticsParameter(Map<String, String> statistics, Map<String, String> dynamicStatistics, String propertyName, String propertyValue) {
-        if (!StringUtils.isNullOrEmpty(historicalProperties) && historicalProperties.contains(propertyName)
-                && DynamicStatisticsDefinitions.checkIfExists(propertyName) && propertyValue != null) {
+        boolean propertyListed = false;
+        if (!StringUtils.isNullOrEmpty(historicalProperties)) {
+            if (propertyName.contains("#")) {
+                propertyListed = historicalProperties.contains(propertyName.split("#")[1]);
+            } else {
+                propertyListed = historicalProperties.contains(propertyName);
+            }
+        }
+        if (propertyListed && DynamicStatisticsDefinitions.checkIfExists(propertyName) && propertyValue != null) {
             dynamicStatistics.put(propertyName, propertyValue);
         } else {
             statistics.put(propertyName, propertyValue);

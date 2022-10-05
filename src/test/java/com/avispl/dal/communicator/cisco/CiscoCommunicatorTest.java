@@ -71,6 +71,7 @@ public class CiscoCommunicatorTest {
 
     @Test
     public void testSerializeProperties() throws Exception {
+        ciscoCommunicator.setHistoricalProperties("CurrentPeopleCount");
         ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Peripherals,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
         ciscoCommunicator.setDisplayPropertyGroups("All");
         List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();
@@ -79,6 +80,7 @@ public class CiscoCommunicatorTest {
         ExtendedStatistics extendedStatistics = (ExtendedStatistics) statistics.get(0);
         EndpointStatistics endpointStatistics = (EndpointStatistics) statistics.get(1);
         Assert.assertNotNull(extendedStatistics);
+        Assert.assertEquals(1, extendedStatistics.getDynamicStatistics().size());
         Assert.assertNotNull(endpointStatistics);
         Assert.assertNotNull(extendedStatistics.getStatistics());
         Assert.assertTrue(extendedStatistics.getStatistics().size() > 100);

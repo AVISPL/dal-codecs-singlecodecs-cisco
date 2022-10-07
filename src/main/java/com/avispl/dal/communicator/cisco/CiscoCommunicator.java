@@ -297,9 +297,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private String displayPropertyGroups = "SystemUnit,RoomAnalytics";
 
     /**
-     * CSV string of values, defining the set of historical properties
+     * CSV string of values, defining the set of historical properties, kept as set locally
      * */
-    private String historicalProperties;
+    private Set<String> historicalProperties = new HashSet();
 
     /**
      * Grace period for restart operation, 120s by default
@@ -358,7 +358,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @return value of {@link #historicalProperties}
      */
     public String getHistoricalProperties() {
-        return historicalProperties;
+        return String.join(",", this.historicalProperties);
     }
 
     /**
@@ -367,7 +367,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param historicalProperties new value of {@link #historicalProperties}
      */
     public void setHistoricalProperties(String historicalProperties) {
-        this.historicalProperties = historicalProperties;
+        this.historicalProperties.clear();
+        Arrays.asList(historicalProperties.split(",")).forEach(propertyName -> {
+            this.historicalProperties.add(propertyName.trim());
+        });
     }
 
     /**
@@ -3000,7 +3003,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * */
     private void addTypedStatisticsParameter(Map<String, String> statistics, Map<String, String> dynamicStatistics, String propertyName, String propertyValue) {
         boolean propertyListed = false;
-        if (!StringUtils.isNullOrEmpty(historicalProperties)) {
+        if (!historicalProperties.isEmpty()) {
             if (propertyName.contains("#")) {
                 propertyListed = historicalProperties.contains(propertyName.split("#")[1]);
             } else {

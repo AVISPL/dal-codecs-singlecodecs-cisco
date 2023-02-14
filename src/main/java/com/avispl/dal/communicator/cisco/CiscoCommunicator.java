@@ -634,14 +634,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param endpointStatistics to put media channel data to
      * @since 1.1.1
      */
-    private void routeMediaChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
+    private void routeMediaChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics, Map<String, String> statistics) {
         MediaChannels mediaChannels = ciscoStatus.getMediaChannels();
 
         if (mediaChannels == null) {
             // this may mean that we are going legacy route since channel data is in the different part of payload in this case
-            populateCallChannelsData(ciscoStatus, endpointStatistics);
+            populateCallChannelsData(ciscoStatus, endpointStatistics, statistics);
         } else {
-            populateMediaChannelsData(ciscoStatus, endpointStatistics);
+            populateMediaChannelsData(ciscoStatus, endpointStatistics, statistics);
         }
     }
 
@@ -652,7 +652,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param endpointStatistics to save data to
      * @since 1.1.1
      */
-    private void populateCallChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
+    private void populateCallChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics, Map<String, String> statistics) {
         Call[] ciscoCallsStatus = ciscoStatus.getCalls();
         if (ciscoCallsStatus == null) {
             if (logger.isDebugEnabled()) {
@@ -732,7 +732,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         audioChannelStats.setCodec(audio.getCodec());
                         audioChannelStats.setBitRateRx(audio.getDynamicRate());
                     }
-                    if (videoData.isPresent()) {
+                    if (videoData.isPresent() && !checkPresentationMode(statistics)) {
                         Video video = videoData.get();
                         videoChannelStats.setJitterRx(video.getJitter());
                         videoChannelStats.setPacketLossRx(video.getPacketLoss());
@@ -783,7 +783,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param endpointStatistics an instance of {@link EndpointStatistics} to set data to
      * @throws RuntimeException if more than 1 connected calls is found
      */
-    private void populateMediaChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics) {
+    private void populateMediaChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics, Map<String, String> statistics) {
         MediaChannels mediaChannels = ciscoStatus.getMediaChannels();
 
         if (mediaChannels == null) {
@@ -851,7 +851,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                                 enrichAudioChannelStatsData(audioChannelStats, callStats, channel, callInfo);
                                 break;
                             case "Video":
-                                enrichVideoChannelStatsData(videoChannelStats, callStats, contentChannelStats, channel, callInfo);
+                                enrichVideoChannelStatsData(videoChannelStats, callStats, contentChannelStats, channel, callInfo, statistics);
                                 break;
                             default:
                                 logger.info("Not supported channel type: " + channel.getType());
@@ -973,9 +973,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 return Arrays.asList(extendedStatistics, endpointStatistics);
             }
 
-            routeMediaChannelsData(ciscoStatus, endpointStatistics);
-            endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
-
             List<String> propertyGroups = Arrays.stream(displayPropertyGroups.split(",")).map(String::trim).collect(Collectors.toList());
 
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Audio")) {
@@ -1042,6 +1039,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     }
                 }
             }
+
+            routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
+            endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
 
             extendedStatistics.setControllableProperties(advancedControllableProperties);
             extendedStatistics.setStatistics(statisticsMap);
@@ -1394,35 +1394,35 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                                         CiscoStatus ciscoStatus, CiscoConfiguration configuration, String valuespace) {
         ConferenceStatus conferenceStatus = ciscoStatus.getConference();
         if (conferenceStatus != null) {
-            addStatisticsParameter(statistics, "Conference#DoNotDisturb", conferenceStatus.getDoNotDisturb());
+            addStatisticsParameter(statistics, CONFERENCE_DO_NOT_DISTURB, conferenceStatus.getDoNotDisturb());
 
             ActiveConferenceSpeaker activeConferenceSpeaker = conferenceStatus.getActiveSpeaker();
             if (activeConferenceSpeaker != null) {
-                addStatisticsParameter(statistics, "Conference#ActiveSpeakerCallId", activeConferenceSpeaker.getCallId());
+                addStatisticsParameter(statistics, CONFERENCE_ACTIVE_SPEAKER_CALL_ID, activeConferenceSpeaker.getCallId());
             }
 
             Multipoint multipoint = conferenceStatus.getMultipoint();
             if (multipoint != null) {
-                addStatisticsParameter(statistics, "Conference#MultipointMode", multipoint.getMode());
+                addStatisticsParameter(statistics, CONFERENCE_MULTIPOINT_MODE, multipoint.getMode());
             }
 
             Presentation presentation = conferenceStatus.getPresentation();
             if (presentation != null) {
-                addStatisticsParameter(statistics, "Conference#PresentationMode", presentation.getMode());
-                addStatisticsParameter(statistics, "Conference#PresentationCallId", presentation.getCallId());
+                addStatisticsParameter(statistics, CONFERENCE_PRESENTATION_MODE, presentation.getMode());
+                addStatisticsParameter(statistics, CONFERENCE_PRESENTATION_CALL_ID, presentation.getCallId());
 
                 Whiteboard whiteboard = presentation.getWhiteboard();
                 if (whiteboard != null) {
-                    addStatisticsParameter(statistics, "Conference#WhiteboardMode", whiteboard.getMode());
-                    addStatisticsParameter(statistics, "Conference#WhiteboardReleaseFloorAvailability", whiteboard.getReleaseFloorAvailability());
-                    addStatisticsParameter(statistics, "Conference#WhiteboardRequestFloorAvailability", whiteboard.getRequestFloorAvailability());
+                    addStatisticsParameter(statistics, CONFERENCE_WHITEBOARD_MODE, whiteboard.getMode());
+                    addStatisticsParameter(statistics, CONFERENCE_WHITEBOARD_RELEASE_FLOOR_AVAILABILITY, whiteboard.getReleaseFloorAvailability());
+                    addStatisticsParameter(statistics, CONFERENCE_WHITEBOARD_REQUEST_FLOOR_AVAILABILITY, whiteboard.getRequestFloorAvailability());
                 }
             }
 
             SpeakerLock speakerLock = conferenceStatus.getSpeakerLock();
             if (speakerLock != null) {
-                addStatisticsParameter(statistics, "Conference#SpeakerLockMode", speakerLock.getMode());
-                addStatisticsParameter(statistics, "Conference#SpeakerLockCallId", speakerLock.getCallId());
+                addStatisticsParameter(statistics, CONFERENCE_SPEAKER_LOCK_MODE, speakerLock.getMode());
+                addStatisticsParameter(statistics, CONFERENCE_SPEAKER_LOCK_CALL_ID, speakerLock.getCallId());
             }
         }
 
@@ -2355,7 +2355,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param channel data, retrieved from the device
      * @param callInfo call information, retrieved from the device
      */
-    private void enrichVideoChannelStatsData(VideoChannelStats videoChannelStats, CallStats callStats, ContentChannelStats contentChannelStats, Channel channel, Call callInfo) {
+    private void enrichVideoChannelStatsData(VideoChannelStats videoChannelStats, CallStats callStats, ContentChannelStats contentChannelStats, Channel channel, Call callInfo, Map<String, String> statistics) {
         if (channel == null) {
             if (logger.isDebugEnabled()) {
                 logger.debug("Unable to populate channel data.");
@@ -2410,7 +2410,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
         switch (direction) {
             case "Incoming":
-                videoChannelStats.setFrameSizeRx(extractValueInt(video.getResolutionX()), extractValueInt(video.getResolutionY()));
+                if (!checkPresentationMode(statistics)) {
+                    videoChannelStats.setFrameSizeRx(extractValueInt(video.getResolutionX()), extractValueInt(video.getResolutionY()));
+                }
                 videoChannelStats.setFrameRateRx(extractValueFloat(video.getFrameRate()));
                 videoChannelStats.setJitterRx(extractValueFloat(netstat.getJitter()));
                 videoChannelStats.setBitRateRx(extractAndReduceValueInt(netstatChannelRate, 1000));
@@ -2433,6 +2435,20 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 logger.info("Channel direction not supported: " + direction);
                 break;
         }
+    }
+
+    /**
+     * Check the presentation mode, stored in statistics, to avoid nested null checks of the original response object.
+     *
+     * @param statistics containing all the device statistics collected
+     * @return true if device in presentation mode, false if not in presentation mode
+     * */
+    private boolean checkPresentationMode(Map<String, String> statistics) {
+        String presentationMode = statistics.get(CONFERENCE_PRESENTATION_MODE);
+        if (StringUtils.isNotNullOrEmpty(presentationMode) && presentationMode.equalsIgnoreCase("On")) {
+            return true;
+        }
+        return false;
     }
 
     /***

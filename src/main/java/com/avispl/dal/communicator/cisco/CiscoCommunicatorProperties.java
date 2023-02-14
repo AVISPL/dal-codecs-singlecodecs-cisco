@@ -118,6 +118,26 @@ final class CiscoCommunicatorProperties {
      static final String NETWORK_SERVICES_UPNP_MODE = "NetworkServices#UPnPMode";
      static final String NETWORK_SERVICES_NTP_MODE = "NetworkServices#NTPMode";
      static final String NETWORK_SERVICES_WELCOME_TEXT = "NetworkServices#WelcomeText";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_PRESENTATION_MODE = "Conference#PresentationMode";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_DO_NOT_DISTURB = "Conference#DoNotDisturb";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_ACTIVE_SPEAKER_CALL_ID = "Conference#ActiveSpeakerCallId";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_MULTIPOINT_MODE = "Conference#MultipointMode";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_PRESENTATION_CALL_ID = "Conference#PresentationCallId";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_WHITEBOARD_MODE = "Conference#WhiteboardMode";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_WHITEBOARD_RELEASE_FLOOR_AVAILABILITY = "Conference#WhiteboardReleaseFloorAvailability";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_WHITEBOARD_REQUEST_FLOOR_AVAILABILITY = "Conference#WhiteboardRequestFloorAvailability";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_SPEAKER_LOCK_MODE = "Conference#SpeakerLockMode";
+     /** @since 1.2.1 */
+     static final String CONFERENCE_SPEAKER_LOCK_CALL_ID = "Conference#SpeakerLockCallId";
      /** @since 1.1.0 */
      static final String PERIPHERALS_CAMERA_PROFILE_CONTROL = "PeripheralsConfiguration#CamerasProfile";
      /** @since 1.1.0 */

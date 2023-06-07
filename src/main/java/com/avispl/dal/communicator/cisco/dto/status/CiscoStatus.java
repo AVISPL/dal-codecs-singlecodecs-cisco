@@ -22,6 +22,7 @@ import com.avispl.dal.communicator.cisco.dto.status.sip.SIP;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.SystemUnit;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.VideoStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webex.WebExStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -84,6 +85,9 @@ public class CiscoStatus {
     /** @since 1.1.0 */
     @JacksonXmlProperty(localName="Peripherals")
     private Peripherals periherals;
+    /** @since 1.1.4 */
+    @JacksonXmlProperty(localName="Webex")
+    private WebExStatus webExStatus;
 
     /**
      * Retrieves {@link #product}
@@ -481,5 +485,23 @@ public class CiscoStatus {
      */
     public void setPeriherals(Peripherals periherals) {
         this.periherals = periherals;
+    }
+
+    /**
+     * Retrieves {@link #webExStatus}
+     *
+     * @return value of {@link #webExStatus}
+     */
+    public WebExStatus getWebExStatus() {
+        return webExStatus;
+    }
+
+    /**
+     * Sets {@link #webExStatus} value
+     *
+     * @param webExStatus new value of {@link #webExStatus}
+     */
+    public void setWebExStatus(WebExStatus webExStatus) {
+        this.webExStatus = webExStatus;
     }
 }

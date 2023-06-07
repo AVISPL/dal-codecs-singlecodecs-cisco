@@ -70,6 +70,9 @@ import com.avispl.dal.communicator.cisco.dto.status.systemunit.*;
 import com.avispl.dal.communicator.cisco.dto.status.usb.Device;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.*;
+import com.avispl.dal.communicator.cisco.dto.status.webex.WebExInstantMeeting;
+import com.avispl.dal.communicator.cisco.dto.status.webex.WebExMeetings;
+import com.avispl.dal.communicator.cisco.dto.status.webex.WebExStatus;
 import com.avispl.dal.communicator.cisco.dto.valuespace.ValueSpace;
 import com.avispl.dal.communicator.cisco.statistics.DynamicStatisticsDefinitions;
 import com.avispl.symphony.api.dal.control.Controller;
@@ -1040,6 +1043,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             }
 
+            populateWebExStatus(statisticsMap, ciscoStatus);
             routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
             endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
 
@@ -1966,6 +1970,28 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         } else {
             if (logger.isDebugEnabled()) {
                 logger.debug("Unable to get peripheral devices configuration.");
+            }
+        }
+    }
+
+    /**
+     * Populate WebEx status information
+     *
+     * @param statistics to save statistics to
+     * @param status response payload information
+     * */
+    private void populateWebExStatus(Map<String, String> statistics, CiscoStatus status) {
+        WebExStatus webExStatus = status.getWebExStatus();
+        if (webExStatus == null) {
+            return;
+        }
+        statistics.put("WebEx#Status", webExStatus.getStatus());
+        WebExMeetings webExMeetings = webExStatus.getWebExMeetings();
+        if (webExMeetings != null) {
+            statistics.put("WebEx#MeetingJoinProtocol", webExMeetings.getJoinProtocol());
+            WebExInstantMeeting instantMeeting = webExMeetings.getInstantMeeting();
+            if (instantMeeting != null) {
+                statistics.put("WebEx#InstantMeeting", instantMeeting.getAvailability());
             }
         }
     }

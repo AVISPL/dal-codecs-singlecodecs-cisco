@@ -202,4 +202,6 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_TOTAL_DEVICES_COUNT = "#TotalDevicesCount";
      /** @since 1.1.0 */
      static final String PROPERTY_STATUS = "#Status";
+     /** @since 1.1.5 */
+     static final String N_A = "N/A";
 }

@@ -1860,6 +1860,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     Map<String, Map<String, String>> disconnectedTypedStats = new HashMap<>();
 
                     Arrays.stream(peripheralsDevices).forEach(connectedDevice -> {
+                        if (connectedDevice == null) {
+                            return;
+                        }
                         int totalDevicesOfStateAndType = 0;
                         String connectedDeviceType = connectedDevice.getType();
                         // %ss is intentional here - in order to make Type plural
@@ -1869,7 +1872,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
                         Optional<ConnectedDevice> connectedDeviceStatus = Optional.empty();
                         if (!connectedDevices.isEmpty()) {
-                            connectedDeviceStatus = connectedDevices.stream().filter(cd -> cd.getSerialNumber().equals(connectedDevice.getSerialNumber())).findFirst();
+                            connectedDeviceStatus = connectedDevices.stream().filter(cd -> cd != null && Objects.equals(cd.getSerialNumber(), connectedDevice.getSerialNumber())).findFirst();
                         }
 
                         Map<String, String> typedStats;
@@ -2640,6 +2643,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         int firstIndex = valuespaceResponse.indexOf("<" + valuespaceName) - 1;
         int lastIndex = valuespaceResponse.lastIndexOf(valuespaceName + ">") + valuespaceName.length() + 1;
         try {
+            if (firstIndex < 0 || lastIndex > valuespaceResponse.length()) {
+                ValueSpace valueSpace = new ValueSpace();
+                ValueSpace.TTPARValue naValue = new ValueSpace.TTPARValue();
+                naValue.setItem(N_A);
+                naValue.setValue(N_A);
+                valueSpace.setType(N_A);
+                valueSpace.setValues(new ValueSpace.TTPARValue[]{ naValue });
+                return valueSpace;
+            }
             String response = valuespaceResponse.substring(firstIndex, lastIndex).replaceAll(valuespaceName, "ValueSpace");
             return xmlMapper.readValue(response, ValueSpace.class);
         } catch (JsonProcessingException e) {

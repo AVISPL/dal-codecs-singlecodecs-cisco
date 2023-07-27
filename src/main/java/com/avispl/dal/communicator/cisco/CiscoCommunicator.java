@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2023 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco;
 
@@ -44,6 +44,9 @@ import com.avispl.dal.communicator.cisco.dto.status.cameras.Camera;
 import com.avispl.dal.communicator.cisco.dto.status.cameras.CameraPosition;
 import com.avispl.dal.communicator.cisco.dto.status.cameras.Cameras;
 import com.avispl.dal.communicator.cisco.dto.status.conference.*;
+import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.ExtensionsStatus;
+import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.microsoft.ExtensionVersion;
+import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.microsoft.MicrosoftExtension;
 import com.avispl.dal.communicator.cisco.dto.status.h323.H323;
 import com.avispl.dal.communicator.cisco.dto.status.h323.H323Gatekeeper;
 import com.avispl.dal.communicator.cisco.dto.status.h323.H323Mode;
@@ -73,6 +76,10 @@ import com.avispl.dal.communicator.cisco.dto.status.video.*;
 import com.avispl.dal.communicator.cisco.dto.status.webex.WebExInstantMeeting;
 import com.avispl.dal.communicator.cisco.dto.status.webex.WebExMeetings;
 import com.avispl.dal.communicator.cisco.dto.status.webex.WebExStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.GoogleMeetStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.MicrosoftTeamsStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.WebRTCProvider;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.WebRTCStatus;
 import com.avispl.dal.communicator.cisco.dto.valuespace.ValueSpace;
 import com.avispl.dal.communicator.cisco.statistics.DynamicStatisticsDefinitions;
 import com.avispl.symphony.api.dal.control.Controller;
@@ -1044,6 +1051,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             }
 
             populateWebExStatus(statisticsMap, ciscoStatus);
+            populateWebRTCStatus(statisticsMap, ciscoStatus);
+            populateExtensionsStatus(statisticsMap, ciscoStatus);
             routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
             endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
 
@@ -1988,14 +1997,65 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (webExStatus == null) {
             return;
         }
-        statistics.put("WebEx#Status", webExStatus.getStatus());
+        addStatisticsParameter(statistics, "WebEx#Status", webExStatus.getStatus());
         WebExMeetings webExMeetings = webExStatus.getWebExMeetings();
         if (webExMeetings != null) {
-            statistics.put("WebEx#MeetingJoinProtocol", webExMeetings.getJoinProtocol());
+            addStatisticsParameter(statistics, "WebEx#MeetingJoinProtocol", webExMeetings.getJoinProtocol());
             WebExInstantMeeting instantMeeting = webExMeetings.getInstantMeeting();
             if (instantMeeting != null) {
-                statistics.put("WebEx#InstantMeeting", instantMeeting.getAvailability());
+                addStatisticsParameter(statistics, "WebEx#InstantMeeting", instantMeeting.getAvailability());
             }
+        }
+    }
+
+    /**
+     * Populate WebRTC providers availability information
+     *
+     * @param statistics to save statistics to
+     * @param status response payload information
+     * */
+    private void populateWebRTCStatus(Map<String, String> statistics, CiscoStatus status) {
+        WebRTCStatus webRTCStatus = status.getWebRTCStatus();
+        if (webRTCStatus == null) {
+            return;
+        }
+        WebRTCProvider webRTCProvider = webRTCStatus.getProvider();
+        if (webRTCProvider == null) {
+            return;
+        }
+        GoogleMeetStatus googleMeetStatus = webRTCProvider.getGoogleMeetStatus();
+        MicrosoftTeamsStatus microsoftTeamsStatus = webRTCProvider.getMicrosoftTeamsStatus();
+        if (googleMeetStatus != null) {
+            addStatisticsParameter(statistics, "WebRTC#GoogleMeet", googleMeetStatus.getAvailability());
+        }
+        if (microsoftTeamsStatus != null) {
+            addStatisticsParameter(statistics, "WebRTC#MicrosoftTeams", microsoftTeamsStatus.getAvailability());
+        }
+    }
+
+    private void populateExtensionsStatus(Map<String, String> statistics, CiscoStatus status) {
+        SystemUnit systemUnit = status.getSystemUnit();
+        if (systemUnit == null) {
+            return;
+        }
+        ExtensionsStatus extensions = systemUnit.getExtensionsStatus();
+        if (extensions == null) {
+            return;
+        }
+        MicrosoftExtension microsoftExtension = extensions.getMicrosoftExtension();
+        if (microsoftExtension == null) {
+            return;
+        }
+        addStatisticsParameter(statistics, "MicrosoftExtension#Supported", microsoftExtension.getSupported());
+        addStatisticsParameter(statistics, "MicrosoftExtension#InCall", microsoftExtension.getInCall());
+
+        ExtensionVersion version = microsoftExtension.getVersion();
+        if (version != null) {
+            addStatisticsParameter(statistics, "MicrosoftExtension#AndriodVersion", version.getAndroid());
+            addStatisticsParameter(statistics, "MicrosoftExtension#CompanyPortalAppVersion", version.getCompanyPortalApp());
+            addStatisticsParameter(statistics, "MicrosoftExtension#OEMAgentVersion", version.getOemAgent());
+            addStatisticsParameter(statistics, "MicrosoftExtension#TeamsAppVersion", version.getTeamsApp());
+            addStatisticsParameter(statistics, "MicrosoftExtension#TeamsAdminAgentVersion", version.getTeamsAdminAgent());
         }
     }
 

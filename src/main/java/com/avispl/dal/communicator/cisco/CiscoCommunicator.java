@@ -2033,6 +2033,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
     }
 
+    /**
+     * Populate extensions statistics
+     *
+     * @param statistics to save statistics to
+     * @param status response payload information
+     * */
     private void populateExtensionsStatus(Map<String, String> statistics, CiscoStatus status) {
         SystemUnit systemUnit = status.getSystemUnit();
         if (systemUnit == null) {

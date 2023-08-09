@@ -1,8 +1,9 @@
 /*
- * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2023 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status.systemunit;
 
+import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.ExtensionsStatus;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
@@ -29,6 +30,8 @@ public class SystemUnit {
     private String productType;
     @JacksonXmlProperty(localName="Uptime")
     private String uptime;
+    @JacksonXmlProperty(localName = "Extensions")
+    private ExtensionsStatus extensionsStatus;
 
     /**
      * Retrieves {@link #hardware}
@@ -154,5 +157,24 @@ public class SystemUnit {
      */
     public void setUptime(String uptime) {
         this.uptime = uptime;
+    }
+
+    /**
+     * Retrieves {@link #extensionsStatus}
+     *
+     * @return value of {@link #extensionsStatus}
+     * @since 1.1.4
+     */
+    public ExtensionsStatus getExtensionsStatus() {
+        return extensionsStatus;
+    }
+
+    /**
+     * Sets {@link #extensionsStatus} value
+     *
+     * @param extensionsStatus new value of {@link #extensionsStatus}
+     */
+    public void setExtensionsStatus(ExtensionsStatus extensionsStatus) {
+        this.extensionsStatus = extensionsStatus;
     }
 }

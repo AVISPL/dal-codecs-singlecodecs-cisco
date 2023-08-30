@@ -131,7 +131,7 @@
                 <Name valueSpaceRef="/Valuespace/STR_0_64_NoFilt">nh.vnoc1.com</Name>
             </Domain>
             <Server item="1" maxOccurrence="3">
-                <Address valueSpaceRef="/Valuespace/STR_0_64_IPv4v6">172.31.254.16</Address>
+                <Address valueSpaceRef="/Valuespace/STR_0_64_IPv4v6">***REMOVED***</Address>
             </Server>
             <Server item="2" maxOccurrence="3">
                 <Address valueSpaceRef="/Valuespace/STR_0_64_IPv4v6">172.31.254.12</Address>
@@ -211,7 +211,7 @@
         <NTP>
             <Mode valueSpaceRef="/Valuespace/TTPAR_AutoManualOff">Auto</Mode>
             <Server item="1" maxOccurrence="3">
-                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">172.31.254.16</Address>
+                <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">***REMOVED***</Address>
             </Server>
             <Server item="2" maxOccurrence="3">
                 <Address valueSpaceRef="/Valuespace/STR_0_255_NoFilt">0.pool.ntp.org</Address>

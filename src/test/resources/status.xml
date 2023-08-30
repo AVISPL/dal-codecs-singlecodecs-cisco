@@ -339,7 +339,7 @@
                 <Name>nh.vnoc1.com</Name>
             </Domain>
             <Server item="1" maxOccurrence="n">
-                <Address>172.31.254.16</Address>
+                <Address>***REMOVED***</Address>
             </Server>
             <Server item="2" maxOccurrence="n">
                 <Address>172.31.254.12</Address>
@@ -375,9 +375,9 @@
     </Network>
     <NetworkServices>
         <NTP>
-            <CurrentAddress>172.31.254.16</CurrentAddress>
+            <CurrentAddress>***REMOVED***</CurrentAddress>
             <Server item="1" maxOccurrence="n">
-                <Address>172.31.254.16</Address>
+                <Address>***REMOVED***</Address>
             </Server>
             <Server item="2" maxOccurrence="n">
                 <Address></Address>

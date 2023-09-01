@@ -2632,10 +2632,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private boolean checkPresentationMode(Map<String, String> statistics) {
         String presentationMode = statistics.get(CONFERENCE_PRESENTATION_MODE);
-        if (StringUtils.isNotNullOrEmpty(presentationMode) && presentationMode.equalsIgnoreCase("On")) {
-            return true;
-        }
-        return false;
+        return StringUtils.isNotNullOrEmpty(presentationMode) && presentationMode.equalsIgnoreCase("On");
     }
 
     /***
@@ -3331,15 +3328,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (!StringUtils.isNullOrEmpty(value)) {
             statistics.put(parameterName, value);
             controllableProperties.add(createSwitch(parameterName, "Off".equalsIgnoreCase(value) ? 0 : 1));
-        }
-    }
-
-    private void addStatisticsParameterWithSwitch(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties,
-                                                  ValueSpaceRefHolder parameterName, String value) {
-        if (!StringUtils.isNullOrEmpty(value) && parameterName != null) {
-            String name = parameterName.getValue();
-            statistics.put(name, value);
-            controllableProperties.add(createSwitch(name, "Off".equalsIgnoreCase(value) ? 0 : 1));
         }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2022 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2023 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco;
 
@@ -44,6 +44,9 @@ import com.avispl.dal.communicator.cisco.dto.status.cameras.Camera;
 import com.avispl.dal.communicator.cisco.dto.status.cameras.CameraPosition;
 import com.avispl.dal.communicator.cisco.dto.status.cameras.Cameras;
 import com.avispl.dal.communicator.cisco.dto.status.conference.*;
+import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.ExtensionsStatus;
+import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.microsoft.ExtensionVersion;
+import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.microsoft.MicrosoftExtension;
 import com.avispl.dal.communicator.cisco.dto.status.h323.H323;
 import com.avispl.dal.communicator.cisco.dto.status.h323.H323Gatekeeper;
 import com.avispl.dal.communicator.cisco.dto.status.h323.H323Mode;
@@ -73,6 +76,10 @@ import com.avispl.dal.communicator.cisco.dto.status.video.*;
 import com.avispl.dal.communicator.cisco.dto.status.webex.WebExInstantMeeting;
 import com.avispl.dal.communicator.cisco.dto.status.webex.WebExMeetings;
 import com.avispl.dal.communicator.cisco.dto.status.webex.WebExStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.GoogleMeetStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.MicrosoftTeamsStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.WebRTCProvider;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.WebRTCStatus;
 import com.avispl.dal.communicator.cisco.dto.valuespace.ValueSpace;
 import com.avispl.dal.communicator.cisco.statistics.DynamicStatisticsDefinitions;
 import com.avispl.symphony.api.dal.control.Controller;
@@ -301,7 +308,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
     /**
      * CSV string of values, defining the set of historical properties, kept as set locally
-     * */
+     */
     private Set<String> historicalProperties = new HashSet();
 
     /**
@@ -545,14 +552,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private List<Call> getConnectedCalls() throws Exception {
-            CiscoStatus status = doGet(String.format(getXmlPath, callStatusUri), CiscoStatus.class);
-            Call[] calls = status.getCalls();
-            if (calls == null) {
-                return Collections.emptyList();
-            }
-            return Arrays.stream(calls).filter(call -> "Connected".equalsIgnoreCase(call.getStatus()) || "Synced".equalsIgnoreCase(call.getStatus()))
-                    .collect(Collectors.toList());
+        CiscoStatus status = doGet(String.format(getXmlPath, callStatusUri), CiscoStatus.class);
+        Call[] calls = status.getCalls();
+        if (calls == null) {
+            return Collections.emptyList();
         }
+        return Arrays.stream(calls).filter(call -> "Connected".equalsIgnoreCase(call.getStatus()) || "Synced".equalsIgnoreCase(call.getStatus()))
+                .collect(Collectors.toList());
+    }
 
     /**
      * {@inheritDoc}
@@ -700,7 +707,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         callStats.setProtocol(activeCall.getProtocol());
 
         Arrays.stream(callChannels).forEach(channel -> {
-            if(channel == null) {
+            if (channel == null) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Channel data is not available, skipping.");
                 }
@@ -884,30 +891,30 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private RegistrationStatus createRegistrationStatus(CiscoStatus ciscoStatus) {
         RegistrationStatus registrationStatus = new RegistrationStatus();
 
-            H323 h323 = ciscoStatus.getH323();
-            registrationStatus.setH323Registered(false);
-            if (h323 != null) {
-                H323Gatekeeper gatekeeper = h323.getGatekeeper();
-                if (gatekeeper != null) {
-                    registrationStatus.setH323Details(String.format("Port: %s", gatekeeper.getPort()));
-                    registrationStatus.setH323Registered("Registered".equalsIgnoreCase(gatekeeper.getStatus()));
-                    registrationStatus.setH323Gatekeeper(gatekeeper.getAddress());
-                }
+        H323 h323 = ciscoStatus.getH323();
+        registrationStatus.setH323Registered(false);
+        if (h323 != null) {
+            H323Gatekeeper gatekeeper = h323.getGatekeeper();
+            if (gatekeeper != null) {
+                registrationStatus.setH323Details(String.format("Port: %s", gatekeeper.getPort()));
+                registrationStatus.setH323Registered("Registered".equalsIgnoreCase(gatekeeper.getStatus()));
+                registrationStatus.setH323Gatekeeper(gatekeeper.getAddress());
             }
+        }
 
-            SIP sip = ciscoStatus.getSip();
-            registrationStatus.setSipRegistered(false);
-            if (sip != null) {
-                Registration[] registrations = sip.getRegistrations();
-                if (registrations != null && registrations.length > 0) {
-                    registrationStatus.setSipDetails(String.format("URI: %s", registrations[0].getUri()));
-                    registrationStatus.setSipRegistered("Registered".equalsIgnoreCase(registrations[0].getStatus()));
-                }
-                Proxy[] proxies = sip.getProxies();
-                if (proxies != null && proxies.length > 0) {
-                    registrationStatus.setSipRegistrar(proxies[0].getAddress());
-                }
+        SIP sip = ciscoStatus.getSip();
+        registrationStatus.setSipRegistered(false);
+        if (sip != null) {
+            Registration[] registrations = sip.getRegistrations();
+            if (registrations != null && registrations.length > 0) {
+                registrationStatus.setSipDetails(String.format("URI: %s", registrations[0].getUri()));
+                registrationStatus.setSipRegistered("Registered".equalsIgnoreCase(registrations[0].getStatus()));
             }
+            Proxy[] proxies = sip.getProxies();
+            if (proxies != null && proxies.length > 0) {
+                registrationStatus.setSipRegistrar(proxies[0].getAddress());
+            }
+        }
 
         return registrationStatus;
     }
@@ -934,6 +941,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 endpointStatistics.setVideoChannelStats(localEndpointStatistics.getVideoChannelStats());
                 endpointStatistics.setAudioChannelStats(localEndpointStatistics.getAudioChannelStats());
 
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device statistics: " + extendedStatistics.getStatistics());
+                }
                 return Arrays.asList(extendedStatistics, endpointStatistics);
             }
 
@@ -973,66 +983,139 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 throw new ResourceNotReachableException("Unable to retrieve device details: /configuration.xml and /status.xml endpoints are not available.");
             }
             if (StringUtils.isNullOrEmpty(valuespace) && ciscoConfiguration == null && ciscoStatus == null) {
+                if (logger.isWarnEnabled()) {
+                    logger.warn("Unable to retrieve cisco configuration and status details. Retrieving device statistics from cache." + localStatistics);
+                }
+                if (localStatistics != null) {
+                    extendedStatistics.setStatistics(localStatistics.getStatistics());
+                    extendedStatistics.setControllableProperties(localStatistics.getControllableProperties());
+                }
+                if (localEndpointStatistics != null) {
+                    endpointStatistics.setInCall(localEndpointStatistics.isInCall());
+                    endpointStatistics.setCallStats(localEndpointStatistics.getCallStats());
+                    endpointStatistics.setVideoChannelStats(localEndpointStatistics.getVideoChannelStats());
+                    endpointStatistics.setAudioChannelStats(localEndpointStatistics.getAudioChannelStats());
+                }
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device statistics: " + extendedStatistics.getStatistics());
+                }
                 return Arrays.asList(extendedStatistics, endpointStatistics);
             }
 
             List<String> propertyGroups = Arrays.stream(displayPropertyGroups.split(",")).map(String::trim).collect(Collectors.toList());
 
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Audio")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device audio statistics");
+                }
                 populateAudioData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Cameras")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device camera statistics");
+                }
                 populateCameraData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Conference")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device conference statistics");
+                }
                 populateConferenceData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Standby")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device standby statistics");
+                }
                 populateStandbyData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "NetworkServices")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device network services statistics");
+                }
                 populateNetworkServicesData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Video")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device video statistics");
+                }
                 populateVideoData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "UserInterface")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device user interface statistics");
+                }
                 populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device system unit statistics");
+                }
                 populateSystemUnitData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device conference capabilities statistics");
+                }
                 populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ActiveCall")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device active call statistics");
+                }
                 populateCallData(statisticsMap, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "H323")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device h323 statistics");
+                }
                 populateH323Data(statisticsMap, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SIP")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device SIP statistics");
+                }
                 populateSIPData(statisticsMap, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Security")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device security statistics");
+                }
                 populateSecurityData(statisticsMap, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Networks")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device networks statistics");
+                }
                 populateNetworkData(statisticsMap, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "USB")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device USB statistics");
+                }
                 populateUSBData(statisticsMap, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "RoomAnalytics")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device room analytics statistics");
+                }
                 populateRoomAnalyticsData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoStatus);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "ProximityServices")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device proximity services statistics");
+                }
                 populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "Peripherals")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device peripherals statistics");
+                }
                 populatePeripheralsData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
             }
             if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Populating device system time statistics");
+                }
                 Time time = ciscoStatus.getTime();
                 if (time != null) {
                     statisticsMap.put("SystemTime#Time", time.getSystemTime());
@@ -1044,6 +1127,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             }
 
             populateWebExStatus(statisticsMap, ciscoStatus);
+            populateWebRTCStatus(statisticsMap, ciscoStatus);
+            populateExtensionsStatus(statisticsMap, ciscoStatus);
             routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
             endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
 
@@ -1055,6 +1140,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             localEndpointStatistics = endpointStatistics;
         } finally {
             controlOperationsLock.unlock();
+        }
+
+        if (logger.isDebugEnabled()) {
+            logger.debug("Populating device statistics: " + extendedStatistics.getStatistics());
         }
         return Arrays.asList(extendedStatistics, endpointStatistics);
     }
@@ -1321,7 +1410,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         String itemCounter = videoConfigurationConnector.getItem();
                         VideoConfigurationCEC cecConfiguration = videoConfigurationConnector.getCec();
                         if (cecConfiguration != null) {
-                            addStatisticsParameterWithSwitch(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_CEC_MODE, itemCounter), cecConfiguration.getMode().getValue());
+                            addStatisticsParameterWithSwitch(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_CEC_MODE, itemCounter), cecConfiguration.getMode());
                         }
                         addStatisticsParameterWithDropdown(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_MONITOR_ROLE, itemCounter), videoConfigurationConnector.getMonitorRole(), valuespace);
                         addStatisticsParameterWithDropdown(statistics, controllableProperties, String.format(N_OUTPUT_SOURCE_OVERSCAN_LEVEL, itemCounter), videoConfigurationConnector.getOverscanLevel(), valuespace);
@@ -1435,8 +1524,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             ConferenceConfigurationAutoAnswer autoAnswerConfiguration = conferenceConfiguration.getAutoAnswer();
             if (autoAnswerConfiguration != null) {
                 addStatisticsParameterWithSlider(statistics, controls, CONFERENCE_AUTO_ANSWER_DELAY, autoAnswerConfiguration.getDelay());
-                addStatisticsParameterWithSwitch(statistics, controls, CONFERENCE_AUTO_ANSWER_MODE, autoAnswerConfiguration.getMode().getValue());
-                addStatisticsParameterWithSwitch(statistics, controls, CONFERENCE_AUTO_ANSWER_MUTE, autoAnswerConfiguration.getMute().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, CONFERENCE_AUTO_ANSWER_MODE, autoAnswerConfiguration.getMode());
+                addStatisticsParameterWithSwitch(statistics, controls, CONFERENCE_AUTO_ANSWER_MUTE, autoAnswerConfiguration.getMute());
             }
 
             ConferenceConfigurationDefaultCall defaultCallConfiguration = conferenceConfiguration.getDefaultCall();
@@ -1457,7 +1546,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             ConferenceConfigurationFarEndControl farEndControlConfiguration = conferenceConfiguration.getFarEndControl();
             if (farEndControlConfiguration != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, CONFERENCE_FAR_END_CONTROL, farEndControlConfiguration.getMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, CONFERENCE_FAR_END_CONTROL, farEndControlConfiguration.getMode());
             }
         }
     }
@@ -1860,6 +1949,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     Map<String, Map<String, String>> disconnectedTypedStats = new HashMap<>();
 
                     Arrays.stream(peripheralsDevices).forEach(connectedDevice -> {
+                        if (connectedDevice == null) {
+                            return;
+                        }
                         int totalDevicesOfStateAndType = 0;
                         String connectedDeviceType = connectedDevice.getType();
                         // %ss is intentional here - in order to make Type plural
@@ -1869,7 +1961,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
                         Optional<ConnectedDevice> connectedDeviceStatus = Optional.empty();
                         if (!connectedDevices.isEmpty()) {
-                            connectedDeviceStatus = connectedDevices.stream().filter(cd -> cd.getSerialNumber().equals(connectedDevice.getSerialNumber())).findFirst();
+                            connectedDeviceStatus = connectedDevices.stream().filter(cd -> cd != null && Objects.equals(cd.getSerialNumber(), connectedDevice.getSerialNumber())).findFirst();
                         }
 
                         Map<String, String> typedStats;
@@ -1978,21 +2070,78 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * Populate WebEx status information
      *
      * @param statistics to save statistics to
-     * @param status response payload information
-     * */
+     * @param status     response payload information
+     */
     private void populateWebExStatus(Map<String, String> statistics, CiscoStatus status) {
         WebExStatus webExStatus = status.getWebExStatus();
         if (webExStatus == null) {
             return;
         }
-        statistics.put("WebEx#Status", webExStatus.getStatus());
+        addStatisticsParameter(statistics, "WebEx#Status", webExStatus.getStatus());
         WebExMeetings webExMeetings = webExStatus.getWebExMeetings();
         if (webExMeetings != null) {
-            statistics.put("WebEx#MeetingJoinProtocol", webExMeetings.getJoinProtocol());
+            addStatisticsParameter(statistics, "WebEx#MeetingJoinProtocol", webExMeetings.getJoinProtocol());
             WebExInstantMeeting instantMeeting = webExMeetings.getInstantMeeting();
             if (instantMeeting != null) {
-                statistics.put("WebEx#InstantMeeting", instantMeeting.getAvailability());
+                addStatisticsParameter(statistics, "WebEx#InstantMeeting", instantMeeting.getAvailability());
             }
+        }
+    }
+
+    /**
+     * Populate WebRTC providers availability information
+     *
+     * @param statistics to save statistics to
+     * @param status     response payload information
+     */
+    private void populateWebRTCStatus(Map<String, String> statistics, CiscoStatus status) {
+        WebRTCStatus webRTCStatus = status.getWebRTCStatus();
+        if (webRTCStatus == null) {
+            return;
+        }
+        WebRTCProvider webRTCProvider = webRTCStatus.getProvider();
+        if (webRTCProvider == null) {
+            return;
+        }
+        GoogleMeetStatus googleMeetStatus = webRTCProvider.getGoogleMeetStatus();
+        MicrosoftTeamsStatus microsoftTeamsStatus = webRTCProvider.getMicrosoftTeamsStatus();
+        if (googleMeetStatus != null) {
+            addStatisticsParameter(statistics, "WebRTC#GoogleMeet", googleMeetStatus.getAvailability());
+        }
+        if (microsoftTeamsStatus != null) {
+            addStatisticsParameter(statistics, "WebRTC#MicrosoftTeams", microsoftTeamsStatus.getAvailability());
+        }
+    }
+
+    /**
+     * Populate extensions statistics
+     *
+     * @param statistics to save statistics to
+     * @param status     response payload information
+     */
+    private void populateExtensionsStatus(Map<String, String> statistics, CiscoStatus status) {
+        SystemUnit systemUnit = status.getSystemUnit();
+        if (systemUnit == null) {
+            return;
+        }
+        ExtensionsStatus extensions = systemUnit.getExtensionsStatus();
+        if (extensions == null) {
+            return;
+        }
+        MicrosoftExtension microsoftExtension = extensions.getMicrosoftExtension();
+        if (microsoftExtension == null) {
+            return;
+        }
+        addStatisticsParameter(statistics, "MicrosoftExtension#Supported", microsoftExtension.getSupported());
+        addStatisticsParameter(statistics, "MicrosoftExtension#InCall", microsoftExtension.getInCall());
+
+        ExtensionVersion version = microsoftExtension.getVersion();
+        if (version != null) {
+            addStatisticsParameter(statistics, "MicrosoftExtension#AndriodVersion", version.getAndroid());
+            addStatisticsParameter(statistics, "MicrosoftExtension#CompanyPortalAppVersion", version.getCompanyPortalApp());
+            addStatisticsParameter(statistics, "MicrosoftExtension#OEMAgentVersion", version.getOemAgent());
+            addStatisticsParameter(statistics, "MicrosoftExtension#TeamsAppVersion", version.getTeamsApp());
+            addStatisticsParameter(statistics, "MicrosoftExtension#TeamsAdminAgentVersion", version.getTeamsAdminAgent());
         }
     }
 
@@ -2069,7 +2218,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             UserInterfaceConfigurationKeyTones keyTones = userInterfaceConfiguration.getKeyTones();
             if (keyTones != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, USER_INTERFACE_KEY_TONES, keyTones.getMode().getValue());
+                addStatisticsParameterWithSwitch(statistics, controls, USER_INTERFACE_KEY_TONES, keyTones.getMode());
             }
 
             UserInterfaceConfigurationContactInfo contactInfo = userInterfaceConfiguration.getContactInfo();
@@ -2240,15 +2389,21 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             CamerasConfigurationBacklight backlight = cameraConfiguration.getBacklight();
             String itemCounter = cameraConfiguration.getItem();
             if (backlight != null) {
-                addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_BACKLIGHT, itemCounter), backlight.getDefaultMode().getValue());
+                ValueSpaceRefHolder defaultMode = backlight.getDefaultMode();
+                if (defaultMode != null) {
+                    addStatisticsParameterWithSwitch(statistics, controls, String.format(N_CAMERA_BACKLIGHT, itemCounter), defaultMode.getValue());
+                }
             }
 
             CamerasConfigurationBrightness brightness = cameraConfiguration.getBrightness();
             if (brightness != null) {
                 addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_LEVEL, itemCounter), brightness.getDefaultLevel());
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_MODE, itemCounter),
-                        Arrays.stream(extractTTPARValuespace(valuespace, brightness.getMode().getValueSpaceRef()).getValues())
-                                .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), brightness.getMode().getValue());
+                ValueSpaceRefHolder mode = brightness.getMode();
+                if (mode != null) {
+                    addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_BRIGHTNESS_MODE, itemCounter),
+                            Arrays.stream(extractTTPARValuespace(valuespace, mode.getValueSpaceRef()).getValues())
+                                    .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), mode.getValue());
+                }
             }
 
             ValueSpaceRefHolder flip = cameraConfiguration.getFlip();
@@ -2260,17 +2415,23 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             CamerasConfigurationFocus focus = cameraConfiguration.getFocus();
             if (focus != null) {
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FOCUS_MODE, itemCounter),
-                        Arrays.stream(extractTTPARValuespace(valuespace, focus.getMode().getValueSpaceRef()).getValues())
-                                .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), focus.getMode().getValue());
+                ValueSpaceRefHolder mode = focus.getMode();
+                if (mode != null) {
+                    addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_FOCUS_MODE, itemCounter),
+                            Arrays.stream(extractTTPARValuespace(valuespace, mode.getValueSpaceRef()).getValues())
+                                    .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), mode.getValue());
+                }
             }
 
             CamerasConfigurationGamma gamma = cameraConfiguration.getGamma();
             if (gamma != null) {
                 addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_GAMMA_LEVEL, itemCounter), gamma.getLevel());
-                addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_GAMMA_MODE, itemCounter),
-                        Arrays.stream(extractTTPARValuespace(valuespace, gamma.getMode().getValueSpaceRef()).getValues())
-                                .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), gamma.getMode().getValue());
+                ValueSpaceRefHolder mode = gamma.getMode();
+                if (mode != null) {
+                    addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_GAMMA_MODE, itemCounter),
+                            Arrays.stream(extractTTPARValuespace(valuespace, mode.getValueSpaceRef()).getValues())
+                                    .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), mode.getValue());
+                }
             }
 
             ValueSpaceRefHolder irSensor = cameraConfiguration.getIrSensor();
@@ -2287,9 +2448,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             CamerasConfigurationWhitebalance whitebalance = cameraConfiguration.getWhitebalance();
             if (whitebalance != null) {
+                addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_LEVEL, itemCounter), whitebalance.getLevel());
                 ValueSpaceRefHolder whitebalanceMode = whitebalance.getMode();
                 if (whitebalanceMode != null) {
-                    addStatisticsParameterWithSlider(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_LEVEL, itemCounter), whitebalance.getLevel());
                     addStatisticsParameterWithDropdown(statistics, controls, String.format(N_CAMERA_WHITEBALANCE_MODE, itemCounter),
                             Arrays.stream(extractTTPARValuespace(valuespace, whitebalanceMode.getValueSpaceRef()).getValues())
                                     .map(ValueSpace.TTPARValue::getValue).collect(Collectors.toList()), whitebalanceMode.getValue());
@@ -2468,13 +2629,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      *
      * @param statistics containing all the device statistics collected
      * @return true if device in presentation mode, false if not in presentation mode
-     * */
+     */
     private boolean checkPresentationMode(Map<String, String> statistics) {
         String presentationMode = statistics.get(CONFERENCE_PRESENTATION_MODE);
-        if (StringUtils.isNotNullOrEmpty(presentationMode) && presentationMode.equalsIgnoreCase("On")) {
-            return true;
-        }
-        return false;
+        return StringUtils.isNotNullOrEmpty(presentationMode) && presentationMode.equalsIgnoreCase("On");
     }
 
     /***
@@ -2576,6 +2734,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private String retrieveValuespace() throws Exception {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Retrieving device valuespace parameters");
+        }
         return doGet(valuespacePath, String.class);
     }
 
@@ -2586,6 +2747,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private CiscoStatus retrieveStatus() throws Exception {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Retrieving device status parameters");
+        }
         return doGet(statusPath, CiscoStatus.class);
     }
 
@@ -2596,6 +2760,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private CiscoConfiguration retrieveConfiguration() throws Exception {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Retrieving device configuration parameters");
+        }
         return doGet(configurationPath, CiscoConfiguration.class);
     }
 
@@ -2615,6 +2782,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private Command retrieveCameraCommands() throws Exception {
+        if (logger.isDebugEnabled()) {
+            logger.debug("Retrieving device camera commands list");
+        }
         return doGet(String.format(getXmlPath, cameraCommandUri), Command.class);
     }
 
@@ -2640,6 +2810,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         int firstIndex = valuespaceResponse.indexOf("<" + valuespaceName) - 1;
         int lastIndex = valuespaceResponse.lastIndexOf(valuespaceName + ">") + valuespaceName.length() + 1;
         try {
+            if (firstIndex < 0 || lastIndex > valuespaceResponse.length()) {
+                ValueSpace valueSpace = new ValueSpace();
+                ValueSpace.TTPARValue naValue = new ValueSpace.TTPARValue();
+                naValue.setItem(N_A);
+                naValue.setValue(N_A);
+                valueSpace.setType(N_A);
+                valueSpace.setValues(new ValueSpace.TTPARValue[]{naValue});
+                return valueSpace;
+            }
             String response = valuespaceResponse.substring(firstIndex, lastIndex).replaceAll(valuespaceName, "ValueSpace");
             return xmlMapper.readValue(response, ValueSpace.class);
         } catch (JsonProcessingException e) {
@@ -2991,8 +3170,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param value    of the control property to update after the control operation success
      */
     private void postCommandRequest(Command command, String property, String value) throws Exception {
+        if (logger.isDebugEnabled()) {
+            logger.debug(String.format("Post device command request '%s' with value '%s' for property %s", command, property, value));
+        }
         String response = doPost("putxml", command, String.class);
         if (response.contains("status=\"OK\"")) {
+            if (logger.isDebugEnabled()) {
+                logger.debug(String.format("Control operation %s has succeeded with value %s", property, value));
+            }
             updateLatestControlTimestamp();
             updateLocalControllableProperty(property, value);
         } else {
@@ -3038,11 +3223,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * Add a property as a regular statistics property, or as dynamic one, based on the {@link #historicalProperties} configuration
      * and DynamicStatisticsDefinitions static definitions.
      *
-     * @param statistics map of regular statistics
+     * @param statistics        map of regular statistics
      * @param dynamicStatistics map of dynamic (historical) statistics
-     * @param propertyName name of property to add
-     * @param propertyValue value of property to add
-     * */
+     * @param propertyName      name of property to add
+     * @param propertyValue     value of property to add
+     */
     private void addTypedStatisticsParameter(Map<String, String> statistics, Map<String, String> dynamicStatistics, String propertyName, String propertyValue) {
         boolean propertyListed = false;
         if (!historicalProperties.isEmpty()) {

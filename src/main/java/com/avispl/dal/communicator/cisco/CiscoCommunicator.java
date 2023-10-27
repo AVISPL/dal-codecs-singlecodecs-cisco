@@ -1126,11 +1126,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             }
 
-            populateWebExStatus(statisticsMap, ciscoStatus);
-            populateWebRTCStatus(statisticsMap, ciscoStatus);
-            populateExtensionsStatus(statisticsMap, ciscoStatus);
-            routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
-            endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
+            if (ciscoStatus != null) {
+                populateWebExStatus(statisticsMap, ciscoStatus);
+                populateWebRTCStatus(statisticsMap, ciscoStatus);
+                populateExtensionsStatus(statisticsMap, ciscoStatus);
+                routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
+                endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
+            }
 
             extendedStatistics.setControllableProperties(advancedControllableProperties);
             extendedStatistics.setStatistics(statisticsMap);

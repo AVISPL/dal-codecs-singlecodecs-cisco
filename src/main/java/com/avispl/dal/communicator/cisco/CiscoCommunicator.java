@@ -1129,7 +1129,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (ciscoStatus != null) {
                 populateWebExStatus(statisticsMap, ciscoStatus);
                 populateWebRTCStatus(statisticsMap, ciscoStatus);
-                populateExtensionsStatus(statisticsMap, ciscoStatus);
+                populateExtensionsStatus(statisticsMap, ciscoStatus, endpointStatistics);
                 routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
                 endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
             }
@@ -2121,7 +2121,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param statistics to save statistics to
      * @param status     response payload information
      */
-    private void populateExtensionsStatus(Map<String, String> statistics, CiscoStatus status) {
+    private void populateExtensionsStatus(Map<String, String> statistics, CiscoStatus status, EndpointStatistics endpointStatistics) {
         SystemUnit systemUnit = status.getSystemUnit();
         if (systemUnit == null) {
             return;
@@ -2135,7 +2135,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             return;
         }
         addStatisticsParameter(statistics, "MicrosoftExtension#Supported", microsoftExtension.getSupported());
+        String msInCall = microsoftExtension.getInCall();
         addStatisticsParameter(statistics, "MicrosoftExtension#InCall", microsoftExtension.getInCall());
+        if (!endpointStatistics.isInCall()) {
+            endpointStatistics.setInCall("true".equalsIgnoreCase(msInCall));
+        }
 
         ExtensionVersion version = microsoftExtension.getVersion();
         if (version != null) {

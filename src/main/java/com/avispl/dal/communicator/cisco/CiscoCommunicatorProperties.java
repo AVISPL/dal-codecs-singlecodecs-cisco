@@ -202,4 +202,130 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_TOTAL_DEVICES_COUNT = "#TotalDevicesCount";
      /** @since 1.1.0 */
      static final String PROPERTY_STATUS = "#Status";
+     /** @since 1.1.3 */
+     static final String N_A = "N/A";
+     /** @since 1.1.4 */
+     static final String ENABLED = "Enabled";
+     /** @since 1.1.4 */
+     static final String ACTIVE = "Active";
+     /** @since 1.1.4 */
+     static final String OFF = "Off";
+     /** @since 1.1.4 */
+     static final String HASH = "#";
+     /** @since 1.1.4 */
+     static final String ALL = "All";
+     /** @since 1.1.4 */
+     static final String OK = "OK";
+     /** @since 1.1.4 */
+     static final String DISCONNECTED = "Disconnected";
+     /** @since 1.1.4 */
+     static final String PROPERTY_GROUP_CAMERAS = "Cameras#";
+     /** @since 1.1.4 */
+     static final String PROPERTY_GROUP_VIDEO = "Video#";
+     /** @since 1.1.4 */
+     static final String PROPERTY_GOOGLE_MEET = "WebRTC#GoogleMeet";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_TEAMS = "WebRTC#MicrosoftTeams";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_TEAMS_STATUS = "WebRTS#MicrosoftTeamsStatus";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_TEAMS_PAIRING = "WebRTS#MicrosoftTeamsPairingActive";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_TEAMS_USER_SIGNED_IN = "WebRTS#MicrosoftTeamsUserSignedIn";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_EXTENSION_ANDROID_VERSION = "MicrosoftExtension#AndriodVersion";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_EXTENSION_COMPANY_PORTAL_APP_VERSION = "MicrosoftExtension#CompanyPortalAppVersion";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_EXTENSION_OEM_AGENT_VERSION = "MicrosoftExtension#OEMAgentVersion";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_EXTENSION_TEAMS_APP_VERSION = "MicrosoftExtension#TeamsAppVersion";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_EXTENSION_TEAMS_ADMIN_AGENT_VERSION = "MicrosoftExtension#TeamsAdminAgentVersion";
+     /** @since 1.1.4 */
+     static final String PROPERTY_GROUP_TEMPLATE_MICROSOFT_TEAMS_HW_ACCELERATOR_ENCODER = "MicrosoftTeamsHWAcceleratorEncoder[%d]#";
+     /** @since 1.1.4 */
+     static final String PROPERTY_GROUP_TEMPLATE_MICROSOFT_TEAMS_HW_ACCELERATOR_DECODER = "MicrosoftTeamsHWAcceleratorDecoder[%d]#";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_EXTENSION_SUPPORTED = "MicrosoftExtension#Supported";
+     /** @since 1.1.4 */
+     static final String PROPERTY_MICROSOFT_EXTENSION_IN_CALL = "MicrosoftExtension#InCall";
+     /** @since 1.1.4 */
+     static final String PROPERTY_FPS = "Fps";
+     /** @since 1.1.4 */
+     static final String PROPERTY_INPUT_MODE = "InputMode";
+     /** @since 1.1.4 */
+     static final String PROPERTY_OUTPUT_MODE = "OutputMode";
+     /** @since 1.1.4 */
+     static final String PROPERTY_FRAME_COUNT = "FrameCount";
+     /** @since 1.1.4 */
+     static final String PROPERTY_HEIGHT = "Height";
+     /** @since 1.1.4 */
+     static final String PROPERTY_WIDTH = "Width";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SAMPLE_PERIOD_US = "SamplePeriodUs";
+     /** @since 1.1.4 */
+     static final String PROPERTY_CROPPED_WIDTH = "CroppedWidth";
+     /** @since 1.1.4 */
+     static final String PROPERTY_CROPPED_HEIGHT = "CroppedHeight";
+     /** @since 1.1.4 */
+     static final String PROPERTY_WEB_EX_STATUS = "WebEx#Status";
+     /** @since 1.1.4 */
+     static final String PROPERTY_WEB_EX_MEETING_JOIN_PROTOCOL = "WebEx#MeetingJoinProtocol";
+     /** @since 1.1.4 */
+     static final String PROPERTY_WEB_EX_MEETING_INSTANT_MEETING = "WebEx#InstantMeeting";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_UPTIME = "SystemUnit#Uptime";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_PRODUCT_ID = "SystemUnit#ProductId";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_PRODUCT_PLATFORM = "SystemUnit#ProductPlatform";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_PRODUCT_TYPE = "SystemUnit#ProductType";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_ACTIVE_CALLS_NUMBER = "SystemUnit#ActiveCallsNumber";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_IN_PROGRESS_CALLS_NUMBER = "SystemUnit#InProgressCallsNumber";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_SUSPENDED_CALLS_NUMBER = "SystemUnit#SuspendedCallsNumber";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_HARDWARE_TEMPERATURE = "SystemUnit#HardwareTemperature(C)";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_SERIAL_NUMBER = "SystemUnit#SerialNumber";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_COMPATIBILITY_LEVEL = "SystemUnit#CompatibilityLevel";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_DISPLAY_NAME = "SystemUnit#DisplayName";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_RELEASE_DATE = "SystemUnit#ReleaseDate";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_VERSION = "SystemUnit#Version";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_SOFTWARE_NAME = "SystemUnit#SoftwareName";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SYSTEM_UNIT_NAME = "SystemUnit#Name";
+     /** @since 1.1.4 */
+     static final String PROPERTY_VIDEO_ACTIVE_SPEAKER_PIP_POSITION = "Video#ActiveSpeakerPIPPosition";
+     /** @since 1.1.4 */
+     static final String PROPERTY_VIDEO_MAIN_VIDEO_SOURCE = "Video#MainVideoSource";
+     /** @since 1.1.4 */
+     static final String PROPERTY_VIDEO_LAYOUT_FAMILY = "Video#LayoutFamily";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SELFVIEW_FULLSCREEN_MODE = "VideoSelfView#FullscreenMode";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SELFVIEW_MODE = "VideoSelfView#Mode";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SELFVIEW_ON_MONITOR_ROLE = "VideoSelfView#OnMonitorRole";
+     /** @since 1.1.4 */
+     static final String PROPERTY_SELFVIEW_PIP_POSITION = "VideoSelfView#PIPPosition";
+     /** @since 1.1.4 */
+     static final String PROPERTY_AUDIO_DEVICES_BLUETOOTH_ACTIVE_PROFILE = "AudioDevices#BluetoothActiveProfile";
+     /** @since 1.1.4 */
+     static final String PROPERTY_AUDIO_DEVICES_HEADSET_USB_CONNECTION_STATUS = "AudioDevices#HeadsetUSBConnectionStatus";
+     /** @since 1.1.4 */
+     static final String PROPERTY_AUDIO_DEVICES_HEADSET_USB_DESCRIPTION = "AudioDevices#HeadsetUSBDescription";
+     /** @since 1.1.4 */
+     static final String PROPERTY_AUDIO_DEVICES_HEADSET_USB_MANUFACTURER = "AudioDevices#HeadsetUSBManufacturer";
+     /** @since 1.1.4 */
+     static final String PROPERTY_AUDIO_DEVICES_HEADSET_USB_CRADLE = "AudioDevices#HandsetUSBCradle";
 }

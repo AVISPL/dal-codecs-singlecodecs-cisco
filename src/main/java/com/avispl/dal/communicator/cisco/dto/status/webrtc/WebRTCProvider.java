@@ -1,8 +1,9 @@
 /*
- * Copyright (c) 2023 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2023-2024 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status.webrtc;
 
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.teams.MicrosoftTeamsStatus;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**

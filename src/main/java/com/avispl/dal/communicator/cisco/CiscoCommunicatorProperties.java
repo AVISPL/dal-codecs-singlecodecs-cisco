@@ -227,11 +227,11 @@ final class CiscoCommunicatorProperties {
      /** @since 1.1.4 */
      static final String PROPERTY_MICROSOFT_TEAMS = "WebRTC#MicrosoftTeams";
      /** @since 1.1.4 */
-     static final String PROPERTY_MICROSOFT_TEAMS_STATUS = "WebRTS#MicrosoftTeamsStatus";
+     static final String PROPERTY_MICROSOFT_TEAMS_STATUS = "MicrosoftTeams#InCall";
      /** @since 1.1.4 */
-     static final String PROPERTY_MICROSOFT_TEAMS_PAIRING = "WebRTS#MicrosoftTeamsPairingActive";
+     static final String PROPERTY_MICROSOFT_TEAMS_PAIRING = "MicrosoftTeams#PairingActive";
      /** @since 1.1.4 */
-     static final String PROPERTY_MICROSOFT_TEAMS_USER_SIGNED_IN = "WebRTS#MicrosoftTeamsUserSignedIn";
+     static final String PROPERTY_MICROSOFT_TEAMS_USER_SIGNED_IN = "MicrosoftTeams#UserSignedIn";
      /** @since 1.1.4 */
      static final String PROPERTY_MICROSOFT_EXTENSION_ANDROID_VERSION = "MicrosoftExtension#AndriodVersion";
      /** @since 1.1.4 */

@@ -20,6 +20,7 @@ import com.avispl.dal.communicator.cisco.dto.status.root.Time;
 import com.avispl.dal.communicator.cisco.dto.status.security.Security;
 import com.avispl.dal.communicator.cisco.dto.status.sip.SIP;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.SystemUnit;
+import com.avispl.dal.communicator.cisco.dto.status.teams.CoreMicrosoftTeamsStatus;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.VideoStatus;
 import com.avispl.dal.communicator.cisco.dto.status.webex.WebExStatus;
@@ -92,6 +93,9 @@ public class CiscoStatus {
     /** @since 1.1.4 */
     @JacksonXmlProperty(localName = "WebRTC")
     private WebRTCStatus webRTCStatus;
+    /** @since 1.1.4 */
+    @JacksonXmlProperty(localName = "MicrosoftTeams")
+    private CoreMicrosoftTeamsStatus microsoftTeamsStatus;
 
     /**
      * Retrieves {@link #product}
@@ -525,5 +529,13 @@ public class CiscoStatus {
      */
     public void setWebRTCStatus(WebRTCStatus webRTCStatus) {
         this.webRTCStatus = webRTCStatus;
+    }
+
+    public CoreMicrosoftTeamsStatus getMicrosoftTeamsStatus() {
+        return microsoftTeamsStatus;
+    }
+
+    public void setMicrosoftTeamsStatus(CoreMicrosoftTeamsStatus microsoftTeamsStatus) {
+        this.microsoftTeamsStatus = microsoftTeamsStatus;
     }
 }

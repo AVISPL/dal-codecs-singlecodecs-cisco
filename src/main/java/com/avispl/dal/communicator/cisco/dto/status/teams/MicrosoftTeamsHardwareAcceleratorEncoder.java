@@ -1,11 +1,11 @@
 /*
  * Copyright (c) 2024 AVI-SPL Inc. All Rights Reserved.
  */
-package com.avispl.dal.communicator.cisco.dto.status.webrtc.teams;
+package com.avispl.dal.communicator.cisco.dto.status.teams;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-public class MicrosoftTeamsHardwareAcceleratorEncoder extends MicrosoftTeamsHardwareAcceleratorMetrics{
+public class MicrosoftTeamsHardwareAcceleratorEncoder extends MicrosoftTeamsHardwareAcceleratorMetrics {
     @JacksonXmlProperty(localName = "InputMode")
     private String inputMode;
 

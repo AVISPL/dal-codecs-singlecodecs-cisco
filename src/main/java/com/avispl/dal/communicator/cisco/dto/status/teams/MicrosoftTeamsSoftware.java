@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2024 AVI-SPL Inc. All Rights Reserved.
  */
-package com.avispl.dal.communicator.cisco.dto.status.webrtc.teams;
+package com.avispl.dal.communicator.cisco.dto.status.teams;
 
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.microsoft.ExtensionVersion;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.microsoft.ExtensionVersionCode;

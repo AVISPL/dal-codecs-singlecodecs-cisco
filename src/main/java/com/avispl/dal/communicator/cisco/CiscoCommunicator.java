@@ -70,6 +70,7 @@ import com.avispl.dal.communicator.cisco.dto.status.security.Persistency;
 import com.avispl.dal.communicator.cisco.dto.status.security.Security;
 import com.avispl.dal.communicator.cisco.dto.status.sip.*;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.*;
+import com.avispl.dal.communicator.cisco.dto.status.teams.*;
 import com.avispl.dal.communicator.cisco.dto.status.usb.Device;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.*;
@@ -2098,39 +2099,40 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void populateWebRTCStatus(Map<String, String> statistics, CiscoStatus status, EndpointStatistics endpointStatistics) {
         WebRTCStatus webRTCStatus = status.getWebRTCStatus();
-        if (webRTCStatus == null) {
-            return;
-        }
-        WebRTCProvider webRTCProvider = webRTCStatus.getProvider();
-        if (webRTCProvider == null) {
-            return;
-        }
-        GoogleMeetStatus googleMeetStatus = webRTCProvider.getGoogleMeetStatus();
-        MicrosoftTeamsStatus microsoftTeamsStatus = webRTCProvider.getMicrosoftTeamsStatus();
-        if (googleMeetStatus != null) {
-            addStatisticsParameter(statistics, PROPERTY_GOOGLE_MEET, googleMeetStatus.getAvailability());
-        }
-        if (microsoftTeamsStatus != null) {
-            addStatisticsParameter(statistics, PROPERTY_MICROSOFT_TEAMS, microsoftTeamsStatus.getAvailability());
+        if (webRTCStatus != null) {
+            WebRTCProvider webRTCProvider = webRTCStatus.getProvider();
+            if (webRTCProvider != null) {
+                GoogleMeetStatus googleMeetStatus = webRTCProvider.getGoogleMeetStatus();
+                MicrosoftTeamsStatus rtcMicrosoftTeamsStatus = webRTCProvider.getMicrosoftTeamsStatus();
 
-            MicrosoftTeamsCalling microsoftTeamsCalling = microsoftTeamsStatus.getCalling();
+                if (googleMeetStatus != null) {
+                    addStatisticsParameter(statistics, PROPERTY_GOOGLE_MEET, googleMeetStatus.getAvailability());
+                }
+                if (rtcMicrosoftTeamsStatus != null) {
+                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_TEAMS, rtcMicrosoftTeamsStatus.getAvailability());
+                }
+            }
+        }
+        CoreMicrosoftTeamsStatus coreMicrosoftTeamsStatus = status.getMicrosoftTeamsStatus();
+        if (coreMicrosoftTeamsStatus != null) {
+            MicrosoftTeamsCalling microsoftTeamsCalling = coreMicrosoftTeamsStatus.getCalling();
             if (microsoftTeamsCalling != null) {
                 String inCall = microsoftTeamsCalling.getInCall();
                 addStatisticsParameter(statistics,PROPERTY_MICROSOFT_TEAMS_STATUS, inCall);
                 endpointStatistics.setInCall(checkReportedStatus(inCall));
             }
 
-            MicrosoftTeamsPairing microsoftTeamsPairing = microsoftTeamsStatus.getPairing();
+            MicrosoftTeamsPairing microsoftTeamsPairing = coreMicrosoftTeamsStatus.getPairing();
             if (microsoftTeamsPairing != null) {
                 addStatisticsParameter(statistics,PROPERTY_MICROSOFT_TEAMS_PAIRING, microsoftTeamsPairing.getActive());
             }
 
-            MicrosoftTeamsUser microsoftTeamsUser = microsoftTeamsStatus.getUser();
+            MicrosoftTeamsUser microsoftTeamsUser = coreMicrosoftTeamsStatus.getUser();
             if (microsoftTeamsUser != null) {
                 addStatisticsParameter(statistics,PROPERTY_MICROSOFT_TEAMS_USER_SIGNED_IN, microsoftTeamsUser.getSignedIn());
             }
 
-            MicrosoftTeamsSoftware microsoftTeamsSoftware = microsoftTeamsStatus.getSoftware();
+            MicrosoftTeamsSoftware microsoftTeamsSoftware = coreMicrosoftTeamsStatus.getSoftware();
             if (microsoftTeamsSoftware != null) {
                 ExtensionVersion version = microsoftTeamsSoftware.getVersion();
                 if (version != null) {
@@ -2141,7 +2143,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_TEAMS_ADMIN_AGENT_VERSION, version.getTeamsAdminAgent());
                 }
             }
-            MicrosoftTeamsHardwareAccelerator microsoftTeamsHardwareAccelerator = microsoftTeamsStatus.getHardwareAccelerator();
+            MicrosoftTeamsHardwareAccelerator microsoftTeamsHardwareAccelerator = coreMicrosoftTeamsStatus.getHardwareAccelerator();
             if (microsoftTeamsHardwareAccelerator != null) {
                 List<MicrosoftTeamsHardwareAcceleratorEncoder> encoders = microsoftTeamsHardwareAccelerator.getEncoders();
                 List<MicrosoftTeamsHardwareAcceleratorDecoder> decoders = microsoftTeamsHardwareAccelerator.getDecoders();

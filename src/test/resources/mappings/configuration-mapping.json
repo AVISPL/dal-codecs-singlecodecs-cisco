@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/configuration.xml"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "configuration.xml",
+    "headers": {
+      "Content-Type": "text/xml"
+    }
+  }
+}

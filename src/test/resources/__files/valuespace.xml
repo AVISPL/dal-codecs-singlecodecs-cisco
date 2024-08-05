@@ -1,0 +1,4446 @@
+<?xml version="1.0"?>
+<Valuespace product="Cisco Codec" version="ce11.19.1.6.76526b1b094" apiVersion="4">
+    <INT_-100_100 type="Integer">
+        <Max>100</Max>
+        <Min>-100</Min>
+        <Step>1</Step>
+    </INT_-100_100>
+    <INT_-1_50 type="Integer">
+        <Max>50</Max>
+        <Min>-1</Min>
+        <Step>1</Step>
+    </INT_-1_50>
+    <INT_-1_600 type="Integer">
+        <Max>600</Max>
+        <Min>-1</Min>
+        <Step>1</Step>
+    </INT_-1_600>
+    <INT_-24_0 type="Integer">
+        <Max>0</Max>
+        <Min>-24</Min>
+        <Step>1</Step>
+    </INT_-24_0>
+    <INT_-500000_500000 type="Integer">
+        <Max>500000</Max>
+        <Min>-500000</Min>
+        <Step>1</Step>
+    </INT_-500000_500000>
+    <INT_0_10 type="Integer">
+        <Max>10</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_10>
+    <INT_0_100 type="Integer">
+        <Max>100</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_100>
+    <INT_0_1000 type="Integer">
+        <Max>1000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_1000>
+    <INT_0_10000 type="Integer">
+        <Max>10000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_10000>
+    <INT_0_1051200 type="Integer">
+        <Max>1051200</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_1051200>
+    <INT_0_1440 type="Integer">
+        <Max>1440</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_1440>
+    <INT_0_15 type="Integer">
+        <Max>15</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_15>
+    <INT_0_1800 type="Integer">
+        <Max>1800</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_1800>
+    <INT_0_20 type="Integer">
+        <Max>20</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_20>
+    <INT_0_200 type="Integer">
+        <Max>200</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_200>
+    <INT_0_20000 type="Integer">
+        <Max>20000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_20000>
+    <INT_0_2147483647 type="Integer">
+        <Max>2147483647</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_2147483647>
+    <INT_0_23 type="Integer">
+        <Max>23</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_23>
+    <INT_0_24 type="Integer">
+        <Max>24</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_24>
+    <INT_0_256 type="Integer">
+        <Max>256</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_256>
+    <INT_0_290 type="Integer">
+        <Max>290</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_290>
+    <INT_0_3 type="Integer">
+        <Max>3</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_3>
+    <INT_0_300000 type="Integer">
+        <Max>300000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_300000>
+    <INT_0_3000000 type="Integer">
+        <Max>3000000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_3000000>
+    <INT_0_3600 type="Integer">
+        <Max>3600</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_3600>
+    <INT_0_4 type="Integer">
+        <Max>4</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_4>
+    <INT_0_40 type="Integer">
+        <Max>40</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_40>
+    <INT_0_50 type="Integer">
+        <Max>50</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_50>
+    <INT_0_5000 type="Integer">
+        <Max>5000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_5000>
+    <INT_0_60 type="Integer">
+        <Max>60</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_60>
+    <INT_0_600 type="Integer">
+        <Max>600</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_600>
+    <INT_0_60000 type="Integer">
+        <Max>60000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_60000>
+    <INT_0_63 type="Integer">
+        <Max>63</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_63>
+    <INT_0_65454 type="Integer">
+        <Max>65454</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_65454>
+    <INT_0_65535 type="Integer">
+        <Max>65535</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_65535>
+    <INT_0_70 type="Integer">
+        <Max>70</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_70>
+    <INT_0_7300 type="Integer">
+        <Max>7300</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_7300>
+    <INT_0_86400 type="Integer">
+        <Max>86400</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_86400>
+    <INT_0_90 type="Integer">
+        <Max>90</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </INT_0_90>
+    <INT_1024_4096 type="Integer">
+        <Max>4096</Max>
+        <Min>1024</Min>
+        <Step>1</Step>
+    </INT_1024_4096>
+    <INT_1024_65438 type="Integer">
+        <Max>65438</Max>
+        <Min>1024</Min>
+        <Step>1</Step>
+    </INT_1024_65438>
+    <INT_1024_65454 type="Integer">
+        <Max>65454</Max>
+        <Min>1024</Min>
+        <Step>1</Step>
+    </INT_1024_65454>
+    <INT_10_60 type="Integer">
+        <Max>60</Max>
+        <Min>10</Min>
+        <Step>1</Step>
+    </INT_10_60>
+    <INT_1121_65535 type="Integer">
+        <Max>65535</Max>
+        <Min>1121</Min>
+        <Step>1</Step>
+    </INT_1121_65535>
+    <INT_1_1000 type="Integer">
+        <Max>1000</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_1000>
+    <INT_1_1440 type="Integer">
+        <Max>1440</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_1440>
+    <INT_1_20 type="Integer">
+        <Max>20</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_20>
+    <INT_1_255 type="Integer">
+        <Max>255</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_255>
+    <INT_1_3 type="Integer">
+        <Max>3</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_3>
+    <INT_1_30 type="Integer">
+        <Max>30</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_30>
+    <INT_1_31 type="Integer">
+        <Max>31</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_31>
+    <INT_1_4 type="Integer">
+        <Max>4</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_4>
+    <INT_1_4094 type="Integer">
+        <Max>4094</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_4094>
+    <INT_1_480 type="Integer">
+        <Max>480</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_480>
+    <INT_1_6 type="Integer">
+        <Max>6</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_6>
+    <INT_1_60 type="Integer">
+        <Max>60</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_60>
+    <INT_1_9 type="Integer">
+        <Max>9</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </INT_1_9>
+    <INT_2_2 type="Integer">
+        <Max>2</Max>
+        <Min>2</Min>
+        <Step>1</Step>
+    </INT_2_2>
+    <INT_2_8 type="Integer">
+        <Max>8</Max>
+        <Min>2</Min>
+        <Step>1</Step>
+    </INT_2_8>
+    <INT_3000_60000 type="Integer">
+        <Max>60000</Max>
+        <Min>3000</Min>
+        <Step>1</Step>
+    </INT_3000_60000>
+    <INT_43200_31536000 type="Integer">
+        <Max>31536000</Max>
+        <Min>43200</Min>
+        <Step>1</Step>
+    </INT_43200_31536000>
+    <INT_4_200 type="Integer">
+        <Max>200</Max>
+        <Min>4</Min>
+        <Step>1</Step>
+    </INT_4_200>
+    <INT_5000_15000 type="Integer">
+        <Max>15000</Max>
+        <Min>5000</Min>
+        <Step>1</Step>
+    </INT_5000_15000>
+    <INT_576_1500 type="Integer">
+        <Max>1500</Max>
+        <Min>576</Min>
+        <Step>1</Step>
+    </INT_576_1500>
+    <INT_5_60 type="Integer">
+        <Max>60</Max>
+        <Min>5</Min>
+        <Step>1</Step>
+    </INT_5_60>
+    <INT_5_65535 type="Integer">
+        <Max>65535</Max>
+        <Min>5</Min>
+        <Step>1</Step>
+    </INT_5_65535>
+    <INT_60_1000 type="Integer">
+        <Max>1000</Max>
+        <Min>60</Min>
+        <Step>1</Step>
+    </INT_60_1000>
+    <INT_60_300 type="Integer">
+        <Max>300</Max>
+        <Min>60</Min>
+        <Step>1</Step>
+    </INT_60_300>
+    <INT_60_3000 type="Integer">
+        <Max>3000</Max>
+        <Min>60</Min>
+        <Step>1</Step>
+    </INT_60_3000>
+    <INT_60_3600 type="Integer">
+        <Max>3600</Max>
+        <Min>60</Min>
+        <Step>1</Step>
+    </INT_60_3600>
+    <INT_64_15000 type="Integer">
+        <Max>15000</Max>
+        <Min>64</Min>
+        <Step>1</Step>
+    </INT_64_15000>
+    <INT_64_20000 type="Integer">
+        <Max>20000</Max>
+        <Min>64</Min>
+        <Step>1</Step>
+    </INT_64_20000>
+    <INT_64_6000 type="Integer">
+        <Max>6000</Max>
+        <Min>64</Min>
+        <Step>1</Step>
+    </INT_64_6000>
+    <INT_6_510 type="Integer">
+        <Max>510</Max>
+        <Min>6</Min>
+        <Step>1</Step>
+    </INT_6_510>
+    <INT_800_1350 type="Integer">
+        <Max>1350</Max>
+        <Min>800</Min>
+        <Step>1</Step>
+    </INT_800_1350>
+    <INT_80_1000 type="Integer">
+        <Max>1000</Max>
+        <Min>80</Min>
+        <Step>1</Step>
+    </INT_80_1000>
+    <INT_80_3000 type="Integer">
+        <Max>3000</Max>
+        <Min>80</Min>
+        <Step>1</Step>
+    </INT_80_3000>
+    <PASSWORD_0_128_NoFilt type="String">
+        <HiddenValue>True</HiddenValue>
+        <MaxLength>128</MaxLength>
+        <MinLength>0</MinLength>
+    </PASSWORD_0_128_NoFilt>
+    <PASSWORD_0_16_NoFilt type="String">
+        <HiddenValue>True</HiddenValue>
+        <MaxLength>16</MaxLength>
+        <MinLength>0</MinLength>
+    </PASSWORD_0_16_NoFilt>
+    <PASSWORD_0_2045_NoFilt type="String">
+        <HiddenValue>True</HiddenValue>
+        <MaxLength>2045</MaxLength>
+        <MinLength>0</MinLength>
+    </PASSWORD_0_2045_NoFilt>
+    <PASSWORD_0_255_NoFilt type="String">
+        <HiddenValue>True</HiddenValue>
+        <MaxLength>255</MaxLength>
+        <MinLength>0</MinLength>
+    </PASSWORD_0_255_NoFilt>
+    <PASSWORD_0_50_NoFilt type="String">
+        <HiddenValue>True</HiddenValue>
+        <MaxLength>50</MaxLength>
+        <MinLength>0</MinLength>
+    </PASSWORD_0_50_NoFilt>
+    <PASSWORD_0_63_NoFilt type="String">
+        <HiddenValue>True</HiddenValue>
+        <MaxLength>63</MaxLength>
+        <MinLength>0</MinLength>
+    </PASSWORD_0_63_NoFilt>
+    <PASSWORD_0_64_NoFilt type="String">
+        <HiddenValue>True</HiddenValue>
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </PASSWORD_0_64_NoFilt>
+    <STR_0_100_NoFilt type="String">
+        <MaxLength>100</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_100_NoFilt>
+    <STR_0_1024_NoFilt type="String">
+        <MaxLength>1024</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_1024_NoFilt>
+    <STR_0_1024_NoInvalidXmlChars type="String">
+        <MaxLength>1024</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_1024_NoInvalidXmlChars>
+    <STR_0_10_Digits type="String">
+        <MaxLength>10</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_10_Digits>
+    <STR_0_10_ValidHexColor type="String">
+        <MaxLength>10</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_10_ValidHexColor>
+    <STR_0_128_NoFilt type="String">
+        <MaxLength>128</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_128_NoFilt>
+    <STR_0_200_NoFilt type="String">
+        <MaxLength>200</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_200_NoFilt>
+    <STR_0_2048_NoFilt type="String">
+        <MaxLength>2048</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_2048_NoFilt>
+    <STR_0_255_IP-List type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_255_IP-List>
+    <STR_0_255_IPorHostname type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_255_IPorHostname>
+    <STR_0_255_NoFilt type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_255_NoFilt>
+    <STR_0_255_NoInvalidXmlChars type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_255_NoInvalidXmlChars>
+    <STR_0_256_NoFilt type="String">
+        <MaxLength>256</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_256_NoFilt>
+    <STR_0_2_NoFilt type="String">
+        <MaxLength>2</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_2_NoFilt>
+    <STR_0_30_NoFilt type="String">
+        <MaxLength>30</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_30_NoFilt>
+    <STR_0_32_NoFilt type="String">
+        <MaxLength>32</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_32_NoFilt>
+    <STR_0_46_NoFilt type="String">
+        <MaxLength>46</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_46_NoFilt>
+    <STR_0_49_NoFilt type="String">
+        <MaxLength>49</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_49_NoFilt>
+    <STR_0_50000_NoFilt type="String">
+        <MaxLength>50000</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_50000_NoFilt>
+    <STR_0_50_NoFilt type="String">
+        <MaxLength>50</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_50_NoFilt>
+    <STR_0_512_NoFilt type="String">
+        <MaxLength>512</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_512_NoFilt>
+    <STR_0_550_NoFilt type="String">
+        <MaxLength>550</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_550_NoFilt>
+    <STR_0_64_BasicDomainNameCheck type="String">
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_64_BasicDomainNameCheck>
+    <STR_0_64_IPv4 type="String">
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_64_IPv4>
+    <STR_0_64_IPv4v6 type="String">
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_64_IPv4v6>
+    <STR_0_64_IPv6 type="String">
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_64_IPv6>
+    <STR_0_64_IPv6WithNetmask type="String">
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_64_IPv6WithNetmask>
+    <STR_0_64_NoFilt type="String">
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_64_NoFilt>
+    <STR_0_6_NoFilt type="String">
+        <MaxLength>6</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_6_NoFilt>
+    <STR_0_80_NoFilt type="String">
+        <MaxLength>80</MaxLength>
+        <MinLength>0</MinLength>
+    </STR_0_80_NoFilt>
+    <STR_10_10_NoFilt type="String">
+        <MaxLength>10</MaxLength>
+        <MinLength>10</MinLength>
+    </STR_10_10_NoFilt>
+    <STR_1_100_Ringtone type="String">
+        <MaxLength>100</MaxLength>
+        <MinLength>1</MinLength>
+    </STR_1_100_Ringtone>
+    <STR_1_12_HorizontalOffset type="String">
+        <MaxLength>12</MaxLength>
+        <MinLength>1</MinLength>
+    </STR_1_12_HorizontalOffset>
+    <STR_1_12_RoundtripGain type="String">
+        <MaxLength>12</MaxLength>
+        <MinLength>1</MinLength>
+    </STR_1_12_RoundtripGain>
+    <STR_1_12_VerticalOffset type="String">
+        <MaxLength>12</MaxLength>
+        <MinLength>1</MinLength>
+    </STR_1_12_VerticalOffset>
+    <STR_1_255_NoFilt type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>1</MinLength>
+    </STR_1_255_NoFilt>
+    <STR_1_256_NoFilt type="String">
+        <MaxLength>256</MaxLength>
+        <MinLength>1</MinLength>
+    </STR_1_256_NoFilt>
+    <STR_5_5_ValidHoursColonMinutes type="String">
+        <MaxLength>5</MaxLength>
+        <MinLength>5</MinLength>
+    </STR_5_5_ValidHoursColonMinutes>
+    <TTPAR_AccelerometerSetting type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">On</Value>
+        <Value item="3">UpsideDown</Value>
+    </TTPAR_AccelerometerSetting>
+    <TTPAR_AccessibilityCallNotification type="Literal">
+        <Value item="1">AmplifiedVisuals</Value>
+        <Value item="2">Default</Value>
+    </TTPAR_AccessibilityCallNotification>
+    <TTPAR_AccessibilityUserInterfaceColorCorrection type="Literal">
+        <Value item="1">Deuteranomaly</Value>
+        <Value item="2">GrayScale</Value>
+        <Value item="3">Off</Value>
+        <Value item="4">Protanomaly</Value>
+        <Value item="5">Tritanomaly</Value>
+    </TTPAR_AccessibilityUserInterfaceColorCorrection>
+    <TTPAR_AccessibilityUserInterfaceScale type="Literal">
+        <Value item="1">ExtraLarge</Value>
+        <Value item="2">Large</Value>
+        <Value item="3">Normal</Value>
+        <Value item="4">Small</Value>
+    </TTPAR_AccessibilityUserInterfaceScale>
+    <TTPAR_ActiveInactive type="Literal">
+        <Value item="1">Active</Value>
+        <Value item="2">Inactive</Value>
+    </TTPAR_ActiveInactive>
+    <TTPAR_AddDialogVisibility type="Literal">
+        <Value item="1">ManualAdd</Value>
+        <Value item="2">Promote</Value>
+    </TTPAR_AddDialogVisibility>
+    <TTPAR_AirPlayAuthentication type="Literal">
+        <Value item="1">Password</Value>
+        <Value item="2">PinAlways</Value>
+        <Value item="3">PinFirstTime</Value>
+    </TTPAR_AirPlayAuthentication>
+    <TTPAR_AirPlayBagType type="Literal">
+        <Value item="1">Development</Value>
+        <Value item="2">NoUpdate</Value>
+        <Value item="3">PALTester</Value>
+        <Value item="4">Production</Value>
+        <Value item="5">QE</Value>
+        <Value item="6">Test</Value>
+    </TTPAR_AirPlayBagType>
+    <TTPAR_AirPlayBeacon type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Off</Value>
+    </TTPAR_AirPlayBeacon>
+    <TTPAR_AllowDeclineVs type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">InsideOnly</Value>
+        <Value item="3">None</Value>
+    </TTPAR_AllowDeclineVs>
+    <TTPAR_AllowDeny type="Literal">
+        <Value item="1">Allow</Value>
+        <Value item="2">Deny</Value>
+    </TTPAR_AllowDeny>
+    <TTPAR_AlwaysNeverAuto type="Literal">
+        <Value item="1">Always</Value>
+        <Value item="2">Auto</Value>
+        <Value item="3">Never</Value>
+    </TTPAR_AlwaysNeverAuto>
+    <TTPAR_AudioAgcVersion type="Literal">
+        <Value item="1">Classic</Value>
+        <Value item="2">VadEnabled</Value>
+    </TTPAR_AudioAgcVersion>
+    <TTPAR_AudioDiagnosticsOnScreenMode type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">GainLinear</Value>
+        <Value item="3">LevelGainDb</Value>
+        <Value item="4">Off</Value>
+    </TTPAR_AudioDiagnosticsOnScreenMode>
+    <TTPAR_AudioInDelayMode type="Literal">
+        <Value item="1">Fixed</Value>
+        <Value item="2">Relative</Value>
+    </TTPAR_AudioInDelayMode>
+    <TTPAR_AudioModeUSBExtended type="Literal">
+        <Value item="1">AdditionalMicrophone</Value>
+        <Value item="2">AdditionalSpeaker</Value>
+        <Value item="3">Microphone</Value>
+        <Value item="4">Off</Value>
+        <Value item="5">Speaker</Value>
+        <Value item="6">SpeakerAndMicrophone</Value>
+    </TTPAR_AudioModeUSBExtended>
+    <TTPAR_AudioNoiseRemovalBackgroundTalkers type="Literal">
+        <Value item="1">Keep</Value>
+        <Value item="2">Suppress</Value>
+    </TTPAR_AudioNoiseRemovalBackgroundTalkers>
+    <TTPAR_AudioNoiseRemovalMode type="Literal">
+        <Value item="1">Disabled</Value>
+        <Value item="2">Enabled</Value>
+        <Value item="3">Manual</Value>
+    </TTPAR_AudioNoiseRemovalMode>
+    <TTPAR_AudioPanningMode type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Off</Value>
+    </TTPAR_AudioPanningMode>
+    <TTPAR_AudioRingBackTone type="Literal">
+        <Value item="1">Tone</Value>
+        <Value item="2">Webex</Value>
+    </TTPAR_AudioRingBackTone>
+    <TTPAR_AudioSensorsUltrasoundTypeLess type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">UserPresence</Value>
+    </TTPAR_AudioSensorsUltrasoundTypeLess>
+    <TTPAR_AudioTrackingSource type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">External</Value>
+        <Value item="3">Internal</Value>
+    </TTPAR_AudioTrackingSource>
+    <TTPAR_AuditLoggingMode type="Literal">
+        <Value item="1">External</Value>
+        <Value item="2">ExternalSecure</Value>
+        <Value item="3">Internal</Value>
+        <Value item="4">Off</Value>
+    </TTPAR_AuditLoggingMode>
+    <TTPAR_AuditOnErrorAction type="Literal">
+        <Value item="1">Halt</Value>
+        <Value item="2">Ignore</Value>
+    </TTPAR_AuditOnErrorAction>
+    <TTPAR_AutoAlwaysOnAlwaysOff type="Literal">
+        <Value item="1">AlwaysOff</Value>
+        <Value item="2">AlwaysOn</Value>
+        <Value item="3">Auto</Value>
+    </TTPAR_AutoAlwaysOnAlwaysOff>
+    <TTPAR_AutoHidden type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Hidden</Value>
+    </TTPAR_AutoHidden>
+    <TTPAR_AutoLocked type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Locked</Value>
+    </TTPAR_AutoLocked>
+    <TTPAR_AutoManual type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Manual</Value>
+    </TTPAR_AutoManual>
+    <TTPAR_AutoManualOff type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Manual</Value>
+        <Value item="3">Off</Value>
+    </TTPAR_AutoManualOff>
+    <TTPAR_AutoNative type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Native</Value>
+    </TTPAR_AutoNative>
+    <TTPAR_AutoOff type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Off</Value>
+    </TTPAR_AutoOff>
+    <TTPAR_AutoOnOff type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">On</Value>
+    </TTPAR_AutoOnOff>
+    <TTPAR_AutoReduced type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Reduced</Value>
+    </TTPAR_AutoReduced>
+    <TTPAR_AutoYesNo type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">No</Value>
+        <Value item="3">Yes</Value>
+    </TTPAR_AutoYesNo>
+    <TTPAR_BackgroundEffects type="Literal">
+        <Value item="1">Particles</Value>
+        <Value item="2">Shadebobs</Value>
+    </TTPAR_BackgroundEffects>
+    <TTPAR_BestEffortOnOff type="Literal">
+        <Value item="1">BestEffort</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">On</Value>
+    </TTPAR_BestEffortOnOff>
+    <TTPAR_BypassActive type="Literal">
+        <Value item="1">Active</Value>
+        <Value item="2">Bypass</Value>
+    </TTPAR_BypassActive>
+    <TTPAR_CDPService type="Literal">
+        <Value item="1">cdpep</Value>
+        <Value item="2">lldpd</Value>
+    </TTPAR_CDPService>
+    <TTPAR_CalendarType type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">PersonalOnly</Value>
+        <Value item="3">SharedAndPersonal</Value>
+        <Value item="4">SharedOnly</Value>
+    </TTPAR_CalendarType>
+    <TTPAR_CallProtocol type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">H323</Value>
+        <Value item="3">Sip</Value>
+        <Value item="4">Spark</Value>
+    </TTPAR_CallProtocol>
+    <TTPAR_CameraCount type="Literal">
+        <Value item="1">0</Value>
+        <Value item="2">1</Value>
+        <Value item="3">2</Value>
+        <Value item="4">3</Value>
+        <Value item="5">4</Value>
+        <Value item="6">5</Value>
+        <Value item="7">6</Value>
+        <Value item="8">7</Value>
+        <Value item="9">Minimum1</Value>
+        <Value item="10">NotSet</Value>
+    </TTPAR_CameraCount>
+    <TTPAR_CameraIdOneCamera type="Literal">
+        <Value item="1">1</Value>
+    </TTPAR_CameraIdOneCamera>
+    <TTPAR_CodecMode type="Literal">
+        <Value item="1">DecodeOnly</Value>
+        <Value item="2">EncodeOnly</Value>
+        <Value item="3">Off</Value>
+        <Value item="4">On</Value>
+    </TTPAR_CodecMode>
+    <TTPAR_ConcealmentStrategy type="Literal">
+        <Value item="1">AdaptiveMotionConceal</Value>
+        <Value item="2">FreezeConceal</Value>
+        <Value item="3">MotionConceal</Value>
+        <Value item="4">SharpnessConceal</Value>
+    </TTPAR_ConcealmentStrategy>
+    <TTPAR_ConnectivityVS type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">External</Value>
+        <Value item="3">Internal</Value>
+    </TTPAR_ConnectivityVS>
+    <TTPAR_ConnectorVisibility type="Literal">
+        <Value item="1">Always</Value>
+        <Value item="2">IfSignal</Value>
+        <Value item="3">Never</Value>
+    </TTPAR_ConnectorVisibility>
+    <TTPAR_ConnectorVisibilityNeverOnly type="Literal">
+        <Value item="1">Never</Value>
+    </TTPAR_ConnectorVisibilityNeverOnly>
+    <TTPAR_ContactInfoVs type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">DisplayName</Value>
+        <Value item="3">E164Alias</Value>
+        <Value item="4">H323Id</Value>
+        <Value item="5">IPv4</Value>
+        <Value item="6">IPv6</Value>
+        <Value item="7">None</Value>
+        <Value item="8">SipUri</Value>
+        <Value item="9">SystemName</Value>
+        <Value item="10">WebexDisplayName</Value>
+    </TTPAR_ContactInfoVs>
+    <TTPAR_ContentType type="Literal">
+        <Value item="1">Default</Value>
+        <Value item="2">Game</Value>
+    </TTPAR_ContentType>
+    <TTPAR_ControlSystemsCount type="Literal">
+        <Value item="1">1</Value>
+        <Value item="2">NotSet</Value>
+    </TTPAR_ControlSystemsCount>
+    <TTPAR_DateFormat type="Literal">
+        <Value item="1">DD_MM_YY</Value>
+        <Value item="2">MM_DD_YY</Value>
+        <Value item="3">YY_MM_DD</Value>
+    </TTPAR_DateFormat>
+    <TTPAR_Disabled type="Literal">
+        <Value item="1">Disabled</Value>
+    </TTPAR_Disabled>
+    <TTPAR_Dot1qMode type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Manual</Value>
+        <Value item="3">Off</Value>
+    </TTPAR_Dot1qMode>
+    <TTPAR_DynamicStatic type="Literal">
+        <Value item="1">Dynamic</Value>
+        <Value item="2">Static</Value>
+    </TTPAR_DynamicStatic>
+    <TTPAR_EmbeddedAppContexts type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">DeviceOnly</Value>
+    </TTPAR_EmbeddedAppContexts>
+    <TTPAR_Enabled type="Literal">
+        <Value item="1">Enabled</Value>
+    </TTPAR_Enabled>
+    <TTPAR_EnabledDisabled type="Literal">
+        <Value item="1">Disabled</Value>
+        <Value item="2">Enabled</Value>
+    </TTPAR_EnabledDisabled>
+    <TTPAR_EnabledDisabledAuto type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Disabled</Value>
+        <Value item="3">Enabled</Value>
+    </TTPAR_EnabledDisabledAuto>
+    <TTPAR_EndSessionAction type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">SendEmailToCreator</Value>
+    </TTPAR_EndSessionAction>
+    <TTPAR_EnforcedOptional type="Literal">
+        <Value item="1">Enforced</Value>
+        <Value item="2">Optional</Value>
+    </TTPAR_EnforcedOptional>
+    <TTPAR_ExpandedEqualType type="Literal">
+        <Value item="1">4x4</Value>
+        <Value item="2">5x5</Value>
+        <Value item="3">Off</Value>
+    </TTPAR_ExpandedEqualType>
+    <TTPAR_FacerecLabelMode type="Literal">
+        <Value item="1">Default</Value>
+        <Value item="2">Persistent</Value>
+    </TTPAR_FacerecLabelMode>
+    <TTPAR_FacilityServiceType type="Literal">
+        <Value item="1">Catering</Value>
+        <Value item="2">Concierge</Value>
+        <Value item="3">Emergency</Value>
+        <Value item="4">Helpdesk</Value>
+        <Value item="5">Other</Value>
+        <Value item="6">Security</Value>
+        <Value item="7">Transportation</Value>
+    </TTPAR_FacilityServiceType>
+    <TTPAR_False type="Literal">
+        <Value item="1">False</Value>
+    </TTPAR_False>
+    <TTPAR_FalseAuto type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">False</Value>
+    </TTPAR_FalseAuto>
+    <TTPAR_FillMode type="Literal">
+        <Value item="1">Crop</Value>
+        <Value item="2">Fit</Value>
+        <Value item="3">Stretch</Value>
+    </TTPAR_FillMode>
+    <TTPAR_FloorControlProtocol type="Literal">
+        <Value item="1">BFCP</Value>
+        <Value item="2">Spark</Value>
+    </TTPAR_FloorControlProtocol>
+    <TTPAR_FullLimitedNothing type="Literal">
+        <Value item="1">Full</Value>
+        <Value item="2">Limited</Value>
+        <Value item="3">Nothing</Value>
+    </TTPAR_FullLimitedNothing>
+    <TTPAR_GoogleMeetChannel type="Literal">
+        <Value item="1">Stable</Value>
+        <Value item="2">Testing</Value>
+    </TTPAR_GoogleMeetChannel>
+    <TTPAR_H323_EncKeySize type="Literal">
+        <Value item="1">Max1024bit</Value>
+        <Value item="2">Min1024bit</Value>
+        <Value item="3">Min2048bit</Value>
+    </TTPAR_H323_EncKeySize>
+    <TTPAR_H323_GkMode type="Literal">
+        <Value item="1">Direct</Value>
+        <Value item="2">Gatekeeper</Value>
+    </TTPAR_H323_GkMode>
+    <TTPAR_HTTPModes type="Literal">
+        <Value item="1">HTTP+HTTPS</Value>
+        <Value item="2">HTTPS</Value>
+        <Value item="3">Off</Value>
+    </TTPAR_HTTPModes>
+    <TTPAR_HTTPProxyAuthenticationModes type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Basic</Value>
+    </TTPAR_HTTPProxyAuthenticationModes>
+    <TTPAR_HTTPProxyModes type="Literal">
+        <Value item="1">Manual</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">PACUrl</Value>
+        <Value item="4">WPAD</Value>
+    </TTPAR_HTTPProxyModes>
+    <TTPAR_HardwareAcceleratedVideo type="Literal">
+        <Value item="1">Decode</Value>
+        <Value item="2">Encode</Value>
+        <Value item="3">EncodeDecode</Value>
+        <Value item="4">Off</Value>
+    </TTPAR_HardwareAcceleratedVideo>
+    <TTPAR_HeadDetectorModelVersion type="Literal">
+        <Value item="1">Candidate</Value>
+        <Value item="2">Current</Value>
+    </TTPAR_HeadDetectorModelVersion>
+    <TTPAR_HighDPIRenderingMode type="Literal">
+        <Value item="1">Performance</Value>
+        <Value item="2">Quality</Value>
+    </TTPAR_HighDPIRenderingMode>
+    <TTPAR_HttpProtocols type="Literal">
+        <Value item="1">HTTP</Value>
+        <Value item="2">HTTPS</Value>
+    </TTPAR_HttpProtocols>
+    <TTPAR_ICETransport type="Literal">
+        <Value item="1">ForceTcp</Value>
+        <Value item="2">ForceUdp</Value>
+        <Value item="3">ForceXTls</Value>
+        <Value item="4">NoTcp</Value>
+        <Value item="5">NoUdp</Value>
+        <Value item="6">NoXTls</Value>
+        <Value item="7">Off</Value>
+    </TTPAR_ICETransport>
+    <TTPAR_IPv4InterfaceIdentifier type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">MAC</Value>
+        <Value item="3">Opaque</Value>
+    </TTPAR_IPv4InterfaceIdentifier>
+    <TTPAR_IPv6Assignment type="Literal">
+        <Value item="1">Autoconf</Value>
+        <Value item="2">DHCPv6</Value>
+        <Value item="3">Static</Value>
+    </TTPAR_IPv6Assignment>
+    <TTPAR_IPv6InterfaceIdentifier type="Literal">
+        <Value item="1">MAC</Value>
+        <Value item="2">Opaque</Value>
+    </TTPAR_IPv6InterfaceIdentifier>
+    <TTPAR_IceDefault type="Literal">
+        <Value item="1">Host</Value>
+        <Value item="2">Relay</Value>
+        <Value item="3">Rflx</Value>
+    </TTPAR_IceDefault>
+    <TTPAR_IceMode type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">On</Value>
+    </TTPAR_IceMode>
+    <TTPAR_InCallUIStyle type="Literal">
+        <Value item="1">Experimental</Value>
+        <Value item="2">Normal</Value>
+    </TTPAR_InCallUIStyle>
+    <TTPAR_InterfaceSpeed type="Literal">
+        <Value item="1">10full</Value>
+        <Value item="2">10half</Value>
+        <Value item="3">100full</Value>
+        <Value item="4">100half</Value>
+        <Value item="5">1000full</Value>
+        <Value item="6">Auto</Value>
+    </TTPAR_InterfaceSpeed>
+    <TTPAR_IpAssignment type="Literal">
+        <Value item="1">DHCP</Value>
+        <Value item="2">Static</Value>
+    </TTPAR_IpAssignment>
+    <TTPAR_IpProtocol type="Literal">
+        <Value item="1">IPv4</Value>
+        <Value item="2">IPv6</Value>
+    </TTPAR_IpProtocol>
+    <TTPAR_IpProtocolForWebex type="Literal">
+        <Value item="1">PreferIpv4</Value>
+        <Value item="2">PreferIpv6</Value>
+    </TTPAR_IpProtocolForWebex>
+    <TTPAR_IpProtocolWithDual type="Literal">
+        <Value item="1">Dual</Value>
+        <Value item="2">IPv4</Value>
+        <Value item="3">IPv6</Value>
+    </TTPAR_IpProtocolWithDual>
+    <TTPAR_LDAPEncryption type="Literal">
+        <Value item="1">LDAPS</Value>
+        <Value item="2">None</Value>
+        <Value item="3">STARTTLS</Value>
+    </TTPAR_LDAPEncryption>
+    <TTPAR_Layout type="Literal">
+        <Value item="1">Board</Value>
+        <Value item="2">Default</Value>
+        <Value item="3">Limit4</Value>
+        <Value item="4">Panorama</Value>
+        <Value item="5">Polaris</Value>
+    </TTPAR_Layout>
+    <TTPAR_LayoutFamily_new type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Equal</Value>
+        <Value item="3">Overlay</Value>
+        <Value item="4">Prominent</Value>
+        <Value item="5">Prominent_L</Value>
+        <Value item="6">Single</Value>
+    </TTPAR_LayoutFamily_new>
+    <TTPAR_LayoutFamily_remote type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Equal</Value>
+        <Value item="3">Overlay</Value>
+        <Value item="4">Prominent</Value>
+        <Value item="5">Single</Value>
+    </TTPAR_LayoutFamily_remote>
+    <TTPAR_LedControlColor type="Literal">
+        <Value item="1">Aquamarine</Value>
+        <Value item="2">Blue</Value>
+        <Value item="3">Cyan</Value>
+        <Value item="4">Fuchsia</Value>
+        <Value item="5">Gold</Value>
+        <Value item="6">Green</Value>
+        <Value item="7">Lime</Value>
+        <Value item="8">Magenta</Value>
+        <Value item="9">Off</Value>
+        <Value item="10">Orange</Value>
+        <Value item="11">Orchid</Value>
+        <Value item="12">Purple</Value>
+        <Value item="13">Red</Value>
+        <Value item="14">Scarlet</Value>
+        <Value item="15">Turquoise</Value>
+        <Value item="16">Violet</Value>
+        <Value item="17">Yellow</Value>
+    </TTPAR_LedControlColor>
+    <TTPAR_LedControlModes type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Manual</Value>
+        <Value item="3">Off</Value>
+    </TTPAR_LedControlModes>
+    <TTPAR_LightConditions type="Literal">
+        <Value item="1">High</Value>
+        <Value item="2">Medium</Value>
+        <Value item="3">Normal</Value>
+    </TTPAR_LightConditions>
+    <TTPAR_LinkedFolderCapability type="Literal">
+        <Value item="1">DefaultEnabled</Value>
+        <Value item="2">Disabled</Value>
+        <Value item="3">Enabled</Value>
+    </TTPAR_LinkedFolderCapability>
+    <TTPAR_LiveAnnotationAvailability type="Literal">
+        <Value item="1">Always</Value>
+        <Value item="2">MultiPlayerSupportedByCall</Value>
+    </TTPAR_LiveAnnotationAvailability>
+    <TTPAR_LocalEncodingStrategy type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Motion</Value>
+        <Value item="3">Sharpness</Value>
+    </TTPAR_LocalEncodingStrategy>
+    <TTPAR_LockedUnlocked type="Literal">
+        <Value item="1">Locked</Value>
+        <Value item="2">Unlocked</Value>
+    </TTPAR_LockedUnlocked>
+    <TTPAR_MTRShareExperience type="Literal">
+        <Value item="1">Microsoft</Value>
+        <Value item="2">RoomOS</Value>
+    </TTPAR_MTRShareExperience>
+    <TTPAR_MariFeatureMode type="Literal">
+        <Value item="1">ContentOnly</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">On</Value>
+    </TTPAR_MariFeatureMode>
+    <TTPAR_MariTCPResMode type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">On</Value>
+        <Value item="3">ProbeOnly</Value>
+    </TTPAR_MariTCPResMode>
+    <TTPAR_MaxZoomFactorIntegrated type="Literal">
+        <Value item="1">3x</Value>
+        <Value item="2">4x</Value>
+        <Value item="3">5x</Value>
+        <Value item="4">Auto</Value>
+    </TTPAR_MaxZoomFactorIntegrated>
+    <TTPAR_MediaType type="Literal">
+        <Value item="1">Audio</Value>
+        <Value item="2">Video</Value>
+    </TTPAR_MediaType>
+    <TTPAR_MeetingChatNotificationsMode type="Literal">
+        <Value item="1">Disabled</Value>
+        <Value item="2">Focused</Value>
+        <Value item="3">Preview</Value>
+    </TTPAR_MeetingChatNotificationsMode>
+    <TTPAR_MenuLanguages type="Literal">
+        <Value item="1">Arabic</Value>
+        <Value item="2">Catalan</Value>
+        <Value item="3">ChineseSimplified</Value>
+        <Value item="4">ChineseTraditional</Value>
+        <Value item="5">Czech</Value>
+        <Value item="6">Danish</Value>
+        <Value item="7">Dutch</Value>
+        <Value item="8">English</Value>
+        <Value item="9">EnglishUK</Value>
+        <Value item="10">Finnish</Value>
+        <Value item="11">French</Value>
+        <Value item="12">FrenchCanadian</Value>
+        <Value item="13">German</Value>
+        <Value item="14">Hebrew</Value>
+        <Value item="15">Hungarian</Value>
+        <Value item="16">Italian</Value>
+        <Value item="17">Japanese</Value>
+        <Value item="18">Korean</Value>
+        <Value item="19">Norwegian</Value>
+        <Value item="20">Polish</Value>
+        <Value item="21">Portuguese</Value>
+        <Value item="22">PortugueseBrazilian</Value>
+        <Value item="23">Russian</Value>
+        <Value item="24">Spanish</Value>
+        <Value item="25">SpanishLatin</Value>
+        <Value item="26">Swedish</Value>
+        <Value item="27">Turkish</Value>
+        <Value item="28">Ukrainian</Value>
+    </TTPAR_MenuLanguages>
+    <TTPAR_MicArrayMode type="Literal">
+        <Value item="1">Focused</Value>
+        <Value item="2">Wide</Value>
+    </TTPAR_MicArrayMode>
+    <TTPAR_MicrosoftTeamsLogLevels type="Literal">
+        <Value item="1">Debug</Value>
+        <Value item="2">Error</Value>
+        <Value item="3">Info</Value>
+        <Value item="4">Verbose</Value>
+        <Value item="5">Warning</Value>
+    </TTPAR_MicrosoftTeamsLogLevels>
+    <TTPAR_MiracastAudioCompression type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Uncompressed</Value>
+    </TTPAR_MiracastAudioCompression>
+    <TTPAR_MiracastAuthentication type="Literal">
+        <Value item="1">AutoAccept</Value>
+        <Value item="2">PinAlways</Value>
+        <Value item="3">PinFirstTime</Value>
+        <Value item="4">PushButton</Value>
+    </TTPAR_MiracastAuthentication>
+    <TTPAR_MiracastMode type="Literal">
+        <Value item="1">Manual</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">On</Value>
+    </TTPAR_MiracastMode>
+    <TTPAR_MiracastPinLength type="Literal">
+        <Value item="1">4</Value>
+        <Value item="2">8</Value>
+    </TTPAR_MiracastPinLength>
+    <TTPAR_MiracastPresentationSelection type="Literal">
+        <Value item="1">AutoShare</Value>
+        <Value item="2">OnConnect</Value>
+    </TTPAR_MiracastPresentationSelection>
+    <TTPAR_MiracastTransport type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Direct</Value>
+        <Value item="3">Infrastructure</Value>
+    </TTPAR_MiracastTransport>
+    <TTPAR_MiracastWiFiCoexistence type="Literal">
+        <Value item="1">Always</Value>
+        <Value item="2">Infrastructure</Value>
+        <Value item="3">Never</Value>
+    </TTPAR_MiracastWiFiCoexistence>
+    <TTPAR_MirroringTypes type="Literal">
+        <Value item="1">LastOnly</Value>
+        <Value item="2">Mirror</Value>
+        <Value item="3">Multiscreen</Value>
+    </TTPAR_MirroringTypes>
+    <TTPAR_MonitorRole_Dual_Auto type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">First</Value>
+        <Value item="3">PresentationOnly</Value>
+        <Value item="4">Second</Value>
+    </TTPAR_MonitorRole_Dual_Auto>
+    <TTPAR_MonitorRole_Dual_BasicCurrent type="Literal">
+        <Value item="1">Current</Value>
+        <Value item="2">First</Value>
+        <Value item="3">Second</Value>
+    </TTPAR_MonitorRole_Dual_BasicCurrent>
+    <TTPAR_Monitors_Dual type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Dual</Value>
+        <Value item="3">DualPresentationOnly</Value>
+        <Value item="4">Single</Value>
+    </TTPAR_Monitors_Dual>
+    <TTPAR_MsTeamsChannel type="Literal">
+        <Value item="1">Stable</Value>
+        <Value item="2">Testing</Value>
+    </TTPAR_MsTeamsChannel>
+    <TTPAR_MultipointVs type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">CUCMMediaResourceGroupList</Value>
+        <Value item="3">MultiSite</Value>
+        <Value item="4">Off</Value>
+    </TTPAR_MultipointVs>
+    <TTPAR_MultiscreenBehavior type="Literal">
+        <Value item="1">Blank</Value>
+        <Value item="2">Mirror</Value>
+    </TTPAR_MultiscreenBehavior>
+    <TTPAR_MuteEnabled type="Literal">
+        <Value item="1">InCallOnly</Value>
+        <Value item="2">True</Value>
+    </TTPAR_MuteEnabled>
+    <TTPAR_NativeMeetingJoinFallbackStrategy type="Literal">
+        <Value item="1">FallbackOnMediaProbeFailure</Value>
+        <Value item="2">None</Value>
+    </TTPAR_NativeMeetingJoinFallbackStrategy>
+    <TTPAR_NewAddFlowVisibility type="Literal">
+        <Value item="1">AlwaysOff</Value>
+        <Value item="2">AlwaysOn</Value>
+        <Value item="3">CloudMeeting</Value>
+        <Value item="4">InstantMeeting</Value>
+    </TTPAR_NewAddFlowVisibility>
+    <TTPAR_NormalAggressive type="Literal">
+        <Value item="1">Aggressive</Value>
+        <Value item="2">Normal</Value>
+    </TTPAR_NormalAggressive>
+    <TTPAR_NotificationsVisibility type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Hidden</Value>
+    </TTPAR_NotificationsVisibility>
+    <TTPAR_NtpKeyAlgorithm type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">SHA1</Value>
+        <Value item="3">SHA256</Value>
+    </TTPAR_NtpKeyAlgorithm>
+    <TTPAR_Off type="Literal">
+        <Value item="1">Off</Value>
+    </TTPAR_Off>
+    <TTPAR_OffManual type="Literal">
+        <Value item="1">Manual</Value>
+        <Value item="2">Off</Value>
+    </TTPAR_OffManual>
+    <TTPAR_OlsonTimeZone type="Literal">
+        <Value item="1">Africa/Abidjan</Value>
+        <Value item="2">Africa/Accra</Value>
+        <Value item="3">Africa/Addis_Ababa</Value>
+        <Value item="4">Africa/Algiers</Value>
+        <Value item="5">Africa/Asmara</Value>
+        <Value item="6">Africa/Asmera</Value>
+        <Value item="7">Africa/Bamako</Value>
+        <Value item="8">Africa/Bangui</Value>
+        <Value item="9">Africa/Banjul</Value>
+        <Value item="10">Africa/Bissau</Value>
+        <Value item="11">Africa/Blantyre</Value>
+        <Value item="12">Africa/Brazzaville</Value>
+        <Value item="13">Africa/Bujumbura</Value>
+        <Value item="14">Africa/Cairo</Value>
+        <Value item="15">Africa/Casablanca</Value>
+        <Value item="16">Africa/Ceuta</Value>
+        <Value item="17">Africa/Conakry</Value>
+        <Value item="18">Africa/Dakar</Value>
+        <Value item="19">Africa/Dar_es_Salaam</Value>
+        <Value item="20">Africa/Djibouti</Value>
+        <Value item="21">Africa/Douala</Value>
+        <Value item="22">Africa/El_Aaiun</Value>
+        <Value item="23">Africa/Freetown</Value>
+        <Value item="24">Africa/Gaborone</Value>
+        <Value item="25">Africa/Harare</Value>
+        <Value item="26">Africa/Johannesburg</Value>
+        <Value item="27">Africa/Juba</Value>
+        <Value item="28">Africa/Kampala</Value>
+        <Value item="29">Africa/Khartoum</Value>
+        <Value item="30">Africa/Kigali</Value>
+        <Value item="31">Africa/Kinshasa</Value>
+        <Value item="32">Africa/Lagos</Value>
+        <Value item="33">Africa/Libreville</Value>
+        <Value item="34">Africa/Lome</Value>
+        <Value item="35">Africa/Luanda</Value>
+        <Value item="36">Africa/Lubumbashi</Value>
+        <Value item="37">Africa/Lusaka</Value>
+        <Value item="38">Africa/Malabo</Value>
+        <Value item="39">Africa/Maputo</Value>
+        <Value item="40">Africa/Maseru</Value>
+        <Value item="41">Africa/Mbabane</Value>
+        <Value item="42">Africa/Mogadishu</Value>
+        <Value item="43">Africa/Monrovia</Value>
+        <Value item="44">Africa/Nairobi</Value>
+        <Value item="45">Africa/Ndjamena</Value>
+        <Value item="46">Africa/Niamey</Value>
+        <Value item="47">Africa/Nouakchott</Value>
+        <Value item="48">Africa/Ouagadougou</Value>
+        <Value item="49">Africa/Porto-Novo</Value>
+        <Value item="50">Africa/Sao_Tome</Value>
+        <Value item="51">Africa/Timbuktu</Value>
+        <Value item="52">Africa/Tripoli</Value>
+        <Value item="53">Africa/Tunis</Value>
+        <Value item="54">Africa/Windhoek</Value>
+        <Value item="55">America/Adak</Value>
+        <Value item="56">America/Anchorage</Value>
+        <Value item="57">America/Anguilla</Value>
+        <Value item="58">America/Antigua</Value>
+        <Value item="59">America/Araguaina</Value>
+        <Value item="60">America/Argentina/Buenos_Aires</Value>
+        <Value item="61">America/Argentina/Catamarca</Value>
+        <Value item="62">America/Argentina/ComodRivadavia</Value>
+        <Value item="63">America/Argentina/Cordoba</Value>
+        <Value item="64">America/Argentina/Jujuy</Value>
+        <Value item="65">America/Argentina/La_Rioja</Value>
+        <Value item="66">America/Argentina/Mendoza</Value>
+        <Value item="67">America/Argentina/Rio_Gallegos</Value>
+        <Value item="68">America/Argentina/Salta</Value>
+        <Value item="69">America/Argentina/San_Juan</Value>
+        <Value item="70">America/Argentina/San_Luis</Value>
+        <Value item="71">America/Argentina/Tucuman</Value>
+        <Value item="72">America/Argentina/Ushuaia</Value>
+        <Value item="73">America/Aruba</Value>
+        <Value item="74">America/Asuncion</Value>
+        <Value item="75">America/Atikokan</Value>
+        <Value item="76">America/Atka</Value>
+        <Value item="77">America/Bahia</Value>
+        <Value item="78">America/Bahia_Banderas</Value>
+        <Value item="79">America/Barbados</Value>
+        <Value item="80">America/Belem</Value>
+        <Value item="81">America/Belize</Value>
+        <Value item="82">America/Blanc-Sablon</Value>
+        <Value item="83">America/Boa_Vista</Value>
+        <Value item="84">America/Bogota</Value>
+        <Value item="85">America/Boise</Value>
+        <Value item="86">America/Buenos_Aires</Value>
+        <Value item="87">America/Cambridge_Bay</Value>
+        <Value item="88">America/Campo_Grande</Value>
+        <Value item="89">America/Cancun</Value>
+        <Value item="90">America/Caracas</Value>
+        <Value item="91">America/Catamarca</Value>
+        <Value item="92">America/Cayenne</Value>
+        <Value item="93">America/Cayman</Value>
+        <Value item="94">America/Chicago</Value>
+        <Value item="95">America/Chihuahua</Value>
+        <Value item="96">America/Ciudad_Juarez</Value>
+        <Value item="97">America/Coral_Harbour</Value>
+        <Value item="98">America/Cordoba</Value>
+        <Value item="99">America/Costa_Rica</Value>
+        <Value item="100">America/Creston</Value>
+        <Value item="101">America/Cuiaba</Value>
+        <Value item="102">America/Curacao</Value>
+        <Value item="103">America/Danmarkshavn</Value>
+        <Value item="104">America/Dawson</Value>
+        <Value item="105">America/Dawson_Creek</Value>
+        <Value item="106">America/Denver</Value>
+        <Value item="107">America/Detroit</Value>
+        <Value item="108">America/Dominica</Value>
+        <Value item="109">America/Edmonton</Value>
+        <Value item="110">America/Eirunepe</Value>
+        <Value item="111">America/El_Salvador</Value>
+        <Value item="112">America/Ensenada</Value>
+        <Value item="113">America/Fort_Nelson</Value>
+        <Value item="114">America/Fort_Wayne</Value>
+        <Value item="115">America/Fortaleza</Value>
+        <Value item="116">America/Glace_Bay</Value>
+        <Value item="117">America/Godthab</Value>
+        <Value item="118">America/Goose_Bay</Value>
+        <Value item="119">America/Grand_Turk</Value>
+        <Value item="120">America/Grenada</Value>
+        <Value item="121">America/Guadeloupe</Value>
+        <Value item="122">America/Guatemala</Value>
+        <Value item="123">America/Guayaquil</Value>
+        <Value item="124">America/Guyana</Value>
+        <Value item="125">America/Halifax</Value>
+        <Value item="126">America/Havana</Value>
+        <Value item="127">America/Hermosillo</Value>
+        <Value item="128">America/Indiana/Indianapolis</Value>
+        <Value item="129">America/Indiana/Knox</Value>
+        <Value item="130">America/Indiana/Marengo</Value>
+        <Value item="131">America/Indiana/Petersburg</Value>
+        <Value item="132">America/Indiana/Tell_City</Value>
+        <Value item="133">America/Indiana/Vevay</Value>
+        <Value item="134">America/Indiana/Vincennes</Value>
+        <Value item="135">America/Indiana/Winamac</Value>
+        <Value item="136">America/Indianapolis</Value>
+        <Value item="137">America/Inuvik</Value>
+        <Value item="138">America/Iqaluit</Value>
+        <Value item="139">America/Jamaica</Value>
+        <Value item="140">America/Jujuy</Value>
+        <Value item="141">America/Juneau</Value>
+        <Value item="142">America/Kentucky/Louisville</Value>
+        <Value item="143">America/Kentucky/Monticello</Value>
+        <Value item="144">America/Knox_IN</Value>
+        <Value item="145">America/Kralendijk</Value>
+        <Value item="146">America/La_Paz</Value>
+        <Value item="147">America/Lima</Value>
+        <Value item="148">America/Los_Angeles</Value>
+        <Value item="149">America/Louisville</Value>
+        <Value item="150">America/Lower_Princes</Value>
+        <Value item="151">America/Maceio</Value>
+        <Value item="152">America/Managua</Value>
+        <Value item="153">America/Manaus</Value>
+        <Value item="154">America/Marigot</Value>
+        <Value item="155">America/Martinique</Value>
+        <Value item="156">America/Matamoros</Value>
+        <Value item="157">America/Mazatlan</Value>
+        <Value item="158">America/Mendoza</Value>
+        <Value item="159">America/Menominee</Value>
+        <Value item="160">America/Merida</Value>
+        <Value item="161">America/Metlakatla</Value>
+        <Value item="162">America/Mexico_City</Value>
+        <Value item="163">America/Miquelon</Value>
+        <Value item="164">America/Moncton</Value>
+        <Value item="165">America/Monterrey</Value>
+        <Value item="166">America/Montevideo</Value>
+        <Value item="167">America/Montreal</Value>
+        <Value item="168">America/Montserrat</Value>
+        <Value item="169">America/Nassau</Value>
+        <Value item="170">America/New_York</Value>
+        <Value item="171">America/Nipigon</Value>
+        <Value item="172">America/Nome</Value>
+        <Value item="173">America/Noronha</Value>
+        <Value item="174">America/North_Dakota/Beulah</Value>
+        <Value item="175">America/North_Dakota/Center</Value>
+        <Value item="176">America/North_Dakota/New_Salem</Value>
+        <Value item="177">America/Nuuk</Value>
+        <Value item="178">America/Ojinaga</Value>
+        <Value item="179">America/Panama</Value>
+        <Value item="180">America/Pangnirtung</Value>
+        <Value item="181">America/Paramaribo</Value>
+        <Value item="182">America/Phoenix</Value>
+        <Value item="183">America/Port-au-Prince</Value>
+        <Value item="184">America/Port_of_Spain</Value>
+        <Value item="185">America/Porto_Acre</Value>
+        <Value item="186">America/Porto_Velho</Value>
+        <Value item="187">America/Puerto_Rico</Value>
+        <Value item="188">America/Punta_Arenas</Value>
+        <Value item="189">America/Rainy_River</Value>
+        <Value item="190">America/Rankin_Inlet</Value>
+        <Value item="191">America/Recife</Value>
+        <Value item="192">America/Regina</Value>
+        <Value item="193">America/Resolute</Value>
+        <Value item="194">America/Rio_Branco</Value>
+        <Value item="195">America/Rosario</Value>
+        <Value item="196">America/Santa_Isabel</Value>
+        <Value item="197">America/Santarem</Value>
+        <Value item="198">America/Santiago</Value>
+        <Value item="199">America/Santo_Domingo</Value>
+        <Value item="200">America/Sao_Paulo</Value>
+        <Value item="201">America/Scoresbysund</Value>
+        <Value item="202">America/Shiprock</Value>
+        <Value item="203">America/Sitka</Value>
+        <Value item="204">America/St_Barthelemy</Value>
+        <Value item="205">America/St_Johns</Value>
+        <Value item="206">America/St_Kitts</Value>
+        <Value item="207">America/St_Lucia</Value>
+        <Value item="208">America/St_Thomas</Value>
+        <Value item="209">America/St_Vincent</Value>
+        <Value item="210">America/Swift_Current</Value>
+        <Value item="211">America/Tegucigalpa</Value>
+        <Value item="212">America/Thule</Value>
+        <Value item="213">America/Thunder_Bay</Value>
+        <Value item="214">America/Tijuana</Value>
+        <Value item="215">America/Toronto</Value>
+        <Value item="216">America/Tortola</Value>
+        <Value item="217">America/Vancouver</Value>
+        <Value item="218">America/Virgin</Value>
+        <Value item="219">America/Whitehorse</Value>
+        <Value item="220">America/Winnipeg</Value>
+        <Value item="221">America/Yakutat</Value>
+        <Value item="222">America/Yellowknife</Value>
+        <Value item="223">Antarctica/Casey</Value>
+        <Value item="224">Antarctica/Davis</Value>
+        <Value item="225">Antarctica/DumontDUrville</Value>
+        <Value item="226">Antarctica/Macquarie</Value>
+        <Value item="227">Antarctica/Mawson</Value>
+        <Value item="228">Antarctica/McMurdo</Value>
+        <Value item="229">Antarctica/Palmer</Value>
+        <Value item="230">Antarctica/Rothera</Value>
+        <Value item="231">Antarctica/South_Pole</Value>
+        <Value item="232">Antarctica/Syowa</Value>
+        <Value item="233">Antarctica/Troll</Value>
+        <Value item="234">Antarctica/Vostok</Value>
+        <Value item="235">Arctic/Longyearbyen</Value>
+        <Value item="236">Asia/Aden</Value>
+        <Value item="237">Asia/Almaty</Value>
+        <Value item="238">Asia/Amman</Value>
+        <Value item="239">Asia/Anadyr</Value>
+        <Value item="240">Asia/Aqtau</Value>
+        <Value item="241">Asia/Aqtobe</Value>
+        <Value item="242">Asia/Ashgabat</Value>
+        <Value item="243">Asia/Ashkhabad</Value>
+        <Value item="244">Asia/Atyrau</Value>
+        <Value item="245">Asia/Baghdad</Value>
+        <Value item="246">Asia/Bahrain</Value>
+        <Value item="247">Asia/Baku</Value>
+        <Value item="248">Asia/Bangkok</Value>
+        <Value item="249">Asia/Barnaul</Value>
+        <Value item="250">Asia/Beirut</Value>
+        <Value item="251">Asia/Bishkek</Value>
+        <Value item="252">Asia/Brunei</Value>
+        <Value item="253">Asia/Calcutta</Value>
+        <Value item="254">Asia/Chita</Value>
+        <Value item="255">Asia/Choibalsan</Value>
+        <Value item="256">Asia/Chongqing</Value>
+        <Value item="257">Asia/Chungking</Value>
+        <Value item="258">Asia/Colombo</Value>
+        <Value item="259">Asia/Dacca</Value>
+        <Value item="260">Asia/Damascus</Value>
+        <Value item="261">Asia/Dhaka</Value>
+        <Value item="262">Asia/Dili</Value>
+        <Value item="263">Asia/Dubai</Value>
+        <Value item="264">Asia/Dushanbe</Value>
+        <Value item="265">Asia/Famagusta</Value>
+        <Value item="266">Asia/Gaza</Value>
+        <Value item="267">Asia/Harbin</Value>
+        <Value item="268">Asia/Hebron</Value>
+        <Value item="269">Asia/Ho_Chi_Minh</Value>
+        <Value item="270">Asia/Hong_Kong</Value>
+        <Value item="271">Asia/Hovd</Value>
+        <Value item="272">Asia/Irkutsk</Value>
+        <Value item="273">Asia/Istanbul</Value>
+        <Value item="274">Asia/Jakarta</Value>
+        <Value item="275">Asia/Jayapura</Value>
+        <Value item="276">Asia/Jerusalem</Value>
+        <Value item="277">Asia/Kabul</Value>
+        <Value item="278">Asia/Kamchatka</Value>
+        <Value item="279">Asia/Karachi</Value>
+        <Value item="280">Asia/Kashgar</Value>
+        <Value item="281">Asia/Kathmandu</Value>
+        <Value item="282">Asia/Katmandu</Value>
+        <Value item="283">Asia/Khandyga</Value>
+        <Value item="284">Asia/Kolkata</Value>
+        <Value item="285">Asia/Krasnoyarsk</Value>
+        <Value item="286">Asia/Kuala_Lumpur</Value>
+        <Value item="287">Asia/Kuching</Value>
+        <Value item="288">Asia/Kuwait</Value>
+        <Value item="289">Asia/Macao</Value>
+        <Value item="290">Asia/Macau</Value>
+        <Value item="291">Asia/Magadan</Value>
+        <Value item="292">Asia/Makassar</Value>
+        <Value item="293">Asia/Manila</Value>
+        <Value item="294">Asia/Muscat</Value>
+        <Value item="295">Asia/Nicosia</Value>
+        <Value item="296">Asia/Novokuznetsk</Value>
+        <Value item="297">Asia/Novosibirsk</Value>
+        <Value item="298">Asia/Omsk</Value>
+        <Value item="299">Asia/Oral</Value>
+        <Value item="300">Asia/Phnom_Penh</Value>
+        <Value item="301">Asia/Pontianak</Value>
+        <Value item="302">Asia/Pyongyang</Value>
+        <Value item="303">Asia/Qatar</Value>
+        <Value item="304">Asia/Qostanay</Value>
+        <Value item="305">Asia/Qyzylorda</Value>
+        <Value item="306">Asia/Rangoon</Value>
+        <Value item="307">Asia/Riyadh</Value>
+        <Value item="308">Asia/Saigon</Value>
+        <Value item="309">Asia/Sakhalin</Value>
+        <Value item="310">Asia/Samarkand</Value>
+        <Value item="311">Asia/Seoul</Value>
+        <Value item="312">Asia/Shanghai</Value>
+        <Value item="313">Asia/Singapore</Value>
+        <Value item="314">Asia/Srednekolymsk</Value>
+        <Value item="315">Asia/Taipei</Value>
+        <Value item="316">Asia/Tashkent</Value>
+        <Value item="317">Asia/Tbilisi</Value>
+        <Value item="318">Asia/Tehran</Value>
+        <Value item="319">Asia/Tel_Aviv</Value>
+        <Value item="320">Asia/Thimbu</Value>
+        <Value item="321">Asia/Thimphu</Value>
+        <Value item="322">Asia/Tokyo</Value>
+        <Value item="323">Asia/Tomsk</Value>
+        <Value item="324">Asia/Ujung_Pandang</Value>
+        <Value item="325">Asia/Ulaanbaatar</Value>
+        <Value item="326">Asia/Ulan_Bator</Value>
+        <Value item="327">Asia/Urumqi</Value>
+        <Value item="328">Asia/Ust-Nera</Value>
+        <Value item="329">Asia/Vientiane</Value>
+        <Value item="330">Asia/Vladivostok</Value>
+        <Value item="331">Asia/Yakutsk</Value>
+        <Value item="332">Asia/Yangon</Value>
+        <Value item="333">Asia/Yekaterinburg</Value>
+        <Value item="334">Asia/Yerevan</Value>
+        <Value item="335">Atlantic/Azores</Value>
+        <Value item="336">Atlantic/Bermuda</Value>
+        <Value item="337">Atlantic/Canary</Value>
+        <Value item="338">Atlantic/Cape_Verde</Value>
+        <Value item="339">Atlantic/Faeroe</Value>
+        <Value item="340">Atlantic/Faroe</Value>
+        <Value item="341">Atlantic/Jan_Mayen</Value>
+        <Value item="342">Atlantic/Madeira</Value>
+        <Value item="343">Atlantic/Reykjavik</Value>
+        <Value item="344">Atlantic/South_Georgia</Value>
+        <Value item="345">Atlantic/St_Helena</Value>
+        <Value item="346">Atlantic/Stanley</Value>
+        <Value item="347">Australia/ACT</Value>
+        <Value item="348">Australia/Adelaide</Value>
+        <Value item="349">Australia/Brisbane</Value>
+        <Value item="350">Australia/Broken_Hill</Value>
+        <Value item="351">Australia/Canberra</Value>
+        <Value item="352">Australia/Currie</Value>
+        <Value item="353">Australia/Darwin</Value>
+        <Value item="354">Australia/Eucla</Value>
+        <Value item="355">Australia/Hobart</Value>
+        <Value item="356">Australia/LHI</Value>
+        <Value item="357">Australia/Lindeman</Value>
+        <Value item="358">Australia/Lord_Howe</Value>
+        <Value item="359">Australia/Melbourne</Value>
+        <Value item="360">Australia/NSW</Value>
+        <Value item="361">Australia/North</Value>
+        <Value item="362">Australia/Perth</Value>
+        <Value item="363">Australia/Queensland</Value>
+        <Value item="364">Australia/South</Value>
+        <Value item="365">Australia/Sydney</Value>
+        <Value item="366">Australia/Tasmania</Value>
+        <Value item="367">Australia/Victoria</Value>
+        <Value item="368">Australia/West</Value>
+        <Value item="369">Australia/Yancowinna</Value>
+        <Value item="370">Brazil/Acre</Value>
+        <Value item="371">Brazil/DeNoronha</Value>
+        <Value item="372">Brazil/East</Value>
+        <Value item="373">Brazil/West</Value>
+        <Value item="374">CET</Value>
+        <Value item="375">CST6CDT</Value>
+        <Value item="376">Canada/Atlantic</Value>
+        <Value item="377">Canada/Central</Value>
+        <Value item="378">Canada/Eastern</Value>
+        <Value item="379">Canada/Mountain</Value>
+        <Value item="380">Canada/Newfoundland</Value>
+        <Value item="381">Canada/Pacific</Value>
+        <Value item="382">Canada/Saskatchewan</Value>
+        <Value item="383">Canada/Yukon</Value>
+        <Value item="384">Chile/Continental</Value>
+        <Value item="385">Chile/EasterIsland</Value>
+        <Value item="386">Cuba</Value>
+        <Value item="387">EET</Value>
+        <Value item="388">EST</Value>
+        <Value item="389">EST5EDT</Value>
+        <Value item="390">Egypt</Value>
+        <Value item="391">Eire</Value>
+        <Value item="392">Etc/GMT</Value>
+        <Value item="393">Etc/GMT+0</Value>
+        <Value item="394">Etc/GMT+1</Value>
+        <Value item="395">Etc/GMT+10</Value>
+        <Value item="396">Etc/GMT+11</Value>
+        <Value item="397">Etc/GMT+12</Value>
+        <Value item="398">Etc/GMT+2</Value>
+        <Value item="399">Etc/GMT+3</Value>
+        <Value item="400">Etc/GMT+4</Value>
+        <Value item="401">Etc/GMT+5</Value>
+        <Value item="402">Etc/GMT+6</Value>
+        <Value item="403">Etc/GMT+7</Value>
+        <Value item="404">Etc/GMT+8</Value>
+        <Value item="405">Etc/GMT+9</Value>
+        <Value item="406">Etc/GMT-0</Value>
+        <Value item="407">Etc/GMT-1</Value>
+        <Value item="408">Etc/GMT-10</Value>
+        <Value item="409">Etc/GMT-11</Value>
+        <Value item="410">Etc/GMT-12</Value>
+        <Value item="411">Etc/GMT-13</Value>
+        <Value item="412">Etc/GMT-14</Value>
+        <Value item="413">Etc/GMT-2</Value>
+        <Value item="414">Etc/GMT-3</Value>
+        <Value item="415">Etc/GMT-4</Value>
+        <Value item="416">Etc/GMT-5</Value>
+        <Value item="417">Etc/GMT-6</Value>
+        <Value item="418">Etc/GMT-7</Value>
+        <Value item="419">Etc/GMT-8</Value>
+        <Value item="420">Etc/GMT-9</Value>
+        <Value item="421">Etc/GMT0</Value>
+        <Value item="422">Etc/Greenwich</Value>
+        <Value item="423">Etc/UCT</Value>
+        <Value item="424">Etc/UTC</Value>
+        <Value item="425">Etc/Universal</Value>
+        <Value item="426">Etc/Zulu</Value>
+        <Value item="427">Europe/Amsterdam</Value>
+        <Value item="428">Europe/Andorra</Value>
+        <Value item="429">Europe/Astrakhan</Value>
+        <Value item="430">Europe/Athens</Value>
+        <Value item="431">Europe/Belfast</Value>
+        <Value item="432">Europe/Belgrade</Value>
+        <Value item="433">Europe/Berlin</Value>
+        <Value item="434">Europe/Bratislava</Value>
+        <Value item="435">Europe/Brussels</Value>
+        <Value item="436">Europe/Bucharest</Value>
+        <Value item="437">Europe/Budapest</Value>
+        <Value item="438">Europe/Busingen</Value>
+        <Value item="439">Europe/Chisinau</Value>
+        <Value item="440">Europe/Copenhagen</Value>
+        <Value item="441">Europe/Dublin</Value>
+        <Value item="442">Europe/Gibraltar</Value>
+        <Value item="443">Europe/Guernsey</Value>
+        <Value item="444">Europe/Helsinki</Value>
+        <Value item="445">Europe/Isle_of_Man</Value>
+        <Value item="446">Europe/Istanbul</Value>
+        <Value item="447">Europe/Jersey</Value>
+        <Value item="448">Europe/Kaliningrad</Value>
+        <Value item="449">Europe/Kiev</Value>
+        <Value item="450">Europe/Kirov</Value>
+        <Value item="451">Europe/Kyiv</Value>
+        <Value item="452">Europe/Lisbon</Value>
+        <Value item="453">Europe/Ljubljana</Value>
+        <Value item="454">Europe/London</Value>
+        <Value item="455">Europe/Luxembourg</Value>
+        <Value item="456">Europe/Madrid</Value>
+        <Value item="457">Europe/Malta</Value>
+        <Value item="458">Europe/Mariehamn</Value>
+        <Value item="459">Europe/Minsk</Value>
+        <Value item="460">Europe/Monaco</Value>
+        <Value item="461">Europe/Moscow</Value>
+        <Value item="462">Europe/Nicosia</Value>
+        <Value item="463">Europe/Oslo</Value>
+        <Value item="464">Europe/Paris</Value>
+        <Value item="465">Europe/Podgorica</Value>
+        <Value item="466">Europe/Prague</Value>
+        <Value item="467">Europe/Riga</Value>
+        <Value item="468">Europe/Rome</Value>
+        <Value item="469">Europe/Samara</Value>
+        <Value item="470">Europe/San_Marino</Value>
+        <Value item="471">Europe/Sarajevo</Value>
+        <Value item="472">Europe/Saratov</Value>
+        <Value item="473">Europe/Simferopol</Value>
+        <Value item="474">Europe/Skopje</Value>
+        <Value item="475">Europe/Sofia</Value>
+        <Value item="476">Europe/Stockholm</Value>
+        <Value item="477">Europe/Tallinn</Value>
+        <Value item="478">Europe/Tirane</Value>
+        <Value item="479">Europe/Tiraspol</Value>
+        <Value item="480">Europe/Ulyanovsk</Value>
+        <Value item="481">Europe/Uzhgorod</Value>
+        <Value item="482">Europe/Vaduz</Value>
+        <Value item="483">Europe/Vatican</Value>
+        <Value item="484">Europe/Vienna</Value>
+        <Value item="485">Europe/Vilnius</Value>
+        <Value item="486">Europe/Volgograd</Value>
+        <Value item="487">Europe/Warsaw</Value>
+        <Value item="488">Europe/Zagreb</Value>
+        <Value item="489">Europe/Zaporozhye</Value>
+        <Value item="490">Europe/Zurich</Value>
+        <Value item="491">GB</Value>
+        <Value item="492">GB-Eire</Value>
+        <Value item="493">GMT</Value>
+        <Value item="494">GMT+0</Value>
+        <Value item="495">GMT-0</Value>
+        <Value item="496">GMT0</Value>
+        <Value item="497">Greenwich</Value>
+        <Value item="498">HST</Value>
+        <Value item="499">Hongkong</Value>
+        <Value item="500">Iceland</Value>
+        <Value item="501">Indian/Antananarivo</Value>
+        <Value item="502">Indian/Chagos</Value>
+        <Value item="503">Indian/Christmas</Value>
+        <Value item="504">Indian/Cocos</Value>
+        <Value item="505">Indian/Comoro</Value>
+        <Value item="506">Indian/Kerguelen</Value>
+        <Value item="507">Indian/Mahe</Value>
+        <Value item="508">Indian/Maldives</Value>
+        <Value item="509">Indian/Mauritius</Value>
+        <Value item="510">Indian/Mayotte</Value>
+        <Value item="511">Indian/Reunion</Value>
+        <Value item="512">Iran</Value>
+        <Value item="513">Israel</Value>
+        <Value item="514">Jamaica</Value>
+        <Value item="515">Japan</Value>
+        <Value item="516">Kwajalein</Value>
+        <Value item="517">Libya</Value>
+        <Value item="518">MET</Value>
+        <Value item="519">MST</Value>
+        <Value item="520">MST7MDT</Value>
+        <Value item="521">Mexico/BajaNorte</Value>
+        <Value item="522">Mexico/BajaSur</Value>
+        <Value item="523">Mexico/General</Value>
+        <Value item="524">NZ</Value>
+        <Value item="525">NZ-CHAT</Value>
+        <Value item="526">Navajo</Value>
+        <Value item="527">PRC</Value>
+        <Value item="528">PST8PDT</Value>
+        <Value item="529">Pacific/Apia</Value>
+        <Value item="530">Pacific/Auckland</Value>
+        <Value item="531">Pacific/Bougainville</Value>
+        <Value item="532">Pacific/Chatham</Value>
+        <Value item="533">Pacific/Chuuk</Value>
+        <Value item="534">Pacific/Easter</Value>
+        <Value item="535">Pacific/Efate</Value>
+        <Value item="536">Pacific/Enderbury</Value>
+        <Value item="537">Pacific/Fakaofo</Value>
+        <Value item="538">Pacific/Fiji</Value>
+        <Value item="539">Pacific/Funafuti</Value>
+        <Value item="540">Pacific/Galapagos</Value>
+        <Value item="541">Pacific/Gambier</Value>
+        <Value item="542">Pacific/Guadalcanal</Value>
+        <Value item="543">Pacific/Guam</Value>
+        <Value item="544">Pacific/Honolulu</Value>
+        <Value item="545">Pacific/Johnston</Value>
+        <Value item="546">Pacific/Kanton</Value>
+        <Value item="547">Pacific/Kiritimati</Value>
+        <Value item="548">Pacific/Kosrae</Value>
+        <Value item="549">Pacific/Kwajalein</Value>
+        <Value item="550">Pacific/Majuro</Value>
+        <Value item="551">Pacific/Marquesas</Value>
+        <Value item="552">Pacific/Midway</Value>
+        <Value item="553">Pacific/Nauru</Value>
+        <Value item="554">Pacific/Niue</Value>
+        <Value item="555">Pacific/Norfolk</Value>
+        <Value item="556">Pacific/Noumea</Value>
+        <Value item="557">Pacific/Pago_Pago</Value>
+        <Value item="558">Pacific/Palau</Value>
+        <Value item="559">Pacific/Pitcairn</Value>
+        <Value item="560">Pacific/Pohnpei</Value>
+        <Value item="561">Pacific/Ponape</Value>
+        <Value item="562">Pacific/Port_Moresby</Value>
+        <Value item="563">Pacific/Rarotonga</Value>
+        <Value item="564">Pacific/Saipan</Value>
+        <Value item="565">Pacific/Samoa</Value>
+        <Value item="566">Pacific/Tahiti</Value>
+        <Value item="567">Pacific/Tarawa</Value>
+        <Value item="568">Pacific/Tongatapu</Value>
+        <Value item="569">Pacific/Truk</Value>
+        <Value item="570">Pacific/Wake</Value>
+        <Value item="571">Pacific/Wallis</Value>
+        <Value item="572">Pacific/Yap</Value>
+        <Value item="573">Poland</Value>
+        <Value item="574">Portugal</Value>
+        <Value item="575">ROC</Value>
+        <Value item="576">ROK</Value>
+        <Value item="577">Singapore</Value>
+        <Value item="578">Turkey</Value>
+        <Value item="579">UCT</Value>
+        <Value item="580">US/Alaska</Value>
+        <Value item="581">US/Aleutian</Value>
+        <Value item="582">US/Arizona</Value>
+        <Value item="583">US/Central</Value>
+        <Value item="584">US/East-Indiana</Value>
+        <Value item="585">US/Eastern</Value>
+        <Value item="586">US/Hawaii</Value>
+        <Value item="587">US/Indiana-Starke</Value>
+        <Value item="588">US/Michigan</Value>
+        <Value item="589">US/Mountain</Value>
+        <Value item="590">US/Pacific</Value>
+        <Value item="591">US/Samoa</Value>
+        <Value item="592">UTC</Value>
+        <Value item="593">Universal</Value>
+        <Value item="594">W-SU</Value>
+        <Value item="595">WET</Value>
+        <Value item="596">Zulu</Value>
+    </TTPAR_OlsonTimeZone>
+    <TTPAR_On type="Literal">
+        <Value item="1">On</Value>
+    </TTPAR_On>
+    <TTPAR_OnCallMode type="Literal">
+        <Value item="1">Active</Value>
+        <Value item="2">Auto</Value>
+        <Value item="3">Inactive</Value>
+        <Value item="4">Previous</Value>
+    </TTPAR_OnCallMode>
+    <TTPAR_OnOff type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">On</Value>
+    </TTPAR_OnOff>
+    <TTPAR_OnOffAuto type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">On</Value>
+    </TTPAR_OnOffAuto>
+    <TTPAR_OnOffCurrent type="Literal">
+        <Value item="1">Current</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">On</Value>
+    </TTPAR_OnOffCurrent>
+    <TTPAR_OnOffCurrentAuto type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Current</Value>
+        <Value item="3">Off</Value>
+        <Value item="4">On</Value>
+    </TTPAR_OnOffCurrentAuto>
+    <TTPAR_OnOffPassive type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">On</Value>
+        <Value item="3">Passive</Value>
+    </TTPAR_OnOffPassive>
+    <TTPAR_OsdOutput_2_Auto type="Literal">
+        <Value item="1">1</Value>
+        <Value item="2">2</Value>
+        <Value item="3">Auto</Value>
+    </TTPAR_OsdOutput_2_Auto>
+    <TTPAR_PIPPositionCurrent type="Literal">
+        <Value item="1">CenterLeft</Value>
+        <Value item="2">CenterRight</Value>
+        <Value item="3">Current</Value>
+        <Value item="4">LowerLeft</Value>
+        <Value item="5">LowerRight</Value>
+        <Value item="6">UpperCenter</Value>
+        <Value item="7">UpperLeft</Value>
+        <Value item="8">UpperRight</Value>
+    </TTPAR_PIPPositionCurrent>
+    <TTPAR_PacketRecoveryTechnique type="Literal">
+        <Value item="1">Fec</Value>
+        <Value item="2">FecRtxHybrid</Value>
+        <Value item="3">Off</Value>
+        <Value item="4">Rtx</Value>
+        <Value item="5">RtxOrFec</Value>
+    </TTPAR_PacketRecoveryTechnique>
+    <TTPAR_PhonebookMode type="Literal">
+        <Value item="1">ReadOnly</Value>
+        <Value item="2">ReadWrite</Value>
+    </TTPAR_PhonebookMode>
+    <TTPAR_PhonebookSearchFilter type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">People</Value>
+        <Value item="3">Rooms</Value>
+    </TTPAR_PhonebookSearchFilter>
+    <TTPAR_PhonebookTypes type="Literal">
+        <Value item="1">CUCM</Value>
+        <Value item="2">Off</Value>
+        <Value item="3">Spark</Value>
+        <Value item="4">TMS</Value>
+        <Value item="5">VCS</Value>
+    </TTPAR_PhonebookTypes>
+    <TTPAR_PortMode type="Literal">
+        <Value item="1">Dynamic</Value>
+        <Value item="2">Static</Value>
+    </TTPAR_PortMode>
+    <TTPAR_PowerLineFrequency type="Literal">
+        <Value item="1">50Hz</Value>
+        <Value item="2">60Hz</Value>
+        <Value item="3">Auto</Value>
+    </TTPAR_PowerLineFrequency>
+    <TTPAR_PresentationOnPlacedOnHold type="Literal">
+        <Value item="1">NoAction</Value>
+        <Value item="2">Stop</Value>
+    </TTPAR_PresentationOnPlacedOnHold>
+    <TTPAR_PresentationPri_def type="Literal">
+        <Value item="1">Equal</Value>
+        <Value item="2">High</Value>
+        <Value item="3">Low</Value>
+    </TTPAR_PresentationPri_def>
+    <TTPAR_PresentationSources_3 type="Literal">
+        <Value item="1">1</Value>
+        <Value item="2">2</Value>
+        <Value item="3">3</Value>
+    </TTPAR_PresentationSources_3>
+    <TTPAR_PresentationSources_6 type="Literal">
+        <Value item="1">1</Value>
+        <Value item="2">2</Value>
+        <Value item="3">3</Value>
+        <Value item="4">4</Value>
+        <Value item="5">5</Value>
+        <Value item="6">6</Value>
+    </TTPAR_PresentationSources_6>
+    <TTPAR_PrimarySecondary type="Literal">
+        <Value item="1">Primary</Value>
+        <Value item="2">Secondary</Value>
+    </TTPAR_PrimarySecondary>
+    <TTPAR_PrivateShared type="Literal">
+        <Value item="1">Private</Value>
+        <Value item="2">Shared</Value>
+    </TTPAR_PrivateShared>
+    <TTPAR_ProtocolPriority type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">WebRTC</Value>
+    </TTPAR_ProtocolPriority>
+    <TTPAR_ProvisioningModes type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">CUCM</Value>
+        <Value item="3">Edge</Value>
+        <Value item="4">Off</Value>
+        <Value item="5">TMS</Value>
+        <Value item="6">VCS</Value>
+        <Value item="7">Webex</Value>
+    </TTPAR_ProvisioningModes>
+    <TTPAR_QoSMode type="Literal">
+        <Value item="1">Diffserv</Value>
+        <Value item="2">Off</Value>
+    </TTPAR_QoSMode>
+    <TTPAR_RelayEncodingStrategy type="Literal">
+        <Value item="1">Motion</Value>
+        <Value item="2">Sharpness</Value>
+    </TTPAR_RelayEncodingStrategy>
+    <TTPAR_ReminderVisibilityOptions type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">ControllerOnly</Value>
+    </TTPAR_ReminderVisibilityOptions>
+    <TTPAR_ResThreshold60fpsVs type="Literal">
+        <Value item="1">512_288</Value>
+        <Value item="2">768_432</Value>
+        <Value item="3">1024_576</Value>
+        <Value item="4">1280_720</Value>
+        <Value item="5">1920_1080</Value>
+        <Value item="6">Never</Value>
+    </TTPAR_ResThreshold60fpsVs>
+    <TTPAR_RgbQuantizationRange type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Full</Value>
+        <Value item="3">Limited</Value>
+    </TTPAR_RgbQuantizationRange>
+    <TTPAR_RoomCategory type="Literal">
+        <Value item="1">Desk</Value>
+        <Value item="2">Focus</Value>
+        <Value item="3">Huddle</Value>
+        <Value item="4">MeetingRoom</Value>
+        <Value item="5">OpenSpace</Value>
+        <Value item="6">Other</Value>
+    </TTPAR_RoomCategory>
+    <TTPAR_RoomCleanupMode type="Literal">
+        <Value item="1">Daily</Value>
+        <Value item="2">Off</Value>
+    </TTPAR_RoomCleanupMode>
+    <TTPAR_RoomReset type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">On</Value>
+    </TTPAR_RoomReset>
+    <TTPAR_RoomSchedulerPresenceMode type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Free</Value>
+    </TTPAR_RoomSchedulerPresenceMode>
+    <TTPAR_SCOSCOInternalMicA2DPInternalMic type="Literal">
+        <Value item="1">A2DPInternalMic</Value>
+        <Value item="2">SCO</Value>
+        <Value item="3">SCOInternalMic</Value>
+    </TTPAR_SCOSCOInternalMicA2DPInternalMic>
+    <TTPAR_SCxVersion type="Literal">
+        <Value item="1">V1</Value>
+        <Value item="2">V4</Value>
+        <Value item="3">V5</Value>
+    </TTPAR_SCxVersion>
+    <TTPAR_SIPDigest_Algorithm type="Literal">
+        <Value item="1">MD5</Value>
+        <Value item="2">SHA256</Value>
+    </TTPAR_SIPDigest_Algorithm>
+    <TTPAR_SIP_DEF_TRNSP type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">TCP</Value>
+        <Value item="3">Tls</Value>
+        <Value item="4">UDP</Value>
+    </TTPAR_SIP_DEF_TRNSP>
+    <TTPAR_SIP_SERVER_TYPE type="Literal">
+        <Value item="1">Cisco</Value>
+        <Value item="2">Standard</Value>
+    </TTPAR_SIP_SERVER_TYPE>
+    <TTPAR_SSHHostKeyAlgorithms type="Literal">
+        <Value item="1">ECDSA</Value>
+        <Value item="2">RSA</Value>
+        <Value item="3">ed25519</Value>
+    </TTPAR_SSHHostKeyAlgorithms>
+    <TTPAR_SWSyncProtocolsAnnounce type="Literal">
+        <Value item="1">AnnounceLegacy</Value>
+        <Value item="2">AnnounceSecure</Value>
+    </TTPAR_SWSyncProtocolsAnnounce>
+    <TTPAR_SWSyncProtocolsAuto type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Legacy</Value>
+        <Value item="3">Secure</Value>
+    </TTPAR_SWSyncProtocolsAuto>
+    <TTPAR_ScreenSettings_1080_4k30_Only type="Literal">
+        <Value item="1">1920_1080_60</Value>
+        <Value item="2">3840_2160_30</Value>
+    </TTPAR_ScreenSettings_1080_4k30_Only>
+    <TTPAR_ScreenSettings_4k30_1440p60_1080p60_21_9 type="Literal">
+        <Value item="1">1920_1080_60</Value>
+        <Value item="2">2560_1080_60</Value>
+        <Value item="3">2560_1440_60</Value>
+        <Value item="4">2880_1200_60</Value>
+        <Value item="5">3440_1440_30</Value>
+        <Value item="6">3840_1600_30</Value>
+        <Value item="7">3840_1620_30</Value>
+        <Value item="8">3840_2160_30</Value>
+    </TTPAR_ScreenSettings_4k30_1440p60_1080p60_21_9>
+    <TTPAR_ScreenSettings_4k_21_9_Auto type="Literal">
+        <Value item="1">1920_1080_50</Value>
+        <Value item="2">1920_1080_60</Value>
+        <Value item="3">1920_1200_50</Value>
+        <Value item="4">1920_1200_60</Value>
+        <Value item="5">2560_1080_60</Value>
+        <Value item="6">2560_1440_60</Value>
+        <Value item="7">2880_1200_60</Value>
+        <Value item="8">3440_1440_60</Value>
+        <Value item="9">3840_1600_60</Value>
+        <Value item="10">3840_1620_60</Value>
+        <Value item="11">3840_2160_30</Value>
+        <Value item="12">3840_2160_60</Value>
+        <Value item="13">Auto</Value>
+    </TTPAR_ScreenSettings_4k_21_9_Auto>
+    <TTPAR_Screensavers type="Literal">
+        <Value item="1">Clock</Value>
+        <Value item="2">Halfwake</Value>
+    </TTPAR_Screensavers>
+    <TTPAR_SerialBaud type="Literal">
+        <Value item="1">9600</Value>
+        <Value item="2">19200</Value>
+        <Value item="3">38400</Value>
+        <Value item="4">57600</Value>
+        <Value item="5">115200</Value>
+    </TTPAR_SerialBaud>
+    <TTPAR_SerialBaud115200 type="Literal">
+        <Value item="1">115200</Value>
+    </TTPAR_SerialBaud115200>
+    <TTPAR_SerialParity type="Literal">
+        <Value item="1">Even</Value>
+        <Value item="2">None</Value>
+        <Value item="3">Odd</Value>
+    </TTPAR_SerialParity>
+    <TTPAR_ShowTemperatureState type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Hidden</Value>
+        <Value item="3">ShowCelsius</Value>
+        <Value item="4">ShowFahrenheit</Value>
+    </TTPAR_ShowTemperatureState>
+    <TTPAR_SignageInteractionMode type="Literal">
+        <Value item="1">Interactive</Value>
+        <Value item="2">NonInteractive</Value>
+    </TTPAR_SignageInteractionMode>
+    <TTPAR_SmtpType type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">StartTls</Value>
+        <Value item="3">Tls</Value>
+    </TTPAR_SmtpType>
+    <TTPAR_SnmpService type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">ReadOnly</Value>
+        <Value item="3">ReadWrite</Value>
+    </TTPAR_SnmpService>
+    <TTPAR_SoftwareUpgradePackageProtocol type="Literal">
+        <Value item="1">HTTP</Value>
+        <Value item="2">HTTPS</Value>
+    </TTPAR_SoftwareUpgradePackageProtocol>
+    <TTPAR_SoftwareUpgradeProvider type="Literal">
+        <Value item="1">Cisco</Value>
+        <Value item="2">Microsoft</Value>
+    </TTPAR_SoftwareUpgradeProvider>
+    <TTPAR_SpeakerTrackBehaviorNoGS type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">BestOverview</Value>
+        <Value item="3">Closeup</Value>
+        <Value item="4">Current</Value>
+        <Value item="5">Frames</Value>
+        <Value item="6">Manual</Value>
+    </TTPAR_SpeakerTrackBehaviorNoGS>
+    <TTPAR_SpeakerViewRequestMode type="Literal">
+        <Value item="1">Always</Value>
+        <Value item="2">Never</Value>
+        <Value item="3">WhenAnnounced</Value>
+        <Value item="4">WithSmallSpeakerInCroppedFrame</Value>
+        <Value item="5">WithSmallSpeakerInUncroppedFrame</Value>
+    </TTPAR_SpeakerViewRequestMode>
+    <TTPAR_StandbyAction type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">PrivacyPosition</Value>
+    </TTPAR_StandbyAction>
+    <TTPAR_StartupStates type="Literal">
+        <Value item="1">Default</Value>
+        <Value item="2">Spark</Value>
+        <Value item="3">Ucm</Value>
+        <Value item="4">UcmViaExpressway</Value>
+    </TTPAR_StartupStates>
+    <TTPAR_SyslogProtocol type="Literal">
+        <Value item="1">Syslog</Value>
+        <Value item="2">SyslogTLS</Value>
+    </TTPAR_SyslogProtocol>
+    <TTPAR_TLSVersions_min_10 type="Literal">
+        <Value item="1">TLSv1.0</Value>
+        <Value item="2">TLSv1.1</Value>
+        <Value item="3">TLSv1.2</Value>
+        <Value item="4">TLSv1.3</Value>
+    </TTPAR_TLSVersions_min_10>
+    <TTPAR_TLSVersions_min_11 type="Literal">
+        <Value item="1">TLSv1.1</Value>
+        <Value item="2">TLSv1.2</Value>
+        <Value item="3">TLSv1.3</Value>
+    </TTPAR_TLSVersions_min_11>
+    <TTPAR_TestModeType type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">On</Value>
+        <Value item="3">TAP</Value>
+    </TTPAR_TestModeType>
+    <TTPAR_TimeFormat type="Literal">
+        <Value item="1">12H</Value>
+        <Value item="2">24H</Value>
+    </TTPAR_TimeFormat>
+    <TTPAR_TimeSlotSize type="Literal">
+        <Value item="1">15</Value>
+        <Value item="2">30</Value>
+        <Value item="3">60</Value>
+    </TTPAR_TimeSlotSize>
+    <TTPAR_TouchPanelCount type="Literal">
+        <Value item="1">0</Value>
+        <Value item="2">1</Value>
+        <Value item="3">2</Value>
+        <Value item="4">3</Value>
+        <Value item="5">4</Value>
+        <Value item="6">5</Value>
+        <Value item="7">Auto</Value>
+        <Value item="8">Minimum1</Value>
+        <Value item="9">NotSet</Value>
+    </TTPAR_TouchPanelCount>
+    <TTPAR_TouchPanelNavigationColors type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Dark</Value>
+        <Value item="3">Light</Value>
+    </TTPAR_TouchPanelNavigationColors>
+    <TTPAR_TouchPanelOrientation type="Literal">
+        <Value item="1">AutoLandscape</Value>
+        <Value item="2">AutoLandscapePortrait</Value>
+        <Value item="3">Fixed</Value>
+    </TTPAR_TouchPanelOrientation>
+    <TTPAR_True type="Literal">
+        <Value item="1">True</Value>
+    </TTPAR_True>
+    <TTPAR_TrueFalse type="Literal">
+        <Value item="1">False</Value>
+        <Value item="2">True</Value>
+    </TTPAR_TrueFalse>
+    <TTPAR_TrueFalseAuto type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">False</Value>
+        <Value item="3">True</Value>
+    </TTPAR_TrueFalseAuto>
+    <TTPAR_TrueFalseUnknown type="Literal">
+        <Value item="1">False</Value>
+        <Value item="2">True</Value>
+        <Value item="3">Unknown</Value>
+    </TTPAR_TrueFalseUnknown>
+    <TTPAR_TrueFalseUnset type="Literal">
+        <Value item="1">False</Value>
+        <Value item="2">True</Value>
+        <Value item="3">Unset</Value>
+    </TTPAR_TrueFalseUnset>
+    <TTPAR_UISecurityMode type="Literal">
+        <Value item="1">Normal</Value>
+        <Value item="2">Strong</Value>
+    </TTPAR_UISecurityMode>
+    <TTPAR_USBModes type="Literal">
+        <Value item="1">USB2</Value>
+        <Value item="2">USB3</Value>
+    </TTPAR_USBModes>
+    <TTPAR_UserInterfaceOSDModes type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Unobstructed</Value>
+    </TTPAR_UserInterfaceOSDModes>
+    <TTPAR_UserInterfaceThemes type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Light</Value>
+        <Value item="3">Night</Value>
+    </TTPAR_UserInterfaceThemes>
+    <TTPAR_VideoInputPresentationSelection type="Literal">
+        <Value item="1">AutoShare</Value>
+        <Value item="2">Desktop</Value>
+        <Value item="3">Manual</Value>
+        <Value item="4">OnConnect</Value>
+    </TTPAR_VideoInputPresentationSelection>
+    <TTPAR_VideoInputSourceType type="Literal">
+        <Value item="1">PC</Value>
+        <Value item="2">camera</Value>
+        <Value item="3">document_camera</Value>
+        <Value item="4">mediaplayer</Value>
+        <Value item="5">other</Value>
+        <Value item="6">whiteboard</Value>
+    </TTPAR_VideoInputSourceType>
+    <TTPAR_VideoInputSourceTypeCameraOnly type="Literal">
+        <Value item="1">camera</Value>
+    </TTPAR_VideoInputSourceTypeCameraOnly>
+    <TTPAR_WakeupBootAction type="Literal">
+        <Value item="1">DefaultCameraPosition</Value>
+        <Value item="2">None</Value>
+        <Value item="3">RestoreCameraPosition</Value>
+    </TTPAR_WakeupBootAction>
+    <TTPAR_Wallpaper type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Custom</Value>
+        <Value item="3">None</Value>
+    </TTPAR_Wallpaper>
+    <TTPAR_WebAppManagement type="Literal">
+        <Value item="1">Allowed</Value>
+        <Value item="2">NotAllowed</Value>
+        <Value item="3">Off</Value>
+    </TTPAR_WebAppManagement>
+    <TTPAR_WebRTCInteractionMode type="Literal">
+        <Value item="1">Interactive</Value>
+        <Value item="2">NonInteractive</Value>
+    </TTPAR_WebRTCInteractionMode>
+    <TTPAR_WebcamUSBModes type="Literal">
+        <Value item="1">OnConnect</Value>
+        <Value item="2">OnStreaming</Value>
+    </TTPAR_WebcamUSBModes>
+    <TTPAR_WebexJoinProtocol type="Literal">
+        <Value item="1">SIP</Value>
+        <Value item="2">Webex</Value>
+    </TTPAR_WebexJoinProtocol>
+    <TTPAR_WebsocketModes type="Literal">
+        <Value item="1">FollowHTTPService</Value>
+        <Value item="2">Off</Value>
+    </TTPAR_WebsocketModes>
+    <TTPAR_WhiteboardRendering type="Literal">
+        <Value item="1">Native</Value>
+        <Value item="2">WebView</Value>
+    </TTPAR_WhiteboardRendering>
+    <TTPAR_WhiteboardThemeNoDefault type="Literal">
+        <Value item="1">Dark</Value>
+        <Value item="2">Light</Value>
+    </TTPAR_WhiteboardThemeNoDefault>
+    <TTPAR_WhiteboardVersion type="Literal">
+        <Value item="1">V0</Value>
+        <Value item="2">V3</Value>
+        <Value item="3">V4</Value>
+        <Value item="4">V5</Value>
+    </TTPAR_WhiteboardVersion>
+    <TTPAR_WifiFrequencyBand type="Literal">
+        <Value item="1">2_4Ghz</Value>
+        <Value item="2">5Ghz</Value>
+        <Value item="3">Auto</Value>
+    </TTPAR_WifiFrequencyBand>
+    <TTPAR_WifiRoaming type="Literal">
+        <Value item="1">Driver</Value>
+        <Value item="2">Software</Value>
+    </TTPAR_WifiRoaming>
+    <TTPAR_WindowDuration type="Literal">
+        <Value item="1">5</Value>
+        <Value item="2">10</Value>
+        <Value item="3">15</Value>
+        <Value item="4">20</Value>
+        <Value item="5">30</Value>
+        <Value item="6">60</Value>
+    </TTPAR_WindowDuration>
+    <TTPAR_WizardState type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">SparkActivate</Value>
+    </TTPAR_WizardState>
+    <TTPAR_WpaDebugLevels type="Literal">
+        <Value item="1">Debug</Value>
+        <Value item="2">Error</Value>
+        <Value item="3">Excessive</Value>
+        <Value item="4">Info</Value>
+        <Value item="5">MsgDump</Value>
+        <Value item="6">Warning</Value>
+    </TTPAR_WpaDebugLevels>
+    <TTPAR_Wx2DeviceMode type="Literal">
+        <Value item="1">Personal</Value>
+        <Value item="2">Provisional</Value>
+        <Value item="3">Shared</Value>
+        <Value item="4">Unknown</Value>
+    </TTPAR_Wx2DeviceMode>
+    <Vs_intArray_0_65534_10 item="1" type="Integer">
+        <Max>65534</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_intArray_0_65534_10>
+    <Vs_intArray_0_65534_20 item="1" type="Integer">
+        <Max>65534</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_intArray_0_65534_20>
+    <Vs_intArray_0_65534_255 item="1" type="Integer">
+        <Max>65534</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_intArray_0_65534_255>
+    <Vs_intArray_1_3_3 item="1" type="Integer">
+        <Max>3</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_intArray_1_3_3>
+    <Vs_intArray_1_3_4 item="1" type="Integer">
+        <Max>3</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_intArray_1_3_4>
+    <Vs_intArray_1_4_4 item="1" type="Integer">
+        <Max>4</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_intArray_1_4_4>
+    <Vs_integer_-1000_1000 item="1" type="Integer">
+        <Max>1000</Max>
+        <Min>-1000</Min>
+        <Step>1</Step>
+    </Vs_integer_-1000_1000>
+    <Vs_integer_-100_100 item="1" type="Integer">
+        <Max>100</Max>
+        <Min>-100</Min>
+        <Step>1</Step>
+    </Vs_integer_-100_100>
+    <Vs_integer_-17000_17000 item="1" type="Integer">
+        <Max>17000</Max>
+        <Min>-17000</Min>
+        <Step>1</Step>
+    </Vs_integer_-17000_17000>
+    <Vs_integer_-1_100 item="1" type="Integer">
+        <Max>100</Max>
+        <Min>-1</Min>
+        <Step>1</Step>
+    </Vs_integer_-1_100>
+    <Vs_integer_-1_1000000000 item="1" type="Integer">
+        <Max>1000000000</Max>
+        <Min>-1</Min>
+        <Step>1</Step>
+    </Vs_integer_-1_1000000000>
+    <Vs_integer_-1_3 item="1" type="Integer">
+        <Max>3</Max>
+        <Min>-1</Min>
+        <Step>1</Step>
+    </Vs_integer_-1_3>
+    <Vs_integer_-20_-1 item="1" type="Integer">
+        <Max>-1</Max>
+        <Min>-20</Min>
+        <Step>1</Step>
+    </Vs_integer_-20_-1>
+    <Vs_integer_-300_300 item="1" type="Integer">
+        <Max>300</Max>
+        <Min>-300</Min>
+        <Step>1</Step>
+    </Vs_integer_-300_300>
+    <Vs_integer_-480_480 item="1" type="Integer">
+        <Max>480</Max>
+        <Min>-480</Min>
+        <Step>1</Step>
+    </Vs_integer_-480_480>
+    <Vs_integer_-54_15 item="1" type="Integer">
+        <Max>15</Max>
+        <Min>-54</Min>
+        <Step>1</Step>
+    </Vs_integer_-54_15>
+    <Vs_integer_-9000_9000 item="1" type="Integer">
+        <Max>9000</Max>
+        <Min>-9000</Min>
+        <Step>1</Step>
+    </Vs_integer_-9000_9000>
+    <Vs_integer_0_1 item="1" type="Integer">
+        <Max>1</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_1>
+    <Vs_integer_0_10 item="1" type="Integer">
+        <Max>10</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_10>
+    <Vs_integer_0_100 item="1" type="Integer">
+        <Max>100</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_100>
+    <Vs_integer_0_1000 item="1" type="Integer">
+        <Max>1000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_1000>
+    <Vs_integer_0_10000 item="1" type="Integer">
+        <Max>10000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_10000>
+    <Vs_integer_0_11 item="1" type="Integer">
+        <Max>11</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_11>
+    <Vs_integer_0_110 item="1" type="Integer">
+        <Max>110</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_110>
+    <Vs_integer_0_12000 item="1" type="Integer">
+        <Max>12000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_12000>
+    <Vs_integer_0_13 item="1" type="Integer">
+        <Max>13</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_13>
+    <Vs_integer_0_14 item="1" type="Integer">
+        <Max>14</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_14>
+    <Vs_integer_0_15 item="1" type="Integer">
+        <Max>15</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_15>
+    <Vs_integer_0_16 item="1" type="Integer">
+        <Max>16</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_16>
+    <Vs_integer_0_23 item="1" type="Integer">
+        <Max>23</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_23>
+    <Vs_integer_0_255 item="1" type="Integer">
+        <Max>255</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_255>
+    <Vs_integer_0_3600 item="1" type="Integer">
+        <Max>3600</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_3600>
+    <Vs_integer_0_365 item="1" type="Integer">
+        <Max>365</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_365>
+    <Vs_integer_0_48 item="1" type="Integer">
+        <Max>48</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_48>
+    <Vs_integer_0_480 item="1" type="Integer">
+        <Max>480</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_480>
+    <Vs_integer_0_5 item="1" type="Integer">
+        <Max>5</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_5>
+    <Vs_integer_0_50 item="1" type="Integer">
+        <Max>50</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_50>
+    <Vs_integer_0_500 item="1" type="Integer">
+        <Max>500</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_500>
+    <Vs_integer_0_5000 item="1" type="Integer">
+        <Max>5000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_5000>
+    <Vs_integer_0_512 item="1" type="Integer">
+        <Max>512</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_512>
+    <Vs_integer_0_52 item="1" type="Integer">
+        <Max>52</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_52>
+    <Vs_integer_0_59 item="1" type="Integer">
+        <Max>59</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_59>
+    <Vs_integer_0_60 item="1" type="Integer">
+        <Max>60</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_60>
+    <Vs_integer_0_6000 item="1" type="Integer">
+        <Max>6000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_6000>
+    <Vs_integer_0_60000 item="1" type="Integer">
+        <Max>60000</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_60000>
+    <Vs_integer_0_65534 item="1" type="Integer">
+        <Max>65534</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_65534>
+    <Vs_integer_0_65535 item="1" type="Integer">
+        <Max>65535</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_65535>
+    <Vs_integer_0_65536 item="1" type="Integer">
+        <Max>65536</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_65536>
+    <Vs_integer_0_86400 item="1" type="Integer">
+        <Max>86400</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_86400>
+    <Vs_integer_0_9 item="1" type="Integer">
+        <Max>9</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_9>
+    <Vs_integer_0_90 item="1" type="Integer">
+        <Max>90</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_90>
+    <Vs_integer_0_999999999 item="1" type="Integer">
+        <Max>999999999</Max>
+        <Min>0</Min>
+        <Step>1</Step>
+    </Vs_integer_0_999999999>
+    <Vs_integer_100_2000 item="1" type="Integer">
+        <Max>2000</Max>
+        <Min>100</Min>
+        <Step>1</Step>
+    </Vs_integer_100_2000>
+    <Vs_integer_10_1000 item="1" type="Integer">
+        <Max>1000</Max>
+        <Min>10</Min>
+        <Step>1</Step>
+    </Vs_integer_10_1000>
+    <Vs_integer_144_2160 item="1" type="Integer">
+        <Max>2160</Max>
+        <Min>144</Min>
+        <Step>1</Step>
+    </Vs_integer_144_2160>
+    <Vs_integer_15_3600 item="1" type="Integer">
+        <Max>3600</Max>
+        <Min>15</Min>
+        <Step>1</Step>
+    </Vs_integer_15_3600>
+    <Vs_integer_176_3840 item="1" type="Integer">
+        <Max>3840</Max>
+        <Min>176</Min>
+        <Step>1</Step>
+    </Vs_integer_176_3840>
+    <Vs_integer_1_1 item="1" type="Integer">
+        <Max>1</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_1>
+    <Vs_integer_1_10 item="1" type="Integer">
+        <Max>10</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_10>
+    <Vs_integer_1_100 item="1" type="Integer">
+        <Max>100</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_100>
+    <Vs_integer_1_10000 item="1" type="Integer">
+        <Max>10000</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_10000>
+    <Vs_integer_1_10080 item="1" type="Integer">
+        <Max>10080</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_10080>
+    <Vs_integer_1_1048576 item="1" type="Integer">
+        <Max>1048576</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_1048576>
+    <Vs_integer_1_12 item="1" type="Integer">
+        <Max>12</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_12>
+    <Vs_integer_1_120 item="1" type="Integer">
+        <Max>120</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_120>
+    <Vs_integer_1_12000 item="1" type="Integer">
+        <Max>12000</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_12000>
+    <Vs_integer_1_1440 item="1" type="Integer">
+        <Max>1440</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_1440>
+    <Vs_integer_1_15 item="1" type="Integer">
+        <Max>15</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_15>
+    <Vs_integer_1_16 item="1" type="Integer">
+        <Max>16</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_16>
+    <Vs_integer_1_1800 item="1" type="Integer">
+        <Max>1800</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_1800>
+    <Vs_integer_1_2 item="1" type="Integer">
+        <Max>2</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_2>
+    <Vs_integer_1_20 item="1" type="Integer">
+        <Max>20</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_20>
+    <Vs_integer_1_200 item="1" type="Integer">
+        <Max>200</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_200>
+    <Vs_integer_1_20160 item="1" type="Integer">
+        <Max>20160</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_20160>
+    <Vs_integer_1_2147483647 item="1" type="Integer">
+        <Max>2147483647</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_2147483647>
+    <Vs_integer_1_24 item="1" type="Integer">
+        <Max>24</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_24>
+    <Vs_integer_1_256 item="1" type="Integer">
+        <Max>256</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_256>
+    <Vs_integer_1_2880 item="1" type="Integer">
+        <Max>2880</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_2880>
+    <Vs_integer_1_3 item="1" type="Integer">
+        <Max>3</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_3>
+    <Vs_integer_1_30 item="1" type="Integer">
+        <Max>30</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_30>
+    <Vs_integer_1_31 item="1" type="Integer">
+        <Max>31</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_31>
+    <Vs_integer_1_35 item="1" type="Integer">
+        <Max>35</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_35>
+    <Vs_integer_1_360 item="1" type="Integer">
+        <Max>360</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_360>
+    <Vs_integer_1_3600 item="1" type="Integer">
+        <Max>3600</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_3600>
+    <Vs_integer_1_365 item="1" type="Integer">
+        <Max>365</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_365>
+    <Vs_integer_1_4 item="1" type="Integer">
+        <Max>4</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_4>
+    <Vs_integer_1_480 item="1" type="Integer">
+        <Max>480</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_480>
+    <Vs_integer_1_5 item="1" type="Integer">
+        <Max>5</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_5>
+    <Vs_integer_1_50 item="1" type="Integer">
+        <Max>50</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_50>
+    <Vs_integer_1_6 item="1" type="Integer">
+        <Max>6</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_6>
+    <Vs_integer_1_60 item="1" type="Integer">
+        <Max>60</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_60>
+    <Vs_integer_1_600 item="1" type="Integer">
+        <Max>600</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_600>
+    <Vs_integer_1_65534 item="1" type="Integer">
+        <Max>65534</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_65534>
+    <Vs_integer_1_65535 item="1" type="Integer">
+        <Max>65535</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_65535>
+    <Vs_integer_1_7 item="1" type="Integer">
+        <Max>7</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_7>
+    <Vs_integer_1_8 item="1" type="Integer">
+        <Max>8</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_8>
+    <Vs_integer_1_999999999 item="1" type="Integer">
+        <Max>999999999</Max>
+        <Min>1</Min>
+        <Step>1</Step>
+    </Vs_integer_1_999999999>
+    <Vs_integer_2015_2100 item="1" type="Integer">
+        <Max>2100</Max>
+        <Min>2015</Min>
+        <Step>1</Step>
+    </Vs_integer_2015_2100>
+    <Vs_integer_240_6000 item="1" type="Integer">
+        <Max>6000</Max>
+        <Min>240</Min>
+        <Step>1</Step>
+    </Vs_integer_240_6000>
+    <Vs_integer_2_10080 item="1" type="Integer">
+        <Max>10080</Max>
+        <Min>2</Min>
+        <Step>1</Step>
+    </Vs_integer_2_10080>
+    <Vs_integer_2_4 item="1" type="Integer">
+        <Max>4</Max>
+        <Min>2</Min>
+        <Step>1</Step>
+    </Vs_integer_2_4>
+    <Vs_integer_2_65534 item="1" type="Integer">
+        <Max>65534</Max>
+        <Min>2</Min>
+        <Step>1</Step>
+    </Vs_integer_2_65534>
+    <Vs_integer_300_1500 item="1" type="Integer">
+        <Max>1500</Max>
+        <Min>300</Min>
+        <Step>1</Step>
+    </Vs_integer_300_1500>
+    <Vs_integer_320_6000 item="1" type="Integer">
+        <Max>6000</Max>
+        <Min>320</Min>
+        <Step>1</Step>
+    </Vs_integer_320_6000>
+    <Vs_integer_4_6 item="1" type="Integer">
+        <Max>6</Max>
+        <Min>4</Min>
+        <Step>1</Step>
+    </Vs_integer_4_6>
+    <Vs_integer_50_5000 item="1" type="Integer">
+        <Max>5000</Max>
+        <Min>50</Min>
+        <Step>1</Step>
+    </Vs_integer_50_5000>
+    <Vs_integer_5_7 item="1" type="Integer">
+        <Max>7</Max>
+        <Min>5</Min>
+        <Step>1</Step>
+    </Vs_integer_5_7>
+    <Vs_integer_64_20000 item="1" type="Integer">
+        <Max>20000</Max>
+        <Min>64</Min>
+        <Step>1</Step>
+    </Vs_integer_64_20000>
+    <Vs_integer_64_6000 item="1" type="Integer">
+        <Max>6000</Max>
+        <Min>64</Min>
+        <Step>1</Step>
+    </Vs_integer_64_6000>
+    <Vs_literal_0_1_2_3_4_5_6_7_8_9_C_Call_Disconnect_Down_F1_F2_F3_F4_F5_Grab_Home_Layout_Left_Mute_MuteMic_Ok_PhoneBook_Presentation_Right_Selfview_Square_SrcAux_SrcCamera_SrcDocCam_SrcPc_SrcVcr_Star_Up_VolumeDown_VolumeUp_ZoomIn_ZoomOut__ item="1" type="Literal">
+        <Value item="1">0</Value>
+        <Value item="2">1</Value>
+        <Value item="3">2</Value>
+        <Value item="4">3</Value>
+        <Value item="5">4</Value>
+        <Value item="6">5</Value>
+        <Value item="7">6</Value>
+        <Value item="8">7</Value>
+        <Value item="9">8</Value>
+        <Value item="10">9</Value>
+        <Value item="11">C</Value>
+        <Value item="12">Call</Value>
+        <Value item="13">Disconnect</Value>
+        <Value item="14">Down</Value>
+        <Value item="15">F1</Value>
+        <Value item="16">F2</Value>
+        <Value item="17">F3</Value>
+        <Value item="18">F4</Value>
+        <Value item="19">F5</Value>
+        <Value item="20">Grab</Value>
+        <Value item="21">Home</Value>
+        <Value item="22">Layout</Value>
+        <Value item="23">Left</Value>
+        <Value item="24">Mute</Value>
+        <Value item="25">MuteMic</Value>
+        <Value item="26">Ok</Value>
+        <Value item="27">PhoneBook</Value>
+        <Value item="28">Presentation</Value>
+        <Value item="29">Right</Value>
+        <Value item="30">Selfview</Value>
+        <Value item="31">Square</Value>
+        <Value item="32">SrcAux</Value>
+        <Value item="33">SrcCamera</Value>
+        <Value item="34">SrcDocCam</Value>
+        <Value item="35">SrcPc</Value>
+        <Value item="36">SrcVcr</Value>
+        <Value item="37">Star</Value>
+        <Value item="38">Up</Value>
+        <Value item="39">VolumeDown</Value>
+        <Value item="40">VolumeUp</Value>
+        <Value item="41">ZoomIn</Value>
+        <Value item="42">ZoomOut</Value>
+        <Value item="43">+</Value>
+        <Value item="44">-</Value>
+    </Vs_literal_0_1_2_3_4_5_6_7_8_9_C_Call_Disconnect_Down_F1_F2_F3_F4_F5_Grab_Home_Layout_Left_Mute_MuteMic_Ok_PhoneBook_Presentation_Right_Selfview_Square_SrcAux_SrcCamera_SrcDocCam_SrcPc_SrcVcr_Star_Up_VolumeDown_VolumeUp_ZoomIn_ZoomOut__>
+    <Vs_literal_1 item="1" type="Literal">
+        <Value item="1">1</Value>
+    </Vs_literal_1>
+    <Vs_literal_1_2_3_4_5_6 item="1" type="Literal">
+        <Value item="1">1</Value>
+        <Value item="2">2</Value>
+        <Value item="3">3</Value>
+        <Value item="4">4</Value>
+        <Value item="5">5</Value>
+        <Value item="6">6</Value>
+    </Vs_literal_1_2_3_4_5_6>
+    <Vs_literal_1_2_3_AirPlay_Miracast_4 item="1" type="Literal">
+        <Value item="1">1</Value>
+        <Value item="2">2</Value>
+        <Value item="3">3</Value>
+        <Value item="4">AirPlay</Value>
+        <Value item="5">Miracast</Value>
+    </Vs_literal_1_2_3_AirPlay_Miracast_4>
+    <Vs_literal_4900K_5500K_6500K_7200K_9300K_10500K_12000K item="1" type="Literal">
+        <Value item="1">4900K</Value>
+        <Value item="2">5500K</Value>
+        <Value item="3">6500K</Value>
+        <Value item="4">7200K</Value>
+        <Value item="5">9300K</Value>
+        <Value item="6">10500K</Value>
+        <Value item="7">12000K</Value>
+    </Vs_literal_4900K_5500K_6500K_7200K_9300K_10500K_12000K>
+    <Vs_literal_8021X_HTTPS_Audit_SIP_Pairing_WebexIdentity_HttpClient_HttpProxy item="1" type="Literal">
+        <Value item="1">802.1X</Value>
+        <Value item="2">HTTPS</Value>
+        <Value item="3">Audit</Value>
+        <Value item="4">SIP</Value>
+        <Value item="5">Pairing</Value>
+        <Value item="6">WebexIdentity</Value>
+        <Value item="7">HttpClient</Value>
+        <Value item="8">HttpProxy</Value>
+    </Vs_literal_8021X_HTTPS_Audit_SIP_Pairing_WebexIdentity_HttpClient_HttpProxy>
+    <Vs_literal_ARC_Ethernet_HDMI_InternalSpeaker_Line_USBC_USBInterface_WebView item="1" type="Literal">
+        <Value item="1">ARC</Value>
+        <Value item="2">Ethernet</Value>
+        <Value item="3">HDMI</Value>
+        <Value item="4">InternalSpeaker</Value>
+        <Value item="5">Line</Value>
+        <Value item="6">USBC</Value>
+        <Value item="7">USBInterface</Value>
+        <Value item="8">WebView</Value>
+    </Vs_literal_ARC_Ethernet_HDMI_InternalSpeaker_Line_USBC_USBInterface_WebView>
+    <Vs_literal_Accept_Decline item="1" type="Literal">
+        <Value item="1">Accept</Value>
+        <Value item="2">Decline</Value>
+    </Vs_literal_Accept_Decline>
+    <Vs_literal_ActivationCode_Manual_AuthorizationCode item="1" type="Literal">
+        <Value item="1">ActivationCode</Value>
+        <Value item="2">Manual</Value>
+        <Value item="3">AuthorizationCode</Value>
+    </Vs_literal_ActivationCode_Manual_AuthorizationCode>
+    <Vs_literal_Add_Replace item="1" type="Literal">
+        <Value item="1">Add</Value>
+        <Value item="2">Replace</Value>
+    </Vs_literal_Add_Replace>
+    <Vs_literal_Admin_Audit_User_Integrator_RoomControl_255 item="1" type="Literal">
+        <Value item="1">Admin</Value>
+        <Value item="2">Audit</Value>
+        <Value item="3">User</Value>
+        <Value item="4">Integrator</Value>
+        <Value item="5">RoomControl</Value>
+    </Vs_literal_Admin_Audit_User_Integrator_RoomControl_255>
+    <Vs_literal_AirPlay_ARC_Bluetooth_Ethernet_HDMI_MicArray_Microphone_Miracast_USBC_USBHandset_USBHeadset_USBInterface_USBMicrophone_WebView item="1" type="Literal">
+        <Value item="1">AirPlay</Value>
+        <Value item="2">ARC</Value>
+        <Value item="3">Bluetooth</Value>
+        <Value item="4">Ethernet</Value>
+        <Value item="5">HDMI</Value>
+        <Value item="6">MicArray</Value>
+        <Value item="7">Microphone</Value>
+        <Value item="8">Miracast</Value>
+        <Value item="9">USBC</Value>
+        <Value item="10">USBHandset</Value>
+        <Value item="11">USBHeadset</Value>
+        <Value item="12">USBInterface</Value>
+        <Value item="13">USBMicrophone</Value>
+        <Value item="14">WebView</Value>
+    </Vs_literal_AirPlay_ARC_Bluetooth_Ethernet_HDMI_MicArray_Microphone_Miracast_USBC_USBHandset_USBHeadset_USBInterface_USBMicrophone_WebView>
+    <Vs_literal_AirPlay_HDMI_Miracast_USBC item="1" type="Literal">
+        <Value item="1">AirPlay</Value>
+        <Value item="2">HDMI</Value>
+        <Value item="3">Miracast</Value>
+        <Value item="4">USBC</Value>
+    </Vs_literal_AirPlay_HDMI_Miracast_USBC>
+    <Vs_literal_AkashiFollowSteps_ErrorPriority_FollowSteps_HopenCameraPreset_ManualSpeakerCheck_ManualSpeakerCheckInstruction_PanoramaViewHowto_PyramidCameraAdjustment_ScreenPlacement_ScreenResolution4k_SnapToWhiteboardSetDistance_SnapToWhiteboardVerifySettings_SnapToWhiteboardWelcome_CheckSpeaker_SummaryCheck_SummaryPriority_MicrophonePosition_MicrophoneSetupComplete_BaymaxSelfview_WelcomePage_3 item="1" type="Literal">
+        <Value item="1">AkashiFollowSteps</Value>
+        <Value item="2">ErrorPriority</Value>
+        <Value item="3">FollowSteps</Value>
+        <Value item="4">HopenCameraPreset</Value>
+        <Value item="5">ManualSpeakerCheck</Value>
+        <Value item="6">ManualSpeakerCheckInstruction</Value>
+        <Value item="7">PanoramaViewHowto</Value>
+        <Value item="8">PyramidCameraAdjustment</Value>
+        <Value item="9">ScreenPlacement</Value>
+        <Value item="10">ScreenResolution4k</Value>
+        <Value item="11">SnapToWhiteboardSetDistance</Value>
+        <Value item="12">SnapToWhiteboardVerifySettings</Value>
+        <Value item="13">SnapToWhiteboardWelcome</Value>
+        <Value item="14">CheckSpeaker</Value>
+        <Value item="15">SummaryCheck</Value>
+        <Value item="16">SummaryPriority</Value>
+        <Value item="17">MicrophonePosition</Value>
+        <Value item="18">MicrophoneSetupComplete</Value>
+        <Value item="19">BaymaxSelfview</Value>
+        <Value item="20">WelcomePage</Value>
+    </Vs_literal_AkashiFollowSteps_ErrorPriority_FollowSteps_HopenCameraPreset_ManualSpeakerCheck_ManualSpeakerCheckInstruction_PanoramaViewHowto_PyramidCameraAdjustment_ScreenPlacement_ScreenResolution4k_SnapToWhiteboardSetDistance_SnapToWhiteboardVerifySettings_SnapToWhiteboardWelcome_CheckSpeaker_SummaryCheck_SummaryPriority_MicrophonePosition_MicrophoneSetupComplete_BaymaxSelfview_WelcomePage_3>
+    <Vs_literal_Alert_Announcement_Binding_Bump_Busy_CallDisconnect_CallInitiate_CallWaiting_Dial_KeyInput_KeyInputDelete_KeyTone_Nav_NavBack_Notification_OK_Pairing_PresentationConnect_Ringing_SignIn_SpecialInfo_StartListening_TelephoneCall_VideoCall_VolumeAdjust_WakeUp item="1" type="Literal">
+        <Value item="1">Alert</Value>
+        <Value item="2">Announcement</Value>
+        <Value item="3">Binding</Value>
+        <Value item="4">Bump</Value>
+        <Value item="5">Busy</Value>
+        <Value item="6">CallDisconnect</Value>
+        <Value item="7">CallInitiate</Value>
+        <Value item="8">CallWaiting</Value>
+        <Value item="9">Dial</Value>
+        <Value item="10">KeyInput</Value>
+        <Value item="11">KeyInputDelete</Value>
+        <Value item="12">KeyTone</Value>
+        <Value item="13">Nav</Value>
+        <Value item="14">NavBack</Value>
+        <Value item="15">Notification</Value>
+        <Value item="16">OK</Value>
+        <Value item="17">Pairing</Value>
+        <Value item="18">PresentationConnect</Value>
+        <Value item="19">Ringing</Value>
+        <Value item="20">SignIn</Value>
+        <Value item="21">SpecialInfo</Value>
+        <Value item="22">StartListening</Value>
+        <Value item="23">TelephoneCall</Value>
+        <Value item="24">VideoCall</Value>
+        <Value item="25">VolumeAdjust</Value>
+        <Value item="26">WakeUp</Value>
+    </Vs_literal_Alert_Announcement_Binding_Bump_Busy_CallDisconnect_CallInitiate_CallWaiting_Dial_KeyInput_KeyInputDelete_KeyTone_Nav_NavBack_Notification_OK_Pairing_PresentationConnect_Ringing_SignIn_SpecialInfo_StartListening_TelephoneCall_VideoCall_VolumeAdjust_WakeUp>
+    <Vs_literal_Alerts_All_None item="1" type="Literal">
+        <Value item="1">Alerts</Value>
+        <Value item="2">All</Value>
+        <Value item="3">None</Value>
+    </Vs_literal_Alerts_All_None>
+    <Vs_literal_All_AudioAmplifier_AudioMicrophone_ControlSystem_Other_TouchPanel item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">AudioAmplifier</Value>
+        <Value item="3">AudioMicrophone</Value>
+        <Value item="4">ControlSystem</Value>
+        <Value item="5">Other</Value>
+        <Value item="6">TouchPanel</Value>
+    </Vs_literal_All_AudioAmplifier_AudioMicrophone_ControlSystem_Other_TouchPanel>
+    <Vs_literal_All_Available_Installed item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">Available</Value>
+        <Value item="3">Installed</Value>
+    </Vs_literal_All_Available_Installed>
+    <Vs_literal_All_Camera item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">Camera</Value>
+    </Vs_literal_All_Camera>
+    <Vs_literal_All_Focus_PanTilt_Zoom item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">Focus</Value>
+        <Value item="3">PanTilt</Value>
+        <Value item="4">Zoom</Value>
+    </Vs_literal_All_Focus_PanTilt_Zoom>
+    <Vs_literal_All_Missed_AnsweredElsewhere_Forwarded_Placed_NoAnswer_Received_Rejected_UnacknowledgedMissed_Pmr item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">Missed</Value>
+        <Value item="3">AnsweredElsewhere</Value>
+        <Value item="4">Forwarded</Value>
+        <Value item="5">Placed</Value>
+        <Value item="6">NoAnswer</Value>
+        <Value item="7">Received</Value>
+        <Value item="8">Rejected</Value>
+        <Value item="9">UnacknowledgedMissed</Value>
+        <Value item="10">Pmr</Value>
+    </Vs_literal_All_Missed_AnsweredElsewhere_Forwarded_Placed_NoAnswer_Received_Rejected_UnacknowledgedMissed_Pmr>
+    <Vs_literal_All_Missed_Placed_Received item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">Missed</Value>
+        <Value item="3">Placed</Value>
+        <Value item="4">Received</Value>
+    </Vs_literal_All_Missed_Placed_Received>
+    <Vs_literal_All_Rooms_People_Pmr item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">Rooms</Value>
+        <Value item="3">People</Value>
+        <Value item="4">Pmr</Value>
+    </Vs_literal_All_Rooms_People_Pmr>
+    <Vs_literal_All_Signage_WebApps_PersistentWebApp_ECM_EmbeddedApp_Kiosk_Integration_WebWidget_WebRTC_Whiteboard item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">Signage</Value>
+        <Value item="3">WebApps</Value>
+        <Value item="4">PersistentWebApp</Value>
+        <Value item="5">ECM</Value>
+        <Value item="6">EmbeddedApp</Value>
+        <Value item="7">Kiosk</Value>
+        <Value item="8">Integration</Value>
+        <Value item="9">WebWidget</Value>
+        <Value item="10">WebRTC</Value>
+        <Value item="11">Whiteboard</Value>
+    </Vs_literal_All_Signage_WebApps_PersistentWebApp_ECM_EmbeddedApp_Kiosk_Integration_WebWidget_WebRTC_Whiteboard>
+    <Vs_literal_All_Unused item="1" type="Literal">
+        <Value item="1">All</Value>
+        <Value item="2">Unused</Value>
+    </Vs_literal_All_Unused>
+    <Vs_literal_Allow_Deny item="1" type="Literal">
+        <Value item="1">Allow</Value>
+        <Value item="2">Deny</Value>
+    </Vs_literal_Allow_Deny>
+    <Vs_literal_Any_Folder_Contact item="1" type="Literal">
+        <Value item="1">Any</Value>
+        <Value item="2">Folder</Value>
+        <Value item="3">Contact</Value>
+    </Vs_literal_Any_Folder_Contact>
+    <Vs_literal_AnyoneCanAnnotate_AnnotationNotAllowed_Approval item="1" type="Literal">
+        <Value item="1">AnyoneCanAnnotate</Value>
+        <Value item="2">AnnotationNotAllowed</Value>
+        <Value item="3">Approval</Value>
+    </Vs_literal_AnyoneCanAnnotate_AnnotationNotAllowed_Approval>
+    <Vs_literal_Asynchronous item="1" type="Literal">
+        <Value item="1">Asynchronous</Value>
+    </Vs_literal_Asynchronous>
+    <Vs_literal_Audible_Silent item="1" type="Literal">
+        <Value item="1">Audible</Value>
+        <Value item="2">Silent</Value>
+    </Vs_literal_Audible_Silent>
+    <Vs_literal_AudioAmplifier_AudioMicrophone_Byod_Camera_ControlSystem_Other_TouchPanel_RoomScheduler_PersistentWebApp item="1" type="Literal">
+        <Value item="1">AudioAmplifier</Value>
+        <Value item="2">AudioMicrophone</Value>
+        <Value item="3">Byod</Value>
+        <Value item="4">Camera</Value>
+        <Value item="5">ControlSystem</Value>
+        <Value item="6">Other</Value>
+        <Value item="7">TouchPanel</Value>
+        <Value item="8">RoomScheduler</Value>
+        <Value item="9">PersistentWebApp</Value>
+    </Vs_literal_AudioAmplifier_AudioMicrophone_Byod_Camera_ControlSystem_Other_TouchPanel_RoomScheduler_PersistentWebApp>
+    <Vs_literal_Auto_AsIs_Left_Centered_Right item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">AsIs</Value>
+        <Value item="3">Left</Value>
+        <Value item="4">Centered</Value>
+        <Value item="5">Right</Value>
+    </Vs_literal_Auto_AsIs_Left_Centered_Right>
+    <Vs_literal_Auto_AsIs_Top_TopLow_Centered_Bottom item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">AsIs</Value>
+        <Value item="3">Top</Value>
+        <Value item="4">TopLow</Value>
+        <Value item="5">Centered</Value>
+        <Value item="6">Bottom</Value>
+    </Vs_literal_Auto_AsIs_Top_TopLow_Centered_Bottom>
+    <Vs_literal_Auto_Audio_Video item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Audio</Value>
+        <Value item="3">Video</Value>
+    </Vs_literal_Auto_Audio_Video>
+    <Vs_literal_Auto_AutoLeft_AutoRight_AsIs_Left_Centered_Right item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">AutoLeft</Value>
+        <Value item="3">AutoRight</Value>
+        <Value item="4">AsIs</Value>
+        <Value item="5">Left</Value>
+        <Value item="6">Centered</Value>
+        <Value item="7">Right</Value>
+    </Vs_literal_Auto_AutoLeft_AutoRight_AsIs_Left_Centered_Right>
+    <Vs_literal_Auto_AutoTop_AutoBottom_AsIs_Top_TopLow_Centered_Bottom item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">AutoTop</Value>
+        <Value item="3">AutoBottom</Value>
+        <Value item="4">AsIs</Value>
+        <Value item="5">Top</Value>
+        <Value item="6">TopLow</Value>
+        <Value item="7">Centered</Value>
+        <Value item="8">Bottom</Value>
+    </Vs_literal_Auto_AutoTop_AutoBottom_AsIs_Top_TopLow_Centered_Bottom>
+    <Vs_literal_Auto_Fixed_GainShared item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Fixed</Value>
+        <Value item="3">GainShared</Value>
+    </Vs_literal_Auto_Fixed_GainShared>
+    <Vs_literal_Auto_H323_SIP_Spark item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">H323</Value>
+        <Value item="3">SIP</Value>
+        <Value item="4">Spark</Value>
+    </Vs_literal_Auto_H323_SIP_Spark>
+    <Vs_literal_Auto_Hidden item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Hidden</Value>
+    </Vs_literal_Auto_Hidden>
+    <Vs_literal_Auto_Large item="1" type="Literal">
+        <Value item="1">Auto</Value>
+        <Value item="2">Large</Value>
+    </Vs_literal_Auto_Large>
+    <Vs_literal_Background_Branding_SchedulerBranding_SchedulerBackground_HalfwakeBackground_HalfwakeBranding_WorkspaceAvatar item="1" type="Literal">
+        <Value item="1">Background</Value>
+        <Value item="2">Branding</Value>
+        <Value item="3">SchedulerBranding</Value>
+        <Value item="4">SchedulerBackground</Value>
+        <Value item="5">HalfwakeBackground</Value>
+        <Value item="6">HalfwakeBranding</Value>
+        <Value item="7">WorkspaceAvatar</Value>
+    </Vs_literal_Background_Branding_SchedulerBranding_SchedulerBackground_HalfwakeBackground_HalfwakeBranding_WorkspaceAvatar>
+    <Vs_literal_Basic_Full item="1" type="Literal">
+        <Value item="1">Basic</Value>
+        <Value item="2">Full</Value>
+    </Vs_literal_Basic_Full>
+    <Vs_literal_BeforeAEC_AfterAEC item="1" type="Literal">
+        <Value item="1">BeforeAEC</Value>
+        <Value item="2">AfterAEC</Value>
+    </Vs_literal_BeforeAEC_AfterAEC>
+    <Vs_literal_Blend_CameraPip_VideoPip item="1" type="Literal">
+        <Value item="1">Blend</Value>
+        <Value item="2">CameraPip</Value>
+        <Value item="3">VideoPip</Value>
+    </Vs_literal_Blend_CameraPip_VideoPip>
+    <Vs_literal_Briefing_Camera_Concierge_Disc_Handset_Help_Helpdesk_Home_Hvac_Info_Input_Language_Laptop_Lightbulb_Media_Microphone_Power_Proximity_Record_Spark_Tv_Webex_General_Custom item="1" type="Literal">
+        <Value item="1">Briefing</Value>
+        <Value item="2">Camera</Value>
+        <Value item="3">Concierge</Value>
+        <Value item="4">Disc</Value>
+        <Value item="5">Handset</Value>
+        <Value item="6">Help</Value>
+        <Value item="7">Helpdesk</Value>
+        <Value item="8">Home</Value>
+        <Value item="9">Hvac</Value>
+        <Value item="10">Info</Value>
+        <Value item="11">Input</Value>
+        <Value item="12">Language</Value>
+        <Value item="13">Laptop</Value>
+        <Value item="14">Lightbulb</Value>
+        <Value item="15">Media</Value>
+        <Value item="16">Microphone</Value>
+        <Value item="17">Power</Value>
+        <Value item="18">Proximity</Value>
+        <Value item="19">Record</Value>
+        <Value item="20">Spark</Value>
+        <Value item="21">Tv</Value>
+        <Value item="22">Webex</Value>
+        <Value item="23">General</Value>
+        <Value item="24">Custom</Value>
+    </Vs_literal_Briefing_Camera_Concierge_Disc_Handset_Help_Helpdesk_Home_Hvac_Info_Input_Language_Laptop_Lightbulb_Media_Microphone_Power_Proximity_Record_Spark_Tv_Webex_General_Custom>
+    <Vs_literal_Briefing_Classroom_Standard_PresenterAndAudience item="1" type="Literal">
+        <Value item="1">Briefing</Value>
+        <Value item="2">Classroom</Value>
+        <Value item="3">Standard</Value>
+        <Value item="4">PresenterAndAudience</Value>
+    </Vs_literal_Briefing_Classroom_Standard_PresenterAndAudience>
+    <Vs_literal_Busy_DoNotDisturb item="1" type="Literal">
+        <Value item="1">Busy</Value>
+        <Value item="2">DoNotDisturb</Value>
+    </Vs_literal_Busy_DoNotDisturb>
+    <Vs_literal_CODECPRO_ROOM70S_ROOM70D item="1" type="Literal">
+        <Value item="1">CODECPRO</Value>
+        <Value item="2">ROOM70S</Value>
+        <Value item="3">ROOM70D</Value>
+    </Vs_literal_CODECPRO_ROOM70S_ROOM70D>
+    <Vs_literal_Call item="1" type="Literal">
+        <Value item="1">Call</Value>
+    </Vs_literal_Call>
+    <Vs_literal_Camera_Microphone_2 item="1" type="Literal">
+        <Value item="1">Camera</Value>
+        <Value item="2">Microphone</Value>
+    </Vs_literal_Camera_Microphone_2>
+    <Vs_literal_CenterLeft_CenterRight_LowerLeft_LowerRight_UpperCenter_UpperLeft_UpperRight item="1" type="Literal">
+        <Value item="1">CenterLeft</Value>
+        <Value item="2">CenterRight</Value>
+        <Value item="3">LowerLeft</Value>
+        <Value item="4">LowerRight</Value>
+        <Value item="5">UpperCenter</Value>
+        <Value item="6">UpperLeft</Value>
+        <Value item="7">UpperRight</Value>
+    </Vs_literal_CenterLeft_CenterRight_LowerLeft_LowerRight_UpperCenter_UpperLeft_UpperRight>
+    <Vs_literal_CenterLeft_CenterRight_LowerLeft_LowerRight_UpperCenter_UpperLeft_UpperRight_DockLowerLeft_DockCenterLeft item="1" type="Literal">
+        <Value item="1">CenterLeft</Value>
+        <Value item="2">CenterRight</Value>
+        <Value item="3">LowerLeft</Value>
+        <Value item="4">LowerRight</Value>
+        <Value item="5">UpperCenter</Value>
+        <Value item="6">UpperLeft</Value>
+        <Value item="7">UpperRight</Value>
+        <Value item="8">DockLowerLeft</Value>
+        <Value item="9">DockCenterLeft</Value>
+    </Vs_literal_CenterLeft_CenterRight_LowerLeft_LowerRight_UpperCenter_UpperLeft_UpperRight_DockLowerLeft_DockCenterLeft>
+    <Vs_literal_Cisco_NonCisco_TLSproxy item="1" type="Literal">
+        <Value item="1">Cisco</Value>
+        <Value item="2">Non-Cisco</Value>
+        <Value item="3">TLS-proxy</Value>
+    </Vs_literal_Cisco_NonCisco_TLSproxy>
+    <Vs_literal_Codec_Console item="1" type="Literal">
+        <Value item="1">Codec</Value>
+        <Value item="2">Console</Value>
+    </Vs_literal_Codec_Console>
+    <Vs_literal_Column_Row_ReversedRow_AlternatingRow_AlternatingReversedRow item="1" type="Literal">
+        <Value item="1">Column</Value>
+        <Value item="2">Row</Value>
+        <Value item="3">ReversedRow</Value>
+        <Value item="4">AlternatingRow</Value>
+        <Value item="5">AlternatingReversedRow</Value>
+    </Vs_literal_Column_Row_ReversedRow_AlternatingRow_AlternatingReversedRow>
+    <Vs_literal_Completed_Declined_TimedOut_CanceledMidway_Interrupted item="1" type="Literal">
+        <Value item="1">Completed</Value>
+        <Value item="2">Declined</Value>
+        <Value item="3">TimedOut</Value>
+        <Value item="4">CanceledMidway</Value>
+        <Value item="5">Interrupted</Value>
+    </Vs_literal_Completed_Declined_TimedOut_CanceledMidway_Interrupted>
+    <Vs_literal_Conference_Transfer_Other item="1" type="Literal">
+        <Value item="1">Conference</Value>
+        <Value item="2">Transfer</Value>
+        <Value item="3">Other</Value>
+    </Vs_literal_Conference_Transfer_Other>
+    <Vs_literal_Controller_RoomScheduler_PersistentWebApp item="1" type="Literal">
+        <Value item="1">Controller</Value>
+        <Value item="2">RoomScheduler</Value>
+        <Value item="3">PersistentWebApp</Value>
+    </Vs_literal_Controller_RoomScheduler_PersistentWebApp>
+    <Vs_literal_Corporate_Local item="1" type="Literal">
+        <Value item="1">Corporate</Value>
+        <Value item="2">Local</Value>
+    </Vs_literal_Corporate_Local>
+    <Vs_literal_Custom_WebApp_WebWidget item="1" type="Literal">
+        <Value item="1">Custom</Value>
+        <Value item="2">WebApp</Value>
+        <Value item="3">WebWidget</Value>
+    </Vs_literal_Custom_WebApp_WebWidget>
+    <Vs_literal_Custom_WebWidget item="1" type="Literal">
+        <Value item="1">Custom</Value>
+        <Value item="2">WebWidget</Value>
+    </Vs_literal_Custom_WebWidget>
+    <Vs_literal_Default_ActiveSpeaker_Offscreen_Presentation item="1" type="Literal">
+        <Value item="1">Default</Value>
+        <Value item="2">ActiveSpeaker</Value>
+        <Value item="3">Offscreen</Value>
+        <Value item="4">Presentation</Value>
+    </Vs_literal_Default_ActiveSpeaker_Offscreen_Presentation>
+    <Vs_literal_Default_Light_Dark item="1" type="Literal">
+        <Value item="1">Default</Value>
+        <Value item="2">Light</Value>
+        <Value item="3">Dark</Value>
+    </Vs_literal_Default_Light_Dark>
+    <Vs_literal_Default_Maximized_Minimized item="1" type="Literal">
+        <Value item="1">Default</Value>
+        <Value item="2">Maximized</Value>
+        <Value item="3">Minimized</Value>
+    </Vs_literal_Default_Maximized_Minimized>
+    <Vs_literal_Default_Minimal_RampIn_None item="1" type="Literal">
+        <Value item="1">Default</Value>
+        <Value item="2">Minimal</Value>
+        <Value item="3">RampIn</Value>
+        <Value item="4">None</Value>
+    </Vs_literal_Default_Minimal_RampIn_None>
+    <Vs_literal_Default_None item="1" type="Literal">
+        <Value item="1">Default</Value>
+        <Value item="2">None</Value>
+    </Vs_literal_Default_None>
+    <Vs_literal_Disabled_Blur_BlurMonochrome_DepthOfField_Monochrome_Hdmi_UsbC_Image item="1" type="Literal">
+        <Value item="1">Disabled</Value>
+        <Value item="2">Blur</Value>
+        <Value item="3">BlurMonochrome</Value>
+        <Value item="4">DepthOfField</Value>
+        <Value item="5">Monochrome</Value>
+        <Value item="6">Hdmi</Value>
+        <Value item="7">UsbC</Value>
+        <Value item="8">Image</Value>
+    </Vs_literal_Disabled_Blur_BlurMonochrome_DepthOfField_Monochrome_Hdmi_UsbC_Image>
+    <Vs_literal_Down_Stop_Up item="1" type="Literal">
+        <Value item="1">Down</Value>
+        <Value item="2">Stop</Value>
+        <Value item="3">Up</Value>
+    </Vs_literal_Down_Stop_Up>
+    <Vs_literal_Enabled_Disabled item="1" type="Literal">
+        <Value item="1">Enabled</Value>
+        <Value item="2">Disabled</Value>
+    </Vs_literal_Enabled_Disabled>
+    <Vs_literal_Encryption_MultiSite_RemoteMonitoring_DeveloperPreview item="1" type="Literal">
+        <Value item="1">Encryption</Value>
+        <Value item="2">MultiSite</Value>
+        <Value item="3">RemoteMonitoring</Value>
+        <Value item="4">DeveloperPreview</Value>
+    </Vs_literal_Encryption_MultiSite_RemoteMonitoring_DeveloperPreview>
+    <Vs_literal_Equal_PIP_Prominent item="1" type="Literal">
+        <Value item="1">Equal</Value>
+        <Value item="2">PIP</Value>
+        <Value item="3">Prominent</Value>
+    </Vs_literal_Equal_PIP_Prominent>
+    <Vs_literal_Equal_Prominent item="1" type="Literal">
+        <Value item="1">Equal</Value>
+        <Value item="2">Prominent</Value>
+    </Vs_literal_Equal_Prominent>
+    <Vs_literal_False_True item="1" type="Literal">
+        <Value item="1">False</Value>
+        <Value item="2">True</Value>
+    </Vs_literal_False_True>
+    <Vs_literal_Far_Near_Stop item="1" type="Literal">
+        <Value item="1">Far</Value>
+        <Value item="2">Near</Value>
+        <Value item="3">Stop</Value>
+    </Vs_literal_Far_Near_Stop>
+    <Vs_literal_First_Second_Third item="1" type="Literal">
+        <Value item="1">First</Value>
+        <Value item="2">Second</Value>
+        <Value item="3">Third</Value>
+    </Vs_literal_First_Second_Third>
+    <Vs_literal_Full_Basic item="1" type="Literal">
+        <Value item="1">Full</Value>
+        <Value item="2">Basic</Value>
+    </Vs_literal_Full_Basic>
+    <Vs_literal_Full_FullRotate_Limited_None item="1" type="Literal">
+        <Value item="1">Full</Value>
+        <Value item="2">FullRotate</Value>
+        <Value item="3">Limited</Value>
+        <Value item="4">None</Value>
+    </Vs_literal_Full_FullRotate_Limited_None>
+    <Vs_literal_Fullscreen_Modal item="1" type="Literal">
+        <Value item="1">Fullscreen</Value>
+        <Value item="2">Modal</Value>
+    </Vs_literal_Fullscreen_Modal>
+    <Vs_literal_Get_Post item="1" type="Literal">
+        <Value item="1">Get</Value>
+        <Value item="2">Post</Value>
+    </Vs_literal_Get_Post>
+    <Vs_literal_Gjallarhorn_Heimdall_Nixie_Unknown item="1" type="Literal">
+        <Value item="1">Gjallarhorn</Value>
+        <Value item="2">Heimdall</Value>
+        <Value item="3">Nixie</Value>
+        <Value item="4">Unknown</Value>
+    </Vs_literal_Gjallarhorn_Heimdall_Nixie_Unknown>
+    <Vs_literal_Green_Yellow_Red_Purple_Blue_Orange_Orchid_Aquamarine_Fuchsia_Violet_Magenta_Scarlet_Gold_Lime_Turquoise_Cyan_Off item="1" type="Literal">
+        <Value item="1">Green</Value>
+        <Value item="2">Yellow</Value>
+        <Value item="3">Red</Value>
+        <Value item="4">Purple</Value>
+        <Value item="5">Blue</Value>
+        <Value item="6">Orange</Value>
+        <Value item="7">Orchid</Value>
+        <Value item="8">Aquamarine</Value>
+        <Value item="9">Fuchsia</Value>
+        <Value item="10">Violet</Value>
+        <Value item="11">Magenta</Value>
+        <Value item="12">Scarlet</Value>
+        <Value item="13">Gold</Value>
+        <Value item="14">Lime</Value>
+        <Value item="15">Turquoise</Value>
+        <Value item="16">Cyan</Value>
+        <Value item="17">Off</Value>
+    </Vs_literal_Green_Yellow_Red_Purple_Blue_Orange_Orchid_Aquamarine_Fuchsia_Violet_Magenta_Scarlet_Gold_Lime_Turquoise_Cyan_Off>
+    <Vs_literal_H323_Sip_Spark item="1" type="Literal">
+        <Value item="1">H323</Value>
+        <Value item="2">Sip</Value>
+        <Value item="3">Spark</Value>
+    </Vs_literal_H323_Sip_Spark>
+    <Vs_literal_HDMI item="1" type="Literal">
+        <Value item="1">HDMI</Value>
+    </Vs_literal_HDMI>
+    <Vs_literal_HDMI_Line_Internal_Headset_All item="1" type="Literal">
+        <Value item="1">HDMI</Value>
+        <Value item="2">Line</Value>
+        <Value item="3">Internal</Value>
+        <Value item="4">Headset</Value>
+        <Value item="5">All</Value>
+    </Vs_literal_HDMI_Line_Internal_Headset_All>
+    <Vs_literal_Harden_NoAction item="1" type="Literal">
+        <Value item="1">Harden</Value>
+        <Value item="2">NoAction</Value>
+    </Vs_literal_Harden_NoAction>
+    <Vs_literal_Hdmi_UsbC item="1" type="Literal">
+        <Value item="1">Hdmi</Value>
+        <Value item="2">UsbC</Value>
+    </Vs_literal_Hdmi_UsbC>
+    <Vs_literal_Hidden_Ready_NotReady_Error item="1" type="Literal">
+        <Value item="1">Hidden</Value>
+        <Value item="2">Ready</Value>
+        <Value item="3">NotReady</Value>
+        <Value item="4">Error</Value>
+    </Vs_literal_Hidden_Ready_NotReady_Error>
+    <Vs_literal_High_Low item="1" type="Literal">
+        <Value item="1">High</Value>
+        <Value item="2">Low</Value>
+    </Vs_literal_High_Low>
+    <Vs_literal_HomeScreen_CallControls_HomeScreenAndCallControls_ControlPanel_Hidden item="1" type="Literal">
+        <Value item="1">HomeScreen</Value>
+        <Value item="2">CallControls</Value>
+        <Value item="3">HomeScreenAndCallControls</Value>
+        <Value item="4">ControlPanel</Value>
+        <Value item="5">Hidden</Value>
+    </Vs_literal_HomeScreen_CallControls_HomeScreenAndCallControls_ControlPanel_Hidden>
+    <Vs_literal_Horizontal_Vertical item="1" type="Literal">
+        <Value item="1">Horizontal</Value>
+        <Value item="2">Vertical</Value>
+    </Vs_literal_Horizontal_Vertical>
+    <Vs_literal_Host_Panelist_Guest item="1" type="Literal">
+        <Value item="1">Host</Value>
+        <Value item="2">Panelist</Value>
+        <Value item="3">Guest</Value>
+    </Vs_literal_Host_Panelist_Guest>
+    <Vs_literal_Host_Panelist_Guest_Cohost_Presenter item="1" type="Literal">
+        <Value item="1">Host</Value>
+        <Value item="2">Panelist</Value>
+        <Value item="3">Guest</Value>
+        <Value item="4">Cohost</Value>
+        <Value item="5">Presenter</Value>
+    </Vs_literal_Host_Panelist_Guest_Cohost_Presenter>
+    <Vs_literal_Idle_Busy_ExternalInUse item="1" type="Literal">
+        <Value item="1">Idle</Value>
+        <Value item="2">Busy_ExternalInUse</Value>
+    </Vs_literal_Idle_Busy_ExternalInUse>
+    <Vs_literal_Image1_Image2_Image3_Image4_Image5_Image6_Image7_User1_User2_User3 item="1" type="Literal">
+        <Value item="1">Image1</Value>
+        <Value item="2">Image2</Value>
+        <Value item="3">Image3</Value>
+        <Value item="4">Image4</Value>
+        <Value item="5">Image5</Value>
+        <Value item="6">Image6</Value>
+        <Value item="7">Image7</Value>
+        <Value item="8">User1</Value>
+        <Value item="9">User2</Value>
+        <Value item="10">User3</Value>
+    </Vs_literal_Image1_Image2_Image3_Image4_Image5_Image6_Image7_User1_User2_User3>
+    <Vs_literal_In_Out_Stop item="1" type="Literal">
+        <Value item="1">In</Value>
+        <Value item="2">Out</Value>
+        <Value item="3">Stop</Value>
+    </Vs_literal_In_Out_Stop>
+    <Vs_literal_Info_Warning_Error item="1" type="Literal">
+        <Value item="1">Info</Value>
+        <Value item="2">Warning</Value>
+        <Value item="3">Error</Value>
+    </Vs_literal_Info_Warning_Error>
+    <Vs_literal_Info_Warning_Error_Fatal_Verbose item="1" type="Literal">
+        <Value item="1">Info</Value>
+        <Value item="2">Warning</Value>
+        <Value item="3">Error</Value>
+        <Value item="4">Fatal</Value>
+        <Value item="5">Verbose</Value>
+    </Vs_literal_Info_Warning_Error_Fatal_Verbose>
+    <Vs_literal_InsideRoom_OutsideRoom item="1" type="Literal">
+        <Value item="1">InsideRoom</Value>
+        <Value item="2">OutsideRoom</Value>
+    </Vs_literal_InsideRoom_OutsideRoom>
+    <Vs_literal_Internal_External item="1" type="Literal">
+        <Value item="1">Internal</Value>
+        <Value item="2">External</Value>
+    </Vs_literal_Internal_External>
+    <Vs_literal_Internal_HeadsetBluetooth_HeadsetUSB_HandsetUSB item="1" type="Literal">
+        <Value item="1">Internal</Value>
+        <Value item="2">HeadsetBluetooth</Value>
+        <Value item="3">HeadsetUSB</Value>
+        <Value item="4">HandsetUSB</Value>
+    </Vs_literal_Internal_HeadsetBluetooth_HeadsetUSB_HandsetUSB>
+    <Vs_literal_Keep_Suppress item="1" type="Literal">
+        <Value item="1">Keep</Value>
+        <Value item="2">Suppress</Value>
+    </Vs_literal_Keep_Suppress>
+    <Vs_literal_Large_Small_Thumbnail item="1" type="Literal">
+        <Value item="1">Large</Value>
+        <Value item="2">Small</Value>
+        <Value item="3">Thumbnail</Value>
+    </Vs_literal_Large_Small_Thumbnail>
+    <Vs_literal_Large_Thumbnail item="1" type="Literal">
+        <Value item="1">Large</Value>
+        <Value item="2">Thumbnail</Value>
+    </Vs_literal_Large_Thumbnail>
+    <Vs_literal_LeftRight_Calibration_Anaglyph item="1" type="Literal">
+        <Value item="1">LeftRight</Value>
+        <Value item="2">Calibration</Value>
+        <Value item="3">Anaglyph</Value>
+    </Vs_literal_LeftRight_Calibration_Anaglyph>
+    <Vs_literal_LeftToRight_TopToBottom item="1" type="Literal">
+        <Value item="1">LeftToRight</Value>
+        <Value item="2">TopToBottom</Value>
+    </Vs_literal_LeftToRight_TopToBottom>
+    <Vs_literal_Left_Right item="1" type="Literal">
+        <Value item="1">Left</Value>
+        <Value item="2">Right</Value>
+    </Vs_literal_Left_Right>
+    <Vs_literal_Left_Right_Stop item="1" type="Literal">
+        <Value item="1">Left</Value>
+        <Value item="2">Right</Value>
+        <Value item="3">Stop</Value>
+    </Vs_literal_Left_Right_Stop>
+    <Vs_literal_Left_Right_Up_Down_ZoomIn_ZoomOut item="1" type="Literal">
+        <Value item="1">Left</Value>
+        <Value item="2">Right</Value>
+        <Value item="3">Up</Value>
+        <Value item="4">Down</Value>
+        <Value item="5">ZoomIn</Value>
+        <Value item="6">ZoomOut</Value>
+    </Vs_literal_Left_Right_Up_Down_ZoomIn_ZoomOut>
+    <Vs_literal_Limited_None item="1" type="Literal">
+        <Value item="1">Limited</Value>
+        <Value item="2">None</Value>
+    </Vs_literal_Limited_None>
+    <Vs_literal_LocalOutput_MainSource_PresentationSource_3 item="1" type="Literal">
+        <Value item="1">LocalOutput</Value>
+        <Value item="2">MainSource</Value>
+        <Value item="3">PresentationSource</Value>
+    </Vs_literal_LocalOutput_MainSource_PresentationSource_3>
+    <Vs_literal_LocalRemote_LocalOnly item="1" type="Literal">
+        <Value item="1">LocalRemote</Value>
+        <Value item="2">LocalOnly</Value>
+    </Vs_literal_LocalRemote_LocalOnly>
+    <Vs_literal_LocalSetup_Network_Webex_Provisioning_SerialPort_Certificates_HTTP_RemoteSupportUser_7 item="1" type="Literal">
+        <Value item="1">LocalSetup</Value>
+        <Value item="2">Network</Value>
+        <Value item="3">Webex</Value>
+        <Value item="4">Provisioning</Value>
+        <Value item="5">SerialPort</Value>
+        <Value item="6">Certificates</Value>
+        <Value item="7">HTTP</Value>
+        <Value item="8">RemoteSupportUser</Value>
+    </Vs_literal_LocalSetup_Network_Webex_Provisioning_SerialPort_Certificates_HTTP_RemoteSupportUser_7>
+    <Vs_literal_LocalSetup_Network_Webex_Provisioning_SerialPort_Certificates_Pairing_UserDb_RoomControl_Macros_Branding_HTTP_RemoteSupportUser_11 item="1" type="Literal">
+        <Value item="1">LocalSetup</Value>
+        <Value item="2">Network</Value>
+        <Value item="3">Webex</Value>
+        <Value item="4">Provisioning</Value>
+        <Value item="5">SerialPort</Value>
+        <Value item="6">Certificates</Value>
+        <Value item="7">Pairing</Value>
+        <Value item="8">UserDb</Value>
+        <Value item="9">RoomControl</Value>
+        <Value item="10">Macros</Value>
+        <Value item="11">Branding</Value>
+        <Value item="12">HTTP</Value>
+        <Value item="13">RemoteSupportUser</Value>
+    </Vs_literal_LocalSetup_Network_Webex_Provisioning_SerialPort_Certificates_Pairing_UserDb_RoomControl_Macros_Branding_HTTP_RemoteSupportUser_11>
+    <Vs_literal_Local_Remote item="1" type="Literal">
+        <Value item="1">Local</Value>
+        <Value item="2">Remote</Value>
+    </Vs_literal_Local_Remote>
+    <Vs_literal_Local_TokenBased item="1" type="Literal">
+        <Value item="1">Local</Value>
+        <Value item="2">TokenBased</Value>
+    </Vs_literal_Local_TokenBased>
+    <Vs_literal_LocalmixerGains item="1" type="Literal">
+        <Value item="1">LocalmixerGains</Value>
+    </Vs_literal_LocalmixerGains>
+    <Vs_literal_LogFile_Terminal item="1" type="Literal">
+        <Value item="1">LogFile</Value>
+        <Value item="2">Terminal</Value>
+    </Vs_literal_LogFile_Terminal>
+    <Vs_literal_LowerCenter_LowerLeft_LowerRight_UpperCenter_UpperLeft_UpperRight item="1" type="Literal">
+        <Value item="1">LowerCenter</Value>
+        <Value item="2">LowerLeft</Value>
+        <Value item="3">LowerRight</Value>
+        <Value item="4">UpperCenter</Value>
+        <Value item="5">UpperLeft</Value>
+        <Value item="6">UpperRight</Value>
+    </Vs_literal_LowerCenter_LowerLeft_LowerRight_UpperCenter_UpperLeft_UpperRight>
+    <Vs_literal_LowerLeft_LowerRight_UpperLeft_UpperRight item="1" type="Literal">
+        <Value item="1">LowerLeft</Value>
+        <Value item="2">LowerRight</Value>
+        <Value item="3">UpperLeft</Value>
+        <Value item="4">UpperRight</Value>
+    </Vs_literal_LowerLeft_LowerRight_UpperLeft_UpperRight>
+    <Vs_literal_LyraSpace_Person item="1" type="Literal">
+        <Value item="1">LyraSpace</Value>
+        <Value item="2">Person</Value>
+    </Vs_literal_LyraSpace_Person>
+    <Vs_literal_MSTeams_GoogleMeet item="1" type="Literal">
+        <Value item="1">MSTeams</Value>
+        <Value item="2">GoogleMeet</Value>
+    </Vs_literal_MSTeams_GoogleMeet>
+    <Vs_literal_MTR_Cisco_OnPremLater item="1" type="Literal">
+        <Value item="1">MTR</Value>
+        <Value item="2">Cisco</Value>
+        <Value item="3">OnPremLater</Value>
+    </Vs_literal_MTR_Cisco_OnPremLater>
+    <Vs_literal_Manual_Hotdesk_Personalization item="1" type="Literal">
+        <Value item="1">Manual</Value>
+        <Value item="2">Hotdesk</Value>
+        <Value item="3">Personalization</Value>
+    </Vs_literal_Manual_Hotdesk_Personalization>
+    <Vs_literal_Microphone_USBMicrophone item="1" type="Literal">
+        <Value item="1">Microphone</Value>
+        <Value item="2">USBMicrophone</Value>
+    </Vs_literal_Microphone_USBMicrophone>
+    <Vs_literal_MicrosoftTeamsRooms_MicrosoftTeamsDisplays_MicrosoftTeamsPanels item="1" type="Literal">
+        <Value item="1">MicrosoftTeamsRooms</Value>
+        <Value item="2">MicrosoftTeamsDisplays</Value>
+        <Value item="3">MicrosoftTeamsPanels</Value>
+    </Vs_literal_MicrosoftTeamsRooms_MicrosoftTeamsDisplays_MicrosoftTeamsPanels>
+    <Vs_literal_Mobile_Other_Telephone_Video_Work item="1" type="Literal">
+        <Value item="1">Mobile</Value>
+        <Value item="2">Other</Value>
+        <Value item="3">Telephone</Value>
+        <Value item="4">Video</Value>
+        <Value item="5">Work</Value>
+    </Vs_literal_Mobile_Other_Telephone_Video_Work>
+    <Vs_literal_N_A_125_250_500_1000_2000_4000 item="1" type="Literal">
+        <Value item="1">N_A</Value>
+        <Value item="2">125</Value>
+        <Value item="3">250</Value>
+        <Value item="4">500</Value>
+        <Value item="5">1000</Value>
+        <Value item="6">2000</Value>
+        <Value item="7">4000</Value>
+    </Vs_literal_N_A_125_250_500_1000_2000_4000>
+    <Vs_literal_Name_Number item="1" type="Literal">
+        <Value item="1">Name</Value>
+        <Value item="2">Number</Value>
+    </Vs_literal_Name_Number>
+    <Vs_literal_New_1_2_3_4_5_6 item="1" type="Literal">
+        <Value item="1">New</Value>
+        <Value item="2">1</Value>
+        <Value item="3">2</Value>
+        <Value item="4">3</Value>
+        <Value item="5">4</Value>
+        <Value item="6">5</Value>
+        <Value item="7">6</Value>
+    </Vs_literal_New_1_2_3_4_5_6>
+    <Vs_literal_NoAction_Restart_Shutdown item="1" type="Literal">
+        <Value item="1">NoAction</Value>
+        <Value item="2">Restart</Value>
+        <Value item="3">Shutdown</Value>
+    </Vs_literal_NoAction_Restart_Shutdown>
+    <Vs_literal_NoAction_Restart_Shutdown_WaitForUpgrade item="1" type="Literal">
+        <Value item="1">NoAction</Value>
+        <Value item="2">Restart</Value>
+        <Value item="3">Shutdown</Value>
+        <Value item="4">WaitForUpgrade</Value>
+    </Vs_literal_NoAction_Restart_Shutdown_WaitForUpgrade>
+    <Vs_literal_NonPersistent_Persistent item="1" type="Literal">
+        <Value item="1">NonPersistent</Value>
+        <Value item="2">Persistent</Value>
+    </Vs_literal_NonPersistent_Persistent>
+    <Vs_literal_None_AirPlay_Miracast_Remote_WebView_1_2_3 item="1" type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">AirPlay</Value>
+        <Value item="3">Miracast</Value>
+        <Value item="4">Remote</Value>
+        <Value item="5">WebView</Value>
+        <Value item="6">1</Value>
+        <Value item="7">2</Value>
+        <Value item="8">3</Value>
+    </Vs_literal_None_AirPlay_Miracast_Remote_WebView_1_2_3>
+    <Vs_literal_None_AirPlay_Miracast_Remote_WebView_1_2_3_4 item="1" type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">AirPlay</Value>
+        <Value item="3">Miracast</Value>
+        <Value item="4">Remote</Value>
+        <Value item="5">WebView</Value>
+        <Value item="6">1</Value>
+        <Value item="7">2</Value>
+        <Value item="8">3</Value>
+    </Vs_literal_None_AirPlay_Miracast_Remote_WebView_1_2_3_4>
+    <Vs_literal_None_AirPlay_Miracast_Remote_WebView_1_2_3_4_5_6 item="1" type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">AirPlay</Value>
+        <Value item="3">Miracast</Value>
+        <Value item="4">Remote</Value>
+        <Value item="5">WebView</Value>
+        <Value item="6">1</Value>
+        <Value item="7">2</Value>
+        <Value item="8">3</Value>
+        <Value item="9">4</Value>
+        <Value item="10">5</Value>
+        <Value item="11">6</Value>
+    </Vs_literal_None_AirPlay_Miracast_Remote_WebView_1_2_3_4_5_6>
+    <Vs_literal_None_PlainText_Base64 item="1" type="Literal">
+        <Value item="1">None</Value>
+        <Value item="2">PlainText</Value>
+        <Value item="3">Base64</Value>
+    </Vs_literal_None_PlainText_Base64>
+    <Vs_literal_Normal_Large item="1" type="Literal">
+        <Value item="1">Normal</Value>
+        <Value item="2">Large</Value>
+    </Vs_literal_Normal_Large>
+    <Vs_literal_NotRunning_Running item="1" type="Literal">
+        <Value item="1">NotRunning</Value>
+        <Value item="2">Running</Value>
+    </Vs_literal_NotRunning_Running>
+    <Vs_literal_NotSet_Controller_Scheduler_PersistentWebApp item="1" type="Literal">
+        <Value item="1">NotSet</Value>
+        <Value item="2">Controller</Value>
+        <Value item="3">Scheduler</Value>
+        <Value item="4">PersistentWebApp</Value>
+    </Vs_literal_NotSet_Controller_Scheduler_PersistentWebApp>
+    <Vs_literal_Notification_Prominent_ProminentPortrait item="1" type="Literal">
+        <Value item="1">Notification</Value>
+        <Value item="2">Prominent</Value>
+        <Value item="3">ProminentPortrait</Value>
+    </Vs_literal_Notification_Prominent_ProminentPortrait>
+    <Vs_literal_OSD_Controller_PersistentWebApp item="1" type="Literal">
+        <Value item="1">OSD</Value>
+        <Value item="2">Controller</Value>
+        <Value item="3">PersistentWebApp</Value>
+    </Vs_literal_OSD_Controller_PersistentWebApp>
+    <Vs_literal_OSD_TouchPanel item="1" type="Literal">
+        <Value item="1">OSD</Value>
+        <Value item="2">TouchPanel</Value>
+    </Vs_literal_OSD_TouchPanel>
+    <Vs_literal_Observations_Percent item="1" type="Literal">
+        <Value item="1">Observations</Value>
+        <Value item="2">Percent</Value>
+    </Vs_literal_Observations_Percent>
+    <Vs_literal_OccurrenceTime_OccurrenceFrequency item="1" type="Literal">
+        <Value item="1">OccurrenceTime</Value>
+        <Value item="2">OccurrenceFrequency</Value>
+    </Vs_literal_OccurrenceTime_OccurrenceFrequency>
+    <Vs_literal_Off_Follow_Diagnostic_Background_Setup_Persistent item="1" type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">Follow</Value>
+        <Value item="3">Diagnostic</Value>
+        <Value item="4">Background</Value>
+        <Value item="5">Setup</Value>
+        <Value item="6">Persistent</Value>
+    </Vs_literal_Off_Follow_Diagnostic_Background_Setup_Persistent>
+    <Vs_literal_Off_On item="1" type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">On</Value>
+    </Vs_literal_Off_On>
+    <Vs_literal_Off_On_WithoutPause item="1" type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">On</Value>
+        <Value item="3">WithoutPause</Value>
+    </Vs_literal_Off_On_WithoutPause>
+    <Vs_literal_Off_PipOnly_AllCases item="1" type="Literal">
+        <Value item="1">Off</Value>
+        <Value item="2">PipOnly</Value>
+        <Value item="3">AllCases</Value>
+    </Vs_literal_Off_PipOnly_AllCases>
+    <Vs_literal_On_Auto item="1" type="Literal">
+        <Value item="1">On</Value>
+        <Value item="2">Auto</Value>
+    </Vs_literal_On_Auto>
+    <Vs_literal_On_Off item="1" type="Literal">
+        <Value item="1">On</Value>
+        <Value item="2">Off</Value>
+    </Vs_literal_On_Off>
+    <Vs_literal_Open_Closed item="1" type="Literal">
+        <Value item="1">Open</Value>
+        <Value item="2">Closed</Value>
+    </Vs_literal_Open_Closed>
+    <Vs_literal_Open_Wpa2psk_Wpa2eapfast_Wpa2eappeap_Wpa2eaptls_Wpa2eapttls item="1" type="Literal">
+        <Value item="1">Open</Value>
+        <Value item="2">Wpa2-psk</Value>
+        <Value item="3">Wpa2-eap-fast</Value>
+        <Value item="4">Wpa2-eap-peap</Value>
+        <Value item="5">Wpa2-eap-tls</Value>
+        <Value item="6">Wpa2-eap-ttls</Value>
+    </Vs_literal_Open_Wpa2psk_Wpa2eapfast_Wpa2eappeap_Wpa2eaptls_Wpa2eapttls>
+    <Vs_literal_Other_Provisioning item="1" type="Literal">
+        <Value item="1">Other</Value>
+        <Value item="2">Provisioning</Value>
+    </Vs_literal_Other_Provisioning>
+    <Vs_literal_OutOfMemory_RenderProcessCrashed_CertificateError_ConnectionError_HttpError_DnsError_OtherError item="1" type="Literal">
+        <Value item="1">OutOfMemory</Value>
+        <Value item="2">RenderProcessCrashed</Value>
+        <Value item="3">CertificateError</Value>
+        <Value item="4">ConnectionError</Value>
+        <Value item="5">HttpError</Value>
+        <Value item="6">DnsError</Value>
+        <Value item="7">OtherError</Value>
+    </Vs_literal_OutOfMemory_RenderProcessCrashed_CertificateError_ConnectionError_HttpError_DnsError_OtherError>
+    <Vs_literal_PEM_Text item="1" type="Literal">
+        <Value item="1">PEM</Value>
+        <Value item="2">Text</Value>
+    </Vs_literal_PEM_Text>
+    <Vs_literal_PreOnboard_FillMissingSoftware item="1" type="Literal">
+        <Value item="1">PreOnboard</Value>
+        <Value item="2">FillMissingSoftware</Value>
+    </Vs_literal_PreOnboard_FillMissingSoftware>
+    <Vs_literal_Preview_Focused_Disabled item="1" type="Literal">
+        <Value item="1">Preview</Value>
+        <Value item="2">Focused</Value>
+        <Value item="3">Disabled</Value>
+    </Vs_literal_Preview_Focused_Disabled>
+    <Vs_literal_ROOMKITEQ_ROOMKITEQX item="1" type="Literal">
+        <Value item="1">ROOMKITEQ</Value>
+        <Value item="2">ROOMKITEQX</Value>
+    </Vs_literal_ROOMKITEQ_ROOMKITEQX>
+    <Vs_literal_Restart_Shutdown item="1" type="Literal">
+        <Value item="1">Restart</Value>
+        <Value item="2">Shutdown</Value>
+    </Vs_literal_Restart_Shutdown>
+    <Vs_literal_RoomOS_Microsoft_Teams item="1" type="Literal">
+        <Value item="1">RoomOS</Value>
+        <Value item="2">Microsoft_Teams</Value>
+    </Vs_literal_RoomOS_Microsoft_Teams>
+    <Vs_literal_SHA1_SHA256 item="1" type="Literal">
+        <Value item="1">SHA-1</Value>
+        <Value item="2">SHA-256</Value>
+    </Vs_literal_SHA1_SHA256>
+    <Vs_literal_SHA224_SHA256_SHA384_SHA512 item="1" type="Literal">
+        <Value item="1">SHA-224</Value>
+        <Value item="2">SHA-256</Value>
+        <Value item="3">SHA-384</Value>
+        <Value item="4">SHA-512</Value>
+    </Vs_literal_SHA224_SHA256_SHA384_SHA512>
+    <Vs_literal_SHA512 item="1" type="Literal">
+        <Value item="1">SHA512</Value>
+    </Vs_literal_SHA512>
+    <Vs_literal_Service_Signal_Battery item="1" type="Literal">
+        <Value item="1">Service</Value>
+        <Value item="2">Signal</Value>
+        <Value item="3">Battery</Value>
+    </Vs_literal_Service_Signal_Battery>
+    <Vs_literal_SingleLine_Numeric_Password_PIN item="1" type="Literal">
+        <Value item="1">SingleLine</Value>
+        <Value item="2">Numeric</Value>
+        <Value item="3">Password</Value>
+        <Value item="4">PIN</Value>
+    </Vs_literal_SingleLine_Numeric_Password_PIN>
+    <Vs_literal_Smile_Sad_Wow_Haha_Celebrate_Clap_ThumbUp_ThumbDown_Fire_Prayer_Heart_SpeedUp_SlowDown item="1" type="Literal">
+        <Value item="1">Smile</Value>
+        <Value item="2">Sad</Value>
+        <Value item="3">Wow</Value>
+        <Value item="4">Haha</Value>
+        <Value item="5">Celebrate</Value>
+        <Value item="6">Clap</Value>
+        <Value item="7">ThumbUp</Value>
+        <Value item="8">ThumbDown</Value>
+        <Value item="9">Fire</Value>
+        <Value item="10">Prayer</Value>
+        <Value item="11">Heart</Value>
+        <Value item="12">SpeedUp</Value>
+        <Value item="13">SlowDown</Value>
+    </Vs_literal_Smile_Sad_Wow_Haha_Celebrate_Clap_ThumbUp_ThumbDown_Fire_Prayer_Heart_SpeedUp_SlowDown>
+    <Vs_literal_Speaker_SpeakerFocused_Presentation_PresentationNonFocused_Selfview_Freezone item="1" type="Literal">
+        <Value item="1">Speaker</Value>
+        <Value item="2">SpeakerFocused</Value>
+        <Value item="3">Presentation</Value>
+        <Value item="4">PresentationNonFocused</Value>
+        <Value item="5">Selfview</Value>
+        <Value item="6">Freezone</Value>
+    </Vs_literal_Speaker_SpeakerFocused_Presentation_PresentationNonFocused_Selfview_Freezone>
+    <Vs_literal_Summarize_ActionPoints item="1" type="Literal">
+        <Value item="1">Summarize</Value>
+        <Value item="2">ActionPoints</Value>
+    </Vs_literal_Summarize_ActionPoints>
+    <Vs_literal_TableStand_WallMount item="1" type="Literal">
+        <Value item="1">TableStand</Value>
+        <Value item="2">WallMount</Value>
+    </Vs_literal_TableStand_WallMount>
+    <Vs_literal_TerminatedByOutOfMemory_TerminatedUnexpectedly_FailedToLoad item="1" type="Literal">
+        <Value item="1">TerminatedByOutOfMemory</Value>
+        <Value item="2">TerminatedUnexpectedly</Value>
+        <Value item="3">FailedToLoad</Value>
+    </Vs_literal_TerminatedByOutOfMemory_TerminatedUnexpectedly_FailedToLoad>
+    <Vs_literal_Thousandths_NumberOfFrames item="1" type="Literal">
+        <Value item="1">Thousandths</Value>
+        <Value item="2">NumberOfFrames</Value>
+    </Vs_literal_Thousandths_NumberOfFrames>
+    <Vs_literal_ToBeDone_CurrentlyOn_Finished_Ignore item="1" type="Literal">
+        <Value item="1">ToBeDone</Value>
+        <Value item="2">CurrentlyOn</Value>
+        <Value item="3">Finished</Value>
+        <Value item="4">Ignore</Value>
+    </Vs_literal_ToBeDone_CurrentlyOn_Finished_Ignore>
+    <Vs_literal_Total_Sample item="1" type="Literal">
+        <Value item="1">Total</Value>
+        <Value item="2">Sample</Value>
+    </Vs_literal_Total_Sample>
+    <Vs_literal_Touchpanel_OSD_Connector1_Connector2_Connector3 item="1" type="Literal">
+        <Value item="1">Touchpanel</Value>
+        <Value item="2">OSD</Value>
+        <Value item="3">Connector1</Value>
+        <Value item="4">Connector2</Value>
+        <Value item="5">Connector3</Value>
+    </Vs_literal_Touchpanel_OSD_Connector1_Connector2_Connector3>
+    <Vs_literal_True item="1" type="Literal">
+        <Value item="1">True</Value>
+    </Vs_literal_True>
+    <Vs_literal_Unanswered_Skipped_Correct_Wrong item="1" type="Literal">
+        <Value item="1">Unanswered</Value>
+        <Value item="2">Skipped</Value>
+        <Value item="3">Correct</Value>
+        <Value item="4">Wrong</Value>
+    </Vs_literal_Unanswered_Skipped_Correct_Wrong>
+    <Vs_literal_Unavailable_Light_Dark item="1" type="Literal">
+        <Value item="1">Unavailable</Value>
+        <Value item="2">Light</Value>
+        <Value item="3">Dark</Value>
+    </Vs_literal_Unavailable_Light_Dark>
+    <Vs_literal_Undefined_Left_Right item="1" type="Literal">
+        <Value item="1">Undefined</Value>
+        <Value item="2">Left</Value>
+        <Value item="3">Right</Value>
+    </Vs_literal_Undefined_Left_Right>
+    <Vs_literal_Undefined_Upper_Lower item="1" type="Literal">
+        <Value item="1">Undefined</Value>
+        <Value item="2">Upper</Value>
+        <Value item="3">Lower</Value>
+    </Vs_literal_Undefined_Upper_Lower>
+    <Vs_literal_Unspecified_Presentation_EmbeddedWebView_File_EcmFile item="1" type="Literal">
+        <Value item="1">Unspecified</Value>
+        <Value item="2">Presentation</Value>
+        <Value item="3">EmbeddedWebView</Value>
+        <Value item="4">File</Value>
+        <Value item="5">EcmFile</Value>
+    </Vs_literal_Unspecified_Presentation_EmbeddedWebView_File_EcmFile>
+    <Vs_literal_Untagged_Favorite item="1" type="Literal">
+        <Value item="1">Untagged</Value>
+        <Value item="2">Favorite</Value>
+    </Vs_literal_Untagged_Favorite>
+    <Vs_literal_Up_Down_Right_Left_Ok_Back_Stop_Play item="1" type="Literal">
+        <Value item="1">Up</Value>
+        <Value item="2">Down</Value>
+        <Value item="3">Right</Value>
+        <Value item="4">Left</Value>
+        <Value item="5">Ok</Value>
+        <Value item="6">Back</Value>
+        <Value item="7">Stop</Value>
+        <Value item="8">Play</Value>
+    </Vs_literal_Up_Down_Right_Left_Ok_Back_Stop_Play>
+    <Vs_literal_Up_Down_Stop_NewMessage_LatestMessage item="1" type="Literal">
+        <Value item="1">Up</Value>
+        <Value item="2">Down</Value>
+        <Value item="3">Stop</Value>
+        <Value item="4">NewMessage</Value>
+        <Value item="5">LatestMessage</Value>
+    </Vs_literal_Up_Down_Stop_NewMessage_LatestMessage>
+    <Vs_literal_User1_User2_User3 item="1" type="Literal">
+        <Value item="1">User1</Value>
+        <Value item="2">User2</Value>
+        <Value item="3">User3</Value>
+    </Vs_literal_User1_User2_User3>
+    <Vs_literal_Visible_Error_NotVisible item="1" type="Literal">
+        <Value item="1">Visible</Value>
+        <Value item="2">Error</Value>
+        <Value item="3">NotVisible</Value>
+    </Vs_literal_Visible_Error_NotVisible>
+    <Vs_literal_WebApp_Integration_Signage_ECM_ECMSignIn_Kiosk_Browser_WebRTCMeeting_EmbeddedApp_PersistentWebApp_WebWidget_None item="1" type="Literal">
+        <Value item="1">WebApp</Value>
+        <Value item="2">Integration</Value>
+        <Value item="3">Signage</Value>
+        <Value item="4">ECM</Value>
+        <Value item="5">ECMSignIn</Value>
+        <Value item="6">Kiosk</Value>
+        <Value item="7">Browser</Value>
+        <Value item="8">WebRTCMeeting</Value>
+        <Value item="9">EmbeddedApp</Value>
+        <Value item="10">PersistentWebApp</Value>
+        <Value item="11">WebWidget</Value>
+        <Value item="12">None</Value>
+    </Vs_literal_WebApp_Integration_Signage_ECM_ECMSignIn_Kiosk_Browser_WebRTCMeeting_EmbeddedApp_PersistentWebApp_WebWidget_None>
+    <Vs_literal_WebDeveloper_InputLatency_Rendering_JavascriptAndRendering_FrameViewer_Custom item="1" type="Literal">
+        <Value item="1">WebDeveloper</Value>
+        <Value item="2">InputLatency</Value>
+        <Value item="3">Rendering</Value>
+        <Value item="4">JavascriptAndRendering</Value>
+        <Value item="5">FrameViewer</Value>
+        <Value item="6">Custom</Value>
+    </Vs_literal_WebDeveloper_InputLatency_Rendering_JavascriptAndRendering_FrameViewer_Custom>
+    <Vs_literal_Welcome_Network_ChooseHardwareConfiguration_CameraView_SpeakerCheck_Timezone_AudioSetup_HologramSetup_ChoosePlatform_OnPremOrLater_SoftwareCompliance_CiscoActivate_LoadingConfigs_ScreenLockPin_SoftwareUpdate_SetupComplete_AdminPassphrase_DiagnosticsAndUsage_InstallMTR item="1" type="Literal">
+        <Value item="1">Welcome</Value>
+        <Value item="2">Network</Value>
+        <Value item="3">ChooseHardwareConfiguration</Value>
+        <Value item="4">CameraView</Value>
+        <Value item="5">SpeakerCheck</Value>
+        <Value item="6">Timezone</Value>
+        <Value item="7">AudioSetup</Value>
+        <Value item="8">HologramSetup</Value>
+        <Value item="9">ChoosePlatform</Value>
+        <Value item="10">OnPremOrLater</Value>
+        <Value item="11">SoftwareCompliance</Value>
+        <Value item="12">CiscoActivate</Value>
+        <Value item="13">LoadingConfigs</Value>
+        <Value item="14">ScreenLockPin</Value>
+        <Value item="15">SoftwareUpdate</Value>
+        <Value item="16">SetupComplete</Value>
+        <Value item="17">AdminPassphrase</Value>
+        <Value item="18">DiagnosticsAndUsage</Value>
+        <Value item="19">InstallMTR</Value>
+    </Vs_literal_Welcome_Network_ChooseHardwareConfiguration_CameraView_SpeakerCheck_Timezone_AudioSetup_HologramSetup_ChoosePlatform_OnPremOrLater_SoftwareCompliance_CiscoActivate_LoadingConfigs_ScreenLockPin_SoftwareUpdate_SetupComplete_AdminPassphrase_DiagnosticsAndUsage_InstallMTR>
+    <Vs_literal_Whiteboard_Annotated item="1" type="Literal">
+        <Value item="1">Whiteboard</Value>
+        <Value item="2">Annotated</Value>
+    </Vs_literal_Whiteboard_Annotated>
+    <Vs_literal_Whiteboards_WebData_TemporaryAccounts_2 item="1" type="Literal">
+        <Value item="1">Whiteboards</Value>
+        <Value item="2">WebData</Value>
+        <Value item="3">TemporaryAccounts</Value>
+    </Vs_literal_Whiteboards_WebData_TemporaryAccounts_2>
+    <Vs_literal_Wide item="1" type="Literal">
+        <Value item="1">Wide</Value>
+    </Vs_literal_Wide>
+    <Vs_literal_Wide_Center item="1" type="Literal">
+        <Value item="1">Wide</Value>
+        <Value item="2">Center</Value>
+    </Vs_literal_Wide_Center>
+    <Vs_literal_Wide_Center_Left_Right item="1" type="Literal">
+        <Value item="1">Wide</Value>
+        <Value item="2">Center</Value>
+        <Value item="3">Left</Value>
+        <Value item="4">Right</Value>
+    </Vs_literal_Wide_Center_Left_Right>
+    <Vs_literal_XML_JSON item="1" type="Literal">
+        <Value item="1">XML</Value>
+        <Value item="2">JSON</Value>
+    </Vs_literal_XML_JSON>
+    <Vs_literal_Yes item="1" type="Literal">
+        <Value item="1">Yes</Value>
+    </Vs_literal_Yes>
+    <Vs_literal_auto_custom_equal_overlay_prominent_prominent_l_single item="1" type="Literal">
+        <Value item="1">auto</Value>
+        <Value item="2">custom</Value>
+        <Value item="3">equal</Value>
+        <Value item="4">overlay</Value>
+        <Value item="5">prominent</Value>
+        <Value item="6">prominent_l</Value>
+        <Value item="7">single</Value>
+    </Vs_literal_auto_custom_equal_overlay_prominent_prominent_l_single>
+    <Vs_literal_base64_FilePath item="1" type="Literal">
+        <Value item="1">base64</Value>
+        <Value item="2">FilePath</Value>
+    </Vs_literal_base64_FilePath>
+    <Vs_literal_camera_PC_mediaplayer_document_camera_other_whiteboard_desktop item="1" type="Literal">
+        <Value item="1">camera</Value>
+        <Value item="2">PC</Value>
+        <Value item="3">mediaplayer</Value>
+        <Value item="4">document_camera</Value>
+        <Value item="5">other</Value>
+        <Value item="6">whiteboard</Value>
+        <Value item="7">desktop</Value>
+    </Vs_literal_camera_PC_mediaplayer_document_camera_other_whiteboard_desktop>
+    <Vs_literal_enGB_enUS_esES_frFR_itIT_deDE item="1" type="Literal">
+        <Value item="1">en-GB</Value>
+        <Value item="2">en-US</Value>
+        <Value item="3">es-ES</Value>
+        <Value item="4">fr-FR</Value>
+        <Value item="5">it-IT</Value>
+        <Value item="6">de-DE</Value>
+    </Vs_literal_enGB_enUS_esES_frFR_itIT_deDE>
+    <Vs_literal_highpass_highshelf_lowpass_lowshelf_none_peaking item="1" type="Literal">
+        <Value item="1">highpass</Value>
+        <Value item="2">highshelf</Value>
+        <Value item="3">lowpass</Value>
+        <Value item="4">lowshelf</Value>
+        <Value item="5">none</Value>
+        <Value item="6">peaking</Value>
+    </Vs_literal_highpass_highshelf_lowpass_lowshelf_none_peaking>
+    <Vs_literal_localInput_localMain_localPresentation_presentation_remoteMain item="1" type="Literal">
+        <Value item="1">localInput</Value>
+        <Value item="2">localMain</Value>
+        <Value item="3">localPresentation</Value>
+        <Value item="4">presentation</Value>
+        <Value item="5">remoteMain</Value>
+    </Vs_literal_localInput_localMain_localPresentation_presentation_remoteMain>
+    <Vs_stringArray_0_128_10 item="1" type="String">
+        <MaxLength>128</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_128_10>
+    <Vs_stringArray_0_128_16 item="1" type="String">
+        <MaxLength>128</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_128_16>
+    <Vs_stringArray_0_128_255 item="1" type="String">
+        <MaxLength>128</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_128_255>
+    <Vs_stringArray_0_254_255 item="1" type="String">
+        <MaxLength>254</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_254_255>
+    <Vs_stringArray_0_254_50 item="1" type="String">
+        <MaxLength>254</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_254_50>
+    <Vs_stringArray_0_255_3 item="1" type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_255_3>
+    <Vs_stringArray_0_3072_20 item="1" type="String">
+        <MaxLength>3072</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_3072_20>
+    <Vs_stringArray_0_4096_2 item="1" type="String">
+        <MaxLength>4096</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_4096_2>
+    <Vs_stringArray_0_64_75 item="1" type="String">
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_64_75>
+    <Vs_stringArray_0_8192_15 item="1" type="String">
+        <MaxLength>8192</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_stringArray_0_8192_15>
+    <Vs_stringArray_1_1024_255 item="1" type="String">
+        <MaxLength>1024</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_stringArray_1_1024_255>
+    <Vs_stringArray_1_128_10 item="1" type="String">
+        <MaxLength>128</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_stringArray_1_128_10>
+    <Vs_stringArray_1_255_15 item="1" type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_stringArray_1_255_15>
+    <Vs_stringArray_1_255_255 item="1" type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_stringArray_1_255_255>
+    <Vs_stringArray_1_255_4 item="1" type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_stringArray_1_255_4>
+    <Vs_string_0_100 item="1" type="String">
+        <MaxLength>100</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_100>
+    <Vs_string_0_1000 item="1" type="String">
+        <MaxLength>1000</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_1000>
+    <Vs_string_0_1024 item="1" type="String">
+        <MaxLength>1024</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_1024>
+    <Vs_string_0_10240 item="1" type="String">
+        <MaxLength>10240</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_10240>
+    <Vs_string_0_1048576 item="1" type="String">
+        <MaxLength>1048576</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_1048576>
+    <Vs_string_0_127 item="1" type="String">
+        <MaxLength>127</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_127>
+    <Vs_string_0_128 item="1" type="String">
+        <MaxLength>128</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_128>
+    <Vs_string_0_140 item="1" type="String">
+        <MaxLength>140</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_140>
+    <Vs_string_0_16 item="1" type="String">
+        <MaxLength>16</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_16>
+    <Vs_string_0_160 item="1" type="String">
+        <MaxLength>160</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_160>
+    <Vs_string_0_16384 item="1" type="String">
+        <MaxLength>16384</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_16384>
+    <Vs_string_0_17 item="1" type="String">
+        <MaxLength>17</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_17>
+    <Vs_string_0_200 item="1" type="String">
+        <MaxLength>200</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_200>
+    <Vs_string_0_2000 item="1" type="String">
+        <MaxLength>2000</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_2000>
+    <Vs_string_0_20000 item="1" type="String">
+        <MaxLength>20000</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_20000>
+    <Vs_string_0_2048 item="1" type="String">
+        <MaxLength>2048</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_2048>
+    <Vs_string_0_2083 item="1" type="String">
+        <MaxLength>2083</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_2083>
+    <Vs_string_0_250 item="1" type="String">
+        <MaxLength>250</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_250>
+    <Vs_string_0_254 item="1" type="String">
+        <MaxLength>254</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_254>
+    <Vs_string_0_255 item="1" type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_255>
+    <Vs_string_0_256 item="1" type="String">
+        <MaxLength>256</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_256>
+    <Vs_string_0_30 item="1" type="String">
+        <MaxLength>30</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_30>
+    <Vs_string_0_32 item="1" type="String">
+        <MaxLength>32</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_32>
+    <Vs_string_0_40 item="1" type="String">
+        <MaxLength>40</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_40>
+    <Vs_string_0_50 item="1" type="String">
+        <MaxLength>50</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_50>
+    <Vs_string_0_512 item="1" type="String">
+        <MaxLength>512</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_512>
+    <Vs_string_0_6 item="1" type="String">
+        <MaxLength>6</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_6>
+    <Vs_string_0_64 item="1" type="String">
+        <MaxLength>64</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_64>
+    <Vs_string_0_65536 item="1" type="String">
+        <MaxLength>65536</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_65536>
+    <Vs_string_0_80 item="1" type="String">
+        <MaxLength>80</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_80>
+    <Vs_string_0_8192 item="1" type="String">
+        <MaxLength>8192</MaxLength>
+        <MinLength>0</MinLength>
+    </Vs_string_0_8192>
+    <Vs_string_16_24 item="1" type="String">
+        <MaxLength>24</MaxLength>
+        <MinLength>16</MinLength>
+    </Vs_string_16_24>
+    <Vs_string_1_100 item="1" type="String">
+        <MaxLength>100</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_string_1_100>
+    <Vs_string_1_128 item="1" type="String">
+        <MaxLength>128</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_string_1_128>
+    <Vs_string_1_1450 item="1" type="String">
+        <MaxLength>1450</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_string_1_1450>
+    <Vs_string_1_2048 item="1" type="String">
+        <MaxLength>2048</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_string_1_2048>
+    <Vs_string_1_255 item="1" type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_string_1_255>
+    <Vs_string_1_50 item="1" type="String">
+        <MaxLength>50</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_string_1_50>
+    <Vs_string_1_500 item="1" type="String">
+        <MaxLength>500</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_string_1_500>
+    <Vs_string_1_65534 item="1" type="String">
+        <MaxLength>65534</MaxLength>
+        <MinLength>1</MinLength>
+    </Vs_string_1_65534>
+    <Vs_string_2_200 item="1" type="String">
+        <MaxLength>200</MaxLength>
+        <MinLength>2</MinLength>
+    </Vs_string_2_200>
+    <Vs_string_2_65536 item="1" type="String">
+        <MaxLength>65536</MaxLength>
+        <MinLength>2</MinLength>
+    </Vs_string_2_65536>
+    <Vs_string_36_36 item="1" type="String">
+        <MaxLength>36</MaxLength>
+        <MinLength>36</MinLength>
+    </Vs_string_36_36>
+    <Vs_string_3_20 item="1" type="String">
+        <MaxLength>20</MaxLength>
+        <MinLength>3</MinLength>
+    </Vs_string_3_20>
+    <Vs_string_4_10 item="1" type="String">
+        <MaxLength>10</MaxLength>
+        <MinLength>4</MinLength>
+    </Vs_string_4_10>
+    <Vs_string_5_250 item="1" type="String">
+        <MaxLength>250</MaxLength>
+        <MinLength>5</MinLength>
+    </Vs_string_5_250>
+    <Vs_string_6_6 item="1" type="String">
+        <MaxLength>6</MaxLength>
+        <MinLength>6</MinLength>
+    </Vs_string_6_6>
+    <Vs_string_8_2048 item="1" type="String">
+        <MaxLength>2048</MaxLength>
+        <MinLength>8</MinLength>
+    </Vs_string_8_2048>
+    <Vs_string_8_255 item="1" type="String">
+        <MaxLength>255</MaxLength>
+        <MinLength>8</MinLength>
+    </Vs_string_8_255>
+</Valuespace>

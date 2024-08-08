@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2023 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2024 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco;
 
@@ -2145,10 +2145,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             }
             MicrosoftTeamsHardwareAccelerator microsoftTeamsHardwareAccelerator = coreMicrosoftTeamsStatus.getHardwareAccelerator();
             if (microsoftTeamsHardwareAccelerator != null) {
-                List<MicrosoftTeamsHardwareAcceleratorEncoder> encoders = microsoftTeamsHardwareAccelerator.getEncoders();
-                List<MicrosoftTeamsHardwareAcceleratorDecoder> decoders = microsoftTeamsHardwareAccelerator.getDecoders();
+                MicrosoftTeamsHardwareAcceleratorEncoder[] encoders = microsoftTeamsHardwareAccelerator.getEncoders();
+                MicrosoftTeamsHardwareAcceleratorDecoder[] decoders = microsoftTeamsHardwareAccelerator.getDecoders();
 
-                if (encoders != null && !encoders.isEmpty()) {
+                if (encoders != null && encoders.length > 0) {
                     int i = 1;
                     for(MicrosoftTeamsHardwareAcceleratorEncoder encoder: encoders) {
                         String groupName = String.format(PROPERTY_GROUP_TEMPLATE_MICROSOFT_TEAMS_HW_ACCELERATOR_ENCODER, i);
@@ -2158,14 +2158,16 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         addStatisticsParameter(statistics,groupName + PROPERTY_HEIGHT, encoder.getHeight());
                         addStatisticsParameter(statistics,groupName + PROPERTY_WIDTH, encoder.getWidth());
                         addStatisticsParameter(statistics,groupName + PROPERTY_SAMPLE_PERIOD_US, encoder.getSamplePeriodUs());
+
+                        enrichEndpointStatisticsChannelData(endpointStatistics, encoder);
                         i++;
                     }
                 }
-                if (decoders != null && !decoders.isEmpty()) {
+                if (decoders != null && decoders.length > 0) {
                     int i = 1;
                     for(MicrosoftTeamsHardwareAcceleratorDecoder decoder: decoders) {
                         String groupName = String.format(PROPERTY_GROUP_TEMPLATE_MICROSOFT_TEAMS_HW_ACCELERATOR_DECODER, i);
-                        addStatisticsParameter(statistics,groupName + PROPERTY_FPS, decoder.getFps());
+                        addStatisticsParameter(statistics,groupName + PROPERTY_FPS, String.valueOf(decoder.getFps()));
                         addStatisticsParameter(statistics,groupName + PROPERTY_OUTPUT_MODE, decoder.getOutputMode());
                         addStatisticsParameter(statistics,groupName + PROPERTY_FRAME_COUNT, decoder.getFrameCount());
                         addStatisticsParameter(statistics,groupName + PROPERTY_HEIGHT, decoder.getHeight());
@@ -2173,9 +2175,48 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         addStatisticsParameter(statistics,groupName + PROPERTY_CROPPED_WIDTH, decoder.getCroppedWidth());
                         addStatisticsParameter(statistics,groupName + PROPERTY_CROPPED_HEIGHT, decoder.getCroppedHeight());
                         addStatisticsParameter(statistics,groupName + PROPERTY_SAMPLE_PERIOD_US, decoder.getSamplePeriodUs());
+
+                        enrichEndpointStatisticsChannelData(endpointStatistics, decoder);
                         i++;
                     }
                 }
+            }
+        }
+    }
+
+    /**
+     * Provide call channel data as endpoint statistics properties
+     *
+     * @param endpointStatistics endpoint statistics instance to keep data in
+     * @param metrics MicrosoftTeamsHardwareAcceleratorEncoder or MicrosoftTeamsHardwareAcceleratorDecoder
+     * */
+    private <T extends MicrosoftTeamsHardwareAcceleratorMetrics> void enrichEndpointStatisticsChannelData(EndpointStatistics endpointStatistics, T metrics) {
+        VideoChannelStats videoChannelStats = endpointStatistics.getVideoChannelStats();
+        if (videoChannelStats == null) {
+            videoChannelStats = new VideoChannelStats();
+            endpointStatistics.setVideoChannelStats(videoChannelStats);
+        }
+
+        String fps = metrics.getFps();
+        String frameCount = metrics.getFrameCount();
+        String height = metrics.getHeight();
+        String width = metrics.getWidth();
+
+        if (metrics instanceof MicrosoftTeamsHardwareAcceleratorEncoder) {
+            if (0.0 == Double.parseDouble(fps) && 0.0 == Double.parseDouble(frameCount)) {
+                // TODO add audio statistics
+                logger.debug("AudioTX statistics is not available yet.");
+            } else {
+                videoChannelStats.setFrameRateTx(Float.valueOf(fps));
+                videoChannelStats.setFrameSizeTx(Integer.parseInt(width), Integer.parseInt(height));
+            }
+        } else if (metrics instanceof MicrosoftTeamsHardwareAcceleratorDecoder) {
+            if (0.0 == Double.parseDouble(fps) && 0.0 == Double.parseDouble(frameCount)) {
+                //TODO add audio statistics
+                logger.debug("AudioRX statistics is not available yet.");
+            } else {
+                videoChannelStats.setFrameRateRx(Float.valueOf(fps));
+                videoChannelStats.setFrameSizeRx(Integer.parseInt(width), Integer.parseInt(height));
             }
         }
     }
@@ -2200,9 +2241,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             return;
         }
         addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_SUPPORTED, microsoftExtension.getSupported());
-        String msInCall = microsoftExtension.getInCall();
-        addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_IN_CALL, msInCall);
-        endpointStatistics.setInCall(checkReportedStatus(msInCall));
+
+        if (endpointStatistics != null && !endpointStatistics.isInCall()) {
+            String msInCall = microsoftExtension.getInCall();
+            addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_IN_CALL, msInCall);
+            endpointStatistics.setInCall(checkReportedStatus(msInCall));
+        }
 
         ExtensionVersion version = microsoftExtension.getVersion();
         if (version != null) {

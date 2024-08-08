@@ -3,22 +3,23 @@
  */
 package com.avispl.dal.communicator.cisco.dto.status.teams;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import java.util.List;
-
 public class MicrosoftTeamsHardwareAccelerator {
+    @JacksonXmlElementWrapper(localName = "Encoder", useWrapping = false)
     @JacksonXmlProperty(localName = "Encoder")
-    private List<MicrosoftTeamsHardwareAcceleratorEncoder> encoders;
+    private MicrosoftTeamsHardwareAcceleratorEncoder[] encoders;
+    @JacksonXmlElementWrapper(localName = "Decoder", useWrapping = false)
     @JacksonXmlProperty(localName = "Decoder")
-    private List<MicrosoftTeamsHardwareAcceleratorDecoder> decoders;
+    private MicrosoftTeamsHardwareAcceleratorDecoder[] decoders;
 
     /**
      * Retrieves {@link #encoders}
      *
      * @return value of {@link #encoders}
      */
-    public List<MicrosoftTeamsHardwareAcceleratorEncoder> getEncoders() {
+    public MicrosoftTeamsHardwareAcceleratorEncoder[] getEncoders() {
         return encoders;
     }
 
@@ -27,7 +28,7 @@ public class MicrosoftTeamsHardwareAccelerator {
      *
      * @param encoders new value of {@link #encoders}
      */
-    public void setEncoders(List<MicrosoftTeamsHardwareAcceleratorEncoder> encoders) {
+    public void setEncoders(MicrosoftTeamsHardwareAcceleratorEncoder[] encoders) {
         this.encoders = encoders;
     }
 
@@ -36,7 +37,7 @@ public class MicrosoftTeamsHardwareAccelerator {
      *
      * @return value of {@link #decoders}
      */
-    public List<MicrosoftTeamsHardwareAcceleratorDecoder> getDecoders() {
+    public MicrosoftTeamsHardwareAcceleratorDecoder[] getDecoders() {
         return decoders;
     }
 
@@ -45,7 +46,7 @@ public class MicrosoftTeamsHardwareAccelerator {
      *
      * @param decoders new value of {@link #decoders}
      */
-    public void setDecoders(List<MicrosoftTeamsHardwareAcceleratorDecoder> decoders) {
+    public void setDecoders(MicrosoftTeamsHardwareAcceleratorDecoder[] decoders) {
         this.decoders = decoders;
     }
 }

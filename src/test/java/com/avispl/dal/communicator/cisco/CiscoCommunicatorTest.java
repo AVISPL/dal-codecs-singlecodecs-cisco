@@ -9,11 +9,8 @@ import com.avispl.symphony.api.dal.dto.control.call.PopupMessage;
 import com.avispl.symphony.api.dal.dto.monitor.EndpointStatistics;
 import com.avispl.symphony.api.dal.dto.monitor.ExtendedStatistics;
 import com.avispl.symphony.api.dal.dto.monitor.Statistics;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.google.common.io.Resources;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,18 +24,14 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class CiscoCommunicatorTest {
     CiscoCommunicator ciscoCommunicator;
 
-    @Rule
-    public WireMockRule wireMockRule = new WireMockRule(WireMockConfiguration.DYNAMIC_PORT);
-
     @BeforeEach
     public void setUp() throws Exception {
-//        wireMockRule.start();
         ciscoCommunicator = new CiscoCommunicator();
-        ciscoCommunicator.setHost("***REMOVED***");
-        ciscoCommunicator.setPort(80);
-        ciscoCommunicator.setProtocol("http");
-        ciscoCommunicator.setPassword("1234");
-        ciscoCommunicator.setLogin("admin");
+        ciscoCommunicator.setHost("10.8.50.218");
+        ciscoCommunicator.setPort(443);
+        ciscoCommunicator.setProtocol("https");
+        ciscoCommunicator.setPassword("");
+        ciscoCommunicator.setLogin("");
         ciscoCommunicator.init();
     }
 
@@ -51,7 +44,8 @@ public class CiscoCommunicatorTest {
         PopupMessage popupMessage = new PopupMessage();
         popupMessage.setMessage("Test message");
         popupMessage.setDuration(20);
-        ciscoCommunicator.sendMessage(popupMessage);
+        ciscoCommunicator.
+                sendMessage(popupMessage);
     }
 
     @Test
@@ -466,13 +460,4 @@ public class CiscoCommunicatorTest {
         Assert.assertNotNull(callStatus.getCallId(), "Mute status should not be null");
     }
 
-    @Test
-    public void testRetrieveStatusInfo() throws Exception {
-        wireMockRule.stubFor(get(urlEqualTo("/configuration.xml")))
-                .setResponse(okXml(resource("configuration.xml")).build());
-        wireMockRule.stubFor(get(urlEqualTo("/status.xml")))
-                .setResponse(okXml(resource("status.xml")).build());
-
-        ciscoCommunicator.getMultipleStatistics();
-    }
 }

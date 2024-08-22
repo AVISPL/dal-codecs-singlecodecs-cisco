@@ -1,7 +1,7 @@
 /*
- * Copyright (c) 2023 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2023-2024 AVI-SPL Inc. All Rights Reserved.
  */
-package com.avispl.dal.communicator.cisco.dto.status.webrtc;
+package com.avispl.dal.communicator.cisco.dto.status.webrtc.teams;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -33,4 +33,5 @@ public class MicrosoftTeamsStatus {
     public void setAvailability(String availability) {
         this.availability = availability;
     }
+
 }

@@ -1005,132 +1005,153 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             List<String> propertyGroups = Arrays.stream(displayPropertyGroups.split(",")).map(String::trim).collect(Collectors.toList());
 
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Audio")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device audio statistics");
+            if (ciscoStatus != null) {
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "Audio")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device audio statistics");
+                    }
+                    populateAudioData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
                 }
-                populateAudioData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Cameras")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device camera statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "Cameras")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device camera statistics");
+                    }
+                    populateCameraData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
                 }
-                populateCameraData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Conference")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device conference statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "Conference")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device conference statistics");
+                    }
+                    populateConferenceData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
                 }
-                populateConferenceData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Standby")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device standby statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "Standby")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device standby statistics");
+                    }
+                    populateStandbyData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
                 }
-                populateStandbyData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "NetworkServices")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device network services statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "NetworkServices")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device network services statistics");
+                    }
+                    populateNetworkServicesData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
                 }
-                populateNetworkServicesData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Video")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device video statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "Video")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device video statistics");
+                    }
+                    populateVideoData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
                 }
-                populateVideoData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "UserInterface")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device user interface statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "UserInterface")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device user interface statistics");
+                    }
+                    populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
                 }
-                populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device system unit statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device system unit statistics");
+                    }
+                    populateSystemUnitData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
                 }
-                populateSystemUnitData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device conference capabilities statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device conference capabilities statistics");
+                    }
+                    populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
                 }
-                populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "ActiveCall")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device active call statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "ActiveCall")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device active call statistics");
+                    }
+                    populateCallData(statisticsMap, ciscoStatus);
                 }
-                populateCallData(statisticsMap, ciscoStatus);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "H323")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device h323 statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "H323")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device h323 statistics");
+                    }
+                    populateH323Data(statisticsMap, ciscoStatus);
                 }
-                populateH323Data(statisticsMap, ciscoStatus);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "SIP")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device SIP statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "SIP")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device SIP statistics");
+                    }
+                    populateSIPData(statisticsMap, ciscoStatus);
                 }
-                populateSIPData(statisticsMap, ciscoStatus);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Security")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device security statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "Security")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device security statistics");
+                    }
+                    populateSecurityData(statisticsMap, ciscoStatus);
                 }
-                populateSecurityData(statisticsMap, ciscoStatus);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Networks")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device networks statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "Networks")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device networks statistics");
+                    }
+                    populateNetworkData(statisticsMap, ciscoStatus);
                 }
-                populateNetworkData(statisticsMap, ciscoStatus);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "USB")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device USB statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "USB")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device USB statistics");
+                    }
+                    populateUSBData(statisticsMap, ciscoStatus);
                 }
-                populateUSBData(statisticsMap, ciscoStatus);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "RoomAnalytics")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device room analytics statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "RoomAnalytics")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device room analytics statistics");
+                    }
+                    populateRoomAnalyticsData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoStatus);
                 }
-                populateRoomAnalyticsData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoStatus);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "ProximityServices")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device proximity services statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "ProximityServices")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device proximity services statistics");
+                    }
+                    populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
                 }
-                populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "Peripherals")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device peripherals statistics");
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "Peripherals")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device peripherals statistics");
+                    }
+                    populatePeripheralsData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
                 }
-                populatePeripheralsData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
-            }
-            if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device system time statistics");
-                }
-                Time time = ciscoStatus.getTime();
-                if (time != null) {
-                    statisticsMap.put("SystemTime#Time", time.getSystemTime());
-                    TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
-                    if (timeConfiguration != null) {
-                        addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), valuespace);
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating device system time statistics");
+                    }
+                    Time time = ciscoStatus.getTime();
+                    if (time != null) {
+                        statisticsMap.put("SystemTime#Time", time.getSystemTime());
+                        TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
+                        if (timeConfiguration != null) {
+                            addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), valuespace);
+                        }
                     }
                 }
-            }
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "MicrosoftTeams")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating MS Teams statistics");
+                    }
+                    populateMSTeamsStatus(statisticsMap, ciscoStatus, endpointStatistics);
+                }
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "WebEx")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating WebEx statistics");
+                    }
+                    populateWebExStatus(statisticsMap, ciscoStatus);
+                }
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "WebRTC")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating WebRTC statistics");
+                    }
+                    populateWebRTCStatus(statisticsMap, ciscoStatus);
+                }
+                if (propertyGroupQualifiedForDisplay(propertyGroups, "MicrosoftExtension")) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Populating MS Extensions statistics");
+                    }
+                    populateExtensionsStatus(statisticsMap, ciscoStatus, endpointStatistics);
+                }
 
-            if (ciscoStatus != null) {
-                populateWebExStatus(statisticsMap, ciscoStatus);
-                populateWebRTCStatus(statisticsMap, ciscoStatus, endpointStatistics);
-                populateExtensionsStatus(statisticsMap, ciscoStatus, endpointStatistics);
                 routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
                 endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
             }
@@ -2097,7 +2118,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param statistics to save statistics to
      * @param status     response payload information
      */
-    private void populateWebRTCStatus(Map<String, String> statistics, CiscoStatus status, EndpointStatistics endpointStatistics) {
+    private void populateWebRTCStatus(Map<String, String> statistics, CiscoStatus status) {
         WebRTCStatus webRTCStatus = status.getWebRTCStatus();
         if (webRTCStatus != null) {
             WebRTCProvider webRTCProvider = webRTCStatus.getProvider();
@@ -2113,6 +2134,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             }
         }
+    }
+
+    /**
+     * Populate MS Teams mode status information
+     *
+     * @param statistics to save statistics to
+     * @param status     response payload information
+     */
+    private void populateMSTeamsStatus(Map<String, String> statistics, CiscoStatus status, EndpointStatistics endpointStatistics) {
         CoreMicrosoftTeamsStatus coreMicrosoftTeamsStatus = status.getMicrosoftTeamsStatus();
         if (coreMicrosoftTeamsStatus != null) {
             MicrosoftTeamsCalling microsoftTeamsCalling = coreMicrosoftTeamsStatus.getCalling();
@@ -2132,17 +2162,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 addStatisticsParameter(statistics,PROPERTY_MICROSOFT_TEAMS_USER_SIGNED_IN, microsoftTeamsUser.getSignedIn());
             }
 
-            MicrosoftTeamsSoftware microsoftTeamsSoftware = coreMicrosoftTeamsStatus.getSoftware();
-            if (microsoftTeamsSoftware != null) {
-                ExtensionVersion version = microsoftTeamsSoftware.getVersion();
-                if (version != null) {
-                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_ANDROID_VERSION, version.getAndroid());
-                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_COMPANY_PORTAL_APP_VERSION, version.getCompanyPortalApp());
-                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_OEM_AGENT_VERSION, version.getOemAgent());
-                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_TEAMS_APP_VERSION, version.getTeamsApp());
-                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_TEAMS_ADMIN_AGENT_VERSION, version.getTeamsAdminAgent());
-                }
-            }
             MicrosoftTeamsHardwareAccelerator microsoftTeamsHardwareAccelerator = coreMicrosoftTeamsStatus.getHardwareAccelerator();
             if (microsoftTeamsHardwareAccelerator != null) {
                 MicrosoftTeamsHardwareAcceleratorEncoder[] encoders = microsoftTeamsHardwareAccelerator.getEncoders();
@@ -2228,6 +2247,23 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param status     response payload information
      */
     private void populateExtensionsStatus(Map<String, String> statistics, CiscoStatus status, EndpointStatistics endpointStatistics) {
+        CoreMicrosoftTeamsStatus coreMicrosoftTeamsStatus = status.getMicrosoftTeamsStatus();
+        boolean coreMSExtensionStatusSet = false;
+        if (coreMicrosoftTeamsStatus != null) {
+            MicrosoftTeamsSoftware microsoftTeamsSoftware = coreMicrosoftTeamsStatus.getSoftware();
+            if (microsoftTeamsSoftware != null) {
+                ExtensionVersion version = microsoftTeamsSoftware.getVersion();
+                if (version != null) {
+                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_ANDROID_VERSION, version.getAndroid());
+                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_COMPANY_PORTAL_APP_VERSION, version.getCompanyPortalApp());
+                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_OEM_AGENT_VERSION, version.getOemAgent());
+                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_TEAMS_APP_VERSION, version.getTeamsApp());
+                    addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_TEAMS_ADMIN_AGENT_VERSION, version.getTeamsAdminAgent());
+                    coreMSExtensionStatusSet = true;
+                }
+            }
+        }
+
         SystemUnit systemUnit = status.getSystemUnit();
         if (systemUnit == null) {
             return;
@@ -2249,7 +2285,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
 
         ExtensionVersion version = microsoftExtension.getVersion();
-        if (version != null) {
+        if (version != null && !coreMSExtensionStatusSet) {
             addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_ANDROID_VERSION, version.getAndroid());
             addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_COMPANY_PORTAL_APP_VERSION, version.getCompanyPortalApp());
             addStatisticsParameter(statistics, PROPERTY_MICROSOFT_EXTENSION_OEM_AGENT_VERSION, version.getOemAgent());

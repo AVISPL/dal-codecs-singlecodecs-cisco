@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2023 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status;
 
@@ -20,9 +20,11 @@ import com.avispl.dal.communicator.cisco.dto.status.root.Time;
 import com.avispl.dal.communicator.cisco.dto.status.security.Security;
 import com.avispl.dal.communicator.cisco.dto.status.sip.SIP;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.SystemUnit;
+import com.avispl.dal.communicator.cisco.dto.status.teams.CoreMicrosoftTeamsStatus;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.VideoStatus;
 import com.avispl.dal.communicator.cisco.dto.status.webex.WebExStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.WebRTCStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -88,6 +90,12 @@ public class CiscoStatus {
     /** @since 1.1.4 */
     @JacksonXmlProperty(localName="Webex")
     private WebExStatus webExStatus;
+    /** @since 1.1.4 */
+    @JacksonXmlProperty(localName = "WebRTC")
+    private WebRTCStatus webRTCStatus;
+    /** @since 1.1.4 */
+    @JacksonXmlProperty(localName = "MicrosoftTeams")
+    private CoreMicrosoftTeamsStatus microsoftTeamsStatus;
 
     /**
      * Retrieves {@link #product}
@@ -503,5 +511,31 @@ public class CiscoStatus {
      */
     public void setWebExStatus(WebExStatus webExStatus) {
         this.webExStatus = webExStatus;
+    }
+
+    /**
+     * Retrieves {@link #webRTCStatus}
+     *
+     * @return value of {@link #webRTCStatus}
+     */
+    public WebRTCStatus getWebRTCStatus() {
+        return webRTCStatus;
+    }
+
+    /**
+     * Sets {@link #webRTCStatus} value
+     *
+     * @param webRTCStatus new value of {@link #webRTCStatus}
+     */
+    public void setWebRTCStatus(WebRTCStatus webRTCStatus) {
+        this.webRTCStatus = webRTCStatus;
+    }
+
+    public CoreMicrosoftTeamsStatus getMicrosoftTeamsStatus() {
+        return microsoftTeamsStatus;
+    }
+
+    public void setMicrosoftTeamsStatus(CoreMicrosoftTeamsStatus microsoftTeamsStatus) {
+        this.microsoftTeamsStatus = microsoftTeamsStatus;
     }
 }

@@ -370,6 +370,19 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         xmlMapper = new XmlMapper();
     }
 
+    @Override
+    protected void internalDestroy() {
+        xmlMapper = null;
+        ciscoConfiguration = null;
+        ciscoStatus = null;
+        ciscoValuespace = null;
+
+        statusError = false;
+        configurationError = false;
+
+        super.internalDestroy();
+    }
+
     /**
      * Retrieves {@link #historicalProperties}
      *

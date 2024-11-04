@@ -107,6 +107,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -348,6 +349,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private CiscoStatus ciscoStatus = null;
     private boolean configurationError = false;
     private boolean statusError = false;
+    private CompletableFuture<Void> ciscoStatusFuture = null;
+    private CompletableFuture<Void> ciscoConfigurationFuture = null;
+    private CompletableFuture<Void> ciscoValuespaceFuture = null;
 
     XmlMapper xmlMapper;
 
@@ -376,6 +380,16 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         ciscoConfiguration = null;
         ciscoStatus = null;
         ciscoValuespace = null;
+
+        if (ciscoStatusFuture != null && !ciscoStatusFuture.isDone()) {
+            ciscoStatusFuture.cancel(true);
+        }
+        if (ciscoValuespaceFuture != null && !ciscoValuespaceFuture.isDone()) {
+            ciscoValuespaceFuture.cancel(true);
+        }
+        if (ciscoConfigurationFuture != null && !ciscoConfigurationFuture.isDone()) {
+            ciscoConfigurationFuture.cancel(true);
+        }
 
         statusError = false;
         configurationError = false;
@@ -972,7 +986,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             Map<String, String> statisticsMap = new HashMap<>();
             Map<String, String> dynamicStatisticsMap = new HashMap<>();
 
-            runAsync(() -> {
+            if (ciscoValuespaceFuture != null && !ciscoValuespaceFuture.isDone()) {
+                ciscoValuespaceFuture.cancel(true);
+            }
+            ciscoValuespaceFuture = runAsync(() -> {
                 try {
                     ciscoValuespace = retrieveValuespace();
                 } catch (ResourceNotReachableException e) {
@@ -983,7 +1000,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             });
 
-            runAsync(() -> {
+            if (ciscoConfigurationFuture != null && !ciscoConfigurationFuture.isDone()) {
+                ciscoConfigurationFuture.cancel(true);
+            }
+            ciscoConfigurationFuture = runAsync(() -> {
                 try {
                     ciscoConfiguration = retrieveConfiguration();
                     configurationError = false;
@@ -996,7 +1016,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             });
 
-            runAsync(()->{
+            if (ciscoStatusFuture != null && !ciscoStatusFuture.isDone()) {
+                ciscoStatusFuture.cancel(true);
+            }
+            ciscoStatusFuture = runAsync(()->{
                 try {
                     ciscoStatus = retrieveStatus();
                     statusError = false;

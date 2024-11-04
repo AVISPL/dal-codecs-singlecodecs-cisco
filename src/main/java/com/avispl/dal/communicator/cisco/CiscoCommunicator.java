@@ -992,10 +992,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             ciscoValuespaceFuture = runAsync(() -> {
                 try {
                     ciscoValuespace = retrieveValuespace();
-                } catch (ResourceNotReachableException e) {
-                    // We don't want to produce an API error if one of the xml files is not available
-                    logger.warn("/valuespace.xml is not available on device " + getHost(), e);
                 } catch (Exception e) {
+                    // We don't want to produce an API error if one of the xml files is not available
                     logger.warn("/valuespace.xml is not available on device " + getHost(), e);
                 }
             });
@@ -1007,11 +1005,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 try {
                     ciscoConfiguration = retrieveConfiguration();
                     configurationError = false;
-                } catch (ResourceNotReachableException e) {
+                } catch (Exception e) {
                     configurationError = true;
                     // We don't want to produce an API error if one of the xml files is not available
-                    logger.warn("/configuration.xml is not available on device " + getHost(), e);
-                } catch (Exception e) {
                     logger.warn("/configuration.xml is not available on device " + getHost(), e);
                 }
             });
@@ -1023,11 +1019,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 try {
                     ciscoStatus = retrieveStatus();
                     statusError = false;
-                } catch (ResourceNotReachableException e) {
+                } catch (Exception e) {
                     statusError = true;
                     // We don't want to produce an API error if one of the xml files is not available
-                    logger.warn("/status.xml is not available on device " + getHost(), e);
-                } catch (Exception e) {
                     logger.warn("/status.xml is not available on device " + getHost(), e);
                 }
             });

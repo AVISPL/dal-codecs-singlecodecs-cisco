@@ -107,6 +107,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -115,6 +116,7 @@ import java.util.stream.Collectors;
 import static com.avispl.dal.communicator.cisco.CiscoCommunicatorProperties.*;
 import static com.avispl.dal.communicator.cisco.controller.ControlPayloadGenerator.*;
 import static com.avispl.symphony.dal.util.ControllablePropertyFactory.*;
+import static java.util.concurrent.CompletableFuture.runAsync;
 
 /**
  * Communicator based on Cisco XML API
@@ -342,6 +344,15 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private ExtendedStatistics localStatistics;
     private EndpointStatistics localEndpointStatistics;
 
+    private String ciscoValuespace = "";
+    private CiscoConfiguration ciscoConfiguration = null;
+    private CiscoStatus ciscoStatus = null;
+    private boolean configurationError = false;
+    private boolean statusError = false;
+    private CompletableFuture<Void> ciscoStatusFuture = null;
+    private CompletableFuture<Void> ciscoConfigurationFuture = null;
+    private CompletableFuture<Void> ciscoValuespaceFuture = null;
+
     XmlMapper xmlMapper;
 
     /**
@@ -361,6 +372,29 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         super.internalInit();
         setJacksonDataformatXMLSupported(true);
         xmlMapper = new XmlMapper();
+    }
+
+    @Override
+    protected void internalDestroy() {
+        xmlMapper = null;
+        ciscoConfiguration = null;
+        ciscoStatus = null;
+        ciscoValuespace = null;
+
+        if (ciscoStatusFuture != null && !ciscoStatusFuture.isDone()) {
+            ciscoStatusFuture.cancel(true);
+        }
+        if (ciscoValuespaceFuture != null && !ciscoValuespaceFuture.isDone()) {
+            ciscoValuespaceFuture.cancel(true);
+        }
+        if (ciscoConfigurationFuture != null && !ciscoConfigurationFuture.isDone()) {
+            ciscoConfigurationFuture.cancel(true);
+        }
+
+        statusError = false;
+        configurationError = false;
+
+        super.internalDestroy();
     }
 
     /**
@@ -952,38 +986,50 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             Map<String, String> statisticsMap = new HashMap<>();
             Map<String, String> dynamicStatisticsMap = new HashMap<>();
 
-            String valuespace = "";
-            try {
-                valuespace = retrieveValuespace();
-            } catch (ResourceNotReachableException e) {
-                // We don't want to produce an API error if one of the xml files is not available
-                logger.warn("/valuespace.xml is not available on device " + getHost(), e);
+            if (ciscoValuespaceFuture != null && !ciscoValuespaceFuture.isDone()) {
+                ciscoValuespaceFuture.cancel(true);
             }
+            ciscoValuespaceFuture = runAsync(() -> {
+                try {
+                    ciscoValuespace = retrieveValuespace();
+                } catch (Exception e) {
+                    // We don't want to produce an API error if one of the xml files is not available
+                    logger.warn("/valuespace.xml is not available on device " + getHost(), e);
+                }
+            });
 
-            CiscoConfiguration ciscoConfiguration = null;
-            CiscoStatus ciscoStatus = null;
-            boolean configurationError = false;
-            boolean statusError = false;
-            try {
-                ciscoConfiguration = retrieveConfiguration();
-            } catch (ResourceNotReachableException e) {
-                configurationError = true;
-                // We don't want to produce an API error if one of the xml files is not available
-                logger.warn("/configuration.xml is not available on device " + getHost(), e);
+            if (ciscoConfigurationFuture != null && !ciscoConfigurationFuture.isDone()) {
+                ciscoConfigurationFuture.cancel(true);
             }
+            ciscoConfigurationFuture = runAsync(() -> {
+                try {
+                    ciscoConfiguration = retrieveConfiguration();
+                    configurationError = false;
+                } catch (Exception e) {
+                    configurationError = true;
+                    // We don't want to produce an API error if one of the xml files is not available
+                    logger.warn("/configuration.xml is not available on device " + getHost(), e);
+                }
+            });
 
-            try {
-                ciscoStatus = retrieveStatus();
-            } catch (ResourceNotReachableException e) {
-                statusError = true;
-                // We don't want to produce an API error if one of the xml files is not available
-                logger.warn("/status.xml is not available on device " + getHost(), e);
+            if (ciscoStatusFuture != null && !ciscoStatusFuture.isDone()) {
+                ciscoStatusFuture.cancel(true);
             }
+            ciscoStatusFuture = runAsync(()->{
+                try {
+                    ciscoStatus = retrieveStatus();
+                    statusError = false;
+                } catch (Exception e) {
+                    statusError = true;
+                    // We don't want to produce an API error if one of the xml files is not available
+                    logger.warn("/status.xml is not available on device " + getHost(), e);
+                }
+            });
 
             if (configurationError && statusError) {
                 throw new ResourceNotReachableException("Unable to retrieve device details: /configuration.xml and /status.xml endpoints are not available.");
             }
-            if (StringUtils.isNullOrEmpty(valuespace) && ciscoConfiguration == null && ciscoStatus == null) {
+            if (StringUtils.isNullOrEmpty(ciscoValuespace) && ciscoConfiguration == null && ciscoStatus == null) {
                 if (logger.isWarnEnabled()) {
                     logger.warn("Unable to retrieve cisco configuration and status details. Retrieving device statistics from cache." + localStatistics);
                 }
@@ -1010,43 +1056,43 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device audio statistics");
                     }
-                    populateAudioData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
+                    populateAudioData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
                 if (propertyGroupQualifiedForDisplay(propertyGroups, "Cameras")) {
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device camera statistics");
                     }
-                    populateCameraData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
+                    populateCameraData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
                 if (propertyGroupQualifiedForDisplay(propertyGroups, "Conference")) {
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device conference statistics");
                     }
-                    populateConferenceData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
+                    populateConferenceData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
                 if (propertyGroupQualifiedForDisplay(propertyGroups, "Standby")) {
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device standby statistics");
                     }
-                    populateStandbyData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
+                    populateStandbyData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
                 if (propertyGroupQualifiedForDisplay(propertyGroups, "NetworkServices")) {
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device network services statistics");
                     }
-                    populateNetworkServicesData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
+                    populateNetworkServicesData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
                 if (propertyGroupQualifiedForDisplay(propertyGroups, "Video")) {
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device video statistics");
                     }
-                    populateVideoData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
+                    populateVideoData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
                 if (propertyGroupQualifiedForDisplay(propertyGroups, "UserInterface")) {
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device user interface statistics");
                     }
-                    populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, valuespace);
+                    populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoValuespace);
                 }
                 if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
                     if (logger.isDebugEnabled()) {
@@ -1112,7 +1158,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device peripherals statistics");
                     }
-                    populatePeripheralsData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, valuespace);
+                    populatePeripheralsData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
                 if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
                     if (logger.isDebugEnabled()) {
@@ -1123,7 +1169,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         statisticsMap.put("SystemTime#Time", time.getSystemTime());
                         TimeConfiguration timeConfiguration = ciscoConfiguration.getTime();
                         if (timeConfiguration != null) {
-                            addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), valuespace);
+                            addStatisticsParameterWithDropdown(statisticsMap, advancedControllableProperties, SYSTEM_TIME_ZONE, timeConfiguration.getZone(), ciscoValuespace);
                         }
                     }
                 }

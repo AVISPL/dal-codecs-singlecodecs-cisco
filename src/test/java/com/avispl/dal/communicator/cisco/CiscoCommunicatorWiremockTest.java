@@ -52,6 +52,8 @@ public class CiscoCommunicatorWiremockTest {
         ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Peripherals,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
         ciscoCommunicator.setDisplayPropertyGroups("All");
         List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();
+        Thread.sleep(30000);
+        statistics = ciscoCommunicator.getMultipleStatistics();
         Assert.assertEquals(2, statistics.size());
 
         ExtendedStatistics extendedStatistics = (ExtendedStatistics) statistics.get(0);

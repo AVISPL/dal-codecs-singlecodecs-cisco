@@ -317,11 +317,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Diagnostics message type filter - only diagnostics messages of this type will be included into map of extended properties
      * */
-    private List<String> diagnosticsMessageTypeFilter = new ArrayList<>();
+    private List<String> diagnosticEventsTypeFilter = new ArrayList<>();
     /**
      * Diagnostics message level filter - only diagnostics messages of this level will be included into map of extended properties
      * */
-    private List<String> diagnosticsMessageLevelFilter = new ArrayList<>();
+    private List<String> diagnosticEventsLevelFilter = new ArrayList<>();
     /**
      * Total number of diagnostics messages to display in extended properties map
      * */
@@ -453,39 +453,39 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     /**
-     * Retrieves {@link #diagnosticsMessageTypeFilter}
+     * Retrieves {@link #diagnosticEventsTypeFilter}
      *
-     * @return value of {@link #diagnosticsMessageTypeFilter}
+     * @return value of {@link #diagnosticEventsTypeFilter}
      */
-    public String getDiagnosticsMessageTypeFilter() {
-        return String.join(",", diagnosticsMessageTypeFilter);
+    public String getDiagnosticEventsTypeFilter() {
+        return String.join(",", diagnosticEventsTypeFilter);
     }
 
     /**
-     * Sets {@link #diagnosticsMessageTypeFilter} value
+     * Sets {@link #diagnosticEventsTypeFilter} value
      *
-     * @param diagnosticsMessageTypeFilter new value of {@link #diagnosticsMessageTypeFilter}
+     * @param diagnosticEventsTypeFilter new value of {@link #diagnosticEventsTypeFilter}
      */
-    public void setDiagnosticsMessageTypeFilter(String diagnosticsMessageTypeFilter) {
-        this.diagnosticsMessageTypeFilter = Arrays.stream(diagnosticsMessageTypeFilter.split(",")).map(String::trim).filter(StringUtils::isNotNullOrEmpty).collect(Collectors.toList());
+    public void setDiagnosticEventsTypeFilter(String diagnosticEventsTypeFilter) {
+        this.diagnosticEventsTypeFilter = Arrays.stream(diagnosticEventsTypeFilter.split(",")).map(String::trim).filter(StringUtils::isNotNullOrEmpty).collect(Collectors.toList());
     }
 
     /**
-     * Retrieves {@link #diagnosticsMessageLevelFilter}
+     * Retrieves {@link #diagnosticEventsLevelFilter}
      *
-     * @return value of {@link #diagnosticsMessageLevelFilter}
+     * @return value of {@link #diagnosticEventsLevelFilter}
      */
-    public String getDiagnosticsMessageLevelFilter() {
-        return String.join(",", diagnosticsMessageLevelFilter);
+    public String getDiagnosticEventsLevelFilter() {
+        return String.join(",", diagnosticEventsLevelFilter);
     }
 
     /**
-     * Sets {@link #diagnosticsMessageLevelFilter} value
+     * Sets {@link #diagnosticEventsLevelFilter} value
      *
-     * @param diagnosticsMessageLevelFilter new value of {@link #diagnosticsMessageLevelFilter}
+     * @param diagnosticEventsLevelFilter new value of {@link #diagnosticEventsLevelFilter}
      */
-    public void setDiagnosticsMessageLevelFilter(String diagnosticsMessageLevelFilter) {
-        this.diagnosticsMessageLevelFilter = Arrays.stream(diagnosticsMessageLevelFilter.split(",")).map(String::trim).filter(StringUtils::isNotNullOrEmpty).collect(Collectors.toList());
+    public void setDiagnosticEventsLevelFilter(String diagnosticEventsLevelFilter) {
+        this.diagnosticEventsLevelFilter = Arrays.stream(diagnosticEventsLevelFilter.split(",")).map(String::trim).filter(StringUtils::isNotNullOrEmpty).collect(Collectors.toList());
     }
 
     /**
@@ -1411,12 +1411,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             DiagnosticsMessage message = messages[i];
             String level = message.getLevel();
             String type = message.getType();
-            boolean levelFilterPass = diagnosticsMessageLevelFilter.contains(level);
-            boolean typeFilterPass = diagnosticsMessageTypeFilter.contains(type);
-            if (!diagnosticsMessageLevelFilter.isEmpty() || !diagnosticsMessageTypeFilter.isEmpty()) {
+            boolean levelFilterPass = diagnosticEventsLevelFilter.contains(level);
+            boolean typeFilterPass = diagnosticEventsTypeFilter.contains(type);
+            if (!diagnosticEventsLevelFilter.isEmpty() || !diagnosticEventsTypeFilter.isEmpty()) {
                 if (!levelFilterPass && !typeFilterPass) {
                     if (logger.isDebugEnabled()) {
-                        logger.debug(String.format("diagnosticsMessageLevelFilter doesn't contain %s. Current configuration: %s. Skipping diagnostics message item.", level, diagnosticsMessageLevelFilter));
+                        logger.debug(String.format("diagnosticsMessageLevelFilter doesn't contain %s. Current configuration: %s. Skipping diagnostics message item.", level, diagnosticEventsLevelFilter));
                     }
                     continue;
                 }

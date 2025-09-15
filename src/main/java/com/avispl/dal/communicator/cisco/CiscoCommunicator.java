@@ -1145,6 +1145,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     if (logger.isDebugEnabled()) {
                         logger.debug("Populating device provisioning statistics");
                     }
+                    statisticsMap.put(FIRMWARE_UPGRADE, "");
+                    statisticsMap.put(FIRMWARE_PACKAGE_URL, firmwarePackageUrl);
+                    advancedControllableProperties.add(createText(FIRMWARE_PACKAGE_URL, firmwarePackageUrl));
+                    advancedControllableProperties.add(createButton(FIRMWARE_UPGRADE, "Upgrade", "Upgrading", 0L));
+
                     populateProvisioningData(statisticsMap, ciscoStatus);
                 }
                 if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Standby")) {
@@ -1278,11 +1283,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
                 endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
             }
-            statisticsMap.put(FIRMWARE_UPGRADE, "");
-            statisticsMap.put(FIRMWARE_PACKAGE_URL, firmwarePackageUrl);
-            advancedControllableProperties.add(createText(FIRMWARE_PACKAGE_URL, firmwarePackageUrl));
-            advancedControllableProperties.add(createButton(FIRMWARE_UPGRADE, "Upgrade", "Upgrading", 0L));
-
             extendedStatistics.setControllableProperties(advancedControllableProperties);
             extendedStatistics.setStatistics(statisticsMap);
             extendedStatistics.setDynamicStatistics(dynamicStatisticsMap);

@@ -325,7 +325,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     /**
      * Total number of diagnostics messages to display in extended properties map
      * */
-    private int diagnosticsMessagesTotal = 10;
+    private int diagnosticEventsTotal = 10;
     /**
      * CSV string of values, defining the set of historical properties, kept as set locally
      */
@@ -435,21 +435,21 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     }
 
     /**
-     * Retrieves {@link #diagnosticsMessagesTotal}
+     * Retrieves {@link #diagnosticEventsTotal}
      *
-     * @return value of {@link #diagnosticsMessagesTotal}
+     * @return value of {@link #diagnosticEventsTotal}
      */
-    public int getDiagnosticsMessagesTotal() {
-        return diagnosticsMessagesTotal;
+    public int getDiagnosticEventsTotal() {
+        return diagnosticEventsTotal;
     }
 
     /**
-     * Sets {@link #diagnosticsMessagesTotal} value
+     * Sets {@link #diagnosticEventsTotal} value
      *
-     * @param diagnosticsMessagesTotal new value of {@link #diagnosticsMessagesTotal}
+     * @param diagnosticEventsTotal new value of {@link #diagnosticEventsTotal}
      */
-    public void setDiagnosticsMessagesTotal(int diagnosticsMessagesTotal) {
-        this.diagnosticsMessagesTotal = diagnosticsMessagesTotal;
+    public void setDiagnosticEventsTotal(int diagnosticEventsTotal) {
+        this.diagnosticEventsTotal = diagnosticEventsTotal;
     }
 
     /**
@@ -1402,7 +1402,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
         int index = 1;
         for (int i = 0; i < messages.length; i++) {
-            if (i >= diagnosticsMessagesTotal) {
+            if (i >= diagnosticEventsTotal) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Target number of diagnostics messages is reached. Skipping further processing.");
                 }

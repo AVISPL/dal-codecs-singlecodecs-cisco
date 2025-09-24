@@ -8,6 +8,8 @@
     <artifactId>symphony-dal-communicator-cisco</artifactId>
     <version>1.1.7</version>
     <properties>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <symphonyApiVersion>RELEASE</symphonyApiVersion>
     </properties>
     <build>
@@ -113,6 +115,12 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
     <reporting>
         <plugins>

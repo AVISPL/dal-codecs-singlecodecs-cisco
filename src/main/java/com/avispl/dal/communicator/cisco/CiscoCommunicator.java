@@ -311,6 +311,17 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private final String valuespacePath = "valuespace.xml";
 
     /**
+     * Adapter metadata, collected from the version.properties
+     * @since 1.1.7
+     */
+    private Properties adapterProperties;
+    /**
+     * Device adapter instantiation timestamp.
+     * @since 1.1.7
+     */
+    private long adapterInitializationTimestamp;
+
+    /**
      * Exposing 2 property groups by default - SystemUnit and Audio
      */
     private List<String> displayPropertyGroups = Arrays.asList("SystemUnit","RoomAnalytics");
@@ -349,7 +360,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * while instead we can define a cooldown period, so multiple controls operations will be stacked within this
      * period and the control states are modified within the {@link #localStatistics} variable.
      */
-    private static final int CONTROL_OPERATION_COOLDOWN_MS = 5000;
+    private final int CONTROL_OPERATION_COOLDOWN_MS = 5000;
 
     /**
      * A number of attempts to perform for getting the conference (call) status while performing
@@ -388,6 +399,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     @Override
     protected void internalInit() throws Exception {
         super.internalInit();
+        adapterProperties = new Properties();
+        adapterProperties.load(getClass().getResourceAsStream("/version.properties"));
+        adapterInitializationTimestamp = System.currentTimeMillis();
+
         setJacksonDataformatXMLSupported(true);
         xmlMapper = new XmlMapper();
     }
@@ -1116,6 +1131,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 return Arrays.asList(extendedStatistics, endpointStatistics);
             }
 
+            populateAdapterMetadata(statisticsMap);
             if (ciscoStatus != null) {
                 if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "DiagnosticEvents")) {
                     if (logger.isDebugEnabled()) {
@@ -1388,10 +1404,20 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (logger.isDebugEnabled()) {
                 logger.debug("No diagnostics data found, skipping.");
             }
+            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
+                dynamicStatistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            } else {
+                statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            }
             return;
         }
         DiagnosticsMessage[] messages = diagnostics.getDiagnosticsMessages();
         if (messages == null || messages.length == 0) {
+            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
+                dynamicStatistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            } else {
+                statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            }
             logger.debug("No diagnostics messages found, skipping.");
             return;
         }
@@ -2612,17 +2638,18 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         if (provisioningSoftwareCurrent != null) {
             statistics.put("Firmware#CurrentUpgradeCompletedAt", provisioningSoftwareCurrent.getCompletedAt());
             statistics.put("Firmware#CurrentUpgradeURL", provisioningSoftwareCurrent.getURL());
-            statistics.put("Firmware#CurrentUpgradeVersionId", provisioningSoftwareCurrent.getVersionId());
+            statistics.put("Firmware#CurrentUpgradeVersionID", provisioningSoftwareCurrent.getVersionId());
         }
 
         ProvisioningSoftwareUpgradeStatus upgradeStatus = provisioningSoftware.getUpgradeStatus();
         if (upgradeStatus != null) {
             statistics.put("Firmware#UpgradeStatus", upgradeStatus.getStatus());
             statistics.put("Firmware#UpgradeMessage", upgradeStatus.getMessage());
+            statistics.put("Firmware#Phase", upgradeStatus.getPhase());
             statistics.put("Firmware#LastChange", upgradeStatus.getLastChange());
             statistics.put("Firmware#UpgradeUrgency", upgradeStatus.getUrgency());
-            statistics.put("Firmware#UpgradeUrl", upgradeStatus.getUrl());
-            statistics.put("Firmware#UpgradeVersionId", upgradeStatus.getVersionId());
+            statistics.put("Firmware#UpgradeURL", upgradeStatus.getUrl());
+            statistics.put("Firmware#UpgradeVersionID", upgradeStatus.getVersionId());
         }
     }
     /**
@@ -2814,6 +2841,22 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             }
         });
+    }
+
+    /**
+     * Populate adapter metadata and save it to the statistics map
+     *
+     * @param statistics map to save metadata statistics to
+     * @since 1.1.7
+     * */
+    private void populateAdapterMetadata(Map<String, String> statistics) {
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_VERSION, adapterProperties.getProperty("adapter.version"));
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_BUILD_DATE, adapterProperties.getProperty("adapter.build.date"));
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_PROPERTY_GROUPS, String.join(", ", displayPropertyGroups));
+
+        long adapterUptime = System.currentTimeMillis() - adapterInitializationTimestamp;
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_UPTIME, normalizeUptime(String.valueOf(adapterUptime / 1000)));
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_UPTIME_MIN, String.valueOf(adapterUptime / (1000*60)));
     }
 
     /***

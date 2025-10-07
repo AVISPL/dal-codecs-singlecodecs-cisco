@@ -5,6 +5,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 public class ProvisioningSoftwareUpgradeStatus {
     @JacksonXmlProperty(localName="LastChange")
     private String lastChange;
+    @JacksonXmlProperty(localName="Phase")
+    private String phase;
     @JacksonXmlProperty(localName="Message")
     private String message;
     @JacksonXmlProperty(localName="Status")
@@ -15,6 +17,24 @@ public class ProvisioningSoftwareUpgradeStatus {
     private String urgency;
     @JacksonXmlProperty(localName="VersionId")
     private String versionId;
+
+    /**
+     * Retrieves {@link #phase}
+     *
+     * @return value of {@link #phase}
+     */
+    public String getPhase() {
+        return phase;
+    }
+
+    /**
+     * Sets {@link #phase} value
+     *
+     * @param phase new value of {@link #phase}
+     */
+    public void setPhase(String phase) {
+        this.phase = phase;
+    }
 
     /**
      * Retrieves {@link #lastChange}

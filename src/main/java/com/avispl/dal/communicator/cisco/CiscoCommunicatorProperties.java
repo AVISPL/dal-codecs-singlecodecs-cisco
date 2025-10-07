@@ -352,4 +352,10 @@ final class CiscoCommunicatorProperties {
      static final String ADAPTER_UPTIME_MIN = "AdapterMetadata#AdapterUptime(min)";
      /** @since 1.1.7 */
      static final String ADAPTER_PROPERTY_GROUPS = "AdapterMetadata#ActivePropertyGroups";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_STATUS = "AdapterMetadata#APIStatus";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_CONFIGURATION = "AdapterMetadata#APIConfiguration";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_VALUESPACE = "AdapterMetadata#APIValuespace";
 }

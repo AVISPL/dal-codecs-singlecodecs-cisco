@@ -342,4 +342,20 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_AUDIO_DEVICES_HEADSET_USB_MANUFACTURER = "AudioDevices#HeadsetUSBManufacturer";
      /** @since 1.1.4 */
      static final String PROPERTY_AUDIO_DEVICES_HEADSET_USB_CRADLE = "AudioDevices#HandsetUSBCradle";
+     /** @since 1.1.7 */
+     static final String ADAPTER_VERSION = "AdapterMetadata#AdapterVersion";
+     /** @since 1.1.7 */
+     static final String ADAPTER_BUILD_DATE = "AdapterMetadata#AdapterBuildDate";
+     /** @since 1.1.7 */
+     static final String ADAPTER_UPTIME = "AdapterMetadata#AdapterUptime";
+     /** @since 1.1.7 */
+     static final String ADAPTER_UPTIME_MIN = "AdapterMetadata#AdapterUptime(min)";
+     /** @since 1.1.7 */
+     static final String ADAPTER_PROPERTY_GROUPS = "AdapterMetadata#ActivePropertyGroups";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_STATUS = "AdapterMetadata#APIStatus";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_CONFIGURATION = "AdapterMetadata#APIConfiguration";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_VALUESPACE = "AdapterMetadata#APIValuespace";
 }

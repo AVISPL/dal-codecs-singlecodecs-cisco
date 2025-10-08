@@ -44,6 +44,12 @@ import com.avispl.dal.communicator.cisco.dto.status.cameras.Camera;
 import com.avispl.dal.communicator.cisco.dto.status.cameras.CameraPosition;
 import com.avispl.dal.communicator.cisco.dto.status.cameras.Cameras;
 import com.avispl.dal.communicator.cisco.dto.status.conference.*;
+import com.avispl.dal.communicator.cisco.dto.status.diagnostics.Diagnostics;
+import com.avispl.dal.communicator.cisco.dto.status.diagnostics.DiagnosticsMessage;
+import com.avispl.dal.communicator.cisco.dto.status.provisioning.ProvisioningSoftware;
+import com.avispl.dal.communicator.cisco.dto.status.provisioning.ProvisioningSoftwareCurrent;
+import com.avispl.dal.communicator.cisco.dto.status.provisioning.ProvisioningSoftwareUpgradeStatus;
+import com.avispl.dal.communicator.cisco.dto.status.provisioning.ProvisioningStatus;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.ExtensionsStatus;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.microsoft.ExtensionVersion;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.extensions.microsoft.MicrosoftExtension;
@@ -106,8 +112,12 @@ import org.springframework.http.HttpMethod;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
+import javax.security.auth.login.FailedLoginException;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -305,10 +315,32 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private final String valuespacePath = "valuespace.xml";
 
     /**
+     * Adapter metadata, collected from the version.properties
+     * @since 1.1.7
+     */
+    private Properties adapterProperties;
+    /**
+     * Device adapter instantiation timestamp.
+     * @since 1.1.7
+     */
+    private long adapterInitializationTimestamp;
+
+    /**
      * Exposing 2 property groups by default - SystemUnit and Audio
      */
-    private String displayPropertyGroups = "SystemUnit,RoomAnalytics";
-
+    private List<String> displayPropertyGroups = Arrays.asList("SystemUnit","RoomAnalytics");
+    /**
+     * Diagnostics message type filter - only diagnostics messages of this type will be included into map of extended properties
+     * */
+    private List<String> diagnosticEventsTypeFilter = new ArrayList<>();
+    /**
+     * Diagnostics message level filter - only diagnostics messages of this level will be included into map of extended properties
+     * */
+    private List<String> diagnosticEventsLevelFilter = new ArrayList<>();
+    /**
+     * Total number of diagnostics messages to display in extended properties map
+     * */
+    private int diagnosticEventsTotal = 10;
     /**
      * CSV string of values, defining the set of historical properties, kept as set locally
      */
@@ -332,7 +364,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * while instead we can define a cooldown period, so multiple controls operations will be stacked within this
      * period and the control states are modified within the {@link #localStatistics} variable.
      */
-    private static final int CONTROL_OPERATION_COOLDOWN_MS = 5000;
+    private final int CONTROL_OPERATION_COOLDOWN_MS = 5000;
 
     /**
      * A number of attempts to perform for getting the conference (call) status while performing
@@ -344,16 +376,24 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private ExtendedStatistics localStatistics;
     private EndpointStatistics localEndpointStatistics;
 
-    private String ciscoValuespace = "";
-    private CiscoConfiguration ciscoConfiguration = null;
-    private CiscoStatus ciscoStatus = null;
-    private boolean configurationError = false;
-    private boolean statusError = false;
+    private volatile String ciscoValuespace = "";
+    private volatile CiscoConfiguration ciscoConfiguration = null;
+    private volatile CiscoStatus ciscoStatus = null;
+    private volatile boolean configurationError = false;
+    private volatile boolean statusError = false;
+    private volatile boolean loginError = false;
     private CompletableFuture<Void> ciscoStatusFuture = null;
     private CompletableFuture<Void> ciscoConfigurationFuture = null;
     private CompletableFuture<Void> ciscoValuespaceFuture = null;
+    private String firmwarePackageUrl = "N/A";
 
     XmlMapper xmlMapper;
+
+    /**
+     * Executor service for async data pulling operations
+     * @since 1.1.7
+     * */
+    private final ExecutorService executorService = Executors.newFixedThreadPool(3);
 
     /**
      * Instantiate {@link CiscoCommunicator}
@@ -370,6 +410,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     @Override
     protected void internalInit() throws Exception {
         super.internalInit();
+        adapterProperties = new Properties();
+        adapterProperties.load(getClass().getResourceAsStream("/version.properties"));
+        adapterInitializationTimestamp = System.currentTimeMillis();
+
         setJacksonDataformatXMLSupported(true);
         xmlMapper = new XmlMapper();
     }
@@ -392,6 +436,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
 
         statusError = false;
+        loginError = false;
         configurationError = false;
 
         super.internalDestroy();
@@ -413,9 +458,61 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     public void setHistoricalProperties(String historicalProperties) {
         this.historicalProperties.clear();
-        Arrays.asList(historicalProperties.split(",")).forEach(propertyName -> {
-            this.historicalProperties.add(propertyName.trim());
-        });
+        Arrays.asList(historicalProperties.split(",")).forEach(propertyName -> this.historicalProperties.add(propertyName.trim()));
+    }
+
+    /**
+     * Retrieves {@link #diagnosticEventsTotal}
+     *
+     * @return value of {@link #diagnosticEventsTotal}
+     */
+    public int getDiagnosticEventsTotal() {
+        return diagnosticEventsTotal;
+    }
+
+    /**
+     * Sets {@link #diagnosticEventsTotal} value
+     *
+     * @param diagnosticEventsTotal new value of {@link #diagnosticEventsTotal}
+     */
+    public void setDiagnosticEventsTotal(int diagnosticEventsTotal) {
+        this.diagnosticEventsTotal = diagnosticEventsTotal;
+    }
+
+    /**
+     * Retrieves {@link #diagnosticEventsTypeFilter}
+     *
+     * @return value of {@link #diagnosticEventsTypeFilter}
+     */
+    public String getDiagnosticEventsTypeFilter() {
+        return String.join(",", diagnosticEventsTypeFilter);
+    }
+
+    /**
+     * Sets {@link #diagnosticEventsTypeFilter} value
+     *
+     * @param diagnosticEventsTypeFilter new value of {@link #diagnosticEventsTypeFilter}
+     */
+    public void setDiagnosticEventsTypeFilter(String diagnosticEventsTypeFilter) {
+        this.diagnosticEventsTypeFilter = Arrays.stream(diagnosticEventsTypeFilter.split(",")).map(String::trim).filter(StringUtils::isNotNullOrEmpty).collect(Collectors.toList());
+    }
+
+    /**
+     * Retrieves {@link #diagnosticEventsLevelFilter}
+     *
+     * @return value of {@link #diagnosticEventsLevelFilter}
+     */
+    public String getDiagnosticEventsLevelFilter() {
+        return String.join(",", diagnosticEventsLevelFilter);
+    }
+
+    /**
+     * Sets {@link #diagnosticEventsLevelFilter} value
+     *
+     * @param diagnosticEventsLevelFilter new value of {@link #diagnosticEventsLevelFilter}
+     */
+    public void setDiagnosticEventsLevelFilter(String diagnosticEventsLevelFilter) {
+        this.diagnosticEventsLevelFilter = Arrays.stream(diagnosticEventsLevelFilter.split(",")).map(String::trim).filter(StringUtils::isNotNullOrEmpty).collect(Collectors.toList());
     }
 
     /**
@@ -424,7 +521,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @return {@link String} with csv value, containing property groups
      */
     public String getDisplayPropertyGroups() {
-        return displayPropertyGroups;
+        return String.join(",", displayPropertyGroups);
     }
 
     /***
@@ -433,7 +530,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param displayPropertyGroups parameter value (csv of groups to display in statistics)
      */
     public void setDisplayPropertyGroups(String displayPropertyGroups) {
-        this.displayPropertyGroups = displayPropertyGroups;
+        this.displayPropertyGroups = Arrays.stream(displayPropertyGroups.split(",")).map(String::trim).filter(StringUtils::isNotNullOrEmpty).collect(Collectors.toList());;;
     }
 
     /**
@@ -622,9 +719,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     @Override
     public void sendMessage(PopupMessage popupMessage) throws Exception {
         if (popupMessage == null || StringUtils.isNullOrEmpty(popupMessage.getMessage()) || popupMessage.getDuration() == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to send message: message data is not valid.");
-            }
+            logDebugMessage("Unable to send message: message data is not valid.");
             return;
         }
 
@@ -700,9 +795,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateCallChannelsData(CiscoStatus ciscoStatus, EndpointStatistics endpointStatistics, Map<String, String> statistics) {
         Call[] ciscoCallsStatus = ciscoStatus.getCalls();
         if (ciscoCallsStatus == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate cisco status data: no calls information is available");
-            }
+            logDebugMessage("Unable to populate cisco status data: no calls information is available");
             return;
         }
 
@@ -720,17 +813,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     callsCount));
         }
         if (callsCount == 0) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate media channels data: no active calls is available");
-            }
+            logDebugMessage("Unable to populate media channels data: no active calls is available");
             return;
         }
         Call activeCall = connectedCalls.get(0);
         Channel[] callChannels = activeCall.getChannels();
         if (callChannels == null || callChannels.length == 0) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate media channels data: no media channels data is available in the calls structure");
-            }
+            logDebugMessage("Unable to populate media channels data: no media channels data is available in the calls structure");
             return;
         }
 
@@ -743,17 +832,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         Arrays.stream(callChannels).forEach(channel -> {
             if (channel == null) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Channel data is not available, skipping.");
-                }
+                logDebugMessage("Channel data is not available, skipping.");
                 return;
             }
 
             String direction = channel.getDirection();
             if (StringUtils.isNullOrEmpty(direction)) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("No channel direction data, skipping.");
-                }
+                logDebugMessage("No channel direction data, skipping.");
                 return;
             }
 
@@ -832,25 +917,18 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         MediaChannels mediaChannels = ciscoStatus.getMediaChannels();
 
         if (mediaChannels == null) {
-
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate media channels data: media channels data is empty");
-            }
+            logDebugMessage("Unable to populate media channels data: media channels data is empty");
             return;
         }
         MediaStatsCall[] calls = mediaChannels.getCalls();
         if (calls == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate media channels data: no calls information is available");
-            }
+            logDebugMessage("Unable to populate media channels data: no calls information is available");
             return;
         }
 
         Call[] ciscoCallsStatus = ciscoStatus.getCalls();
         if (ciscoCallsStatus == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate cisco status data: no calls information is available");
-            }
+            logDebugMessage("Unable to populate cisco status data: no calls information is available");
             return;
         }
 
@@ -862,9 +940,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     callsCount));
         }
         if (callsCount == 0) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate media channels data: no active calls is available");
-            }
+            logDebugMessage("Unable to populate media channels data: no active calls is available");
             return;
         }
 
@@ -965,9 +1041,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         controlOperationsLock.lock();
         try {
             if (isValidControlCoolDown() && localStatistics != null && localEndpointStatistics != null) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Device is occupied. Skipping statistics refresh call.");
-                }
+                logDebugMessage("Device is occupied. Skipping statistics refresh call.");
                 extendedStatistics.setStatistics(localStatistics.getStatistics());
                 extendedStatistics.setControllableProperties(localStatistics.getControllableProperties());
 
@@ -975,10 +1049,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 endpointStatistics.setCallStats(localEndpointStatistics.getCallStats());
                 endpointStatistics.setVideoChannelStats(localEndpointStatistics.getVideoChannelStats());
                 endpointStatistics.setAudioChannelStats(localEndpointStatistics.getAudioChannelStats());
-
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device statistics: " + extendedStatistics.getStatistics());
-                }
+                endpointStatistics.setRegistrationStatus(localEndpointStatistics.getRegistrationStatus());
+                logDebugMessage("Populating device statistics: " + extendedStatistics.getStatistics());
+                logDebugMessage("Populating endpoint statistics: " + endpointStatistics);
                 return Arrays.asList(extendedStatistics, endpointStatistics);
             }
 
@@ -986,52 +1059,70 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             Map<String, String> statisticsMap = new HashMap<>();
             Map<String, String> dynamicStatisticsMap = new HashMap<>();
 
-            if (ciscoValuespaceFuture != null && !ciscoValuespaceFuture.isDone()) {
-                ciscoValuespaceFuture.cancel(true);
-            }
-            ciscoValuespaceFuture = runAsync(() -> {
+            if (ciscoValuespaceFuture == null || ciscoValuespaceFuture.isDone() || ciscoValuespaceFuture.isCompletedExceptionally()) {
+                ciscoValuespaceFuture = runAsync(() -> {
                 try {
                     ciscoValuespace = retrieveValuespace();
+                    loginError = false;
+                } catch (FailedLoginException fle) {
+                    loginError = true;
+                    logger.warn("Authentication error: please check the device credentials provided.", fle);
                 } catch (Exception e) {
                     // We don't want to produce an API error if one of the xml files is not available
                     logger.warn("/valuespace.xml is not available on device " + getHost(), e);
                 }
-            });
-
-            if (ciscoConfigurationFuture != null && !ciscoConfigurationFuture.isDone()) {
-                ciscoConfigurationFuture.cancel(true);
+                }, executorService);
             }
-            ciscoConfigurationFuture = runAsync(() -> {
+
+            if (ciscoConfigurationFuture == null || ciscoConfigurationFuture.isDone() || ciscoConfigurationFuture.isCompletedExceptionally()) {
+                ciscoConfigurationFuture = runAsync(() -> {
                 try {
                     ciscoConfiguration = retrieveConfiguration();
                     configurationError = false;
+                    loginError = false;
+                } catch (FailedLoginException fle) {
+                    loginError = true;
+                    logger.warn("Authentication error: please check the device credentials provided.", fle);
                 } catch (Exception e) {
                     configurationError = true;
                     // We don't want to produce an API error if one of the xml files is not available
                     logger.warn("/configuration.xml is not available on device " + getHost(), e);
                 }
-            });
-
-            if (ciscoStatusFuture != null && !ciscoStatusFuture.isDone()) {
-                ciscoStatusFuture.cancel(true);
+                }, executorService);
             }
-            ciscoStatusFuture = runAsync(()->{
-                try {
-                    ciscoStatus = retrieveStatus();
-                    statusError = false;
-                } catch (Exception e) {
-                    statusError = true;
-                    // We don't want to produce an API error if one of the xml files is not available
-                    logger.warn("/status.xml is not available on device " + getHost(), e);
-                }
-            });
 
+            logDebugMessage(String.format("Cisco Device [%s]: Status retrieval scheduling: preparation: [%s]%n", getHost(), new Date()));
+            if (ciscoStatusFuture == null || ciscoStatusFuture.isDone() || ciscoStatusFuture.isCompletedExceptionally()) {
+                logDebugMessage(String.format("Cisco Device [%s]: Status retrieval scheduling: qualified%n", getHost()));
+                ciscoStatusFuture = runAsync(() -> {
+                    logDebugMessage(String.format("Cisco Device [%s]: Status retrieval scheduling: start%n", getHost()));
+                    try {
+                        ciscoStatus = retrieveStatus();
+                        statusError = false;
+                        loginError = false;
+                    } catch (FailedLoginException fle) {
+                        loginError = true;
+                        logger.warn("Authentication error: please check the device credentials provided.", fle);
+                    } catch (Exception e) {
+                        statusError = true;
+                        // We don't want to produce an API error if one of the xml files is not available
+                        logger.warn("/status.xml is not available on device " + getHost(), e);
+                    } finally {
+                        logDebugMessage(String.format("Cisco Device [%s]: Status retrieval scheduling: end [%s] with status error: %s, login error: %s%n", getHost(), new Date(), statusError, loginError));
+                        logDebugMessage(String.format("Cisco Device [%s]: Retrieved device status.", getHost()));
+                    }
+                }, executorService).orTimeout(30000, TimeUnit.MILLISECONDS);
+            }
+
+            if (loginError) {
+                throw new FailedLoginException("Unable to retrieve device details: Device authentication has failed. Please check the device credentials.");
+            }
             if (configurationError && statusError) {
-                throw new ResourceNotReachableException("Unable to retrieve device details: /configuration.xml and /status.xml endpoints are not available.");
+                throw new ResourceNotReachableException("Unable to retrieve device details: /status.xml and /configuration.xml endpoints are not available.");
             }
             if (StringUtils.isNullOrEmpty(ciscoValuespace) && ciscoConfiguration == null && ciscoStatus == null) {
                 if (logger.isWarnEnabled()) {
-                    logger.warn("Unable to retrieve cisco configuration and status details. Retrieving device statistics from cache." + localStatistics);
+                    logger.warn(String.format("Unable to retrieve cisco configuration and status details for endpoint %s. Retrieving device statistics from cache: %s", getHost(), localStatistics));
                 }
                 if (localStatistics != null) {
                     extendedStatistics.setStatistics(localStatistics.getStatistics());
@@ -1042,128 +1133,100 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     endpointStatistics.setCallStats(localEndpointStatistics.getCallStats());
                     endpointStatistics.setVideoChannelStats(localEndpointStatistics.getVideoChannelStats());
                     endpointStatistics.setAudioChannelStats(localEndpointStatistics.getAudioChannelStats());
+                    endpointStatistics.setRegistrationStatus(localEndpointStatistics.getRegistrationStatus());
                 }
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Populating device statistics: " + extendedStatistics.getStatistics());
-                }
+                logDebugMessage("Populating device statistics: " + extendedStatistics.getStatistics());
                 return Arrays.asList(extendedStatistics, endpointStatistics);
             }
 
-            List<String> propertyGroups = Arrays.stream(displayPropertyGroups.split(",")).map(String::trim).collect(Collectors.toList());
-
+            populateAdapterMetadata(statisticsMap, ciscoStatus, ciscoConfiguration, ciscoValuespace);
             if (ciscoStatus != null) {
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "Audio")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device audio statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "DiagnosticEvents")) {
+                    logDebugMessage("Populating device diagnostics information");
+                    populateDiagnosticsData(statisticsMap, dynamicStatisticsMap, ciscoStatus);
+                }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Audio")) {
+                    logDebugMessage("Populating device audio statistics");
                     populateAudioData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "Cameras")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device camera statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Cameras")) {
+                    logDebugMessage("Populating device camera statistics");
                     populateCameraData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "Conference")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device conference statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Conference")) {
+                    logDebugMessage("Populating device conference statistics");
                     populateConferenceData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "Standby")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device standby statistics");
-                    }
+                /**
+                 * TODO: uncomment this functionality when we decide to support it
+                 * */
+//                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Firmware")) {
+                if (false) {
+                    logDebugMessage("Populating device provisioning statistics");
+                    populateProvisioningData(statisticsMap, advancedControllableProperties, ciscoStatus);
+                }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Standby")) {
+                    logDebugMessage("Populating device standby statistics");
                     populateStandbyData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "NetworkServices")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device network services statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "NetworkServices")) {
+                    logDebugMessage("Populating device network services statistics");
                     populateNetworkServicesData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "Video")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device video statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Video")) {
+                    logDebugMessage("Populating device video statistics");
                     populateVideoData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "UserInterface")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device user interface statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "UserInterface")) {
+                    logDebugMessage("Populating device user interface statistics");
                     populateUserInterfaceData(statisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoValuespace);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemUnit")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device system unit statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "SystemUnit")) {
+                    logDebugMessage("Populating device system unit statistics");
                     populateSystemUnitData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "ConferenceCapabilities")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device conference capabilities statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "ConferenceCapabilities")) {
+                    logDebugMessage("Populating device conference capabilities statistics");
                     populateConferenceCapabilitiesData(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "ActiveCall")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device active call statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "ActiveCall")) {
+                    logDebugMessage("Populating device active call statistics");
                     populateCallData(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "H323")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device h323 statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "H323")) {
+                    logDebugMessage("Populating device h323 statistics");
                     populateH323Data(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "SIP")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device SIP statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "SIP")) {
+                    logDebugMessage("Populating device SIP statistics");
                     populateSIPData(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "Security")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device security statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Security")) {
+                    logDebugMessage("Populating device security statistics");
                     populateSecurityData(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "Networks")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device networks statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Networks")) {
+                    logDebugMessage("Populating device networks statistics");
                     populateNetworkData(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "USB")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device USB statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "USB")) {
+                    logDebugMessage("Populating device USB statistics");
                     populateUSBData(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "RoomAnalytics")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device room analytics statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "RoomAnalytics")) {
+                    logDebugMessage("Populating device room analytics statistics");
                     populateRoomAnalyticsData(statisticsMap, dynamicStatisticsMap, advancedControllableProperties, ciscoConfiguration, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "ProximityServices")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device proximity services statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "ProximityServices")) {
+                    logDebugMessage("Populating device proximity services statistics");
                     populateProximityData(statisticsMap, advancedControllableProperties, ciscoConfiguration);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "Peripherals")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device peripherals statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "Peripherals")) {
+                    logDebugMessage("Populating device peripherals statistics");
                     populatePeripheralsData(statisticsMap, advancedControllableProperties, ciscoStatus, ciscoConfiguration, ciscoValuespace);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "SystemTime")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating device system time statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "SystemTime")) {
+                    logDebugMessage("Populating device system time statistics");
                     Time time = ciscoStatus.getTime();
                     if (time != null) {
                         statisticsMap.put("SystemTime#Time", time.getSystemTime());
@@ -1173,35 +1236,26 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         }
                     }
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "MicrosoftTeams")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating MS Teams statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "MicrosoftTeams")) {
+                    logDebugMessage("Populating MS Teams statistics");
                     populateMSTeamsStatus(statisticsMap, ciscoStatus, endpointStatistics);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "WebEx")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating WebEx statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "WebEx")) {
+                    logDebugMessage("Populating WebEx statistics");
                     populateWebExStatus(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "WebRTC")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating WebRTC statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "WebRTC")) {
+                    logDebugMessage("Populating WebRTC statistics");
                     populateWebRTCStatus(statisticsMap, ciscoStatus);
                 }
-                if (propertyGroupQualifiedForDisplay(propertyGroups, "MicrosoftExtension")) {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Populating MS Extensions statistics");
-                    }
+                if (propertyGroupQualifiedForDisplay(displayPropertyGroups, "MicrosoftExtension")) {
+                    logDebugMessage("Populating MS Extensions statistics");
                     populateExtensionsStatus(statisticsMap, ciscoStatus, endpointStatistics);
                 }
 
                 routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
                 endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
             }
-
             extendedStatistics.setControllableProperties(advancedControllableProperties);
             extendedStatistics.setStatistics(statisticsMap);
             extendedStatistics.setDynamicStatistics(dynamicStatisticsMap);
@@ -1212,9 +1266,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             controlOperationsLock.unlock();
         }
 
-        if (logger.isDebugEnabled()) {
-            logger.debug("Populating device statistics: " + extendedStatistics.getStatistics());
-        }
+        logDebugMessage("Populating device statistics: " + extendedStatistics.getStatistics());
         return Arrays.asList(extendedStatistics, endpointStatistics);
     }
 
@@ -1241,9 +1293,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                                         CiscoStatus ciscoStatus, CiscoConfiguration ciscoConfiguration) {
         SystemUnit systemUnit = ciscoStatus.getSystemUnit();
         if (systemUnit == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate system unit data: no system unit information available");
-            }
+            logDebugMessage("Unable to populate system unit data: no system unit information available");
             return;
         }
 
@@ -1292,6 +1342,65 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (systemName != null) {
                 addStatisticsParameter(statistics, PROPERTY_SYSTEM_UNIT_NAME, systemName.getValue());
             }
+        }
+    }
+
+    /**
+     * Populate diagnostics data from Cisco /status.xml payload
+     *
+     * @param statistics property map to save data to
+     * @param status source of the diagnostics data - /status.xml payload
+     * */
+    private void populateDiagnosticsData(Map<String, String> statistics, Map<String, String> dynamicStatistics, CiscoStatus status) {
+        Diagnostics diagnostics = status.getDiagnostics();
+        if (diagnostics == null) {
+            logDebugMessage("No diagnostics data found, skipping.");
+            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
+                dynamicStatistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            } else {
+                statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            }
+            return;
+        }
+        DiagnosticsMessage[] messages = diagnostics.getDiagnosticsMessages();
+        if (messages == null || messages.length == 0) {
+            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
+                dynamicStatistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            } else {
+                statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            }
+            logger.debug("No diagnostics messages found, skipping.");
+            return;
+        }
+        if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
+            dynamicStatistics.put(PROPERTY_DIAGNOSTICS_EVENTS, String.valueOf(messages.length));
+        } else {
+            statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, String.valueOf(messages.length));
+        }
+        int index = 1;
+        for (int i = 0; i < messages.length; i++) {
+            if (i >= diagnosticEventsTotal) {
+                logDebugMessage("Target number of diagnostics messages is reached. Skipping further processing.");
+                return;
+            }
+            DiagnosticsMessage message = messages[i];
+            String level = message.getLevel();
+            String type = message.getType();
+            boolean levelFilterPass = diagnosticEventsLevelFilter.contains(level);
+            boolean typeFilterPass = diagnosticEventsTypeFilter.contains(type);
+            if (!diagnosticEventsLevelFilter.isEmpty() || !diagnosticEventsTypeFilter.isEmpty()) {
+                if (!levelFilterPass && !typeFilterPass) {
+                    logDebugMessage(String.format("diagnosticsMessageLevelFilter doesn't contain %s. Current configuration: %s. Skipping diagnostics message item.", level, diagnosticEventsLevelFilter));
+                    continue;
+                }
+            }
+            String groupName = String.format(PROPERTY_GROUP_TEMPLATE_DIAGNOSTICS, index);
+            statistics.put(groupName + "Description", message.getDescription());
+            statistics.put(groupName + "References", message.getReferences());
+            statistics.put(groupName + "Type", type);
+            statistics.put(groupName + "Level", level);
+
+            index++;
         }
     }
 
@@ -1517,16 +1626,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateCallData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Call[] calls = ciscoStatus.getCalls();
         if (calls == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate call data: no active calls available");
-            }
+            logDebugMessage("Unable to populate call data: no active calls available");
             return;
         }
         Arrays.stream(calls).forEach(call -> {
             if (DISCONNECTED.equalsIgnoreCase(call.getStatus())) {
-                if (logger.isDebugEnabled()) {
-                    logger.debug(String.format("Call %s is disconnected. Skipping statistics collection", call.getCallId()));
-                }
+                logDebugMessage(String.format("Call %s is disconnected. Skipping statistics collection", call.getCallId()));
                 return;
             }
             String itemCounter = call.getItem();
@@ -1630,16 +1735,12 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateConferenceCapabilitiesData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Capabilities capabilities = ciscoStatus.getCapabilities();
         if (capabilities == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate confenrence capabilities data: no capabilities status available");
-            }
+            logDebugMessage("Unable to populate confenrence capabilities data: no capabilities status available");
             return;
         }
         ConferenceCapabilities conferenceCapabilities = capabilities.getConferenceCapabilities();
         if (conferenceCapabilities == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate confenrence capabilities data: no conference capabilities available");
-            }
+            logDebugMessage("Unable to populate confenrence capabilities data: no conference capabilities available");
             return;
         }
         addStatisticsParameter(statistics, "ConferenceCapabilities#MaxActiveCalls", conferenceCapabilities.getMaxActiveCalls());
@@ -1752,9 +1853,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void populateNetworkData(Map<String, String> statistics, CiscoStatus ciscoStatus) {
         Network[] networks = ciscoStatus.getNetworks();
         if (networks == null || networks.length == 0) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate network data: no networks information available");
-            }
+            logDebugMessage("Unable to populate network data: no networks information available");
             return;
         }
 
@@ -2099,19 +2198,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     disconnectedTypedStats.values().forEach(statistics::putAll);
                     connectedTypedStats.values().forEach(statistics::putAll);
                 } else {
-                    if (logger.isDebugEnabled()) {
-                        logger.debug("Unable to get connected devices information: no connected devices available");
-                    }
+                    logDebugMessage("Unable to get connected devices information: no connected devices available");
                 }
             } else {
-                if (logger.isDebugEnabled()) {
-                    logger.debug("Unable to get peripheral devices information: no peripheral devices available or the response status is invalid");
-                }
+                logDebugMessage("Unable to get peripheral devices information: no peripheral devices available or the response status is invalid");
             }
         } else {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to get peripheral devices information: no devices available in the list");
-            }
+            logDebugMessage("Unable to get peripheral devices information: no devices available in the list");
         }
 
         PeripheralsConfiguration peripheralsConfiguration = configuration.getPeripherals();
@@ -2130,9 +2223,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 }
             }
         } else {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to get peripheral devices configuration.");
-            }
+            logDebugMessage("Unable to get peripheral devices configuration.");
         }
     }
 
@@ -2463,6 +2554,38 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
     }
 
+    private void populateProvisioningData(Map<String, String> statistics, List<AdvancedControllableProperty> controls, CiscoStatus status) {
+        ProvisioningStatus provisioningStatus = status.getProvisioning();
+        if (provisioningStatus == null) {
+            return;
+        }
+        ProvisioningSoftware provisioningSoftware = provisioningStatus.getSoftware();
+        if (provisioningSoftware == null) {
+            return;
+        }
+        statistics.put(FIRMWARE_UPGRADE, "");
+        statistics.put(FIRMWARE_PACKAGE_URL, firmwarePackageUrl);
+        controls.add(createText(FIRMWARE_PACKAGE_URL, firmwarePackageUrl));
+        controls.add(createButton(FIRMWARE_UPGRADE, "Upgrade", "Upgrading", 0L));
+
+        ProvisioningSoftwareCurrent provisioningSoftwareCurrent = provisioningSoftware.getCurrent();
+        if (provisioningSoftwareCurrent != null) {
+            statistics.put("Firmware#CurrentCompletedAt", provisioningSoftwareCurrent.getCompletedAt());
+            statistics.put("Firmware#CurrentURL", provisioningSoftwareCurrent.getURL());
+            statistics.put("Firmware#CurrentVersionID", provisioningSoftwareCurrent.getVersionId());
+        }
+
+        ProvisioningSoftwareUpgradeStatus upgradeStatus = provisioningSoftware.getUpgradeStatus();
+        if (upgradeStatus != null) {
+            statistics.put("Firmware#UpgradeStatus", formatMonitoredEnumProperty(upgradeStatus.getStatus()));
+            statistics.put("Firmware#UpgradeMessage", formatMonitoredTextProperty(upgradeStatus.getMessage()));
+            statistics.put("Firmware#Phase", formatMonitoredEnumProperty(upgradeStatus.getPhase()));
+            statistics.put("Firmware#LastChange", upgradeStatus.getLastChange());
+            statistics.put("Firmware#UpgradeUrgency", formatMonitoredEnumProperty(upgradeStatus.getUrgency()));
+            statistics.put("Firmware#UpgradeURL", upgradeStatus.getUrl());
+            statistics.put("Firmware#UpgradeVersionID", upgradeStatus.getVersionId());
+        }
+    }
     /**
      * Retrieve Standby statistics/controls values
      *
@@ -2558,9 +2681,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         CamerasConfiguration camerasConfiguration = configuration.getCameras();
         if (camerasConfiguration == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate cameras configuration data: no cameras configuration available");
-            }
+            logDebugMessage("Unable to populate cameras configuration data: no cameras configuration available");
             return;
         }
         CamerasConfigurationPreset camerasPreset = camerasConfiguration.getPreset();
@@ -2575,9 +2696,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         CamerasConfigurationCamera[] cameras = camerasConfiguration.getCameras();
         if (cameras == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate cameras configuration data: no cameras configuration available");
-            }
+            logDebugMessage("Unable to populate cameras configuration data: no cameras configuration available");
             return;
         }
         Arrays.stream(cameras).forEach(cameraConfiguration -> {
@@ -2654,6 +2773,25 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         });
     }
 
+    /**
+     * Populate adapter metadata and save it to the statistics map
+     *
+     * @param statistics map to save metadata statistics to
+     * @since 1.1.7
+     * */
+    private void populateAdapterMetadata(Map<String, String> statistics, CiscoStatus status, CiscoConfiguration configuration, String valueSpace) {
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_VERSION, adapterProperties.getProperty("adapter.version"));
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_BUILD_DATE, adapterProperties.getProperty("adapter.build.date"));
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_PROPERTY_GROUPS, String.join(", ", displayPropertyGroups));
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_API_STATUS, status != null ? "Ok" : "Failed");
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_API_CONFIGURATION, configuration != null ? "Ok" : "Failed");
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_API_VALUESPACE, StringUtils.isNotNullOrEmpty(valueSpace) ? "Ok" : "Failed");
+
+        long adapterUptime = System.currentTimeMillis() - adapterInitializationTimestamp;
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_UPTIME, normalizeUptime(String.valueOf(adapterUptime / 1000)));
+        statistics.put(CiscoCommunicatorProperties.ADAPTER_UPTIME_MIN, String.valueOf(adapterUptime / (1000*60)));
+    }
+
     /***
      * Set audio channel statistics for EndpointStatistics
      *
@@ -2665,33 +2803,25 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private void enrichAudioChannelStatsData(AudioChannelStats audioChannelStats, CallStats callStats, Channel channel, Call callInfo) {
         Audio[] audioChannels = channel.getAudio();
         if (audioChannels == null || audioChannels.length == 0) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate audio channel data: no audio status available");
-            }
+            logDebugMessage("Unable to populate audio channel data: no audio status available");
             return;
         }
 
         Optional<Audio> audioData = Arrays.stream(audioChannels).filter(a -> ACTIVE.equalsIgnoreCase(a.getStatus()) || !StringUtils.isNullOrEmpty(a.getChannels())).findFirst();
         if (!audioData.isPresent()) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate audio channel data: no audio status data available");
-            }
+            logDebugMessage("Unable to populate audio channel data: no audio status data available");
             return;
         }
 
         Audio audio = audioData.get();
         String audioChannelProtocol = audio.getCodec();
         if (StringUtils.isNullOrEmpty(audioChannelProtocol) || OFF.equalsIgnoreCase(audioChannelProtocol)) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate audio channel data: no audio protocol available");
-            }
+            logDebugMessage("Unable to populate audio channel data: no audio protocol available");
             return;
         }
         Netstat netstat = channel.getNetstat();
         if (netstat == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate audio channel data: no netstat data available");
-            }
+            logDebugMessage("Unable to populate audio channel data: no netstat data available");
             return;
         }
         audioChannelStats.setCodec(audioChannelProtocol);
@@ -2699,9 +2829,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         String direction = channel.getDirection();
         if (StringUtils.isNullOrEmpty(direction)) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("No channel direction data, skipping.");
-            }
+            logDebugMessage("No channel direction data, skipping.");
             return;
         }
         switch (direction) {
@@ -2739,24 +2867,18 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     private void enrichVideoChannelStatsData(VideoChannelStats videoChannelStats, CallStats callStats, ContentChannelStats contentChannelStats, Channel channel, Call callInfo, Map<String, String> statistics) {
         if (channel == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate channel data.");
-            }
+            logDebugMessage("Unable to populate channel data.");
             return;
         }
         Video[] videoChannels = channel.getVideo();
         if (videoChannels == null || videoChannels.length == 0) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate video channel data: no video status available");
-            }
+            logDebugMessage("Unable to populate video channel data: no video status available");
             return;
         }
 
         Optional<Video> videoData = Arrays.stream(videoChannels).filter(v -> ACTIVE.equalsIgnoreCase(v.getStatus()) || !StringUtils.isNullOrEmpty(v.getChannelRole())).findFirst();
         if (!videoData.isPresent()) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate video channel data: no video status data available");
-            }
+            logDebugMessage("Unable to populate video channel data: no video status data available");
             return;
         }
 
@@ -2769,25 +2891,19 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         }
         String videoChannelProtocol = video.getCodec();
         if (videoChannelProtocol == null || OFF.equalsIgnoreCase(videoChannelProtocol)) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate video channel data: no video channel protocol information available");
-            }
+            logDebugMessage("Unable to populate video channel data: no video channel protocol information available");
             return;
         }
         Netstat netstat = channel.getNetstat();
         if (netstat == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate video channel data: no netstat information available");
-            }
+            logDebugMessage("Unable to populate video channel data: no netstat information available");
             return;
         }
         String netstatChannelRate = netstat.getChannelRate();
         videoChannelStats.setCodec(videoChannelProtocol);
         String direction = channel.getDirection();
         if (StringUtils.isNullOrEmpty(direction)) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("No channel direction data, skipping.");
-            }
+            logDebugMessage("No channel direction data, skipping.");
             return;
         }
         switch (direction) {
@@ -2841,17 +2957,13 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         Optional<Video> videoData = Arrays.stream(videoChannels).filter(a -> ACTIVE.equalsIgnoreCase(a.getStatus())).findFirst();
 
         if (!videoData.isPresent()) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate content channel data: no video information available");
-            }
+            logDebugMessage("Unable to populate content channel data: no video information available");
             return;
         }
 
         Netstat netstat = channel.getNetstat();
         if (netstat == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Unable to populate content channel data: no netstat information available");
-            }
+            logDebugMessage("Unable to populate content channel data: no netstat information available");
             return;
         }
 
@@ -2860,9 +2972,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
         String direction = channel.getDirection();
         if (StringUtils.isNullOrEmpty(direction)) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("No channel direction data, skipping.");
-            }
+            logDebugMessage("No channel direction data, skipping.");
             return;
         }
         switch (direction) {
@@ -2888,9 +2998,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
     private Integer extractValueInt(String value) {
         if (!isNumeric(value)) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Value is missing or has incorrect format. Skipping.");
-            }
+            logDebugMessage("Value is missing or has incorrect format. Skipping.");
             return null;
         }
         return Integer.parseInt(value);
@@ -2898,9 +3006,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
     private Integer extractAndReduceValueInt(String value, int reducer) {
         if (!isNumeric(value)) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Value is missing or has incorrect format. Skipping.");
-            }
+            logDebugMessage("Value is missing or has incorrect format. Skipping.");
             return null;
         }
         return Integer.parseInt(value) / reducer;
@@ -2908,9 +3014,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
     private Float extractValueFloat(String value) {
         if (!isNumeric(value)) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("Value is missing or has incorrect format. Skipping.");
-            }
+            logDebugMessage("Value is missing or has incorrect format. Skipping.");
             return null;
         }
         return Float.parseFloat(value);
@@ -2929,9 +3033,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private String retrieveValuespace() throws Exception {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Retrieving device valuespace parameters");
-        }
+        logDebugMessage("Retrieving device valuespace parameters");
         return doGet(valuespacePath, String.class);
     }
 
@@ -2942,9 +3044,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private CiscoStatus retrieveStatus() throws Exception {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Retrieving device status parameters");
-        }
+        logDebugMessage("Retrieving device status parameters");
         return doGet(statusPath, CiscoStatus.class);
     }
 
@@ -2955,9 +3055,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private CiscoConfiguration retrieveConfiguration() throws Exception {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Retrieving device configuration parameters");
-        }
+        logDebugMessage("Retrieving device configuration parameters");
         return doGet(configurationPath, CiscoConfiguration.class);
     }
 
@@ -2977,9 +3075,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @throws Exception if any error occurs
      */
     private Command retrieveCameraCommands() throws Exception {
-        if (logger.isDebugEnabled()) {
-            logger.debug("Retrieving device camera commands list");
-        }
+        logDebugMessage("Retrieving device camera commands list");
         return doGet(String.format(getXmlPath, cameraCommandUri), Command.class);
     }
 
@@ -3304,6 +3400,18 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 case SYSTEM_UNIT_RESTART:
                     doPost("putxml", generateRestartPayload());
                     break;
+                case FIRMWARE_UPGRADE:
+                    runAsync(() -> {
+                        try {
+                            doPost("putxml", generateSoftwareUpgradePayload(firmwarePackageUrl));
+                        } catch (Exception e) {
+                            logger.error("Unable to run firmware upgrade.", e);
+                        }
+                    });
+                    break;
+                case FIRMWARE_PACKAGE_URL:
+                    firmwarePackageUrl = value;
+                    break;
                 case AUDIO_VOLUME:
                     postCommandRequest(generateAudioCommandPayload(value, AudioControlCommandType.Volume), property, value);
                     break;
@@ -3365,14 +3473,10 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param value    of the control property to update after the control operation success
      */
     private void postCommandRequest(Command command, String property, String value) throws Exception {
-        if (logger.isDebugEnabled()) {
-            logger.debug(String.format("Post device command request '%s' with value '%s' for property %s", command, property, value));
-        }
+        logDebugMessage(String.format("Post device command request '%s' with value '%s' for property %s", command, property, value));
         String response = doPost("putxml", command, String.class);
         if (response.contains("status=\"OK\"")) {
-            if (logger.isDebugEnabled()) {
-                logger.debug(String.format("Control operation %s has succeeded with value %s", property, value));
-            }
+            logDebugMessage(String.format("Control operation %s has succeeded with value %s", property, value));
             updateLatestControlTimestamp();
             updateLocalControllableProperty(property, value);
         } else {
@@ -3642,5 +3746,51 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * */
     private boolean checkReportedStatus(String stringBooleanValue) {
         return "true".equalsIgnoreCase(stringBooleanValue);
+    }
+
+    /**
+     * Transforms values like InProgress, NotReady etc. to In Progress, Not Ready etc. accordingly
+     *
+     * @param value original property value
+     * @return String value of formatted property value
+     *
+     * @since 1.1.7
+     * */
+    private String formatMonitoredEnumProperty(String value) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            if (i > 0 && Character.isUpperCase(c) && Character.isLowerCase(value.charAt(i - 1))) {
+                result.append(' ');
+            }
+            result.append(c);
+        }
+        return result.toString();
+    }
+
+    /**
+     * Make first property value letter uppercase
+     * so that "internal error" or similar strings are presented as "Internal error"
+     *
+     * @param value original property value
+     * @return String value of formatted property value
+     * @since 1.1.7
+     * */
+    private String formatMonitoredTextProperty(String value) {
+        if (value == null || value.isEmpty()) {
+            return value;
+        }
+        return value.substring(0, 1).toUpperCase() + value.substring(1);
+    }
+
+    /**
+     * Log a debug message, with isDebugEnabled() check
+     *
+     * @param message to be logged as debug level message
+     * */
+    private void logDebugMessage(String message) {
+        if (logger.isDebugEnabled()) {
+            logger.debug(message);
+        }
     }
 }

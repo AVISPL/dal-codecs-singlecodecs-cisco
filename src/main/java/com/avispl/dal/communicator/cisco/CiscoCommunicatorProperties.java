@@ -174,6 +174,16 @@ final class CiscoCommunicatorProperties {
      static final String AUDIO_MICROPHONES_MUTE = "Audio#MicrophonesMute";
      static final String AUDIO_MICROPHONE_MODE = "Audio#MicrophoneMode";
 
+     static final String FIRMWARE_PACKAGE_URL = "Firmware#PackageURL";
+     static final String FIRMWARE_UPGRADE = "Firmware#Upgrade";
+     static final String FIRMWARE_CURRENT_URL = "Firmware#CurrentURL";
+     static final String FIRMWARE_CURRENT_VERSION = "Firmware#CurrentVersion";
+     static final String FIRMWARE_CURRENT_COMPLETED_AT = "Firmware#CurrentCompletedAt";
+     static final String FIRMWARE_UPGRADE_STATUS_LAST_CHANGE = "Firmware#UpgradeStatusLastChange";
+     static final String FIRMWARE_UPGRADE_STATUS_URL = "Firmware#UpgradeStatusURL";
+     static final String FIRMWARE_UPGRADE_STATUS_URGENCY = "Firmware#UpgradeStatusUrgency";
+     static final String FIRMWARE_UPGRADE_STATUS_PHASE = "Firmware#UpgradeStatusPhase";
+
      /** @since 1.1.0 */
      static final String PERIPHERALS_DISCONNECTED_TEMPLATE = "PeripheralsDisconnected%ss";
      /** @since 1.1.0 */
@@ -246,6 +256,10 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_GROUP_TEMPLATE_MICROSOFT_TEAMS_HW_ACCELERATOR_ENCODER = "MicrosoftTeamsHWAcceleratorEncoder[%d]#";
      /** @since 1.1.4 */
      static final String PROPERTY_GROUP_TEMPLATE_MICROSOFT_TEAMS_HW_ACCELERATOR_DECODER = "MicrosoftTeamsHWAcceleratorDecoder[%d]#";
+     /** @since 1.1.8 */
+     static final String PROPERTY_GROUP_TEMPLATE_DIAGNOSTICS = "DiagnosticEvent[%d]#";
+     /** @since 1.1.8 */
+     static final String PROPERTY_DIAGNOSTICS_EVENTS = "DiagnosticEvents";
      /** @since 1.1.4 */
      static final String PROPERTY_MICROSOFT_EXTENSION_SUPPORTED = "MicrosoftExtension#Supported";
      /** @since 1.1.4 */
@@ -328,4 +342,20 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_AUDIO_DEVICES_HEADSET_USB_MANUFACTURER = "AudioDevices#HeadsetUSBManufacturer";
      /** @since 1.1.4 */
      static final String PROPERTY_AUDIO_DEVICES_HEADSET_USB_CRADLE = "AudioDevices#HandsetUSBCradle";
+     /** @since 1.1.7 */
+     static final String ADAPTER_VERSION = "AdapterMetadata#AdapterVersion";
+     /** @since 1.1.7 */
+     static final String ADAPTER_BUILD_DATE = "AdapterMetadata#AdapterBuildDate";
+     /** @since 1.1.7 */
+     static final String ADAPTER_UPTIME = "AdapterMetadata#AdapterUptime";
+     /** @since 1.1.7 */
+     static final String ADAPTER_UPTIME_MIN = "AdapterMetadata#AdapterUptime(min)";
+     /** @since 1.1.7 */
+     static final String ADAPTER_PROPERTY_GROUPS = "AdapterMetadata#ActivePropertyGroups";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_STATUS = "AdapterMetadata#APIStatus";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_CONFIGURATION = "AdapterMetadata#APIConfiguration";
+     /** @since 1.1.7 */
+     static final String ADAPTER_API_VALUESPACE = "AdapterMetadata#APIValuespace";
 }

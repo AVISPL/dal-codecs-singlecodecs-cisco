@@ -290,6 +290,8 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_WEB_EX_MEETING_INSTANT_MEETING = "WebEx#InstantMeeting";
      /** @since 1.1.4 */
      static final String PROPERTY_SYSTEM_UNIT_UPTIME = "SystemUnit#Uptime";
+     /** @since 1.1.8 */
+     static final String PROPERTY_SYSTEM_UNIT_UPTIME_MIN = "SystemUnit#Uptime(min)";
      /** @since 1.1.4 */
      static final String PROPERTY_SYSTEM_UNIT_PRODUCT_ID = "SystemUnit#ProductId";
      /** @since 1.1.4 */

@@ -1303,6 +1303,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         String uptime = systemUnit.getUptime();
         if (!StringUtils.isNullOrEmpty(uptime)) {
             addStatisticsParameter(statistics, PROPERTY_SYSTEM_UNIT_UPTIME, normalizeUptime(uptime));
+            addStatisticsParameter(statistics, PROPERTY_SYSTEM_UNIT_UPTIME_MIN, String.valueOf(Integer.parseInt(uptime)/60));
         }
 
         addStatisticsParameter(statistics, PROPERTY_SYSTEM_UNIT_PRODUCT_ID, systemUnit.getProductId());

@@ -1379,6 +1379,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, String.valueOf(messages.length));
         }
         int index = 1;
+        List<String> eventTypes = new ArrayList<>();
         for (int i = 0; i < messages.length; i++) {
             if (i >= diagnosticEventsTotal) {
                 logDebugMessage("Target number of diagnostics messages is reached. Skipping further processing.");
@@ -1387,6 +1388,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             DiagnosticsMessage message = messages[i];
             String level = message.getLevel();
             String type = message.getType();
+            eventTypes.add(type);
             boolean levelFilterPass = diagnosticEventsLevelFilter.contains(level);
             boolean typeFilterPass = diagnosticEventsTypeFilter.contains(type);
             if (!diagnosticEventsLevelFilter.isEmpty() || !diagnosticEventsTypeFilter.isEmpty()) {
@@ -1403,6 +1405,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             index++;
         }
+        statistics.put(PROPERTY_DIAGNOSTICS_EVENT_TYPES, String.join(", ", eventTypes));
     }
 
     /**

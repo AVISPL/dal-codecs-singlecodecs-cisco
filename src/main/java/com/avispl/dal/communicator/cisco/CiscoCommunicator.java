@@ -1381,28 +1381,27 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         int index = 1;
         List<String> eventTypes = new ArrayList<>();
         for (int i = 0; i < messages.length; i++) {
-            if (i >= diagnosticEventsTotal) {
-                logDebugMessage("Target number of diagnostics messages is reached. Skipping further processing.");
-                return;
-            }
             DiagnosticsMessage message = messages[i];
             String level = message.getLevel();
             String type = message.getType();
             eventTypes.add(type);
-            boolean levelFilterPass = diagnosticEventsLevelFilter.contains(level);
-            boolean typeFilterPass = diagnosticEventsTypeFilter.contains(type);
-            if (!diagnosticEventsLevelFilter.isEmpty() || !diagnosticEventsTypeFilter.isEmpty()) {
-                if (!levelFilterPass && !typeFilterPass) {
-                    logDebugMessage(String.format("diagnosticsMessageLevelFilter doesn't contain %s. Current configuration: %s. Skipping diagnostics message item.", level, diagnosticEventsLevelFilter));
-                    continue;
+            if (i < diagnosticEventsTotal) {
+                boolean levelFilterPass = diagnosticEventsLevelFilter.contains(level);
+                boolean typeFilterPass = diagnosticEventsTypeFilter.contains(type);
+                if (!diagnosticEventsLevelFilter.isEmpty() || !diagnosticEventsTypeFilter.isEmpty()) {
+                    if (!levelFilterPass && !typeFilterPass) {
+                        logDebugMessage(String.format("diagnosticsMessageLevelFilter or diagnosticEventsTypeFilter do not contain %s entry. Current configuration: %s. Skipping diagnostics message item.", level, diagnosticEventsLevelFilter));
+                        continue;
+                    }
                 }
+                String groupName = String.format(PROPERTY_GROUP_TEMPLATE_DIAGNOSTICS, index);
+                statistics.put(groupName + "Description", message.getDescription());
+                statistics.put(groupName + "References", message.getReferences());
+                statistics.put(groupName + "Type", type);
+                statistics.put(groupName + "Level", level);
+            } else {
+                logDebugMessage("Target number of diagnostics messages is reached. Skipping further data population.");
             }
-            String groupName = String.format(PROPERTY_GROUP_TEMPLATE_DIAGNOSTICS, index);
-            statistics.put(groupName + "Description", message.getDescription());
-            statistics.put(groupName + "References", message.getReferences());
-            statistics.put(groupName + "Type", type);
-            statistics.put(groupName + "Level", level);
-
             index++;
         }
         statistics.put(PROPERTY_DIAGNOSTICS_EVENT_TYPES, String.join(", ", eventTypes));

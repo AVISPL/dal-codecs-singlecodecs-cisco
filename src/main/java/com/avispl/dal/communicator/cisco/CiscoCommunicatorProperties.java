@@ -260,6 +260,8 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_GROUP_TEMPLATE_DIAGNOSTICS = "DiagnosticEvent[%d]#";
      /** @since 1.1.8 */
      static final String PROPERTY_DIAGNOSTICS_EVENTS = "DiagnosticEvents";
+     /** @since 1.1.8 */
+     static final String PROPERTY_DIAGNOSTICS_EVENT_TYPES = "Diagnostics#EventTypes";
      /** @since 1.1.4 */
      static final String PROPERTY_MICROSOFT_EXTENSION_SUPPORTED = "MicrosoftExtension#Supported";
      /** @since 1.1.4 */
@@ -290,6 +292,8 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_WEB_EX_MEETING_INSTANT_MEETING = "WebEx#InstantMeeting";
      /** @since 1.1.4 */
      static final String PROPERTY_SYSTEM_UNIT_UPTIME = "SystemUnit#Uptime";
+     /** @since 1.1.8 */
+     static final String PROPERTY_SYSTEM_UNIT_UPTIME_MIN = "SystemUnit#Uptime(min)";
      /** @since 1.1.4 */
      static final String PROPERTY_SYSTEM_UNIT_PRODUCT_ID = "SystemUnit#ProductId";
      /** @since 1.1.4 */

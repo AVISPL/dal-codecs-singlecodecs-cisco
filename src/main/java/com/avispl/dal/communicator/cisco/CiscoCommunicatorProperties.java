@@ -175,9 +175,7 @@ final class CiscoCommunicatorProperties {
      static final String AUDIO_MICROPHONE_MODE = "Audio#MicrophoneMode";
 
      /** @since 1.1.0 */
-     static final String PERIPHERALS_DISCONNECTED_TEMPLATE = "PeripheralsDisconnected%ss";
-     /** @since 1.1.0 */
-     static final String PERIPHERALS_CONNECTED_TEMPLATE = "PeripheralsConnected%ss";
+     static final String PERIPHERALS_TEMPLATE = "Peripherals%ss";
      /** @since 1.1.0 */
      static final String PROPERTY_UPGRADE_STATUS = "#UpgradeStatus";
      /** @since 1.1.0 */
@@ -199,7 +197,9 @@ final class CiscoCommunicatorProperties {
      /** @since 1.1.0 */
      static final String PROPERTY_TYPE = "#Type";
      /** @since 1.1.0 */
-     static final String PROPERTY_TOTAL_DEVICES_COUNT = "#TotalDevicesCount";
+     static final String PROPERTY_TOTAL_CONNECTED_DEVICES_COUNT = "#TotalConnectedDevicesCount";
+     /** @since 1.1.0 */
+     static final String PROPERTY_TOTAL_DISCONNECTED_DEVICES_COUNT = "#TotalDisconnectedDevicesCount";
      /** @since 1.1.0 */
      static final String PROPERTY_STATUS = "#Status";
      /** @since 1.1.3 */

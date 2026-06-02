@@ -15,9 +15,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.google.common.io.Resources.getResource;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -64,13 +64,32 @@ public class CiscoCommunicatorTest {
     }
 
     @Test
+    public void testSoftwareUpgrade() throws Exception {
+        ControllableProperty upgradePackage = new ControllableProperty();
+        upgradePackage.setProperty("Firmware#PackageURL");
+        upgradePackage.setValue("https://www.dropbox.com/scl/fi/9140lmufgrojz1oj78zcl/s52020ce9_15_18_5.pkg?rlkey=7dax08cvhsdc7d0dpfh1sbzty&st=rnhq61vl&dl=1");
+        upgradePackage.setValue("https://www.dropbox.com/scl/fi/ba9yyhxpwz885xq99056c/s53300ce9.15.6-step-upgrade.pkg?rlkey=z15ooqt4j1s118amv8fe8cgcc&st=mymgblpg&dl=1");
+
+        ControllableProperty upgrade = new ControllableProperty();
+        upgrade.setProperty("Firmware#Upgrade");
+
+        ciscoCommunicator.controlProperty(upgradePackage);
+        Thread.sleep(5000);
+        ciscoCommunicator.controlProperty(upgrade);
+    }
+
+    @Test
     public void testSerializeProperties() throws Exception {
         ciscoCommunicator.setHistoricalProperties("CurrentPeopleCount");
-        ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Peripherals,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
-        ciscoCommunicator.setDisplayPropertyGroups("All");
-        List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();
+        ciscoCommunicator.setDisplayPropertyGroups("Firmware");
+        ciscoCommunicator.setDiagnosticEventsLevelFilter("Error");
+        ciscoCommunicator.setDiagnosticEventsTypeFilter("HTTPSModeSecurity,SIPProfileRegistration,");
+        List<Statistics> statistics = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            statistics = ciscoCommunicator.getMultipleStatistics();
+            Thread.sleep(30000);
+        }
         Assert.assertEquals(2, statistics.size());
-
         ExtendedStatistics extendedStatistics = (ExtendedStatistics) statistics.get(0);
         EndpointStatistics endpointStatistics = (EndpointStatistics) statistics.get(1);
         Assert.assertNotNull(extendedStatistics);

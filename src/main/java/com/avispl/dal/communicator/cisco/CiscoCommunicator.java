@@ -347,16 +347,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private Set<String> historicalProperties = new HashSet();
 
     /**
-     * Filter for diagnostic events by level (e.g. "Error", "Warning")
-     */
-    private String diagnosticEventsLevelFilter;
-
-    /**
-     * CSV filter for diagnostic events by type (e.g. "HTTPSModeSecurity,SIPProfileRegistration")
-     */
-    private String diagnosticEventsTypeFilter;
-
-    /**
      * Grace period for restart operation, 120s by default
      */
     private long restartGracePeriod = 120000;
@@ -541,42 +531,6 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     public void setDisplayPropertyGroups(String displayPropertyGroups) {
         this.displayPropertyGroups = Arrays.stream(displayPropertyGroups.split(",")).map(String::trim).filter(StringUtils::isNotNullOrEmpty).collect(Collectors.toList());;;
-    }
-
-    /**
-     * Retrieves {@link #diagnosticEventsLevelFilter}
-     *
-     * @return value of {@link #diagnosticEventsLevelFilter}
-     */
-    public String getDiagnosticEventsLevelFilter() {
-        return diagnosticEventsLevelFilter;
-    }
-
-    /**
-     * Sets {@link #diagnosticEventsLevelFilter} value
-     *
-     * @param diagnosticEventsLevelFilter new value of {@link #diagnosticEventsLevelFilter}
-     */
-    public void setDiagnosticEventsLevelFilter(String diagnosticEventsLevelFilter) {
-        this.diagnosticEventsLevelFilter = diagnosticEventsLevelFilter;
-    }
-
-    /**
-     * Retrieves {@link #diagnosticEventsTypeFilter}
-     *
-     * @return value of {@link #diagnosticEventsTypeFilter}
-     */
-    public String getDiagnosticEventsTypeFilter() {
-        return diagnosticEventsTypeFilter;
-    }
-
-    /**
-     * Sets {@link #diagnosticEventsTypeFilter} value
-     *
-     * @param diagnosticEventsTypeFilter new value of {@link #diagnosticEventsTypeFilter}
-     */
-    public void setDiagnosticEventsTypeFilter(String diagnosticEventsTypeFilter) {
-        this.diagnosticEventsTypeFilter = diagnosticEventsTypeFilter;
     }
 
     /**

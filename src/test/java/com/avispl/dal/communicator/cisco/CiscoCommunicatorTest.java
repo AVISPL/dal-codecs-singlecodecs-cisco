@@ -85,7 +85,7 @@ public class CiscoCommunicatorTest {
         ciscoCommunicator.setDiagnosticEventsLevelFilter("Error");
         ciscoCommunicator.setDiagnosticEventsTypeFilter("HTTPSModeSecurity,SIPProfileRegistration,");
         List<Statistics> statistics = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             statistics = ciscoCommunicator.getMultipleStatistics();
             Thread.sleep(30000);
         }

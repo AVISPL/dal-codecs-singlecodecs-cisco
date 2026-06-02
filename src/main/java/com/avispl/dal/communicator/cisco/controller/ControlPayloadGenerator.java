@@ -819,6 +819,15 @@ public class ControlPayloadGenerator {
         return command;
     }
 
+    public static Command generateSoftwareUpgradePayload(String url) {
+        if (StringUtils.isNullOrEmpty(url) || url.equals("N/A")) {
+            throw new IllegalArgumentException("Unable to proceed with software upgrade: PackageURL is not defined");
+        }
+        Command command = new Command();
+        command.setSystemUnitCommand(new SystemUnitCommand(url));
+        return command;
+    }
+
     public static Command generateStandbyCommandPayload(String value) {
         Command command = new Command();
         if ("0".equals(value)) {

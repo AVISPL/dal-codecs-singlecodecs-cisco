@@ -37,7 +37,6 @@ public class SystemUnitCommand {
      * Created on Apr 26, 2021
      * @since 1.0
      */
-
     public static class Boot {
         @JacksonXmlProperty(isAttribute = true)
         private String command = "True";
@@ -76,6 +75,27 @@ public class SystemUnitCommand {
             return action;
         }
     }
+
+    public static class SoftwareUpgrade {
+        @JacksonXmlProperty(isAttribute = true)
+        private String command = "True";
+        @JacksonXmlProperty(localName="URL")
+        private String url;
+
+        public SoftwareUpgrade(){}
+        public SoftwareUpgrade(String url) {
+            this.url = url;
+        }
+        public String getCommand() {
+            return command;
+        }
+        public String getURL() {
+            return url;
+        }
+    }
+    @JacksonXmlProperty(localName="SoftwareUpgrade")
+    private SoftwareUpgrade softwareUpgrade;
+
     @JacksonXmlProperty(localName="Boot")
     private Boot boot;
     /**
@@ -91,6 +111,10 @@ public class SystemUnitCommand {
         boot = new Boot(action);
     }
 
+    public SystemUnitCommand(String url) {
+        softwareUpgrade = new SoftwareUpgrade(url);
+    }
+
     /**
      * Retrieves {@link #boot}
      *
@@ -98,5 +122,14 @@ public class SystemUnitCommand {
      */
     public Boot getBoot() {
         return boot;
+    }
+
+    /**
+     * Retrieves {@link #softwareUpgrade}
+     *
+     * @return value of {@link #softwareUpgrade}
+     */
+    public SoftwareUpgrade getSoftwareUpgrade() {
+        return softwareUpgrade;
     }
 }

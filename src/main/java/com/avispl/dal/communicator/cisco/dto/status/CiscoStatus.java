@@ -7,11 +7,13 @@ import com.avispl.dal.communicator.cisco.dto.status.audio.AudioStatus;
 import com.avispl.dal.communicator.cisco.dto.status.call.Call;
 import com.avispl.dal.communicator.cisco.dto.status.cameras.Cameras;
 import com.avispl.dal.communicator.cisco.dto.status.conference.ConferenceStatus;
+import com.avispl.dal.communicator.cisco.dto.status.diagnostics.Diagnostics;
 import com.avispl.dal.communicator.cisco.dto.status.h323.H323;
 import com.avispl.dal.communicator.cisco.dto.status.media.MediaChannels;
 import com.avispl.dal.communicator.cisco.dto.status.network.Network;
 import com.avispl.dal.communicator.cisco.dto.status.networkservices.NetworkServices;
 import com.avispl.dal.communicator.cisco.dto.status.peripherals.Peripherals;
+import com.avispl.dal.communicator.cisco.dto.status.provisioning.ProvisioningStatus;
 import com.avispl.dal.communicator.cisco.dto.status.roomanalytics.RoomAnalytics;
 import com.avispl.dal.communicator.cisco.dto.status.root.Capabilities;
 import com.avispl.dal.communicator.cisco.dto.status.root.Proximity;
@@ -96,6 +98,29 @@ public class CiscoStatus {
     /** @since 1.1.4 */
     @JacksonXmlProperty(localName = "MicrosoftTeams")
     private CoreMicrosoftTeamsStatus microsoftTeamsStatus;
+    @JacksonXmlProperty(localName="Provisioning")
+    private ProvisioningStatus provisioning;
+    /** @since 1.1.8 */
+    @JacksonXmlProperty(localName="Diagnostics")
+    private Diagnostics diagnostics;
+
+    /**
+     * Retrieves {@link #diagnostics}
+     *
+     * @return value of {@link #diagnostics}
+     */
+    public Diagnostics getDiagnostics() {
+        return diagnostics;
+    }
+
+    /**
+     * Sets {@link #diagnostics} value
+     *
+     * @param diagnostics new value of {@link #diagnostics}
+     */
+    public void setDiagnostics(Diagnostics diagnostics) {
+        this.diagnostics = diagnostics;
+    }
 
     /**
      * Retrieves {@link #product}
@@ -537,5 +562,23 @@ public class CiscoStatus {
 
     public void setMicrosoftTeamsStatus(CoreMicrosoftTeamsStatus microsoftTeamsStatus) {
         this.microsoftTeamsStatus = microsoftTeamsStatus;
+    }
+
+    /**
+     * Retrieves {@link #provisioning}
+     *
+     * @return value of {@link #provisioning}
+     */
+    public ProvisioningStatus getProvisioning() {
+        return provisioning;
+    }
+
+    /**
+     * Sets {@link #provisioning} value
+     *
+     * @param provisioning new value of {@link #provisioning}
+     */
+    public void setProvisioning(ProvisioningStatus provisioning) {
+        this.provisioning = provisioning;
     }
 }

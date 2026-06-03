@@ -49,8 +49,8 @@ public class CiscoCommunicatorWiremockTest {
                         .withHeader("Content-Type", "text/xml")));
 
         ciscoCommunicator.setHistoricalProperties("CurrentPeopleCount");
-        ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Peripherals,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
-        ciscoCommunicator.setDisplayPropertyGroups("All");
+        ciscoCommunicator.setDisplayPropertyGroups("Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
+        //ciscoCommunicator.setDisplayPropertyGroups("All");
         List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();
         Thread.sleep(30000);
         statistics = ciscoCommunicator.getMultipleStatistics();

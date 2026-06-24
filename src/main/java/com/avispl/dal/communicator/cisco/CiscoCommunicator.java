@@ -1724,7 +1724,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
 
             ConferenceConfigurationFarEndControl farEndControlConfiguration = conferenceConfiguration.getFarEndControl();
             if (farEndControlConfiguration != null) {
-                addStatisticsParameterWithDropdown(statistics, controls, CONFERENCE_FAR_END_CONTROL, Arrays.asList("On", "Off", "Auto"), farEndControlConfiguration.getMode().getValue());
+                addStatisticsParameterWithDropdown(statistics, controls, CONFERENCE_FAR_END_CONTROL, farEndControlConfiguration.getMode(), valuespace);
             }
         }
     }

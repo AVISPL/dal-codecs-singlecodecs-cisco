@@ -2117,62 +2117,42 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             if (peripheralsListResult != null && OK.equalsIgnoreCase(peripheralsListResult.getStatus())) {
                 PeripheralsDevice[] peripheralsDevices = peripheralsListResult.getPeripheralsDevices();
                 if (peripheralsDevices != null) {
-                    Map<String, Map<String, String>> connectedTypedStats = new HashMap<>();
-                    Map<String, Map<String, String>> disconnectedTypedStats = new HashMap<>();
+                    Map<String, Map<String, String>> typedStatsMap = new HashMap<>();
+                    Map<String, Integer> connectedCountByType = new HashMap<>();
+                    Map<String, Integer> disconnectedCountByType = new HashMap<>();
 
                     Arrays.stream(peripheralsDevices).forEach(connectedDevice -> {
                         if (connectedDevice == null) {
                             return;
                         }
-                        int totalDevicesOfStateAndType = 0;
                         String connectedDeviceType = connectedDevice.getType();
                         // %ss is intentional here - in order to make Type plural
-                        String disconnectedKey = String.format(PERIPHERALS_DISCONNECTED_TEMPLATE, connectedDeviceType);
-                        String connectedKey = String.format(PERIPHERALS_CONNECTED_TEMPLATE, connectedDeviceType);
-                        String key = disconnectedKey;
+                        String key = String.format(PERIPHERALS_TEMPLATE, connectedDeviceType);
 
                         Optional<ConnectedDevice> connectedDeviceStatus = Optional.empty();
                         if (!connectedDevices.isEmpty()) {
                             connectedDeviceStatus = connectedDevices.stream().filter(cd -> cd != null && Objects.equals(cd.getSerialNumber(), connectedDevice.getSerialNumber())).findFirst();
                         }
 
-                        Map<String, String> typedStats;
+                        Map<String, String> typedStats = typedStatsMap.computeIfAbsent(connectedDeviceType, t -> new HashMap<>());
 
                         if (connectedDeviceStatus.isPresent()) {
                             ConnectedDevice cd = connectedDeviceStatus.get();
                             String deviceStatus = cd.getStatus();
 
                             if ("connected".equalsIgnoreCase(deviceStatus)) {
-                                if (connectedTypedStats.containsKey(connectedDeviceType)) {
-                                    typedStats = connectedTypedStats.get(connectedDeviceType);
-                                } else {
-                                    typedStats = new HashMap<>();
-                                    connectedTypedStats.put(connectedDeviceType, typedStats);
-                                }
-
-                                key = connectedKey;
+                                connectedCountByType.merge(connectedDeviceType, 1, Integer::sum);
                             } else {
-                                if (disconnectedTypedStats.containsKey(connectedDeviceType)) {
-                                    typedStats = disconnectedTypedStats.get(connectedDeviceType);
-                                } else {
-                                    typedStats = new HashMap<>();
-                                    disconnectedTypedStats.put(connectedDeviceType, typedStats);
-                                }
+                                disconnectedCountByType.merge(connectedDeviceType, 1, Integer::sum);
                             }
 
                             String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
-                            addStatisticsParameter(typedStats, key + PROPERTY_STATUS, cd.getStatus());
+                            addStatisticsParameter(typedStats, key + PROPERTY_STATUS, mergeAndNormalizeStrings(typedStats.get(key + PROPERTY_STATUS), cd.getStatus(), "; "));
                             addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), cd.getUpgradeStatus(), "; "));
                         } else {
-                            key = disconnectedKey;
-                            if (disconnectedTypedStats.containsKey(connectedDeviceType)) {
-                                typedStats = disconnectedTypedStats.get(connectedDeviceType);
-                            } else {
-                                typedStats = new HashMap<>();
-                                disconnectedTypedStats.put(connectedDeviceType, typedStats);
-                            }
+                            disconnectedCountByType.merge(connectedDeviceType, 1, Integer::sum);
                             String upgradeStatusKey = key + PROPERTY_UPGRADE_STATUS;
-                            addStatisticsParameter(typedStats, key + PROPERTY_STATUS, DISCONNECTED);
+                            addStatisticsParameter(typedStats, key + PROPERTY_STATUS, mergeAndNormalizeStrings(typedStats.get(key + PROPERTY_STATUS), DISCONNECTED, "; "));
                             addStatisticsParameter(typedStats, upgradeStatusKey, mergeAndNormalizeStrings(typedStats.get(upgradeStatusKey), "-", "; "));
                         }
 
@@ -2195,11 +2175,14 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                         addStatisticsParameter(typedStats, serialNumberKey, mergeAndNormalizeStrings(typedStats.get(serialNumberKey), connectedDevice.getSerialNumber(), "; "));
                         addStatisticsParameter(typedStats, softwareInfoKey, mergeAndNormalizeStrings(typedStats.get(softwareInfoKey), connectedDevice.getSoftwareInfo(), "; "));
                         addStatisticsParameter(typedStats, typeKey, mergeAndNormalizeStrings(typedStats.get(typeKey), connectedDeviceType, "; "));
-                        addStatisticsParameter(typedStats, key + PROPERTY_TOTAL_DEVICES_COUNT, String.valueOf(++totalDevicesOfStateAndType));
                     });
 
-                    disconnectedTypedStats.values().forEach(statistics::putAll);
-                    connectedTypedStats.values().forEach(statistics::putAll);
+                    typedStatsMap.forEach((type, typedStats) -> {
+                        String key = String.format(PERIPHERALS_TEMPLATE, type);
+                        addStatisticsParameter(typedStats, key + PROPERTY_TOTAL_CONNECTED_DEVICES_COUNT, String.valueOf(connectedCountByType.getOrDefault(type, 0)));
+                        addStatisticsParameter(typedStats, key + PROPERTY_TOTAL_DISCONNECTED_DEVICES_COUNT, String.valueOf(disconnectedCountByType.getOrDefault(type, 0)));
+                        statistics.putAll(typedStats);
+                    });
                 } else {
                     logDebugMessage("Unable to get connected devices information: no connected devices available");
                 }

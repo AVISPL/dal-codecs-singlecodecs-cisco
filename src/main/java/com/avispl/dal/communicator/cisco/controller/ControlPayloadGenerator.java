@@ -211,7 +211,7 @@ public class ControlPayloadGenerator {
         switch (type) {
             case FarEndControl:
                 ConferenceConfigurationFarEndControl farEndControl = new ConferenceConfigurationFarEndControl();
-                farEndControl.setMode(new ValueSpaceRefHolder(normalizeSwitchValue(value, "On", "Off")));
+                farEndControl.setMode(new ValueSpaceRefHolder(value));
                 conferenceConfiguration.setFarEndControl(farEndControl);
                 break;
             case AutoAnswerMode:

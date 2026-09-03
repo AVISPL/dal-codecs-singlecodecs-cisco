@@ -1357,7 +1357,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
         DiagnosticsMessage[] messages = diagnostics == null ? null : diagnostics.getDiagnosticsMessages();
         if (messages == null || messages.length == 0) {
             logDebugMessage(diagnostics == null ? "No diagnostics data found, skipping." : "No diagnostics messages found, skipping.");
-            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_COUNT)) {
+            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
                 dynamicStatistics.put(PROPERTY_DIAGNOSTICS_COUNT, "N/A");
             } else {
                 statistics.put(PROPERTY_DIAGNOSTICS_COUNT, "N/A");
@@ -1367,7 +1367,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             statistics.put(PROPERTY_DIAGNOSTICS_EVENT_TYPES, "N/A");
             return;
         }
-        if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_COUNT)) {
+        if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
             dynamicStatistics.put(PROPERTY_DIAGNOSTICS_COUNT, String.valueOf(messages.length));
         } else {
             statistics.put(PROPERTY_DIAGNOSTICS_COUNT, String.valueOf(messages.length));

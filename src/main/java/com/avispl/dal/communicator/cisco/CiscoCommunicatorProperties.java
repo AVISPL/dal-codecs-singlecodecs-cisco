@@ -258,6 +258,8 @@ final class CiscoCommunicatorProperties {
      static final String PROPERTY_GROUP_TEMPLATE_MICROSOFT_TEAMS_HW_ACCELERATOR_DECODER = "MicrosoftTeamsHWAcceleratorDecoder[%d]#";
      /** @since 1.1.8 */
      static final String PROPERTY_GROUP_TEMPLATE_DIAGNOSTICS = "DiagnosticEvent[%d]#";
+     /** @since 1.1.8 */
+     static final String PROPERTY_DIAGNOSTICS_EVENTS = "DiagnosticEvents";
      /** @since 1.2.0 */
      static final String PROPERTY_DIAGNOSTICS_COUNT = "Diagnostics#Count";
      /** @since 1.1.8 */

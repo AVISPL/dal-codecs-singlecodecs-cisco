@@ -1354,37 +1354,42 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * */
     private void populateDiagnosticsData(Map<String, String> statistics, Map<String, String> dynamicStatistics, CiscoStatus status) {
         Diagnostics diagnostics = status.getDiagnostics();
-        if (diagnostics == null) {
-            logDebugMessage("No diagnostics data found, skipping.");
-            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
-                dynamicStatistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
-            } else {
-                statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
-            }
-            return;
-        }
-        DiagnosticsMessage[] messages = diagnostics.getDiagnosticsMessages();
+        DiagnosticsMessage[] messages = diagnostics == null ? null : diagnostics.getDiagnosticsMessages();
         if (messages == null || messages.length == 0) {
-            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
-                dynamicStatistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+            logDebugMessage(diagnostics == null ? "No diagnostics data found, skipping." : "No diagnostics messages found, skipping.");
+            if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_COUNT)) {
+                dynamicStatistics.put(PROPERTY_DIAGNOSTICS_COUNT, "N/A");
             } else {
-                statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, "N/A");
+                statistics.put(PROPERTY_DIAGNOSTICS_COUNT, "N/A");
             }
-            logger.debug("No diagnostics messages found, skipping.");
+            statistics.put(PROPERTY_DIAGNOSTICS_LEVELS, "N/A");
+            statistics.put(PROPERTY_DIAGNOSTICS_REFERENCES, "N/A");
+            statistics.put(PROPERTY_DIAGNOSTICS_EVENT_TYPES, "N/A");
             return;
         }
-        if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_EVENTS)) {
-            dynamicStatistics.put(PROPERTY_DIAGNOSTICS_EVENTS, String.valueOf(messages.length));
+        if (historicalProperties.contains(PROPERTY_DIAGNOSTICS_COUNT)) {
+            dynamicStatistics.put(PROPERTY_DIAGNOSTICS_COUNT, String.valueOf(messages.length));
         } else {
-            statistics.put(PROPERTY_DIAGNOSTICS_EVENTS, String.valueOf(messages.length));
+            statistics.put(PROPERTY_DIAGNOSTICS_COUNT, String.valueOf(messages.length));
         }
         int index = 1;
-        List<String> eventTypes = new ArrayList<>();
+        Set<String> levels = new TreeSet<>();
+        Set<String> references = new TreeSet<>();
+        Set<String> eventTypes = new TreeSet<>();
         for (int i = 0; i < messages.length; i++) {
             DiagnosticsMessage message = messages[i];
             String level = message.getLevel();
             String type = message.getType();
-            eventTypes.add(type);
+            String reference = message.getReferences();
+            if (StringUtils.isNotNullOrEmpty(level)) {
+                levels.add(level);
+            }
+            if (StringUtils.isNotNullOrEmpty(type)) {
+                eventTypes.add(type);
+            }
+            if (StringUtils.isNotNullOrEmpty(reference)) {
+                references.add(reference);
+            }
             if (i < diagnosticEventsTotal) {
                 boolean levelFilterPass = diagnosticEventsLevelFilter.contains(level);
                 boolean typeFilterPass = diagnosticEventsTypeFilter.contains(type);
@@ -1404,6 +1409,8 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
             }
             index++;
         }
+        statistics.put(PROPERTY_DIAGNOSTICS_LEVELS, String.join(", ", levels));
+        statistics.put(PROPERTY_DIAGNOSTICS_REFERENCES, String.join(", ", references));
         statistics.put(PROPERTY_DIAGNOSTICS_EVENT_TYPES, String.join(", ", eventTypes));
     }
 

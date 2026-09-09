@@ -211,7 +211,7 @@ public class ControlPayloadGenerator {
         switch (type) {
             case FarEndControl:
                 ConferenceConfigurationFarEndControl farEndControl = new ConferenceConfigurationFarEndControl();
-                farEndControl.setMode(new ValueSpaceRefHolder(normalizeSwitchValue(value, "On", "Off")));
+                farEndControl.setMode(new ValueSpaceRefHolder(value));
                 conferenceConfiguration.setFarEndControl(farEndControl);
                 break;
             case AutoAnswerMode:
@@ -816,6 +816,15 @@ public class ControlPayloadGenerator {
     public static Command generateRestartPayload() {
         Command command = new Command();
         command.setSystemUnitCommand(new SystemUnitCommand(SystemUnitCommand.BootAction.Restart));
+        return command;
+    }
+
+    public static Command generateSoftwareUpgradePayload(String url) {
+        if (StringUtils.isNullOrEmpty(url) || url.equals("N/A")) {
+            throw new IllegalArgumentException("Unable to proceed with software upgrade: PackageURL is not defined");
+        }
+        Command command = new Command();
+        command.setSystemUnitCommand(new SystemUnitCommand(url));
         return command;
     }
 

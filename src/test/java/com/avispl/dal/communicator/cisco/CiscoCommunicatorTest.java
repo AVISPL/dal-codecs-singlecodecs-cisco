@@ -9,36 +9,29 @@ import com.avispl.symphony.api.dal.dto.control.call.PopupMessage;
 import com.avispl.symphony.api.dal.dto.monitor.EndpointStatistics;
 import com.avispl.symphony.api.dal.dto.monitor.ExtendedStatistics;
 import com.avispl.symphony.api.dal.dto.monitor.Statistics;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.google.common.io.Resources;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.google.common.io.Resources.getResource;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class CiscoCommunicatorTest {
     CiscoCommunicator ciscoCommunicator;
 
-    @Rule
-    public WireMockRule wireMockRule = new WireMockRule(WireMockConfiguration.DYNAMIC_PORT);
-
     @BeforeEach
     public void setUp() throws Exception {
-//        wireMockRule.start();
         ciscoCommunicator = new CiscoCommunicator();
-        ciscoCommunicator.setHost("***REMOVED***");
-        ciscoCommunicator.setPort(80);
-        ciscoCommunicator.setProtocol("http");
-        ciscoCommunicator.setPassword("1234");
-        ciscoCommunicator.setLogin("admin");
+        ciscoCommunicator.setHost("10.8.50.218");
+        ciscoCommunicator.setPort(443);
+        ciscoCommunicator.setProtocol("https");
+        ciscoCommunicator.setPassword("");
+        ciscoCommunicator.setLogin("");
         ciscoCommunicator.init();
     }
 
@@ -51,7 +44,8 @@ public class CiscoCommunicatorTest {
         PopupMessage popupMessage = new PopupMessage();
         popupMessage.setMessage("Test message");
         popupMessage.setDuration(20);
-        ciscoCommunicator.sendMessage(popupMessage);
+        ciscoCommunicator.
+                sendMessage(popupMessage);
     }
 
     @Test
@@ -70,13 +64,32 @@ public class CiscoCommunicatorTest {
     }
 
     @Test
+    public void testSoftwareUpgrade() throws Exception {
+        ControllableProperty upgradePackage = new ControllableProperty();
+        upgradePackage.setProperty("Firmware#PackageURL");
+        upgradePackage.setValue("https://www.dropbox.com/scl/fi/9140lmufgrojz1oj78zcl/s52020ce9_15_18_5.pkg?rlkey=7dax08cvhsdc7d0dpfh1sbzty&st=rnhq61vl&dl=1");
+        upgradePackage.setValue("https://www.dropbox.com/scl/fi/ba9yyhxpwz885xq99056c/s53300ce9.15.6-step-upgrade.pkg?rlkey=z15ooqt4j1s118amv8fe8cgcc&st=mymgblpg&dl=1");
+
+        ControllableProperty upgrade = new ControllableProperty();
+        upgrade.setProperty("Firmware#Upgrade");
+
+        ciscoCommunicator.controlProperty(upgradePackage);
+        Thread.sleep(5000);
+        ciscoCommunicator.controlProperty(upgrade);
+    }
+
+    @Test
     public void testSerializeProperties() throws Exception {
         ciscoCommunicator.setHistoricalProperties("CurrentPeopleCount");
-        ciscoCommunicator.setDisplayPropertyGroups("Audio,SystemUnit,Standby,Peripherals,Camera,Conference,NetworkServices,Video,UserInterface,ConferenceCapabilities,ActiveCall,H323,SIP,Security,Network,USB,RoomAnalytics,Proximity");
-        ciscoCommunicator.setDisplayPropertyGroups("All");
-        List<Statistics> statistics = ciscoCommunicator.getMultipleStatistics();
+        ciscoCommunicator.setDisplayPropertyGroups("Firmware");
+        ciscoCommunicator.setDiagnosticEventsLevelFilter("Error");
+        ciscoCommunicator.setDiagnosticEventsTypeFilter("HTTPSModeSecurity,SIPProfileRegistration,");
+        List<Statistics> statistics = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            statistics = ciscoCommunicator.getMultipleStatistics();
+            Thread.sleep(30000);
+        }
         Assert.assertEquals(2, statistics.size());
-
         ExtendedStatistics extendedStatistics = (ExtendedStatistics) statistics.get(0);
         EndpointStatistics endpointStatistics = (EndpointStatistics) statistics.get(1);
         Assert.assertNotNull(extendedStatistics);
@@ -466,13 +479,4 @@ public class CiscoCommunicatorTest {
         Assert.assertNotNull(callStatus.getCallId(), "Mute status should not be null");
     }
 
-    @Test
-    public void testRetrieveStatusInfo() throws Exception {
-        wireMockRule.stubFor(get(urlEqualTo("/configuration.xml")))
-                .setResponse(okXml(resource("configuration.xml")).build());
-        wireMockRule.stubFor(get(urlEqualTo("/status.xml")))
-                .setResponse(okXml(resource("status.xml")).build());
-
-        ciscoCommunicator.getMultipleStatistics();
-    }
 }

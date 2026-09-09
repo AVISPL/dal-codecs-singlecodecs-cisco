@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 AVI-SPL Inc. All Rights Reserved.
+ * Copyright (c) 2021-2023 AVI-SPL Inc. All Rights Reserved.
  */
 package com.avispl.dal.communicator.cisco.dto.status;
 
@@ -7,11 +7,13 @@ import com.avispl.dal.communicator.cisco.dto.status.audio.AudioStatus;
 import com.avispl.dal.communicator.cisco.dto.status.call.Call;
 import com.avispl.dal.communicator.cisco.dto.status.cameras.Cameras;
 import com.avispl.dal.communicator.cisco.dto.status.conference.ConferenceStatus;
+import com.avispl.dal.communicator.cisco.dto.status.diagnostics.Diagnostics;
 import com.avispl.dal.communicator.cisco.dto.status.h323.H323;
 import com.avispl.dal.communicator.cisco.dto.status.media.MediaChannels;
 import com.avispl.dal.communicator.cisco.dto.status.network.Network;
 import com.avispl.dal.communicator.cisco.dto.status.networkservices.NetworkServices;
 import com.avispl.dal.communicator.cisco.dto.status.peripherals.Peripherals;
+import com.avispl.dal.communicator.cisco.dto.status.provisioning.ProvisioningStatus;
 import com.avispl.dal.communicator.cisco.dto.status.roomanalytics.RoomAnalytics;
 import com.avispl.dal.communicator.cisco.dto.status.root.Capabilities;
 import com.avispl.dal.communicator.cisco.dto.status.root.Proximity;
@@ -20,8 +22,11 @@ import com.avispl.dal.communicator.cisco.dto.status.root.Time;
 import com.avispl.dal.communicator.cisco.dto.status.security.Security;
 import com.avispl.dal.communicator.cisco.dto.status.sip.SIP;
 import com.avispl.dal.communicator.cisco.dto.status.systemunit.SystemUnit;
+import com.avispl.dal.communicator.cisco.dto.status.teams.CoreMicrosoftTeamsStatus;
 import com.avispl.dal.communicator.cisco.dto.status.usb.USB;
 import com.avispl.dal.communicator.cisco.dto.status.video.VideoStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webex.WebExStatus;
+import com.avispl.dal.communicator.cisco.dto.status.webrtc.WebRTCStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -84,6 +89,38 @@ public class CiscoStatus {
     /** @since 1.1.0 */
     @JacksonXmlProperty(localName="Peripherals")
     private Peripherals periherals;
+    /** @since 1.1.4 */
+    @JacksonXmlProperty(localName="Webex")
+    private WebExStatus webExStatus;
+    /** @since 1.1.4 */
+    @JacksonXmlProperty(localName = "WebRTC")
+    private WebRTCStatus webRTCStatus;
+    /** @since 1.1.4 */
+    @JacksonXmlProperty(localName = "MicrosoftTeams")
+    private CoreMicrosoftTeamsStatus microsoftTeamsStatus;
+    @JacksonXmlProperty(localName="Provisioning")
+    private ProvisioningStatus provisioning;
+    /** @since 1.1.8 */
+    @JacksonXmlProperty(localName="Diagnostics")
+    private Diagnostics diagnostics;
+
+    /**
+     * Retrieves {@link #diagnostics}
+     *
+     * @return value of {@link #diagnostics}
+     */
+    public Diagnostics getDiagnostics() {
+        return diagnostics;
+    }
+
+    /**
+     * Sets {@link #diagnostics} value
+     *
+     * @param diagnostics new value of {@link #diagnostics}
+     */
+    public void setDiagnostics(Diagnostics diagnostics) {
+        this.diagnostics = diagnostics;
+    }
 
     /**
      * Retrieves {@link #product}
@@ -481,5 +518,67 @@ public class CiscoStatus {
      */
     public void setPeriherals(Peripherals periherals) {
         this.periherals = periherals;
+    }
+
+    /**
+     * Retrieves {@link #webExStatus}
+     *
+     * @return value of {@link #webExStatus}
+     */
+    public WebExStatus getWebExStatus() {
+        return webExStatus;
+    }
+
+    /**
+     * Sets {@link #webExStatus} value
+     *
+     * @param webExStatus new value of {@link #webExStatus}
+     */
+    public void setWebExStatus(WebExStatus webExStatus) {
+        this.webExStatus = webExStatus;
+    }
+
+    /**
+     * Retrieves {@link #webRTCStatus}
+     *
+     * @return value of {@link #webRTCStatus}
+     */
+    public WebRTCStatus getWebRTCStatus() {
+        return webRTCStatus;
+    }
+
+    /**
+     * Sets {@link #webRTCStatus} value
+     *
+     * @param webRTCStatus new value of {@link #webRTCStatus}
+     */
+    public void setWebRTCStatus(WebRTCStatus webRTCStatus) {
+        this.webRTCStatus = webRTCStatus;
+    }
+
+    public CoreMicrosoftTeamsStatus getMicrosoftTeamsStatus() {
+        return microsoftTeamsStatus;
+    }
+
+    public void setMicrosoftTeamsStatus(CoreMicrosoftTeamsStatus microsoftTeamsStatus) {
+        this.microsoftTeamsStatus = microsoftTeamsStatus;
+    }
+
+    /**
+     * Retrieves {@link #provisioning}
+     *
+     * @return value of {@link #provisioning}
+     */
+    public ProvisioningStatus getProvisioning() {
+        return provisioning;
+    }
+
+    /**
+     * Sets {@link #provisioning} value
+     *
+     * @param provisioning new value of {@link #provisioning}
+     */
+    public void setProvisioning(ProvisioningStatus provisioning) {
+        this.provisioning = provisioning;
     }
 }

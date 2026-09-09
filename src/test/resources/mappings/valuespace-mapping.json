@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/valuespace.xml"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "valuespace.xml",
+    "headers": {
+      "Content-Type": "text/xml"
+    }
+  }
+}

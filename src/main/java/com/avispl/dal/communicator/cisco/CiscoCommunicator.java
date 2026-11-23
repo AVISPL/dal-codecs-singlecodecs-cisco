@@ -3521,6 +3521,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param propertyValue     value of property to add
      */
     private void addTypedStatisticsParameter(Map<String, String> statistics, Map<String, String> dynamicStatistics, String propertyName, String propertyValue) {
+        if (propertyValue == null) {
+            // the device doesn't report this value (e.g. numeric hardware temperature on RoomOS devices)
+            logDebugMessage("No value reported for property " + propertyName + ", skipping it");
+            return;
+        }
         boolean propertyListed = false;
         if (!historicalProperties.isEmpty()) {
             if (propertyName.contains(HASH)) {
@@ -3529,7 +3534,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 propertyListed = historicalProperties.contains(propertyName);
             }
         }
-        if (propertyListed && DynamicStatisticsDefinitions.checkIfExists(propertyName) && propertyValue != null) {
+        if (propertyListed && DynamicStatisticsDefinitions.checkIfExists(propertyName)) {
             dynamicStatistics.put(propertyName, propertyValue);
         } else {
             statistics.put(propertyName, propertyValue);

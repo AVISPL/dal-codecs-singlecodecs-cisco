@@ -121,6 +121,7 @@ Unlisted models running CE Software v9.x or later may also be supported — cont
 - ActiveCall group appears only during an active call.
 - Security group is read-only.
 - No call history — only current call state is accessible.
+- `HardwareTemperature(C)` is only available on devices that report a numeric `SystemUnit Hardware Temperature` (e.g. SX, MX, Codec Pro). RoomOS devices such as Room Bar and Board Pro report only a temperature status, so the property (and its historical data) is not shown for them.
 
 ---
 

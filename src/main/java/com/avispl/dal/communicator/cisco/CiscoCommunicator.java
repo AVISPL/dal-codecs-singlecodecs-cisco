@@ -358,6 +358,23 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
     private long latestControlTimestamp;
 
     /**
+     * Time when the status currently held in {@link #ciscoStatus} was requested. Status is retrieved asynchronously, so
+     * the status used for a poll may have been requested before the latest control operation.
+     */
+    private volatile long ciscoStatusRequestTimestamp;
+
+    /**
+     * Microphones mute state set by the last control operation, kept until a status requested after that control is
+     * available (null when there is nothing pending). See {@link #applyPendingMicrophonesMute(Map, List)}
+     */
+    private volatile Boolean pendingMicrophonesMute;
+
+    /**
+     * Time of the last microphones mute control operation
+     */
+    private volatile long pendingMicrophonesMuteTimestamp;
+
+    /**
      * Cooldown period for control operation. Most control operations (toggle/slider based in this case) may be
      * requested multiple times in a row. Normally, a control operation would trigger an emergency delivery action,
      * which is not wanted in this case - such control operations will stack multiple statistics retrieval calls,
@@ -744,9 +761,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     @Override
     public void mute() throws Exception {
-        Command muteCommand = new Command();
-        muteCommand.setAudioCommand(new MicrophonesMuteCommand(true));
-        doPost("putxml", muteCommand);
+        setMicrophonesMute(true);
     }
 
     /**
@@ -762,9 +777,47 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      */
     @Override
     public void unmute() throws Exception {
+        setMicrophonesMute(false);
+    }
+
+    /**
+     * Mute or unmute microphones through the regular control path: the response is checked, the control cooldown starts
+     * and the cached state is updated. The new state is kept until a status requested after this control is available,
+     * so a status retrieved before the control doesn't switch the toggle back.
+     *
+     * @param mute true to mute, false to unmute
+     */
+    private void setMicrophonesMute(boolean mute) throws Exception {
         Command muteCommand = new Command();
-        muteCommand.setAudioCommand(new MicrophonesMuteCommand(false));
-        doPost("putxml", muteCommand);
+        muteCommand.setAudioCommand(new MicrophonesMuteCommand(mute));
+        postCommandRequest(muteCommand, AUDIO_MICROPHONES_MUTE, mute ? "1" : "0");
+        pendingMicrophonesMute = mute;
+        pendingMicrophonesMuteTimestamp = System.currentTimeMillis();
+        if (localStatistics != null && localStatistics.getStatistics() != null && localStatistics.getStatistics().containsKey(AUDIO_MICROPHONES_MUTE)) {
+            localStatistics.getStatistics().put(AUDIO_MICROPHONES_MUTE, mute ? "On" : OFF);
+        }
+    }
+
+    /**
+     * Keep the microphones mute state set by the last control operation while the device status in use was requested
+     * before that control. Once a status requested after the control is used, the device value is reported again.
+     *
+     * @param statistics             statistics to update
+     * @param controllableProperties controllable properties to update
+     */
+    private void applyPendingMicrophonesMute(Map<String, String> statistics, List<AdvancedControllableProperty> controllableProperties) {
+        Boolean pending = pendingMicrophonesMute;
+        if (pending == null) {
+            return;
+        }
+        if (ciscoStatusRequestTimestamp > pendingMicrophonesMuteTimestamp) {
+            pendingMicrophonesMute = null;
+            return;
+        }
+        if (statistics.containsKey(AUDIO_MICROPHONES_MUTE)) {
+            statistics.put(AUDIO_MICROPHONES_MUTE, pending ? "On" : OFF);
+        }
+        controllableProperties.stream().filter(cp -> AUDIO_MICROPHONES_MUTE.equals(cp.getName())).findFirst().ifPresent(cp -> cp.setValue(pending ? 1 : 0));
     }
 
     /**
@@ -1097,7 +1150,9 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 ciscoStatusFuture = runAsync(() -> {
                     logDebugMessage(String.format("Cisco Device [%s]: Status retrieval scheduling: start%n", getHost()));
                     try {
+                        long statusRequestTimestamp = System.currentTimeMillis();
                         ciscoStatus = retrieveStatus();
+                        ciscoStatusRequestTimestamp = statusRequestTimestamp;
                         statusError = false;
                         loginError = false;
                     } catch (FailedLoginException fle) {
@@ -1256,6 +1311,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 routeMediaChannelsData(ciscoStatus, endpointStatistics, statisticsMap);
                 endpointStatistics.setRegistrationStatus(createRegistrationStatus(ciscoStatus));
             }
+            applyPendingMicrophonesMute(statisticsMap, advancedControllableProperties);
             extendedStatistics.setControllableProperties(advancedControllableProperties);
             extendedStatistics.setStatistics(statisticsMap);
             extendedStatistics.setDynamicStatistics(dynamicStatisticsMap);
@@ -3409,11 +3465,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                     postCommandRequest(generateAudioCommandPayload(value, AudioControlCommandType.Volume), property, value);
                     break;
                 case AUDIO_MICROPHONES_MUTE:
-                    if ("0".equals(value)) {
-                        unmute();
-                    } else {
-                        mute();
-                    }
+                    setMicrophonesMute(!"0".equals(value));
                     break;
                 case AUDIO_MICROPHONE_MODE:
                     postConfigurationRequest(generateAudioConfigurationPayload(value, AudioConfigurationCommandType.MicrophoneMode), property, value);
@@ -3521,6 +3573,11 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
      * @param propertyValue     value of property to add
      */
     private void addTypedStatisticsParameter(Map<String, String> statistics, Map<String, String> dynamicStatistics, String propertyName, String propertyValue) {
+        if (propertyValue == null) {
+            // the device doesn't report this value (e.g. numeric hardware temperature on RoomOS devices)
+            logDebugMessage("No value reported for property " + propertyName + ", skipping it");
+            return;
+        }
         boolean propertyListed = false;
         if (!historicalProperties.isEmpty()) {
             if (propertyName.contains(HASH)) {
@@ -3529,7 +3586,7 @@ public class CiscoCommunicator extends RestCommunicator implements CallControlle
                 propertyListed = historicalProperties.contains(propertyName);
             }
         }
-        if (propertyListed && DynamicStatisticsDefinitions.checkIfExists(propertyName) && propertyValue != null) {
+        if (propertyListed && DynamicStatisticsDefinitions.checkIfExists(propertyName)) {
             dynamicStatistics.put(propertyName, propertyValue);
         } else {
             statistics.put(propertyName, propertyValue);
